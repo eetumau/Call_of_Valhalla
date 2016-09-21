@@ -4,7 +4,6 @@ using System.Collections;
 public class Player_Movement : MonoBehaviour
 {
 
-    private Transform _playerTransform;
     private Rigidbody2D _playerRigidbody2D;
 
     [SerializeField]
@@ -22,9 +21,8 @@ public class Player_Movement : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
-        _playerTransform = GetComponent<Transform>();
         _playerRigidbody2D = GetComponent<Rigidbody2D>();
+
 
     }
 
@@ -32,6 +30,11 @@ public class Player_Movement : MonoBehaviour
     void Update()
     {
 
+
+    }
+
+    private void FixedUpdate()
+    {
         CheckIfGrounded();
 
     }
