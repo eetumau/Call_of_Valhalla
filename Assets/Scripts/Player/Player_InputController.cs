@@ -32,9 +32,8 @@ public class Player_InputController : MonoBehaviour {
             _playerMovement.Move(_inputX);
         }
 
-        if (_jump)
-        {
-            _playerMovement.Jump();
-        }
+        
+            _playerMovement.Jump(_jump);
+        
     }
 }

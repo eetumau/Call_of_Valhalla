@@ -37,9 +37,9 @@ public class Player_Movement : MonoBehaviour {
 
     }
 
-    public void Jump()
+    public void Jump(bool _jump)
     {
-        if (_isGrounded)
+        if (_isGrounded && _jump)
         {
             //_playerRigidbody2D.AddForce(new Vector2(0, _playerJumpForce));
             _playerRigidbody2D.velocity = new Vector2(_playerRigidbody2D.velocity.x, _playerJumpForce);
