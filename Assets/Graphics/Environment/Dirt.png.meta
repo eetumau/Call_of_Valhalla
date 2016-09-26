@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 4a545b71ae290c64c84028dbc7ce522a
-timeCreated: 1474442587
+timeCreated: 1474875050
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -13,6 +13,9 @@ TextureImporter:
     21300012: Dirt_6
     21300014: Dirt_7
     21300016: Dirt_8
+    21300018: Dirt_9
+    21300020: Dirt_10
+    21300022: Dirt_11
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -71,7 +74,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 128
+        y: 192
         width: 64
         height: 64
       alignment: 6
@@ -84,7 +87,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 128
+        y: 192
         width: 64
         height: 64
       alignment: 6
@@ -97,7 +100,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 128
+        y: 192
         width: 64
         height: 64
       alignment: 6
@@ -110,7 +113,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
+        y: 128
         width: 64
         height: 64
       alignment: 6
@@ -123,7 +126,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 64
+        y: 128
         width: 64
         height: 64
       alignment: 6
@@ -136,7 +139,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 64
+        y: 128
         width: 64
         height: 64
       alignment: 6
@@ -149,7 +152,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 64
         width: 64
         height: 64
       alignment: 6
@@ -162,7 +165,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 0
+        y: 64
         width: 64
         height: 64
       alignment: 6
@@ -172,6 +175,45 @@ TextureImporter:
       tessellationDetail: 0
     - serializedVersion: 2
       name: Dirt_8
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Dirt_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Dirt_10
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Dirt_11
       rect:
         serializedVersion: 2
         x: 128
