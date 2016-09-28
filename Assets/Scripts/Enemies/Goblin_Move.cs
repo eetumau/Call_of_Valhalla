@@ -25,6 +25,6 @@ public class Goblin_Move : MonoBehaviour {
     {
         Vector3 moveTo = playerPos - _transform.position;
 
-        _transform.position += new Vector3(Mathf.Lerp(_transform.position.x, playerPos.x, Time.deltaTime * _), _transform.position.y, _transform.position.z);
+        //_transform.position += new Vector3(Mathf.Lerp(_transform.position.x, playerPos.x, Time.deltaTime * _), _transform.position.y, _transform.position.z);
     }
 }
