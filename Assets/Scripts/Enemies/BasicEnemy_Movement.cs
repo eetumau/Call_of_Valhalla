@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Goblin_Move : MonoBehaviour
-{
+public class BasicEnemy_Movement : MonoBehaviour {
 
     [SerializeField]
     private float _movementSpeed;
@@ -44,6 +43,13 @@ public class Goblin_Move : MonoBehaviour
         {
             _transform.position -= new Vector3(_movementSpeed * Time.deltaTime, 0, 0);
         }
+
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+
 
 
     }

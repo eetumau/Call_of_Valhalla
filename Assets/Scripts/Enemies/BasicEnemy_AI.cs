@@ -1,18 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Goblin_AI : MonoBehaviour
-{
+public class BasicEnemy_AI : MonoBehaviour {
 
     [SerializeField]
     private float _aggroRadius;
     [SerializeField]
-    private Vector2 _playerLookAt;
-    [SerializeField]
     private float _nextIdleActionTime;
 
 
-    private Goblin_Move Goblin_Move;
+    private BasicEnemy_Movement _enemyMovement;
 
     private Transform _transform;
     private bool _aggro = false;
@@ -26,7 +23,7 @@ public class Goblin_AI : MonoBehaviour
 
         _transform = GetComponent<Transform>();
 
-        Goblin_Move = GetComponent<Goblin_Move>();
+        _enemyMovement = GetComponent<BasicEnemy_Movement>();
 
         _idleTimer = _nextIdleActionTime;
 
@@ -54,8 +51,7 @@ public class Goblin_AI : MonoBehaviour
     */
     private void SearchForPlayer()
     {
-        int layerMask = 1 << 8;
-        layerMask = ~layerMask;
+        var allButEnemy = ~(1 << 8);
 
         _aggro = false;
 
@@ -65,9 +61,10 @@ public class Goblin_AI : MonoBehaviour
         {
             if (colliders[i].gameObject.tag == "Player")
             {
+                //Debug.DrawLine(_transform.position + transform.up, colliders[i].transform.position + colliders[i].transform.up);
 
 
-                if (!Physics2D.Linecast(_transform.position + transform.up, colliders[i].transform.position, layerMask))
+                if (!Physics2D.Linecast(_transform.position + transform.up, colliders[i].transform.position + colliders[i].transform.up, allButEnemy))
                 {
                     Debug.DrawLine(_transform.position + transform.up, colliders[i].transform.position + colliders[i].transform.up);
 
@@ -115,7 +112,7 @@ public class Goblin_AI : MonoBehaviour
 
         if (!_idle)
         {
-            Goblin_Move.PassiveMovement(_moveRight);
+            _enemyMovement.PassiveMovement(_moveRight);
         }
 
         _idleTimer -= Time.deltaTime;
