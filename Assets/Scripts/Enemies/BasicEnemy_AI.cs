@@ -6,26 +6,46 @@ public class BasicEnemy_AI : MonoBehaviour {
     [SerializeField]
     private float _aggroRadius;
     [SerializeField]
-    private float _nextIdleActionTime;
+    private float _timeBeforeNextAction;
+    [SerializeField]
+    private float _timeBeforePassive;
+    [SerializeField]
+    private Vector3 _linecastOffset;
+    
 
 
     private BasicEnemy_Movement _enemyMovement;
 
     private Transform _transform;
-    private bool _aggro = false;
-    private bool _idle = true;
+    private bool _playerOnSight = false;
+    private bool _passive = false;
+    private bool _aggressive = false;
+    private bool _idle = false;
     private bool _moveRight = false;
-    private float _idleTimer;
+    private float _actionTimer;
+    private float _passiveTimer;
+    private Vector3 _playerPosition;
+    private Vector3 _lastSeenPosition;
+    private BoxCollider2D _boxCollider;
+
+    public static BasicEnemy_AI Instance;
+
+    public bool Aggressive { get { return _aggressive; } }
 
     // Use this for initialization
     void Start()
     {
+        Instance = this;
 
-        _transform = GetComponent<Transform>();
+        _passive = true;
+
+        //_transform = GetComponent<Transform>();
 
         _enemyMovement = GetComponent<BasicEnemy_Movement>();
 
-        _idleTimer = _nextIdleActionTime;
+        _transform = GetComponent<Transform>();
+
+        _actionTimer = _timeBeforeNextAction;
 
 
     }
@@ -33,7 +53,16 @@ public class BasicEnemy_AI : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        PassiveState();
+
+        if (_passive)
+        {
+            PassiveState();
+        }else if (_aggressive)
+        {
+            AggressiveState();
+        }
+
+
 
     }
 
@@ -51,9 +80,7 @@ public class BasicEnemy_AI : MonoBehaviour {
     */
     private void SearchForPlayer()
     {
-        var allButEnemy = ~(1 << 8);
-
-        _aggro = false;
+        var allButIgnoreLinecast = ~(1 << 8);
 
         var colliders = Physics2D.OverlapCircleAll(_transform.position, _aggroRadius);
 
@@ -61,19 +88,26 @@ public class BasicEnemy_AI : MonoBehaviour {
         {
             if (colliders[i].gameObject.tag == "Player")
             {
-                //Debug.DrawLine(_transform.position + transform.up, colliders[i].transform.position + colliders[i].transform.up);
 
-
-                if (!Physics2D.Linecast(_transform.position + transform.up, colliders[i].transform.position + colliders[i].transform.up, allButEnemy))
+                if (!Physics2D.Linecast(_transform.position + _linecastOffset, colliders[i].transform.position + colliders[i].transform.up, allButIgnoreLinecast))
                 {
-                    Debug.DrawLine(_transform.position + transform.up, colliders[i].transform.position + colliders[i].transform.up);
+                    Debug.DrawLine(_transform.position + _linecastOffset, colliders[i].transform.position + colliders[i].transform.up);
 
-                    _aggro = true;
+                    _passive = false;
+                    _aggressive = true;
+                    _playerOnSight = true;
+
+                }else
+                {
+                    _playerOnSight = false;
+                    _lastSeenPosition = new Vector3(colliders[i].transform.position.x, _transform.position.y, _transform.position.z);
                 }
 
-
+                _playerPosition = colliders[i].gameObject.transform.position;
             }
         }
+
+
     }
 
 
@@ -82,44 +116,60 @@ public class BasicEnemy_AI : MonoBehaviour {
      */
     private void PassiveState()
     {
-        if (_idleTimer <= 0)
+        if (_actionTimer <= 0)
         {
-            int random = Random.Range(0, 3);
+            int random = Random.Range(0, 4);
 
             if (random == 0)
             {
-                random = Random.Range(0, 2);
-
-                if (random == 0)
-                {
-                    _moveRight = true;
-                }
-
-                else
-                {
-                    _moveRight = false;
-                }
+                _enemyMovement.RandomDirection();
 
                 _idle = false;
-                _idleTimer = _nextIdleActionTime;
+                _actionTimer = _timeBeforeNextAction;
             }
             else
             {
                 _idle = true;
-                _idleTimer = _nextIdleActionTime;
+                _actionTimer = _timeBeforeNextAction;
             }
         }
 
         if (!_idle)
         {
-            _enemyMovement.PassiveMovement(_moveRight);
+            _enemyMovement.PassiveMovement();
         }
 
-        _idleTimer -= Time.deltaTime;
+        _actionTimer -= Time.deltaTime;
     }
 
+    private void AggressiveState()
+    {
+        if (_playerOnSight)
+        {
+            _enemyMovement.AggressiveMovement(_playerPosition);
+        }
+        else
+        {
+            var allButIgnoreLinecast = ~(1 << 8);
 
-
+            if (!Physics2D.Raycast(_transform.position, _transform.right, 1, allButIgnoreLinecast) &&
+                !Physics2D.Raycast(_transform.position, -_transform.right, 1, allButIgnoreLinecast))
+            {
+                _enemyMovement.AggressiveMovement(_lastSeenPosition);
+            }
+            else
+            {
+                _passiveTimer -= Time.deltaTime;
+                
+                if(_passiveTimer <= 0)
+                {
+                    _aggressive = false;
+                    _passive = true;
+                    _passiveTimer = _timeBeforePassive;
+                }
+            }
+        }
+    }
 
 
 }
