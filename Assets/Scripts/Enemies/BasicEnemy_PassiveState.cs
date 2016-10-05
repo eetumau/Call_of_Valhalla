@@ -3,19 +3,13 @@ using System.Collections;
 
 namespace CallOfValhalla.Enemy
 {
-    public class BasicEnemy_PassiveState : BasicEnemy_StateBase
+    public class BasicEnemy_PassiveState : MonoBehaviour
     {
 
-        public BasicEnemy_PassiveState() : base()
+        public void Move()
         {
-            State = StateType.Passive;
-            AddTransition(TransitionType.PassiveToAggressive, StateType.Aggressive);
-        }
 
-        public override void StateActivated()
-        {
-            BasicEnemy_Controller.Instance.SetPassive();
         }
-
+      
     }
 }

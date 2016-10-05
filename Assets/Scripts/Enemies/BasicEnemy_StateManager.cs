@@ -32,6 +32,7 @@ namespace CallOfValhalla.Enemy
             if (AddState(initialState))
             {
                 CurrentState = initialState;
+                initialState.StateActivated();
             }
         }
 

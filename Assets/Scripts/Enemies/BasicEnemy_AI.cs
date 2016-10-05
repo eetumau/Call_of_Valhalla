@@ -17,7 +17,8 @@ namespace CallOfValhalla.Enemy
 
 
 
-        private BasicEnemy_Movement _enemyMovement;
+        private BasicEnemy_Movement _movement;
+        private BasicEnemy_Attack _attack;
 
         private Transform _transform;
         private bool _playerOnSight = false;
@@ -33,7 +34,10 @@ namespace CallOfValhalla.Enemy
 
         public static BasicEnemy_AI Instance;
 
-        public bool Aggressive { get { return _aggressive; } }
+        public BasicEnemy_Movement Movement
+        {
+            get { return _movement; }
+        }
 
         // Use this for initialization
         void Start()
@@ -44,7 +48,8 @@ namespace CallOfValhalla.Enemy
 
             //_transform = GetComponent<Transform>();
 
-            _enemyMovement = GetComponent<BasicEnemy_Movement>();
+            _movement = GetComponent<BasicEnemy_Movement>();
+            _attack = GetComponent<BasicEnemy_Attack>();
 
             _transform = GetComponent<Transform>();
 
@@ -127,7 +132,7 @@ namespace CallOfValhalla.Enemy
 
                 if (random == 0)
                 {
-                    _enemyMovement.RandomDirection();
+                    _movement.RandomDirection();
 
                     _idle = false;
                     _actionTimer = _timeBeforeNextAction;
@@ -141,7 +146,7 @@ namespace CallOfValhalla.Enemy
 
             if (!_idle)
             {
-                _enemyMovement.PassiveMovement();
+                _movement.PassiveMovement();
             }
 
             _actionTimer -= Time.deltaTime;
@@ -151,7 +156,8 @@ namespace CallOfValhalla.Enemy
         {
             if (_playerOnSight)
             {
-                _enemyMovement.AggressiveMovement(_playerPosition);
+                _movement.AggressiveMovement(_playerPosition);
+                _attack.Attack(_playerPosition);
             }
             else
             {
@@ -160,7 +166,7 @@ namespace CallOfValhalla.Enemy
                 if (!Physics2D.Raycast(_transform.position, _transform.right, 1, allButIgnoreLinecast) &&
                     !Physics2D.Raycast(_transform.position, -_transform.right, 1, allButIgnoreLinecast))
                 {
-                    _enemyMovement.AggressiveMovement(_lastSeenPosition);
+                    _movement.AggressiveMovement(_lastSeenPosition);
                 }
                 else
                 {

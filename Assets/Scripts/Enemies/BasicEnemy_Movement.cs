@@ -18,11 +18,7 @@ namespace CallOfValhalla.Enemy
         private SpriteRenderer _spriteRenderer;
         private BasicEnemy_WallCheck _wallCheck;
 
-        public bool HoldPosition
-        {
-            get { return _holdPosition; }
-            set { _holdPosition = value; }
-        }
+        public float MinDistance { get { return _minDistance; } }
 
         // Use this for initialization
         void Start()

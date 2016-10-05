@@ -15,6 +15,7 @@ namespace CallOfValhalla.Enemy
 
         public override void StateActivated()
         {
+
         }
 
     }
