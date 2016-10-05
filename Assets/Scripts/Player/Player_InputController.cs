@@ -6,16 +6,20 @@ public class Player_InputController : MonoBehaviour {
     private float _inputX;
     private bool _jump;
     private bool _basicAttack;
+    private bool _specialAttack;
+    private string _weapon1Name = "Sword";
+    private string _weapon2Name = "Sword";
 
     private Player_Movement _playerMovement;
-    private Attack_Basic _attackBasic;
+    private Weapon _weapon1;
+    private Weapon _weapon2;
 
 	// Use this for initialization
 	void Start () {
 
         _playerMovement = GetComponent<Player_Movement>();
-        _attackBasic = GetComponent<Attack_Basic>();
-	
+        SetWeapons();
+        
 	}
 	
 	// Update is called once per frame
@@ -30,15 +34,39 @@ public class Player_InputController : MonoBehaviour {
         _inputX = Input.GetAxis("Horizontal");
         _jump = Input.GetButtonDown("Jump");
         _basicAttack = Input.GetButtonDown("Attack1");
+        _specialAttack = Input.GetButtonDown("Attack2");
 
-        if(_inputX < 0 || _inputX > 0)
+        if (_inputX < 0 || _inputX > 0)
         {
             _playerMovement.Move(_inputX);
         }
 
-        _attackBasic.Attack(_basicAttack);
-            _playerMovement.Jump(_jump);
+        
+        _weapon1.BasicAttack(_basicAttack);
+        _weapon1.SpecialAttack(_specialAttack);
+
+        _weapon2.BasicAttack(_basicAttack);
+        _weapon2.SpecialAttack(_specialAttack);
+            
+        _playerMovement.Jump(_jump);
             
         
+    }
+
+    private void SetWeapons()
+    {
+        if (_weapon1Name.Equals("Sword"))
+            _weapon1 = GetComponent<Weapon_Sword>();
+        else if (_weapon1Name.Equals("Sword"))
+            _weapon1 = GetComponent<Weapon_Sword>();
+        else
+            _weapon1 = GetComponent<Weapon_Sword>();
+
+        if (_weapon2Name.Equals("Sword"))
+            _weapon2 = GetComponent<Weapon_Sword>();
+        else if (_weapon2Name.Equals("Sword"))
+            _weapon2 = GetComponent<Weapon_Sword>();
+        else
+            _weapon2 = GetComponent<Weapon_Sword>();
     }
 }
