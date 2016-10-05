@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using CallOfValhalla.Player;
 
 namespace CallOfValhalla
 {
@@ -8,6 +9,7 @@ namespace CallOfValhalla
 
         private static GameManager _instance;
         private Pauser _pauser;
+        
         private Player_InputController _inputController;
         private Player_Movement _playerMovement;
 
@@ -58,6 +60,7 @@ namespace CallOfValhalla
         {
             _pauser = GetComponent<Pauser>();
             _playerMovement = FindObjectOfType<Player_Movement>();
+            
             //_inputController = FindObjectOfType<Player_InputController>();
         }
 
