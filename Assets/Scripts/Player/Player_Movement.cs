@@ -6,6 +6,7 @@ public class Player_Movement : MonoBehaviour
 
     private Transform _playerTransform;
     private Rigidbody2D _playerRigidbody2D;
+	public Animator animator;
 
     [SerializeField]
     private float _playerMoveSpeed;
@@ -33,6 +34,26 @@ public class Player_Movement : MonoBehaviour
     {
 
         CheckIfGrounded();
+
+        if (Input.GetAxis ("Horizontal") > 0) {
+            _playerTransform.localScale = new Vector3(1, 1, 1);
+        } 
+        else if (Input.GetAxis ("Horizontal") < 0) {
+           _playerTransform.localScale = new Vector3(-1, 1, 1); 
+        }
+
+		if (_isGrounded == true && Input.GetAxis ("Horizontal") != 0) {
+			animator.SetInteger ("animState", 1);
+		}
+        else if (_isGrounded == false && _playerRigidbody2D.velocity.y > 0.5) {
+            animator.SetInteger ("animState", 2);
+        }
+        else if (_isGrounded == false && _playerRigidbody2D.velocity.y < 0.5) {
+            animator.SetInteger ("animState", 3);
+        } 
+		else {
+			animator.SetInteger ("animState", 0);
+		}
 
     }
 
