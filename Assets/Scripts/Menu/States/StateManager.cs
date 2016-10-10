@@ -2,32 +2,36 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace CallOfValhalla.Enemy
+namespace CallOfValhalla.States
 {
 
     public enum StateType
     {
         Error = -1,
-        Passive,
-        Aggressive
+        MainMenu,
+        Game,
+        GameOver
     }
 
     public enum TransitionType
     {
         Error = -1,
-        PassiveToAggressive,
-        AggressiveToPassive
+        MainMenuToGame,
+        GameToGameOver,
+        GameOverToMainMenu
+
+
     }
 
-    public class BasicEnemy_StateManager
+    public class StateManager
     {
 
-        private List<BasicEnemy_StateBase> _states = new List<BasicEnemy_StateBase>();
-  
-        public BasicEnemy_StateBase CurrentState { get; private set; }
+        private List<StateBase> _states = new List<StateBase>();
+
+        public StateBase CurrentState { get; private set; }
         public StateType CurrentStateType { get { return CurrentState.State; } }
 
-        public BasicEnemy_StateManager(BasicEnemy_StateBase initialState)
+        public StateManager(StateBase initialState)
         {
             if (AddState(initialState))
             {
@@ -36,12 +40,12 @@ namespace CallOfValhalla.Enemy
             }
         }
 
-        public bool AddState(BasicEnemy_StateBase state)
+        public bool AddState(StateBase state)
         {
             bool exists = false;
-            foreach(var stateBase in _states)
+            foreach (var stateBase in _states)
             {
-                if(stateBase.State == state.State)
+                if (stateBase.State == state.State)
                 {
                     exists = true;
                 }
@@ -57,10 +61,10 @@ namespace CallOfValhalla.Enemy
 
         public bool RemoveState(StateType stateType)
         {
-            BasicEnemy_StateBase state = null;
-            foreach(var stateBase in _states)
+            StateBase state = null;
+            foreach (var stateBase in _states)
             {
-                if(stateBase.State == stateType)
+                if (stateBase.State == stateType)
                 {
                     state = stateBase;
                 }
@@ -71,20 +75,20 @@ namespace CallOfValhalla.Enemy
 
         public void PerformTransition(TransitionType transition)
         {
-            if(transition == TransitionType.Error)
+            if (transition == TransitionType.Error)
             {
                 return;
             }
 
             StateType targetStateType = CurrentState.GetTargetStateType(transition);
-            if(targetStateType == StateType.Error || targetStateType == CurrentStateType)
+            if (targetStateType == StateType.Error || targetStateType == CurrentStateType)
             {
                 return;
             }
 
-            foreach(var state in _states)
+            foreach (var state in _states)
             {
-                if(state.State == targetStateType)
+                if (state.State == targetStateType)
                 {
                     CurrentState.StateDeactivating();
                     CurrentState = state;

@@ -39,6 +39,12 @@ namespace CallOfValhalla.Enemy
             get { return _movement; }
         }
 
+        public BasicEnemy_Attack Attack
+        {
+            get { return _attack; }
+        }
+
+
         // Use this for initialization
         void Start()
         {
@@ -157,7 +163,6 @@ namespace CallOfValhalla.Enemy
             if (_playerOnSight)
             {
                 _movement.AggressiveMovement(_playerPosition);
-                _attack.Attack(_playerPosition);
             }
             else
             {

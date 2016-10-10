@@ -21,10 +21,16 @@ namespace CallOfValhalla.Player
         private Transform _groundCheckTransform;
 
         private bool _isGrounded;
+        private Player_HP _hp;
 
         public WeaponController WeaponController
         {
             get { return _weaponController; }
+        }
+
+        public Player_HP HP
+        {
+            get { return _hp; }
         }
 
         // Use this for initialization
@@ -34,6 +40,7 @@ namespace CallOfValhalla.Player
             _playerTransform = GetComponent<Transform>();
             _playerRigidbody2D = GetComponent<Rigidbody2D>();
             _weaponController = GetComponent<WeaponController>();
+            _hp = GetComponent<Player_HP>();
 
         }
 

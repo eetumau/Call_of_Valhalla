@@ -39,12 +39,6 @@ namespace CallOfValhalla.Enemy
 
         }
 
-        public void MoveToPlayer(Vector3 playerPos)
-        {
-            Vector3 moveTo = playerPos - _transform.position;
-
-            _transform.position += new Vector3(Mathf.Lerp(_transform.position.x, moveTo.x, Time.deltaTime * 0.5f), _transform.position.y, _transform.position.z);
-        }
 
         public void PassiveMovement()
         {
@@ -76,6 +70,9 @@ namespace CallOfValhalla.Enemy
             if (_minDistance <= distance.magnitude)
             {
                 _transform.position = Vector3.Lerp(_transform.position, targetPos, Time.deltaTime * 0.5f * _movementSpeed);
+            }else
+            {
+                BasicEnemy_AI.Instance.Attack.Attack();
             }
         }
 
@@ -135,5 +132,7 @@ namespace CallOfValhalla.Enemy
             }
 
         }
+
+
     }
 }

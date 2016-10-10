@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using CallOfValhalla.Player;
+using CallOfValhalla.States;
+using UnityEngine.SceneManagement;
 
 namespace CallOfValhalla
 {
@@ -23,6 +25,11 @@ namespace CallOfValhalla
                 }
                 return _instance;
             }
+        }
+
+        public static StateManager StateManager
+        {
+            get; set;
         }
 
         public Player_Movement Player
@@ -60,9 +67,32 @@ namespace CallOfValhalla
         {
             _pauser = GetComponent<Pauser>();
             _playerMovement = FindObjectOfType<Player_Movement>();
-            
-            //_inputController = FindObjectOfType<Player_InputController>();
+
+            InitStateManager();
         }
+
+        private void InitStateManager()
+        {
+            StateManager = new StateManager(new MainMenuState());
+            StateManager.AddState(new GameState());
+            StateManager.AddState(new GameOverState());
+        }
+
+        public void MainMenu()
+        {
+            StateManager.PerformTransition(TransitionType.GameOverToMainMenu);
+        }
+
+        public void Game()
+        {
+            StateManager.PerformTransition(TransitionType.MainMenuToGame);
+        }
+
+        public void GameOver()
+        {
+            StateManager.PerformTransition(TransitionType.GameToGameOver);
+        }
+
 
     }
 }
