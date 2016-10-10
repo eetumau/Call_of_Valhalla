@@ -6,7 +6,7 @@ namespace CallOfValhalla.Player
     abstract public class Weapon : MonoBehaviour
     {
 
-        abstract public void BasicAttack();
+        abstract public void BasicAttack(bool attack);
         abstract public void SpecialAttack();
     }
 }
