@@ -43,8 +43,8 @@ namespace CallOfValhalla.Player
         private void SetWeapons(string weapon1Name, string weapon2Name)
         {
 
-            if (weapon1Name.Equals("Sword"))
-                _weapon1 = _sword;
+            //if (weapon1Name.Equals("Sword"))
+            //    _weapon1 = _sword;
             /*
             else if (weapon1Name.Equals("Sword"))
                 _weapon1 = GetComponent<Weapon_Sword>();
@@ -52,8 +52,8 @@ namespace CallOfValhalla.Player
                 _weapon1 = GetComponent<Weapon_Sword>();
 
             */
-            if (weapon2Name.Equals("Sword"))
-                _weapon2 = new Weapon_Sword();
+            //if (weapon2Name.Equals("Sword"))
+            //    _weapon2 = new Weapon_Sword();
 
             /*
             else if (weapon2Name.Equals("Sword"))
@@ -82,11 +82,11 @@ namespace CallOfValhalla.Player
         public void ChangeCurrentWeapon ()
         {
 
-            Debug.Log("change");
-            if (_weapon1Current)
-                _weapon1Current = false;
-            else
-                _weapon1Current = true;           
+            //Debug.Log("change");
+            //if (_weapon1Current)
+            //    _weapon1Current = false;
+            //else
+            //    _weapon1Current = true;           
         }
     }
 }
