@@ -7,14 +7,15 @@ namespace CallOfValhalla.Player
     {
                
         private GameObject _weapon1_1;
+        
         private GameObject _weapon1_2;
         [SerializeField]
         GameObject _hero;
         private float _timer1;
         private float _timer2;
 
-        private bool _firstHitActive;
-        private bool _secondHitActive;
+        private bool _weapon1Active;
+        private bool _weapon2Active;
 
         [SerializeField]
         GameObject _sword;
@@ -23,7 +24,6 @@ namespace CallOfValhalla.Player
 
         private void Awake()
         {               
-                //Debug.Log("Täällä mennään");
 
                 _weapon1_1 = Instantiate(_sword, transform.position, Quaternion.identity) as GameObject;
                 _weapon1_1.transform.parent = _hero.transform;
@@ -36,14 +36,10 @@ namespace CallOfValhalla.Player
                 _weapon1_2.SetActive(false);
             
         }
-        public override void BasicAttack()
+        public override void BasicAttack(bool attack)
         {
             
-            if ( !_secondHitActive && !_firstHitActive)
-            {
-
-            }
-            /*
+                       
             if (_timer1 <= 0)
             {
                 _weapon1_1.SetActive(false);
@@ -56,7 +52,6 @@ namespace CallOfValhalla.Player
             }
             if (attack && _weapon1Active)
             {
-                //Debug.Log("Weapon2");
                 _timer1 = 0;
                 _timer2 = 0.5f;
                 _weapon1_1.SetActive(false);
@@ -67,7 +62,6 @@ namespace CallOfValhalla.Player
             {
                 _weapon1_1.SetActive(true);
                 _weapon1Active = true;
-                //Debug.Log("PAM");
                 _timer1 = 1f;
             }
 
@@ -79,7 +73,7 @@ namespace CallOfValhalla.Player
             {
                 _timer2 -= Time.deltaTime;
             }
-            */
+            
 
         }
 

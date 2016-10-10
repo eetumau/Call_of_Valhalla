@@ -24,9 +24,7 @@ public class Attack_Basic : MonoBehaviour {
 
         if (Weapon1 == "Sword")
         {
-
-            Debug.Log("Täällä mennään");
-
+                        
             _weapon1_1 = Instantiate(_sword, transform.position, Quaternion.identity) as GameObject;
             _weapon1_1.transform.parent = _hero.transform;
             _weapon1_1.transform.position = new Vector2(transform.position.x + 1, transform.position.y + 1);
