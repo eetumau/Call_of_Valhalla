@@ -6,15 +6,25 @@ namespace CallOfValhalla.Enemy
     public class BasicEnemy_WallCheck : MonoBehaviour
     {
 
-        private BasicEnemy_Movement _enemyMovement;
-        private BasicEnemy_AI _enemyAI;
+        private Enemy_Movement _enemyMovement;
         private Transform _transform;
+        private BasicEnemy_WallCheck _instance;
+
+        public BasicEnemy_WallCheck Instance
+        {
+            get { return _instance; }
+        }
 
         private void Start()
         {
-            _enemyMovement = GetComponentInParent<BasicEnemy_Movement>();
-            _enemyAI = GetComponentInParent<BasicEnemy_AI>();
+            _instance = this;
+            _enemyMovement = GetComponentInParent<Enemy_Movement>();
             _transform = GetComponent<Transform>();
+        }
+
+        private void FixedUpdate()
+        {
+
         }
 
         private void OnCollisionEnter2D(Collision2D col)
@@ -23,7 +33,7 @@ namespace CallOfValhalla.Enemy
             if (col.gameObject.tag == "Ground")
             {
 
-                _enemyMovement.ChangeDirection();
+                _enemyMovement.Instance.ChangeDirection();
             }
         }
 
