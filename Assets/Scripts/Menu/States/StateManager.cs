@@ -5,12 +5,16 @@ using System.Collections.Generic;
 namespace CallOfValhalla.States
 {
 
+    //Reminder to remove Testing states and transitions !
+
     public enum StateType
     {
         Error = -1,
         MainMenu,
         Game,
-        GameOver
+        GameOver,
+        Eetu,
+        Teemu
     }
 
     public enum TransitionType
@@ -18,7 +22,9 @@ namespace CallOfValhalla.States
         Error = -1,
         MainMenuToGame,
         GameToGameOver,
-        GameOverToMainMenu
+        GameOverToMainMenu,
+        MainMenuToEetu,
+        MainMenuToTeemu
 
 
     }

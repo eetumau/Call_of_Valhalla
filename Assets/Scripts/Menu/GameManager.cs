@@ -76,6 +76,10 @@ namespace CallOfValhalla
             StateManager = new StateManager(new MainMenuState());
             StateManager.AddState(new GameState());
             StateManager.AddState(new GameOverState());
+
+            //For testing purposes
+            StateManager.AddState(new EetuTestState());
+            StateManager.AddState(new TeemuTestState());
         }
 
         public void MainMenu()
@@ -91,6 +95,18 @@ namespace CallOfValhalla
         public void GameOver()
         {
             StateManager.PerformTransition(TransitionType.GameToGameOver);
+        }
+
+        //For testing purposes
+        public void Eetu()
+        {
+            StateManager.PerformTransition(TransitionType.MainMenuToEetu);
+        }
+ 
+        //For testing purposes
+        public void Teemu()
+        {
+            StateManager.PerformTransition(TransitionType.MainMenuToTeemu);
         }
 
 
