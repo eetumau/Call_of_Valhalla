@@ -9,10 +9,17 @@ namespace CallOfValhalla
         [SerializeField]
         private int _hp;
 
+        private Player_HP _instance;
+
+        public Player_HP Instance
+        {
+            get { return _instance; }
+        }
+
         // Use this for initialization
         void Start()
         {
-
+            _instance = this;
         }
 
         // Update is called once per frame

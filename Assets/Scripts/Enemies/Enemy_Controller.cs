@@ -15,6 +15,7 @@ namespace CallOfValhalla.Enemy
         private bool _isAggressive = false;
         private bool _isSearchingForPlayer = false;
         private Vector3 _lastSeenPlayerPos;
+        private bool _inAttackRange;
 
         public Enemy_Controller Instance
         {
@@ -40,6 +41,12 @@ namespace CallOfValhalla.Enemy
         {
             get { return _lastSeenPlayerPos; }
             set { _lastSeenPlayerPos = value; }
+        }
+
+        public bool InAttackRange
+        {
+            get { return _inAttackRange; }
+            set { _inAttackRange = value; }
         }
 
         private void Start()
