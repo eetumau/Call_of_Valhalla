@@ -106,7 +106,7 @@ namespace CallOfValhalla.Player
 
             for (int i = 0; i < colliders.Length; i++)
             {
-                if (colliders[i].tag == "Ground")
+                if (colliders[i].GetComponentInChildren<PolygonCollider2D>().tag == "Ground")
                 {
 
                     _isGrounded = true;
