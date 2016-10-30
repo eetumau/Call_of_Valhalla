@@ -10,6 +10,9 @@ namespace CallOfValhalla.Player
         private int _hp;
 
         private Player_HP _instance;
+        private Animator _animator;
+
+        private Player_Movement _movement;
 
         public Player_HP Instance
         {
@@ -20,6 +23,8 @@ namespace CallOfValhalla.Player
         void Start()
         {
             _instance = this;
+            _animator = GetComponent<Animator>();
+            _movement = GetComponent<Player_Movement>();
         }
 
         // Update is called once per frame
@@ -27,7 +32,7 @@ namespace CallOfValhalla.Player
         {
             if(_hp <= 0)
             {
-                Debug.Log("DEAD!");
+                
             }
 
         }

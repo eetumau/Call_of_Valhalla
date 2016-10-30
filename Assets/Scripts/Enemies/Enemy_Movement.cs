@@ -79,7 +79,7 @@ namespace CallOfValhalla.Enemy
                             ChangeDirection();
                         }
 
-                        //_animator.SetInteger("animState", 1);
+                        _animator.SetInteger("animState", 1);
                         _isIdle = false;
                         _isFacingRight = true;
                         _movingTimer = Random.Range(1, 4);
@@ -91,14 +91,14 @@ namespace CallOfValhalla.Enemy
                             ChangeDirection();
                         }
 
-                        //_animator.SetInteger("animState", 1);
+                        _animator.SetInteger("animState", 1);
                         _isIdle = false;
                         _isFacingRight = false;
                         _movingTimer = Random.Range(1, 4);
                     }
                     else
                     {
-                        //_animator.SetInteger("animState", 0);
+                        _animator.SetInteger("animState", 0);
                         _isIdle = true;
                     }
 
@@ -123,7 +123,7 @@ namespace CallOfValhalla.Enemy
 
                 if (_movingTimer <= 0)
                 {
-                    //_animator.SetInteger("animState", 0);
+                    _animator.SetInteger("animState", 0);
                     _isIdle = true;
                 }
 
@@ -150,10 +150,7 @@ namespace CallOfValhalla.Enemy
                 _animator.SetInteger("animState", 0);
 
             }
-            else
-            {
-                _animator.SetInteger("animState", 0);
-            }
+            
 
             if (_transform.position.x < _player.transform.position.x && !_isFacingRight)
             {
