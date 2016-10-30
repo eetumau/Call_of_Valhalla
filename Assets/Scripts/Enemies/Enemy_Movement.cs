@@ -147,7 +147,10 @@ namespace CallOfValhalla.Enemy
             }else if(Distance <= _minDistanceFromPlayer && Distance > 0 || Distance >= -1*_minDistanceFromPlayer && Distance <= 0)
             {
                 _enemyController.Instance.InAttackRange = true;
-            }else
+                _animator.SetInteger("animState", 0);
+
+            }
+            else
             {
                 _animator.SetInteger("animState", 0);
             }

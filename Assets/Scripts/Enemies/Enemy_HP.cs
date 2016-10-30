@@ -22,11 +22,6 @@ namespace CallOfValhalla.Enemy {
         // Update is called once per frame
         void Update() {
 
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                _hitPoints--;
-            }
-
             if (_hitPoints <= 0)
             {
                 _animator.SetInteger("animState", 3);
@@ -34,6 +29,11 @@ namespace CallOfValhalla.Enemy {
                 _enemyController.Instance.Die();
             }
 
+        }
+
+        public void TakeDamage(int damage)
+        {
+            _hitPoints -= damage;
         }
     }
 }

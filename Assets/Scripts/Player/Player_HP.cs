@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace CallOfValhalla
+namespace CallOfValhalla.Player
 {
     public class Player_HP : MonoBehaviour
     {
@@ -25,6 +25,10 @@ namespace CallOfValhalla
         // Update is called once per frame
         void Update()
         {
+            if(_hp <= 0)
+            {
+                Debug.Log("DEAD!");
+            }
 
         }
 
