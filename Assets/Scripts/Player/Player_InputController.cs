@@ -47,10 +47,10 @@ namespace CallOfValhalla.Player
             _specialAttack = Input.GetButtonDown("Attack2");
             _changeCurrentWeapon = Input.GetButtonDown("ChangeWeapon");
 
-            //if (_basicAttack || _specialAttack)
-            //    GameManager.Instance.Player.WeaponController.Attack(_basicAttack, _specialAttack);
-            //if (_changeCurrentWeapon)
-            //    GameManager.Instance.Player.WeaponController.ChangeCurrentWeapon();
+            if (_basicAttack || _specialAttack)
+                GameManager.Instance.Player.WeaponController.Attack(_basicAttack, _specialAttack);
+            if (_changeCurrentWeapon)
+                GameManager.Instance.Player.WeaponController.ChangeCurrentWeapon();
             
 
             if (_inputX < 0 || _inputX > 0)

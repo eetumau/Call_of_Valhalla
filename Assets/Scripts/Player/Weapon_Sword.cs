@@ -6,92 +6,117 @@ namespace CallOfValhalla.Player
     public class Weapon_Sword : Weapon
     {
                
-        private GameObject _weapon1_1;
-        
-        private GameObject _weapon1_2;
+        private GameObject _basic1Collider;        
+        private GameObject _basic2Collider;
+        private GameObject _specialCollider;
+
         [SerializeField]
         GameObject _hero;
+        private Player_Movement _movement;
         private float _timer1;
         private float _timer2;
+        private float _specialAttackTimer;
+        private float _specialAttackCooldown;
 
-        private bool _weapon1Active;
-        private bool _weapon2Active;
+        private bool _basic1Active;
+        private bool _basic2Active;
+        private bool _specialActive;
 
         [SerializeField]
-        GameObject _sword;
+        GameObject _basic1;
         [SerializeField]
-        GameObject _sword2;
+        GameObject _basic2;
+        [SerializeField]
+        GameObject _special;
 
         private void Awake()
-        {               
+        {                                 
+            _basic1Collider = Instantiate(_basic1, transform.position, Quaternion.identity) as GameObject;
+            _basic1Collider.transform.parent = _hero.transform;
+            _basic1Collider.transform.position = new Vector2(transform.position.x + 1, transform.position.y + 1);
+            _basic1Collider.SetActive(false);
 
-                _weapon1_1 = Instantiate(_sword, transform.position, Quaternion.identity) as GameObject;
-                _weapon1_1.transform.parent = _hero.transform;
-                _weapon1_1.transform.position = new Vector2(transform.position.x + 1, transform.position.y + 1);
-                _weapon1_1.SetActive(false);
+            _basic2Collider = Instantiate(_basic2, transform.position, Quaternion.identity) as GameObject;
+            _basic2Collider.transform.parent = _hero.transform;
+            _basic2Collider.transform.position = new Vector2(transform.position.x + 1, transform.position.y + 1);
+            _basic2Collider.SetActive(false);
 
-                _weapon1_2 = Instantiate(_sword2, transform.position, Quaternion.identity) as GameObject;
-                _weapon1_2.transform.parent = _hero.transform;
-                _weapon1_2.transform.position = new Vector2(transform.position.x + 1, transform.position.y + 1);
-                _weapon1_2.SetActive(false);
-            
+            _specialCollider = Instantiate(_special, transform.position, Quaternion.identity) as GameObject;
+            _specialCollider.transform.parent = _hero.transform;
+            _specialCollider.transform.position = new Vector2(transform.position.x + 1, transform.position.y + 1);
+            _specialCollider.SetActive(false);
+
+            _movement = GetComponent<Player_Movement>();
+
         }
         public override void BasicAttack(bool attack)
         {
-            
-                       
-            if (_timer1 <= 0)
-            {
-                _weapon1_1.SetActive(false);
-                _weapon1Active = false;
-            }
-            if (_timer2 <= 0)
-            {
-                _weapon1_2.SetActive(false);
-                _weapon2Active = false;
-            }
-            if (attack && _weapon1Active)
+
+            if (attack && _basic1Active && !_specialActive)
             {
                 _timer1 = 0;
                 _timer2 = 0.5f;
-                _weapon1_1.SetActive(false);
-                _weapon1_2.SetActive(true);
-                _weapon2Active = true;
+                _basic1Collider.SetActive(false);
+                _basic2Collider.SetActive(true);
+                _basic2Active = true;
             }
-            if (attack && !_weapon2Active)
+            if (attack && !_basic2Active && !_specialActive)
             {
-                _weapon1_1.SetActive(true);
-                _weapon1Active = true;
+                _basic1Collider.SetActive(true);
+                _basic1Active = true;
                 _timer1 = 1f;
             }
-
-            if (_timer1 > 0)
-            {
-                _timer1 -= Time.deltaTime;
-            }
-            if (_timer2 > 0)
-            {
-                _timer2 -= Time.deltaTime;
-            }
-            
-
         }
 
-        public override void SpecialAttack()
-        {
-
-        }
-
-        // Use this for initialization
-        void Start()
-        {
-
+        public override void SpecialAttack(bool attack)
+        { 
+            Debug.Log(_specialAttackCooldown);
+            if (attack && _specialAttackCooldown <= 0 && _movement._isGrounded && !_basic1Active && !_basic2Active)
+            {
+                _movement.SwordDash();
+                _specialCollider.SetActive(true);
+                _specialActive = true;
+                _specialAttackTimer = 0.7f;
+                _specialAttackCooldown = 8f;                
+            }
         }
 
         // Update is called once per frame
         void Update()
         {
+            CheckTimers();
+            RunTimers();            
+        }
 
+        private void RunTimers()
+        {                  
+            if (_timer1 > 0)
+                _timer1 -= Time.deltaTime;           
+            if (_timer2 > 0)            
+                _timer2 -= Time.deltaTime;
+            if (_specialAttackTimer > 0)
+                _specialAttackTimer -= Time.deltaTime;
+            if (_specialAttackCooldown > 0)
+                _specialAttackCooldown -= Time.deltaTime;
+        }
+
+        private void CheckTimers()
+        {
+            if (_timer1 <= 0)
+            {
+                _basic1Collider.SetActive(false);
+                _basic1Active = false;
+            }
+            if (_timer2 <= 0)
+            {
+                _basic2Collider.SetActive(false);
+                _basic2Active = false;
+            }
+            if (_specialAttackTimer <= 0)
+            {
+                _specialCollider.SetActive(false);
+                _specialActive = false;
+            }
         }
     }
 }

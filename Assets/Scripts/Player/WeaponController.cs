@@ -6,7 +6,6 @@ namespace CallOfValhalla.Player
     public class WeaponController : MonoBehaviour
     {
 
-        [SerializeField]
         private Weapon_Sword _sword;
 
         private string Weapon1;
@@ -43,15 +42,18 @@ namespace CallOfValhalla.Player
         private void SetWeapons(string weapon1Name, string weapon2Name)
         {
 
-            //if (weapon1Name.Equals("Sword"))
-            //    _weapon1 = _sword;
-            /*
-            else if (weapon1Name.Equals("Sword"))
+            if (weapon1Name.Equals("Sword"))
+            {
+                _sword = GetComponent<Weapon_Sword>();
+                _weapon1 = _sword;
+                
+            }
+            /*else if (weapon1Name.Equals("Sword"))
                 _weapon1 = GetComponent<Weapon_Sword>();
             else
                 _weapon1 = GetComponent<Weapon_Sword>();
-
-            */
+                */
+            
             //if (weapon2Name.Equals("Sword"))
             //    _weapon2 = new Weapon_Sword();
 
@@ -65,16 +67,19 @@ namespace CallOfValhalla.Player
 
         public void Attack (bool basicAttack, bool specialAttack)
         {
-            /*
+            if (_weapon1 != null)
+            {
+                Debug.Log("NOT NULL");
+            }
             if (_weapon1Current && basicAttack && !specialAttack)            
                 _weapon1.BasicAttack(basicAttack);
             else if (_weapon1Current && !basicAttack && specialAttack)
-                _weapon1.SpecialAttack();
+                _weapon1.SpecialAttack(specialAttack);
             else if (!_weapon1Current && basicAttack && !specialAttack)
                 _weapon2.BasicAttack(basicAttack);
             if (!_weapon1Current && !basicAttack && specialAttack)
-                _weapon1.SpecialAttack();
-                */
+                _weapon1.SpecialAttack(specialAttack);
+                
                 
             
         }
