@@ -25,7 +25,6 @@ namespace CallOfValhalla.Player
         private Player_HP _hp;
         private WeaponController _weaponController;
 
-
         public Player_HP HP
         {
             get { return _hp; }
@@ -39,7 +38,6 @@ namespace CallOfValhalla.Player
         // Use this for initialization
         void Start()
         {
-
             _playerTransform = GetComponent<Transform>();
             _playerRigidbody2D = GetComponent<Rigidbody2D>();
             _weaponController = GetComponent<WeaponController>();
@@ -50,51 +48,59 @@ namespace CallOfValhalla.Player
         // Update is called once per frame
         void Update()
         {
-
             CheckIfGrounded();
 
-            if(_attackTimer <= 0)
-            CheckAnimations();
+            if (_attackTimer <= 0)
+                CheckAnimations();
             
             RunTimers();
         }
 
         public void CheckAnimations()
-        {
+        {   
+            // Determines which way the player looks
             if (Input.GetAxis("Horizontal") > 0)
-            {
                 _playerTransform.localScale = new Vector3(1, 1, 1);
-            }
             else if (Input.GetAxis("Horizontal") < 0)
-            {
                 _playerTransform.localScale = new Vector3(-1, 1, 1);
-            }
 
+            // Sets animations based on movement
             if (_isGrounded == true && Input.GetAxis("Horizontal") != 0)
-            {
                 animator.SetInteger("animState", 1);
-            }
-            else if (_isGrounded == false && _playerRigidbody2D.velocity.y > 0.5)
+            else if (_isGrounded == false && _playerRigidbody2D.velocity.y > 0.5)            
+                animator.SetInteger("animState", 2);            
+            else if (_isGrounded == false && _playerRigidbody2D.velocity.y < 0.5)            
+                animator.SetInteger("animState", 3);            
+            else 
+                animator.SetInteger("animState", 0);            
+        }
+
+        public void SetAttackAnimation(string animation, float timer)
+        {
+            Debug.Log("metodin alku");
+            if (animation.Equals("swordbasic1"))
+            {                
+                animator.SetInteger("animState", 4);
+                _attackTimer = timer;
+            } else if (animation.Equals("swordbasic2"))
             {
-                animator.SetInteger("animState", 2);
+                animator.SetInteger("animState", 5);
+                _attackTimer = timer;
             }
-            else if (_isGrounded == false && _playerRigidbody2D.velocity.y < 0.5)
-            {
-                animator.SetInteger("animState", 3);
-            }
-            else
-            {
-                animator.SetInteger("animState", 0);
+            else if (animation.Equals("swordspecial"))
+            {   Debug.Log("animaatio");
+                animator.SetInteger("animState", 6);
+                _attackTimer = timer;
             }
         }
 
         public void Move(float inputX)
         {
-            if (_attackTimer <= 0)
+            //if (_attackTimer <= 0)
             _playerRigidbody2D.velocity = new Vector2(inputX * _playerMoveSpeed, _playerRigidbody2D.velocity.y);
 
         }
-
+        
         public void SwordDash()
         {
             if (_playerTransform.localScale.x == 1)
@@ -117,7 +123,6 @@ namespace CallOfValhalla.Player
                 //_playerRigidbody2D.AddForce(new Vector2(0, _playerJumpForce));
                 _playerRigidbody2D.velocity = new Vector2(_playerRigidbody2D.velocity.x, _playerJumpForce);
                 _isGrounded = false;
-
             }
 
         }
@@ -132,7 +137,6 @@ namespace CallOfValhalla.Player
             {
                 if (colliders[i].gameObject.tag == "Ground")
                 {
-
                         _isGrounded = true;
                 }
             }
@@ -146,6 +150,5 @@ namespace CallOfValhalla.Player
                 _attackTimer -= Time.deltaTime;
             }
         }
-
     }
 }
