@@ -97,7 +97,6 @@ namespace CallOfValhalla.Enemy
             _instance.enabled = false;
             _attack.enabled = false;
             _attackTrigger.enabled = false;
-            Debug.Log("död");
             
         }
 
