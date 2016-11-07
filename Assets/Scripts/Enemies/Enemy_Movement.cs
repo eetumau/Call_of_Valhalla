@@ -45,6 +45,8 @@ namespace CallOfValhalla.Enemy
         void Start()
         {
 
+            
+
             _transform = GetComponent<Transform>();
             _enemyController = GetComponent<Enemy_Controller>();
             _animator = GetComponent<Animator>();
