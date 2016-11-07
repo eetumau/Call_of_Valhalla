@@ -11,7 +11,7 @@ namespace CallOfValhalla.States
         public EetuTestState() : base()
         {
             State = StateType.Eetu;
-            AddTransition(TransitionType.EetuToGameOver, StateType.GameOver);
+            AddTransition(TransitionType.EetuToGameOver, StateType.MainMenu);
         }
 
         public override void StateActivated()

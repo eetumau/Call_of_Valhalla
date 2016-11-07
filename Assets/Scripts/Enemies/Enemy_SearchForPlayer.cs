@@ -11,8 +11,6 @@ namespace CallOfValhalla.Enemy
         private float _aggroRadius;
         [SerializeField]
         private Transform _lineCastStartingPoint;
-        //[SerializeField]
-        //private Transform _lineCastEndingPoint;
         [SerializeField]
         private float _timeBeforeTurningPassive;
 
@@ -30,11 +28,12 @@ namespace CallOfValhalla.Enemy
         // Use this for initialization
         void Start()
         {
+            _lineCastObject = GameObject.Find("LineCastEndingPoint");
+
             _animator = GetComponent<Animator>();
             _transform = GetComponent<Transform>();
             _enemyController = GetComponent<Enemy_Controller>();
             _turnToPassiveTimer = _timeBeforeTurningPassive;
-            _lineCastObject = GameObject.Find("LineCastEndingPoint");
             _lineCastEndingPoint = _lineCastObject.GetComponent<Transform>();
         }
 
