@@ -223,13 +223,13 @@ namespace CallOfValhalla.Enemy
         public void Knockback()
         {
 
-            if (!_isFacingRight)
+            if (!_isFacingRight && _knockbackTimer <= 0)
             {
                 _rigidBody2D.AddForce(_transform.right * 300);
                 _rigidBody2D.AddForce(_transform.up * 300);
                 _knockbackTimer = 0.5f;
             }
-            else
+            else if (_knockbackTimer <= 0)
             {
                 _rigidBody2D.AddForce(_transform.right * -300);
                 _rigidBody2D.AddForce(_transform.up * 300);
