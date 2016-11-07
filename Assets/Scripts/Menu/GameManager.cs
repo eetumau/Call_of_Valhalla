@@ -94,7 +94,8 @@ namespace CallOfValhalla
 
         public void GameOver()
         {
-            StateManager.PerformTransition(TransitionType.GameToGameOver);
+            Debug.Log("Game over");
+            StateManager.PerformTransition(TransitionType.EetuToGameOver);
         }
 
         //For testing purposes
