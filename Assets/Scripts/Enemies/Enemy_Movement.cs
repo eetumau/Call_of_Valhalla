@@ -22,12 +22,11 @@ namespace CallOfValhalla.Enemy
         private Enemy_Controller _enemyController;
         private float _movingTimer;
         private float _actionTimer;
-        private float _knockbackTimer;
         private bool _isIdle = true;
         private Animator _animator;
         private Enemy_Movement _instance;
         private BasicEnemy_WallCheck _wallCheck;
-        private Rigidbody2D _rigidBody2D;
+        private Enemy_Attack _enemyAttack;
 
         public Enemy_Movement Instance
         {
@@ -49,7 +48,7 @@ namespace CallOfValhalla.Enemy
             _animator = GetComponent<Animator>();
             _instance = this;
             _wallCheck = GetComponentInChildren<BasicEnemy_WallCheck>();
-            _rigidBody2D = GetComponent<Rigidbody2D>();
+            _enemyAttack = GetComponentInChildren<Enemy_Attack>();
         }
 
         // Update is called once per frame
@@ -57,22 +56,6 @@ namespace CallOfValhalla.Enemy
         {
             _enemyController.Instance.InAttackRange = false;
 
-            if (_knockbackTimer <= 0)
-                CheckStates();
-
-            RunTimers();
-            Debug.Log(_knockbackTimer);
-
-        }
-
-        private void RunTimers()
-        {
-            if (_knockbackTimer > 0)
-                _knockbackTimer -= Time.deltaTime;
-        }
-
-        private void CheckStates()
-        {
             if (_enemyController.Instance.IsPassive)
             {
                 PassiveMove();
@@ -85,6 +68,7 @@ namespace CallOfValhalla.Enemy
             {
                 MoveToLastSeenPos();
             }
+
         }
 
         private void PassiveMove()
@@ -163,11 +147,16 @@ namespace CallOfValhalla.Enemy
             if (Distance >= _minDistanceFromPlayer || Distance <= -1*_minDistanceFromPlayer)
             {
                 _animator.SetInteger("animState", 1);
-               
-                _transform.position = Vector2.MoveTowards(_transform.position, new Vector2(_player.position.x, _transform.position.y), Time.deltaTime * _aggressiveMovementSpeed);
+
+                if (!_enemyAttack.Instance.Attacking)
+                {
+                    _transform.position = Vector2.MoveTowards(_transform.position, new Vector2(_player.position.x, _transform.position.y), Time.deltaTime * _aggressiveMovementSpeed);
+
+                }
 
                 //_transform.position = Vector3.Lerp(_transform.position, new Vector3(_player.position.x, _transform.position.y, _transform.position.z), Time.deltaTime);
-            }else if(Distance <= _minDistanceFromPlayer && Distance > 0 || Distance >= -1*_minDistanceFromPlayer && Distance <= 0)
+            }
+            else if(Distance <= _minDistanceFromPlayer && Distance > 0 || Distance >= -1*_minDistanceFromPlayer && Distance <= 0)
             {
                 _enemyController.Instance.InAttackRange = true;
                 _animator.SetInteger("animState", 0);
@@ -211,22 +200,6 @@ namespace CallOfValhalla.Enemy
 
             _transform.localScale = new Vector3(-1 * _transform.localScale.x, _transform.localScale.y, _transform.localScale.z);
 
-        }
-
-        public void Knockback()
-        {
-            
-            if (_isFacingRight)
-            {                
-                _rigidBody2D.AddForce(_transform.right * 1000);
-                _rigidBody2D.AddForce(_transform.up * 1000);
-                _knockbackTimer = 1f;
-            } else
-            {
-                _rigidBody2D.AddForce(_transform.right * -1000);
-                _rigidBody2D.AddForce(_transform.up * 1000);
-                _knockbackTimer = 1f;
-            }
         }
 
     }
