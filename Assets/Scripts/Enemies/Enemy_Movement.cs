@@ -32,6 +32,11 @@ namespace CallOfValhalla.Enemy
             get { return _instance; }
         }
 
+        public Transform Transform
+        {
+            get { return _transform; }
+        }
+
 
         // Use this for initialization
         void Start()

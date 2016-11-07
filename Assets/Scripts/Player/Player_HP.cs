@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using CallOfValhalla;
 
 namespace CallOfValhalla.Player
 {
@@ -8,11 +9,14 @@ namespace CallOfValhalla.Player
 
         [SerializeField]
         private int _hp;
+        [SerializeField]
+        private float _deathDelay;
 
         private Player_HP _instance;
         private Animator _animator;
 
         private Player_Movement _movement;
+        private Player_InputController _input;
 
         public Player_HP Instance
         {
@@ -25,6 +29,7 @@ namespace CallOfValhalla.Player
             _instance = this;
             _animator = GetComponent<Animator>();
             _movement = GetComponent<Player_Movement>();
+            _input = GetComponent<Player_InputController>();
         }
 
         // Update is called once per frame
@@ -32,7 +37,7 @@ namespace CallOfValhalla.Player
         {
             if(_hp <= 0)
             {
-                
+                Die();
             }
 
         }
@@ -42,5 +47,20 @@ namespace CallOfValhalla.Player
             _hp -= damage;
             Debug.Log(_hp);
         }
+
+        private void Die()
+        {
+            _movement.enabled = false;
+            _input.enabled = false;
+            _animator.SetInteger("animState", 9);
+
+            if(_deathDelay <= 0)
+            {
+                GameManager.Instance.GameOver();
+            }
+
+            _deathDelay -= Time.deltaTime;
+        }
+
     }
 }

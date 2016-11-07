@@ -54,17 +54,20 @@ namespace CallOfValhalla.Player
 
             if (attack && _basic1Active && !_specialActive)
             {
+                Debug.Log("2 hyökkäys");
                 _timer1 = 0;
                 _timer2 = 0.5f;
                 _basic1Collider.SetActive(false);
                 _basic2Collider.SetActive(true);
                 _basic2Active = true;
+                _movement.SetAttackAnimation("swordbasic2", 0.4f);
             }
             if (attack && !_basic2Active && !_specialActive)
             {
                 _basic1Collider.SetActive(true);
                 _basic1Active = true;
-                _timer1 = 1f;
+                _timer1 = 0.5f;
+                _movement.SetAttackAnimation("swordbasic1", 0.4f);
             }
         }
 
@@ -76,8 +79,9 @@ namespace CallOfValhalla.Player
                 _movement.SwordDash();
                 _specialCollider.SetActive(true);
                 _specialActive = true;
-                _specialAttackTimer = 0.7f;
-                _specialAttackCooldown = 8f;                
+                _specialAttackTimer = 0.4f;
+                _specialAttackCooldown = 8f;
+                _movement.SetAttackAnimation("swordspecial", 0.4f);
             }
         }
 

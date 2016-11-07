@@ -15,7 +15,7 @@ namespace CallOfValhalla.States
 
         public override void StateActivated()
         {
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene(0);
         }
 
 

@@ -24,7 +24,8 @@ namespace CallOfValhalla.States
         GameToGameOver,
         GameOverToMainMenu,
         MainMenuToEetu,
-        MainMenuToTeemu
+        MainMenuToTeemu,
+        EetuToGameOver
 
 
     }
