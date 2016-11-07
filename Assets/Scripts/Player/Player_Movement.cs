@@ -21,7 +21,9 @@ namespace CallOfValhalla.Player
 
         public bool _isGrounded;
         private bool _attacking;
+        private bool _swordDashing;
         private float _attackTimer;
+        private float _swordDashTimer;
         private Player_HP _hp;
         private WeaponController _weaponController;
 
@@ -52,8 +54,10 @@ namespace CallOfValhalla.Player
 
             if (_attackTimer <= 0)
                 CheckAnimations();
-            
+
+            SpecialAttacks();
             RunTimers();
+            CheckTimers();
         }
 
         public void CheckAnimations()
@@ -75,9 +79,24 @@ namespace CallOfValhalla.Player
                 animator.SetInteger("animState", 0);            
         }
 
+        public void SpecialAttacks()
+        {
+            if (_swordDashing && _swordDashTimer > 0)
+                if (_playerTransform.localScale.x == 1)
+                    _playerRigidbody2D.velocity = new Vector2(25, 0);
+                else
+                    _playerRigidbody2D.velocity = new Vector2(-25, 0);
+            else if (_swordDashing && _swordDashTimer <= 0)
+            {
+                _swordDashing = false;
+                _playerRigidbody2D.velocity = new Vector2(0, 0);
+            }
+                
+        }
+
         public void SetAttackAnimation(string animation, float timer)
         {
-            Debug.Log("metodin alku");
+            
             if (animation.Equals("swordbasic1"))
             {                
                 animator.SetInteger("animState", 4);
@@ -88,7 +107,7 @@ namespace CallOfValhalla.Player
                 _attackTimer = timer;
             }
             else if (animation.Equals("swordspecial"))
-            {   Debug.Log("animaatio");
+            {   
                 animator.SetInteger("animState", 6);
                 _attackTimer = timer;
             }
@@ -96,7 +115,7 @@ namespace CallOfValhalla.Player
 
         public void Move(float inputX)
         {
-            //if (_attackTimer <= 0)
+            if (_swordDashTimer <= 0)
             _playerRigidbody2D.velocity = new Vector2(inputX * _playerMoveSpeed, _playerRigidbody2D.velocity.y);
 
         }
@@ -105,14 +124,18 @@ namespace CallOfValhalla.Player
         {
             if (_playerTransform.localScale.x == 1)
             {
-                _playerRigidbody2D.velocity = new Vector2(0, _playerRigidbody2D.velocity.y);
-                _playerRigidbody2D.AddForce(_playerTransform.right * 700);
-                _attackTimer = 0.7f;
+                //_playerRigidbody2D.velocity = new Vector2(0, _playerRigidbody2D.velocity.y);
+                //_playerRigidbody2D.AddForce(_playerTransform.right * 900);
+                _attackTimer = 0.3f;
+                _swordDashTimer = 0.3f;
+                _swordDashing = true;                
             } else
-            {
-                _playerRigidbody2D.velocity = new Vector2(0, _playerRigidbody2D.velocity.y);
-                _playerRigidbody2D.AddForce(_playerTransform.right * -700);
-                _attackTimer = 0.7f;
+            {                
+                //_playerRigidbody2D.velocity = new Vector2(0, _playerRigidbody2D.velocity.y);
+                //_playerRigidbody2D.AddForce(_playerTransform.right * -900);
+                _attackTimer = 0.3f;
+                _swordDashTimer = 0.3f;
+                _swordDashing = true;
             }
         }
 
@@ -145,10 +168,21 @@ namespace CallOfValhalla.Player
 
         private void RunTimers()
         {
-            if (_attackTimer >= 0)
+            if (_attackTimer >= 0)            
+                _attackTimer -= Time.deltaTime;      
+            if (_swordDashTimer >= 0)
+                _swordDashTimer -= Time.deltaTime;
+        }
+
+        private void CheckTimers()
+        {
+            /*
+            if (_swordDashing && _swordDashTimer <= 0)
             {
-                _attackTimer -= Time.deltaTime;
+                _playerRigidbody2D.velocity = new Vector2(0, 0);
+                _swordDashing = false;
             }
+                */
         }
     }
 }
