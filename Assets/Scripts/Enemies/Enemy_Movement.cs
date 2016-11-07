@@ -26,6 +26,7 @@ namespace CallOfValhalla.Enemy
         private Animator _animator;
         private Enemy_Movement _instance;
         private BasicEnemy_WallCheck _wallCheck;
+        private Enemy_Attack _enemyAttack;
 
         public Enemy_Movement Instance
         {
@@ -47,6 +48,7 @@ namespace CallOfValhalla.Enemy
             _animator = GetComponent<Animator>();
             _instance = this;
             _wallCheck = GetComponentInChildren<BasicEnemy_WallCheck>();
+            _enemyAttack = GetComponentInChildren<Enemy_Attack>();
         }
 
         // Update is called once per frame
@@ -145,11 +147,16 @@ namespace CallOfValhalla.Enemy
             if (Distance >= _minDistanceFromPlayer || Distance <= -1*_minDistanceFromPlayer)
             {
                 _animator.SetInteger("animState", 1);
-               
-                _transform.position = Vector2.MoveTowards(_transform.position, new Vector2(_player.position.x, _transform.position.y), Time.deltaTime * _aggressiveMovementSpeed);
+
+                if (!_enemyAttack.Instance.Attacking)
+                {
+                    _transform.position = Vector2.MoveTowards(_transform.position, new Vector2(_player.position.x, _transform.position.y), Time.deltaTime * _aggressiveMovementSpeed);
+
+                }
 
                 //_transform.position = Vector3.Lerp(_transform.position, new Vector3(_player.position.x, _transform.position.y, _transform.position.z), Time.deltaTime);
-            }else if(Distance <= _minDistanceFromPlayer && Distance > 0 || Distance >= -1*_minDistanceFromPlayer && Distance <= 0)
+            }
+            else if(Distance <= _minDistanceFromPlayer && Distance > 0 || Distance >= -1*_minDistanceFromPlayer && Distance <= 0)
             {
                 _enemyController.Instance.InAttackRange = true;
                 _animator.SetInteger("animState", 0);

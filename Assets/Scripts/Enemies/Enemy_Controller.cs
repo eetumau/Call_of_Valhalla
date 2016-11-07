@@ -57,7 +57,7 @@ namespace CallOfValhalla.Enemy
             _hp = GetComponent<Enemy_HP>();
             _movement = GetComponent<Enemy_Movement>();
             _searchForPlayer = GetComponent<Enemy_SearchForPlayer>();
-            _wallCheck = GetComponent<BasicEnemy_WallCheck>();
+            _wallCheck = GetComponentInChildren<BasicEnemy_WallCheck>();
             _attack = GetComponentInChildren<Enemy_Attack>();
             _attackTrigger = GetComponentInChildren<Enemy_AttackTrigger>();
         }
@@ -97,6 +97,7 @@ namespace CallOfValhalla.Enemy
             _instance.enabled = false;
             _attack.enabled = false;
             _attackTrigger.enabled = false;
+            Debug.Log("död");
             
         }
 

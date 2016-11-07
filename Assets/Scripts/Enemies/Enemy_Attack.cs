@@ -35,6 +35,11 @@ namespace CallOfValhalla.Enemy
             get { return _instance; }
         }
 
+        public bool Attacking
+        {
+            get { return _attacking; }
+        }
+
         public int Damage
         {
             get { return _damage; }
@@ -84,6 +89,22 @@ namespace CallOfValhalla.Enemy
                 }
             }
 
+            if (_attacking)
+            {
+                if (_attackTimer <= 0)
+                {
+                    _attackHitBox.enabled = false;
+                    _animator.SetInteger("animState", 0);
+                    _attacking = false;
+                    _attackTimer = _attackTime;
+                    _delayTimer = _attackDelay;
+                    _coolDownTimer = _attackCoolDown;
+
+                }
+
+                _attackTimer -= Time.deltaTime;
+            }
+
 
         }
 
@@ -100,23 +121,8 @@ namespace CallOfValhalla.Enemy
             if (_delayTimer <= 0)
             {
                 _attackHitBox.enabled = true;
-                _transform.position = _transform.position + Vector3.zero;   
             }
             
-
-
-            if(_attackTimer <= 0)
-            {
-                _attackHitBox.enabled = false;
-                _animator.SetInteger("animState", 0);
-                _attacking = false;
-                _attackTimer = _attackTime;
-                _delayTimer = _attackDelay;
-                _coolDownTimer = _attackCoolDown;
-
-            }
-
-            _attackTimer -= Time.deltaTime;
             _delayTimer -= Time.deltaTime;
 
         }
