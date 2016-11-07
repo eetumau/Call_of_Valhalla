@@ -10,6 +10,8 @@ namespace CallOfValhalla.Enemy
         private BasicEnemy_WallCheck _wallCheck;
         private Enemy_HP _hp;
         private Enemy_SearchForPlayer _searchForPlayer;
+        private Enemy_Attack _attack;
+        private Enemy_AttackTrigger _attackTrigger;
 
         private bool _isPassive = true;
         private bool _isAggressive = false;
@@ -56,6 +58,8 @@ namespace CallOfValhalla.Enemy
             _movement = GetComponent<Enemy_Movement>();
             _searchForPlayer = GetComponent<Enemy_SearchForPlayer>();
             _wallCheck = GetComponent<BasicEnemy_WallCheck>();
+            _attack = GetComponentInChildren<Enemy_Attack>();
+            _attackTrigger = GetComponentInChildren<Enemy_AttackTrigger>();
         }
 
         private void Update()
@@ -91,6 +95,8 @@ namespace CallOfValhalla.Enemy
             _hp.enabled = false;
             _wallCheck.enabled = false;
             _instance.enabled = false;
+            _attack.enabled = false;
+            _attackTrigger.enabled = false;
             
         }
 

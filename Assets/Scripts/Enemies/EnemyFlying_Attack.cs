@@ -35,6 +35,7 @@ namespace CallOfValhalla.Enemy
         private Transform _targetTransform;
         private Vector3 _returnPos;
         private float _returnTimer;
+       
 
         public EnemyFlying_Attack Instance
         {
@@ -76,7 +77,7 @@ namespace CallOfValhalla.Enemy
                 {
                     if (!_attacking)
                     {
-                        
+                        _returnPos = _transform.position;
                         Debug.Log(_returnPos);
                         _random = Random.Range(0, _attackChance + 1);
                     }
@@ -115,7 +116,10 @@ namespace CallOfValhalla.Enemy
             {
                 _attackHitBox.enabled = true;
 
-                _transform.position = Vector3.Lerp(_transform.position, _targetTransform.position, Time.deltaTime);
+                var _targetRotation = Quaternion.LookRotation(_targetTransform.position - _transform.position);
+                _transform.rotation = Quaternion.Lerp(_transform.rotation, new Quaternion(_transform.rotation.x, _transform.rotation.y, _targetRotation.z, _transform.rotation.w), 2 * Time.deltaTime);
+                _transform.position = Vector3.Lerp(_transform.position, _targetTransform.position, 2* Time.deltaTime);
+                
 
             }
 
@@ -123,12 +127,15 @@ namespace CallOfValhalla.Enemy
 
             if (_attackTimer <= 0)
             {
-
+                var _targetRotation = Quaternion.LookRotation(_returnPos - _transform.position);
+                _transform.rotation = Quaternion.Lerp(_transform.rotation, new Quaternion(_transform.rotation.x, _transform.rotation.y, _targetRotation.z, _transform.rotation.w), 2 * Time.deltaTime);
                 _transform.position = Vector3.Lerp(_transform.position, _returnPos, Time.deltaTime);
                 
 
                 if(_returnTimer <= 0)
                 {
+                    _transform.rotation = _transform.rotation = new Quaternion(_transform.rotation.x, _transform.rotation.y, 0, _transform.rotation.w);
+
                     _attackHitBox.enabled = false;
                     //_animator.SetInteger("animState", 0);
                     _attacking = false;
