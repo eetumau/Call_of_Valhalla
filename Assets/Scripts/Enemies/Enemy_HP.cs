@@ -6,17 +6,20 @@ namespace CallOfValhalla.Enemy {
 
         [SerializeField]
         private float _hitPoints;
-
+        [SerializeField]
+        private GameObject _blood;
 
         private Animator _animator;
         private Enemy_Controller _enemyController;
+        private Transform _transform;
+
 
         // Use this for initialization
         void Start() {
 
             _enemyController = GetComponent<Enemy_Controller>();
             _animator = GetComponent<Animator>();
-
+            _transform = GetComponent<Transform>();
         }
 
         // Update is called once per frame
@@ -34,6 +37,7 @@ namespace CallOfValhalla.Enemy {
         public void TakeDamage(int damage)
         {
             _hitPoints -= damage;
+            Instantiate(_blood, _transform.position+Vector3.up, _transform.rotation );
         }
     }
 }
