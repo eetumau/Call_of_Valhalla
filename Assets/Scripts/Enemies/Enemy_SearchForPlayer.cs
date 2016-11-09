@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using CallOfValhalla.Player;
 
 namespace CallOfValhalla.Enemy
 {
@@ -11,8 +12,6 @@ namespace CallOfValhalla.Enemy
         [SerializeField]
         private Transform _lineCastStartingPoint;
         [SerializeField]
-        private Transform _lineCastEndingPoint;
-        [SerializeField]
         private float _timeBeforeTurningPassive;
 
         private Transform _transform;
@@ -21,16 +20,21 @@ namespace CallOfValhalla.Enemy
         private Vector3 _playerLastSeenPos;
         private Animator _animator;
         private int allButIgnoreLinecast = ~(1 << 8);
+        private GameObject _lineCastObject;
+        private Transform _lineCastEndingPoint;
 
 
 
         // Use this for initialization
         void Start()
         {
+            _lineCastObject = GameObject.Find("LineCastEndingPoint");
+
             _animator = GetComponent<Animator>();
             _transform = GetComponent<Transform>();
             _enemyController = GetComponent<Enemy_Controller>();
             _turnToPassiveTimer = _timeBeforeTurningPassive;
+            _lineCastEndingPoint = _lineCastObject.GetComponent<Transform>();
         }
 
         // Update is called once per frame

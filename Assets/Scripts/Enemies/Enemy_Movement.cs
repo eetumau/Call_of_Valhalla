@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using CallOfValhalla.Player;
 
 namespace CallOfValhalla.Enemy
 {
@@ -12,8 +13,6 @@ namespace CallOfValhalla.Enemy
         private float _aggressiveMovementSpeed;
         [SerializeField]
         private float _timeBetweenActions;
-        [SerializeField]
-        private Transform _player;
         [SerializeField]
         private float _minDistanceFromPlayer;
 
@@ -29,6 +28,9 @@ namespace CallOfValhalla.Enemy
         private BasicEnemy_WallCheck _wallCheck;
         private Rigidbody2D _rigidBody2D;
         private Enemy_Attack _enemyAttack;
+        private Player_Movement _playerMovement;
+        private Transform _player;
+        
 
         public Enemy_Movement Instance
         {
@@ -45,8 +47,8 @@ namespace CallOfValhalla.Enemy
         void Start()
         {
 
-            
 
+            _playerMovement = FindObjectOfType<Player_Movement>();
             _transform = GetComponent<Transform>();
             _enemyController = GetComponent<Enemy_Controller>();
             _animator = GetComponent<Animator>();
@@ -54,6 +56,8 @@ namespace CallOfValhalla.Enemy
             _wallCheck = GetComponentInChildren<BasicEnemy_WallCheck>();
             _rigidBody2D = GetComponent<Rigidbody2D>();
             _enemyAttack = GetComponentInChildren<Enemy_Attack>();
+            _player = _playerMovement.GetComponent<Transform>();
+
         }
 
         // Update is called once per frame
@@ -178,7 +182,12 @@ namespace CallOfValhalla.Enemy
             else if (Distance <= _minDistanceFromPlayer && Distance > 0 || Distance >= -1 * _minDistanceFromPlayer && Distance <= 0)
             {
                 _enemyController.Instance.InAttackRange = true;
-                _animator.SetInteger("animState", 0);
+
+                if (!_enemyAttack.Instance.Attacking)
+                {
+                    _animator.SetInteger("animState", 0);
+
+                }
 
             }
 

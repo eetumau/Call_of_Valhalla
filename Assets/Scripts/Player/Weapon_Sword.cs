@@ -54,20 +54,21 @@ namespace CallOfValhalla.Player
 
             if (attack && _basic1Active && !_specialActive)
             {
-                
+                Debug.Log("Basic2 Collider");
                 _timer1 = 0;
                 _timer2 = 0.3f;
                 _basic1Collider.SetActive(false);
                 _basic2Collider.SetActive(true);
                 _basic2Active = true;
-                _movement.SetAttackAnimation("swordbasic2", 0.4f);
+                _movement.SetAttackAnimation("swordbasic2", 0.3f);
             }
-            if (attack && !_basic2Active && !_specialActive)
+            if (attack && !_basic2Active && !_specialActive && _timer1 <= 0)
             {
+                Debug.Log("Basic1 Collider");
                 _basic1Collider.SetActive(true);
                 _basic1Active = true;
                 _timer1 = 0.3f;
-                _movement.SetAttackAnimation("swordbasic1", 0.4f);
+                _movement.SetAttackAnimation("swordbasic1", 0.3f);
             }
         }
 

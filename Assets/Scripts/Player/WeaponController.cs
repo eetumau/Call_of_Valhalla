@@ -67,10 +67,7 @@ namespace CallOfValhalla.Player
 
         public void Attack (bool basicAttack, bool specialAttack)
         {
-            if (_weapon1 != null)
-            {
-                Debug.Log("NOT NULL");
-            }
+            
             if (_weapon1Current && basicAttack && !specialAttack)            
                 _weapon1.BasicAttack(basicAttack);
             else if (_weapon1Current && !basicAttack && specialAttack)
