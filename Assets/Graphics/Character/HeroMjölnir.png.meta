@@ -1,34 +1,34 @@
 fileFormatVersion: 2
-guid: bcc214d430c6c9c4c989788f36d53267
-timeCreated: 1478680959
+guid: 9a5e6ac701d664d43967c9f584325212
+timeCreated: 1478680987
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: HeroBow_0
-    21300002: HeroBow_1
-    21300004: HeroBow_2
-    21300006: HeroBow_3
-    21300008: HeroBow_4
-    21300010: HeroBow_5
-    21300012: HeroBow_6
-    21300014: HeroBow_7
-    21300016: HeroBow_8
-    21300018: HeroBow_9
-    21300020: HeroBow_10
-    21300022: HeroBow_11
-    21300024: HeroBow_12
-    21300026: HeroBow_13
-    21300028: HeroBow_14
-    21300030: HeroBow_15
-    21300032: HeroBow_16
-    21300034: HeroBow_17
-    21300036: HeroBow_18
-    21300038: HeroBow_19
-    21300040: HeroBow_20
-    21300042: HeroBow_21
-    21300044: HeroBow_22
-    21300046: HeroBow_23
-    21300048: HeroBow_24
+    21300000: "HeroMj\xF6lnir_0"
+    21300002: "HeroMj\xF6lnir_1"
+    21300004: "HeroMj\xF6lnir_2"
+    21300006: "HeroMj\xF6lnir_3"
+    21300008: "HeroMj\xF6lnir_4"
+    21300010: "HeroMj\xF6lnir_5"
+    21300012: "HeroMj\xF6lnir_6"
+    21300014: "HeroMj\xF6lnir_7"
+    21300016: "HeroMj\xF6lnir_8"
+    21300018: "HeroMj\xF6lnir_9"
+    21300020: "HeroMj\xF6lnir_10"
+    21300022: "HeroMj\xF6lnir_11"
+    21300024: "HeroMj\xF6lnir_12"
+    21300026: "HeroMj\xF6lnir_13"
+    21300028: "HeroMj\xF6lnir_14"
+    21300030: "HeroMj\xF6lnir_15"
+    21300032: "HeroMj\xF6lnir_16"
+    21300034: "HeroMj\xF6lnir_17"
+    21300036: "HeroMj\xF6lnir_18"
+    21300038: "HeroMj\xF6lnir_19"
+    21300040: "HeroMj\xF6lnir_20"
+    21300042: "HeroMj\xF6lnir_21"
+    21300044: "HeroMj\xF6lnir_22"
+    21300046: "HeroMj\xF6lnir_23"
+    21300048: "HeroMj\xF6lnir_24"
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -83,7 +83,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HeroBow_0
+      name: "HeroMj\xF6lnir_0"
       rect:
         serializedVersion: 2
         x: 0
@@ -96,7 +96,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_1
+      name: "HeroMj\xF6lnir_1"
       rect:
         serializedVersion: 2
         x: 128
@@ -109,7 +109,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_2
+      name: "HeroMj\xF6lnir_2"
       rect:
         serializedVersion: 2
         x: 256
@@ -122,7 +122,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_3
+      name: "HeroMj\xF6lnir_3"
       rect:
         serializedVersion: 2
         x: 384
@@ -135,7 +135,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_4
+      name: "HeroMj\xF6lnir_4"
       rect:
         serializedVersion: 2
         x: 512
@@ -148,7 +148,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_5
+      name: "HeroMj\xF6lnir_5"
       rect:
         serializedVersion: 2
         x: 0
@@ -161,7 +161,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_6
+      name: "HeroMj\xF6lnir_6"
       rect:
         serializedVersion: 2
         x: 128
@@ -174,7 +174,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_7
+      name: "HeroMj\xF6lnir_7"
       rect:
         serializedVersion: 2
         x: 256
@@ -187,7 +187,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_8
+      name: "HeroMj\xF6lnir_8"
       rect:
         serializedVersion: 2
         x: 384
@@ -200,7 +200,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_9
+      name: "HeroMj\xF6lnir_9"
       rect:
         serializedVersion: 2
         x: 512
@@ -213,7 +213,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_10
+      name: "HeroMj\xF6lnir_10"
       rect:
         serializedVersion: 2
         x: 0
@@ -226,7 +226,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_11
+      name: "HeroMj\xF6lnir_11"
       rect:
         serializedVersion: 2
         x: 128
@@ -239,7 +239,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_12
+      name: "HeroMj\xF6lnir_12"
       rect:
         serializedVersion: 2
         x: 256
@@ -252,7 +252,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_13
+      name: "HeroMj\xF6lnir_13"
       rect:
         serializedVersion: 2
         x: 384
@@ -265,7 +265,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_14
+      name: "HeroMj\xF6lnir_14"
       rect:
         serializedVersion: 2
         x: 512
@@ -278,7 +278,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_15
+      name: "HeroMj\xF6lnir_15"
       rect:
         serializedVersion: 2
         x: 0
@@ -291,7 +291,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_16
+      name: "HeroMj\xF6lnir_16"
       rect:
         serializedVersion: 2
         x: 128
@@ -304,7 +304,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_17
+      name: "HeroMj\xF6lnir_17"
       rect:
         serializedVersion: 2
         x: 256
@@ -317,7 +317,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_18
+      name: "HeroMj\xF6lnir_18"
       rect:
         serializedVersion: 2
         x: 384
@@ -330,7 +330,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_19
+      name: "HeroMj\xF6lnir_19"
       rect:
         serializedVersion: 2
         x: 512
@@ -343,7 +343,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_20
+      name: "HeroMj\xF6lnir_20"
       rect:
         serializedVersion: 2
         x: 0
@@ -356,7 +356,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_21
+      name: "HeroMj\xF6lnir_21"
       rect:
         serializedVersion: 2
         x: 128
@@ -369,7 +369,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_22
+      name: "HeroMj\xF6lnir_22"
       rect:
         serializedVersion: 2
         x: 256
@@ -382,7 +382,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_23
+      name: "HeroMj\xF6lnir_23"
       rect:
         serializedVersion: 2
         x: 384
@@ -395,7 +395,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HeroBow_24
+      name: "HeroMj\xF6lnir_24"
       rect:
         serializedVersion: 2
         x: 512
