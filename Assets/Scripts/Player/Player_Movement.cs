@@ -94,6 +94,11 @@ namespace CallOfValhalla.Player
                 
         }
 
+        public void ResetAttackTimer()
+        {
+            _attackTimer = 0;
+        }
+
         public void SetAttackAnimation(string animation, float timer)
         {
             

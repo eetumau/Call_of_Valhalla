@@ -49,6 +49,7 @@ namespace CallOfValhalla.Player
             _movement = GetComponent<Player_Movement>();
 
         }
+
         public override void BasicAttack(bool attack)
         {
 
@@ -56,26 +57,28 @@ namespace CallOfValhalla.Player
             {
                 Debug.Log("Basic2 Collider");
                 _timer1 = 0;
-                _timer2 = 0.3f;
+                _timer2 = 0.4f;
                 _basic1Collider.SetActive(false);
                 _basic2Collider.SetActive(true);
                 _basic2Active = true;
-                _movement.SetAttackAnimation("swordbasic2", 0.3f);
+                _movement.SetAttackAnimation("swordbasic2", 0.4f);
+
             }
-            if (attack && !_basic2Active && !_specialActive && _timer1 <= 0)
+            if (attack && !_basic1Active && !_specialActive)
             {
                 Debug.Log("Basic1 Collider");
                 _basic1Collider.SetActive(true);
                 _basic1Active = true;
-                _timer1 = 0.3f;
-                _movement.SetAttackAnimation("swordbasic1", 0.3f);
+                _timer1 = 0.4f;
+                _movement.SetAttackAnimation("swordbasic1", 0.4f);
             }
+            
         }
 
         public override void SpecialAttack(bool attack)
         { 
             Debug.Log(_specialAttackCooldown);
-            if (attack && _specialAttackCooldown <= 0 && _movement._isGrounded && !_basic1Active && !_basic2Active)
+            if (attack && _specialAttackCooldown <= 0 && _movement._isGrounded )
             {
                 _movement.SwordDash();
                 _specialCollider.SetActive(true);
