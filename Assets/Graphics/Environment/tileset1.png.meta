@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 2ddcc5edbe458bf47acd6a77a7ad6463
-timeCreated: 1477899782
+timeCreated: 1478770733
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -48,6 +48,20 @@ TextureImporter:
     21300082: tileset1_41
     21300084: tileset1_42
     21300086: tileset1_43
+    21300088: tileset1_44
+    21300090: tileset1_45
+    21300092: tileset1_46
+    21300094: tileset1_47
+    21300096: tileset1_48
+    21300098: tileset1_49
+    21300100: tileset1_50
+    21300102: tileset1_51
+    21300104: tileset1_52
+    21300106: tileset1_53
+    21300108: tileset1_54
+    21300110: tileset1_55
+    21300112: tileset1_56
+    21300114: tileset1_57
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -92,7 +106,12 @@ TextureImporter:
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  buildTargetSettings:
+  - buildTarget: Standalone
+    maxTextureSize: 512
+    textureFormat: -3
+    compressionQuality: 50
+    allowsAlphaSplitting: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -100,8 +119,8 @@ TextureImporter:
       name: tileset1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 384
+        x: 320
+        y: 448
         width: 64
         height: 64
       alignment: 0
@@ -113,7 +132,7 @@ TextureImporter:
       name: tileset1_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 0
         y: 384
         width: 64
         height: 64
@@ -126,7 +145,7 @@ TextureImporter:
       name: tileset1_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 64
         y: 384
         width: 64
         height: 64
@@ -139,7 +158,7 @@ TextureImporter:
       name: tileset1_3
       rect:
         serializedVersion: 2
-        x: 192
+        x: 128
         y: 384
         width: 64
         height: 64
@@ -152,7 +171,7 @@ TextureImporter:
       name: tileset1_4
       rect:
         serializedVersion: 2
-        x: 256
+        x: 192
         y: 384
         width: 64
         height: 64
@@ -165,7 +184,7 @@ TextureImporter:
       name: tileset1_5
       rect:
         serializedVersion: 2
-        x: 320
+        x: 256
         y: 384
         width: 64
         height: 64
@@ -178,8 +197,8 @@ TextureImporter:
       name: tileset1_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 320
+        x: 320
+        y: 384
         width: 64
         height: 64
       alignment: 0
@@ -191,8 +210,8 @@ TextureImporter:
       name: tileset1_7
       rect:
         serializedVersion: 2
-        x: 64
-        y: 320
+        x: 384
+        y: 384
         width: 64
         height: 64
       alignment: 0
@@ -204,7 +223,7 @@ TextureImporter:
       name: tileset1_8
       rect:
         serializedVersion: 2
-        x: 128
+        x: 0
         y: 320
         width: 64
         height: 64
@@ -217,7 +236,7 @@ TextureImporter:
       name: tileset1_9
       rect:
         serializedVersion: 2
-        x: 192
+        x: 64
         y: 320
         width: 64
         height: 64
@@ -230,7 +249,7 @@ TextureImporter:
       name: tileset1_10
       rect:
         serializedVersion: 2
-        x: 256
+        x: 128
         y: 320
         width: 64
         height: 64
@@ -243,7 +262,7 @@ TextureImporter:
       name: tileset1_11
       rect:
         serializedVersion: 2
-        x: 320
+        x: 192
         y: 320
         width: 64
         height: 64
@@ -256,8 +275,8 @@ TextureImporter:
       name: tileset1_12
       rect:
         serializedVersion: 2
-        x: 0
-        y: 256
+        x: 256
+        y: 320
         width: 64
         height: 64
       alignment: 0
@@ -269,8 +288,8 @@ TextureImporter:
       name: tileset1_13
       rect:
         serializedVersion: 2
-        x: 64
-        y: 256
+        x: 320
+        y: 320
         width: 64
         height: 64
       alignment: 0
@@ -282,8 +301,8 @@ TextureImporter:
       name: tileset1_14
       rect:
         serializedVersion: 2
-        x: 128
-        y: 256
+        x: 384
+        y: 320
         width: 64
         height: 64
       alignment: 0
@@ -296,7 +315,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 192
+        y: 256
         width: 64
         height: 64
       alignment: 0
@@ -309,7 +328,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 192
+        y: 256
         width: 64
         height: 64
       alignment: 0
@@ -322,7 +341,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 192
+        y: 256
         width: 64
         height: 64
       alignment: 0
@@ -335,7 +354,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 192
+        y: 256
         width: 64
         height: 64
       alignment: 0
@@ -348,7 +367,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 192
+        y: 256
         width: 64
         height: 64
       alignment: 0
@@ -360,8 +379,8 @@ TextureImporter:
       name: tileset1_20
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
+        x: 320
+        y: 256
         width: 64
         height: 64
       alignment: 0
@@ -373,8 +392,8 @@ TextureImporter:
       name: tileset1_21
       rect:
         serializedVersion: 2
-        x: 64
-        y: 128
+        x: 0
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -386,8 +405,8 @@ TextureImporter:
       name: tileset1_22
       rect:
         serializedVersion: 2
-        x: 128
-        y: 128
+        x: 64
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -399,8 +418,8 @@ TextureImporter:
       name: tileset1_23
       rect:
         serializedVersion: 2
-        x: 192
-        y: 128
+        x: 128
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -412,8 +431,8 @@ TextureImporter:
       name: tileset1_24
       rect:
         serializedVersion: 2
-        x: 256
-        y: 128
+        x: 192
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -425,8 +444,8 @@ TextureImporter:
       name: tileset1_25
       rect:
         serializedVersion: 2
-        x: 320
-        y: 128
+        x: 256
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -438,8 +457,8 @@ TextureImporter:
       name: tileset1_26
       rect:
         serializedVersion: 2
-        x: 384
-        y: 128
+        x: 320
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -451,8 +470,8 @@ TextureImporter:
       name: tileset1_27
       rect:
         serializedVersion: 2
-        x: 448
-        y: 128
+        x: 384
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -464,8 +483,8 @@ TextureImporter:
       name: tileset1_28
       rect:
         serializedVersion: 2
-        x: 0
-        y: 64
+        x: 448
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -477,6 +496,136 @@ TextureImporter:
       name: tileset1_29
       rect:
         serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset1_30
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset1_31
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset1_32
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset1_33
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset1_34
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset1_35
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset1_36
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset1_37
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset1_38
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset1_39
+      rect:
+        serializedVersion: 2
         x: 64
         y: 64
         width: 64
@@ -487,7 +636,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset1_30
+      name: tileset1_40
       rect:
         serializedVersion: 2
         x: 128
@@ -500,7 +649,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset1_31
+      name: tileset1_41
       rect:
         serializedVersion: 2
         x: 192
@@ -513,7 +662,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset1_32
+      name: tileset1_42
       rect:
         serializedVersion: 2
         x: 256
@@ -526,7 +675,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset1_33
+      name: tileset1_43
       rect:
         serializedVersion: 2
         x: 320
@@ -539,7 +688,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset1_34
+      name: tileset1_44
       rect:
         serializedVersion: 2
         x: 384
@@ -552,7 +701,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset1_35
+      name: tileset1_45
       rect:
         serializedVersion: 2
         x: 448
@@ -565,7 +714,33 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset1_36
+      name: tileset1_46
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset1_47
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset1_48
       rect:
         serializedVersion: 2
         x: 0
@@ -578,7 +753,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset1_37
+      name: tileset1_49
       rect:
         serializedVersion: 2
         x: 64
@@ -591,7 +766,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset1_38
+      name: tileset1_50
       rect:
         serializedVersion: 2
         x: 128
@@ -604,7 +779,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset1_39
+      name: tileset1_51
       rect:
         serializedVersion: 2
         x: 192
@@ -617,7 +792,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset1_40
+      name: tileset1_52
       rect:
         serializedVersion: 2
         x: 256
@@ -630,7 +805,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset1_41
+      name: tileset1_53
       rect:
         serializedVersion: 2
         x: 320
@@ -643,7 +818,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset1_42
+      name: tileset1_54
       rect:
         serializedVersion: 2
         x: 384
@@ -656,10 +831,36 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset1_43
+      name: tileset1_55
       rect:
         serializedVersion: 2
         x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset1_56
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset1_57
+      rect:
+        serializedVersion: 2
+        x: 576
         y: 0
         width: 64
         height: 64
