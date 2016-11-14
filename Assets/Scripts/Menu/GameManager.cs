@@ -107,9 +107,14 @@ namespace CallOfValhalla
                 {
                     _playerMovement.HP.enabled = true;
                     _playerMovement.HP.Respawn(_checkPoint.SpawnPoint);
-                    
+                    _checkPoint.DestroyCheckPoint();
+                }else
+                {
+                    StateManager.PerformTransition(TransitionType.EetuToGameOver);
+
                 }
-            }else
+            }
+            else
             {
                 StateManager.PerformTransition(TransitionType.EetuToGameOver);
 

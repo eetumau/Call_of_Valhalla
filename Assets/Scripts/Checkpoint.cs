@@ -8,8 +8,11 @@ namespace CallOfValhalla
 
         [SerializeField]
         private Sprite _activatedSprite;
+        [SerializeField]
+        private Sprite _destroyedSprite;
 
         private bool _activated = false;
+        private bool _used = false;
         private Transform _transform;
         private SpriteRenderer _renderer;
 
@@ -40,12 +43,22 @@ namespace CallOfValhalla
 
         void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.tag == "Player")
+            if (!_used)
             {
-                _activated = true;
-                _renderer.sprite = _activatedSprite;
-                GameManager.Instance.CheckPoint = this;
+                if (other.gameObject.tag == "Player")
+                {
+                    _activated = true;
+                    _renderer.sprite = _activatedSprite;
+                    GameManager.Instance.CheckPoint = this;
+                }
             }
+        }
+
+        public void DestroyCheckPoint()
+        {
+            _activated = false;
+            _used = true;
+            _renderer.sprite = _destroyedSprite;
         }
     }
 }
