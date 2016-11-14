@@ -27,6 +27,11 @@ namespace CallOfValhalla.Player
             get { return _instance; }
         }
 
+        public int HP
+        {
+            get { return _hp; }
+        }
+
         // Use this for initialization
         void Start()
         {
