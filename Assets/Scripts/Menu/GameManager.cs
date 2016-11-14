@@ -11,9 +11,11 @@ namespace CallOfValhalla
 
         private static GameManager _instance;
         private Pauser _pauser;
+        private Checkpoint _checkPoint;
         
         private Player_InputController _inputController;
         private Player_Movement _playerMovement;
+        private Player_HP _playerHP;
 
         public static GameManager Instance
         {
@@ -49,6 +51,11 @@ namespace CallOfValhalla
             get { return _pauser; }
         }
 
+        public Checkpoint CheckPoint
+        {
+            set { _checkPoint = value; }
+        }
+
         // Use this for initialization
         void Awake()
         {
@@ -67,6 +74,7 @@ namespace CallOfValhalla
         {
             _pauser = GetComponent<Pauser>();
             _playerMovement = FindObjectOfType<Player_Movement>();
+            _playerHP = FindObjectOfType<Player_HP>();
 
             InitStateManager();
         }
@@ -94,8 +102,18 @@ namespace CallOfValhalla
 
         public void GameOver()
         {
-            Debug.Log("Game over");
-            StateManager.PerformTransition(TransitionType.EetuToGameOver);
+            if(_checkPoint != null) {
+                if (_checkPoint.Activated)
+                {
+                    _playerMovement.HP.enabled = true;
+                    _playerMovement.HP.Respawn(_checkPoint.SpawnPoint);
+                    
+                }
+            }else
+            {
+                StateManager.PerformTransition(TransitionType.EetuToGameOver);
+
+            }
         }
 
         //For testing purposes

@@ -8,15 +8,19 @@ namespace CallOfValhalla.Player
     {
 
         [SerializeField]
-        private int _hp;
+        private int _OriginalHP;
         [SerializeField]
         private float _deathDelay;
 
         private Player_HP _instance;
         private Animator _animator;
+        private float _delayTimer;
+        private int _hp;
 
         private Player_Movement _movement;
         private Player_InputController _input;
+        private Transform _transform;
+        private bool _respawning;
 
         public Player_HP Instance
         {
@@ -30,12 +34,15 @@ namespace CallOfValhalla.Player
             _animator = GetComponent<Animator>();
             _movement = GetComponent<Player_Movement>();
             _input = GetComponent<Player_InputController>();
+            _delayTimer = _deathDelay;
+            _hp = _OriginalHP;
+            _transform = GetComponent<Transform>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            if(_hp <= 0)
+            if(_hp <= 0 && !_respawning)
             {
                 Die();
             }
@@ -54,12 +61,25 @@ namespace CallOfValhalla.Player
             _input.enabled = false;
             _animator.SetInteger("animState", 9);
 
-            if(_deathDelay <= 0)
+            if(_delayTimer <= 0)
             {
                 GameManager.Instance.GameOver();
             }
 
-            _deathDelay -= Time.deltaTime;
+            _delayTimer -= Time.deltaTime;
+        }
+
+        public void Respawn(Transform spawnPoint)
+        {
+            _respawning = true;
+            _movement.enabled = true;
+            _input.enabled = true;
+            _animator.SetInteger("animState", 0);
+            _delayTimer = _deathDelay;
+            _hp = _OriginalHP;
+            _transform.position = spawnPoint.position;
+            _respawning = false;
+
         }
 
     }
