@@ -52,8 +52,8 @@ namespace CallOfValhalla.Player
         {
             CheckIfGrounded();
 
-            if (_attackTimer <= 0)
-                CheckAnimations();
+            
+            CheckAnimations();
 
             SpecialAttacks();
             RunTimers();
@@ -69,14 +69,17 @@ namespace CallOfValhalla.Player
                 _playerTransform.localScale = new Vector3(-1, 1, 1);
 
             // Sets animations based on movement
-            if (_isGrounded == true && Input.GetAxis("Horizontal") != 0)
-                animator.SetInteger("animState", 1);
-            else if (_isGrounded == false && _playerRigidbody2D.velocity.y > 0.5)            
-                animator.SetInteger("animState", 2);            
-            else if (_isGrounded == false && _playerRigidbody2D.velocity.y < 0.5)            
-                animator.SetInteger("animState", 3);            
-            else 
-                animator.SetInteger("animState", 0);            
+            if (_attackTimer <= 0)
+            {
+                if (_isGrounded == true && Input.GetAxis("Horizontal") != 0)
+                    animator.SetInteger("animState", 1);
+                else if (_isGrounded == false && _playerRigidbody2D.velocity.y > 0.5)
+                    animator.SetInteger("animState", 2);
+                else if (_isGrounded == false && _playerRigidbody2D.velocity.y < 0.5)
+                    animator.SetInteger("animState", 3);
+                else
+                    animator.SetInteger("animState", 0);
+            }      
         }
 
         public void SpecialAttacks()
