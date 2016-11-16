@@ -7,8 +7,9 @@ namespace CallOfValhalla
     public class Pauser : MonoBehaviour
     {
 
+        private GameObject _pauseCanvasGO;
         private Canvas _canvas;
-        private GraphicRaycaster _raycaster;
+
 
         private bool _paused = false;
 
@@ -16,7 +17,8 @@ namespace CallOfValhalla
         {
             GameManager.Instance.Pauser = this;
             _canvas = GetComponentInChildren<Canvas>();
-            _raycaster = GetComponentInChildren<GraphicRaycaster>();
+            _pauseCanvasGO = _canvas.gameObject;
+            _pauseCanvasGO.SetActive(false);
         }
 
         public void TogglePause()
@@ -26,13 +28,13 @@ namespace CallOfValhalla
 
             if (_paused)
             {
-                Debug.Log("Paused");
-                _canvas.enabled = true;
+                _pauseCanvasGO.SetActive(true);
+
                 Time.timeScale = 0;
             }else
             {
-                Debug.Log("Unpaused");
-                _canvas.enabled = false;
+                _pauseCanvasGO.SetActive(false);
+
                 Time.timeScale = 1;
             }
         }
