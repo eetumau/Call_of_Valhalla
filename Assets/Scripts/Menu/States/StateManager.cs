@@ -12,9 +12,8 @@ namespace CallOfValhalla.States
         Error = -1,
         MainMenu,
         Game,
-        GameOver,
-        Eetu,
-        Teemu
+        GameOver
+
     }
 
     public enum TransitionType
@@ -22,12 +21,8 @@ namespace CallOfValhalla.States
         Error = -1,
         MainMenuToGame,
         GameToGameOver,
-        GameOverToMainMenu,
-        MainMenuToEetu,
-        MainMenuToTeemu,
-        EetuToGameOver
-
-
+        GameToMainMenu,
+        GameOverToMainMenu
     }
 
     public class StateManager

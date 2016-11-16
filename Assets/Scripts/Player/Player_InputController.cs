@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using CallOfValhalla;
 
 namespace CallOfValhalla.Player
 {
@@ -36,7 +37,7 @@ namespace CallOfValhalla.Player
         private void GetInput()
         {
 
-            if (Input.GetKeyUp(KeyCode.P))
+            if (Input.GetKeyUp(KeyCode.Escape))
             {
                 GameManager.Instance.Pauser.TogglePause();
             }

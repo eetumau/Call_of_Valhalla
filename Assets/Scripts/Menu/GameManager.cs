@@ -16,6 +16,7 @@ namespace CallOfValhalla
         private Player_InputController _inputController;
         private Player_Movement _playerMovement;
         private Player_HP _playerHP;
+        private int _level;
 
         public static GameManager Instance
         {
@@ -49,11 +50,18 @@ namespace CallOfValhalla
         public Pauser Pauser
         {
             get { return _pauser; }
+            set { _pauser = value; }
         }
 
         public Checkpoint CheckPoint
         {
             set { _checkPoint = value; }
+        }
+
+        public int Level
+        {
+            get { return _level; }
+            set { _level = value; }
         }
 
         // Use this for initialization
@@ -72,7 +80,7 @@ namespace CallOfValhalla
 
         private void Init()
         {
-            _pauser = GetComponent<Pauser>();
+            _pauser = FindObjectOfType<Pauser>();
             _playerMovement = FindObjectOfType<Player_Movement>();
             _playerHP = FindObjectOfType<Player_HP>();
 
@@ -85,9 +93,6 @@ namespace CallOfValhalla
             StateManager.AddState(new GameState());
             StateManager.AddState(new GameOverState());
 
-            //For testing purposes
-            StateManager.AddState(new EetuTestState());
-            StateManager.AddState(new TeemuTestState());
         }
 
         public void MainMenu()
@@ -110,29 +115,16 @@ namespace CallOfValhalla
                     _checkPoint.DestroyCheckPoint();
                 }else
                 {
-                    StateManager.PerformTransition(TransitionType.EetuToGameOver);
+                    StateManager.PerformTransition(TransitionType.GameToMainMenu);
 
                 }
             }
             else
             {
-                StateManager.PerformTransition(TransitionType.EetuToGameOver);
+                StateManager.PerformTransition(TransitionType.GameToMainMenu);
 
             }
         }
-
-        //For testing purposes
-        public void Eetu()
-        {
-            StateManager.PerformTransition(TransitionType.MainMenuToEetu);
-        }
- 
-        //For testing purposes
-        public void Teemu()
-        {
-            StateManager.PerformTransition(TransitionType.MainMenuToTeemu);
-        }
-
 
     }
 }

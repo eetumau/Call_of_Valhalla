@@ -10,12 +10,14 @@ namespace CallOfValhalla.States
         public GameState() : base()
         {
             State = StateType.Game;
-            AddTransition(TransitionType.GameToGameOver, StateType.MainMenu);
+            AddTransition(TransitionType.GameToMainMenu, StateType.MainMenu);
+            AddTransition(TransitionType.GameToGameOver, StateType.GameOver);
         }
 
         public override void StateActivated()
         {
-            SceneManager.LoadScene(2);
+
+            SceneManager.LoadScene(GameManager.Instance.Level);
         }
 
     }
