@@ -3,6 +3,7 @@ using System.Collections;
 using CallOfValhalla.Player;
 using CallOfValhalla.States;
 using UnityEngine.SceneManagement;
+using CallOfValhalla.UI;
 
 namespace CallOfValhalla
 {
@@ -12,7 +13,8 @@ namespace CallOfValhalla
         private static GameManager _instance;
         private Pauser _pauser;
         private Checkpoint _checkPoint;
-        
+        private GUIManager _guiManager;
+
         private Player_InputController _inputController;
         private Player_Movement _playerMovement;
         private Player_HP _playerHP;
@@ -62,6 +64,24 @@ namespace CallOfValhalla
         {
             get { return _level; }
             set { _level = value; }
+        }
+
+        public GUIManager GUIManager
+        {
+            get
+            {
+                if (_guiManager == null)
+                {
+                    _guiManager = FindObjectOfType<GUIManager>();
+                }
+                if (_guiManager == null)
+                {
+                    Debug.LogError("GameManager: GUIManager is not found from scene!");
+                    Debug.Break();
+                }
+
+                return _guiManager;
+            }
         }
 
         // Use this for initialization
