@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using CallOfValhalla.UI;
 
 namespace CallOfValhalla.Player
 {
@@ -14,9 +15,12 @@ namespace CallOfValhalla.Player
         private bool _basicAttack;
         private bool _specialAttack;
         private bool _weapon1Current;
+        
+        
 
         private Weapon _weapon1;
         private Weapon _weapon2;
+        private string _currentWeapon;
 
         private void Awake()
         {
@@ -24,13 +28,7 @@ namespace CallOfValhalla.Player
             Weapon2 = "Sword";
             SetWeapons(Weapon1, Weapon2);
             _weapon1Current = true;
-        }
-
-
-        // Use this for initialization
-        void Start()
-        {
-
+            
         }
 
         // Update is called once per frame
@@ -46,7 +44,8 @@ namespace CallOfValhalla.Player
             {
                 _sword = GetComponent<Weapon_Sword>();
                 _weapon1 = _sword;
-                
+                _currentWeapon = "Sword";
+                GameManager.Instance.GUIManager.SetWeapon("Sword");
             }
             /*else if (weapon1Name.Equals("Sword"))
                 _weapon1 = GetComponent<Weapon_Sword>();
@@ -78,6 +77,13 @@ namespace CallOfValhalla.Player
                 _weapon1.SpecialAttack(specialAttack);
                 
                 
+            
+        }
+
+        public float GetCooldown()
+        {
+           // if (_weapon1Current)
+                return _weapon1.GetCooldown();
             
         }
 

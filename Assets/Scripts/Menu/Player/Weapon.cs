@@ -8,5 +8,6 @@ namespace CallOfValhalla.Player
 
         abstract public void BasicAttack(bool attack);
         abstract public void SpecialAttack(bool attack);
+        abstract public float GetCooldown();
     }
 }

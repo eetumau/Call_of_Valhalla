@@ -75,6 +75,11 @@ namespace CallOfValhalla.Player
             
         }
 
+        public override float GetCooldown()
+        {
+            return _specialAttackCooldown;
+        }
+
         public override void SpecialAttack(bool attack)
         { 
             Debug.Log(_specialAttackCooldown);
