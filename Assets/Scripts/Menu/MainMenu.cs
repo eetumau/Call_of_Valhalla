@@ -7,11 +7,16 @@ namespace CallOfValhalla
     public class MainMenu : MonoBehaviour
     {
         private int _level;
+        private Animator _animator;
+
+        void Start()
+        {
+            _animator = GetComponentInChildren<Animator>();
+        }
 
         public void OnNewGamePressed()
         {
-            GameManager.Instance.Level = 1;
-            GameManager.Instance.Game();
+            _animator.SetTrigger("Hide");
 
         }
 
@@ -19,7 +24,24 @@ namespace CallOfValhalla
         {
             Application.Quit();
         }
-        
+
+        public void OnBackPressed()
+        {
+            _animator.SetTrigger("Show");
+        }
+
+        public void Level1()
+        {
+            GameManager.Instance.Level = 1;
+            GameManager.Instance.Game();
+        }
+
+        public void Level2()
+        {
+            GameManager.Instance.Level = 2;
+            GameManager.Instance.Game();
+        }
+
         //For testing purposes
         public void EetunSceneen()
         {
