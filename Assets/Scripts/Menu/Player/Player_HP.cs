@@ -30,6 +30,7 @@ namespace CallOfValhalla.Player
         public int HP
         {
             get { return _hp; }
+            set { _hp = value; }
         }
 
         // Use this for initialization
@@ -47,7 +48,7 @@ namespace CallOfValhalla.Player
         // Update is called once per frame
         void Update()
         {
-            if(_hp <= 0 && !_respawning)
+            if(_hp <= 0)
             {
                 Die();
             }
@@ -60,18 +61,21 @@ namespace CallOfValhalla.Player
             Debug.Log(_hp);
         }
 
-        private void Die()
+        public void Die()
         {
-            _movement.enabled = false;
-            _input.enabled = false;
-            _animator.SetInteger("animState", 9);
-
-            if(_delayTimer <= 0)
+            if (!_respawning)
             {
-                GameManager.Instance.GameOver();
-            }
+                _movement.enabled = false;
+                _input.enabled = false;
+                _animator.SetInteger("animState", 9);
 
-            _delayTimer -= Time.deltaTime;
+                if (_delayTimer <= 0)
+                {
+                    GameManager.Instance.GameOver();
+                }
+
+                _delayTimer -= Time.deltaTime;
+            }
         }
 
         public void Respawn(Transform spawnPoint)
@@ -82,7 +86,7 @@ namespace CallOfValhalla.Player
             _animator.SetInteger("animState", 0);
             _delayTimer = _deathDelay;
             _hp = _OriginalHP;
-            _transform.position = spawnPoint.position;
+            _transform.position = new Vector3(spawnPoint.position.x, spawnPoint.position.y, _transform.position.z);
             _respawning = false;
 
         }
