@@ -118,6 +118,9 @@ namespace CallOfValhalla.Player
             {   
                 animator.SetInteger("animState", 6);
                 _attackTimer = timer;
+            } else if (animation.Equals("hammerbasic"))
+            {
+                animator.SetInteger("animState", 4);
             }
         }
 

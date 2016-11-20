@@ -45,7 +45,7 @@ namespace CallOfValhalla
         //For testing purposes
         public void EetunSceneen()
         {
-            GameManager.Instance.Level = 2;
+            GameManager.Instance.Level = 4;
             GameManager.Instance.Game();
         }
 

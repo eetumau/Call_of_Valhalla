@@ -16,7 +16,7 @@ namespace CallOfValhalla.Player
         private bool _basicAttack;
         private bool _specialAttack;
         private bool _weapon1Current;
-
+        private Animator _animator;
 
 
         private Weapon _weapon1;
@@ -29,6 +29,7 @@ namespace CallOfValhalla.Player
             Weapon2 = "Hammer";
             SetWeapons(Weapon1, Weapon2);
             _weapon1Current = true;
+            _animator = GetComponent<Animator>();
 
         }
 
@@ -55,8 +56,10 @@ namespace CallOfValhalla.Player
                 */
 
             if (weapon2Name.Equals("Hammer"))
+            {
                 _hammer = GetComponent<Weapon_Hammer>();
-            _weapon2 = _hammer;
+                _weapon2 = _hammer;
+            }
 
             /*
             else if (weapon2Name.Equals("Sword"))
@@ -84,19 +87,28 @@ namespace CallOfValhalla.Player
 
         public float GetCooldown()
         {
-            // if (_weapon1Current)
-            return _weapon1.GetCooldown();
-
+            if (_weapon1Current)
+                return _weapon1.GetCooldown();
+            else
+                return _weapon2.GetCooldown();
         }
 
         public void ChangeCurrentWeapon()
         {
 
-            //Debug.Log("change");
-            //if (_weapon1Current)
-            //    _weapon1Current = false;
-            //else
-            //    _weapon1Current = true;           
+            Debug.Log("change");
+            if (_weapon1Current)
+            {
+                _weapon1Current = false;
+                _animator.runtimeAnimatorController = Resources.Load("Hero_Mjölnir", typeof(RuntimeAnimatorController)) as RuntimeAnimatorController;
+            }
+            else
+            {
+                _weapon1Current = true;
+                _animator.runtimeAnimatorController = Resources.Load("Hero_Sword", typeof(RuntimeAnimatorController)) as RuntimeAnimatorController;
+            }
         }
     }
 }
+
+

@@ -9,22 +9,41 @@ public class Weapon_Hammer : Weapon
     private GameObject _basicCollider;
     private GameObject _specialCollider;
     private GameObject _hero;
+    private Player_Movement _movement;
+
+    [SerializeField]
+    GameObject _basic;
+    [SerializeField]
+    GameObject _special;
+
+    private bool _basicActive;
+    private bool _specialActive;
+    private float _specialAttackCooldown;
+
+    private float _timer1;
 
     private void Awake()
     {
         _hero = GameObject.Find("HeroSword_0");
+        _movement = GetComponent<Player_Movement>();
 
         if (_hero != null)
         {
             Debug.Log("TOIMII");
         }
+
+        _basicCollider = Instantiate(_basic, transform.position, Quaternion.identity) as GameObject;
+        _basicCollider.transform.parent = _hero.transform;
+        _basicCollider.transform.position = new Vector2(transform.position.x + 1, transform.position.y + 1);
+        _basicCollider.SetActive(false);
+
+        _specialCollider = Instantiate(_special, transform.position, Quaternion.identity) as GameObject;
+        _specialCollider.transform.parent = _hero.transform;
+        _specialCollider.transform.position = new Vector2(transform.position.x + 1, transform.position.y + 1);
+        _specialCollider.SetActive(false);
+
     }
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -39,7 +58,13 @@ public class Weapon_Hammer : Weapon
 
     public override void BasicAttack(bool attack)
     {
-        throw new NotImplementedException();
+        if (!_specialActive && _timer1 <= 0)
+        {
+            Debug.Log("Basic2 Collider");
+            _timer1 = 0;
+            _basicCollider.SetActive(true);
+            _movement.SetAttackAnimation("hammerbasic", 1f);
+        }
     }
 
     public override void SpecialAttack(bool attack)

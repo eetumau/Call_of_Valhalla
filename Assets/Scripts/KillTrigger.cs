@@ -9,6 +9,8 @@ namespace CallOfValhalla
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            
+            if (other.transform.tag == "Player")
             GameManager.Instance.Player.HP.HP = 0;
         }
     }
