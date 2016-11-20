@@ -117,7 +117,7 @@ namespace CallOfValhalla
 
         public void MainMenu()
         {
-            StateManager.PerformTransition(TransitionType.GameOverToMainMenu);
+            StateManager.PerformTransition(TransitionType.GameToMainMenu);
         }
 
         public void Game()
