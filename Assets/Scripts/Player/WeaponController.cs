@@ -8,15 +8,16 @@ namespace CallOfValhalla.Player
     {
 
         private Weapon_Sword _sword;
+        private Weapon_Hammer _hammer;
 
         private string Weapon1;
         private string Weapon2;
-        
+
         private bool _basicAttack;
         private bool _specialAttack;
         private bool _weapon1Current;
-        
-        
+
+
 
         private Weapon _weapon1;
         private Weapon _weapon2;
@@ -25,10 +26,10 @@ namespace CallOfValhalla.Player
         private void Awake()
         {
             Weapon1 = "Sword";
-            Weapon2 = "Sword";
+            Weapon2 = "Hammer";
             SetWeapons(Weapon1, Weapon2);
             _weapon1Current = true;
-            
+
         }
 
         // Update is called once per frame
@@ -52,9 +53,10 @@ namespace CallOfValhalla.Player
             else
                 _weapon1 = GetComponent<Weapon_Sword>();
                 */
-            
-            //if (weapon2Name.Equals("Sword"))
-            //    _weapon2 = new Weapon_Sword();
+
+            if (weapon2Name.Equals("Hammer"))
+                _hammer = GetComponent<Weapon_Hammer>();
+            _weapon2 = _hammer;
 
             /*
             else if (weapon2Name.Equals("Sword"))
@@ -64,10 +66,10 @@ namespace CallOfValhalla.Player
                 */
         }
 
-        public void Attack (bool basicAttack, bool specialAttack)
+        public void Attack(bool basicAttack, bool specialAttack)
         {
-            
-            if (_weapon1Current && basicAttack && !specialAttack)            
+
+            if (_weapon1Current && basicAttack && !specialAttack)
                 _weapon1.BasicAttack(basicAttack);
             else if (_weapon1Current && !basicAttack && specialAttack)
                 _weapon1.SpecialAttack(specialAttack);
@@ -75,19 +77,19 @@ namespace CallOfValhalla.Player
                 _weapon2.BasicAttack(basicAttack);
             if (!_weapon1Current && !basicAttack && specialAttack)
                 _weapon1.SpecialAttack(specialAttack);
-                
-                
-            
+
+
+
         }
 
         public float GetCooldown()
         {
-           // if (_weapon1Current)
-                return _weapon1.GetCooldown();
-            
+            // if (_weapon1Current)
+            return _weapon1.GetCooldown();
+
         }
 
-        public void ChangeCurrentWeapon ()
+        public void ChangeCurrentWeapon()
         {
 
             //Debug.Log("change");
