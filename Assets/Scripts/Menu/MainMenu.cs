@@ -41,6 +41,12 @@ namespace CallOfValhalla
             GameManager.Instance.Level = 2;
             GameManager.Instance.Game();
         }
+        
+        public void Level3()
+        {
+            GameManager.Instance.Level = 3;
+            GameManager.Instance.Game();
+        }
 
         //For testing purposes
         public void EetunSceneen()
@@ -52,7 +58,7 @@ namespace CallOfValhalla
         //For testing purposes
         public void TeemunSceneen()
         {
-            GameManager.Instance.Level = 3;
+            GameManager.Instance.Level = 5;
             GameManager.Instance.Game();
         }
 
