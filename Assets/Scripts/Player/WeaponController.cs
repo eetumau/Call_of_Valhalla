@@ -79,7 +79,7 @@ namespace CallOfValhalla.Player
             else if (!_weapon1Current && basicAttack && !specialAttack)
                 _weapon2.BasicAttack(basicAttack);
             if (!_weapon1Current && !basicAttack && specialAttack)
-                _weapon1.SpecialAttack(specialAttack);
+                _weapon2.SpecialAttack(specialAttack);
 
 
 

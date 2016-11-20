@@ -71,8 +71,8 @@ namespace CallOfValhalla.Player
             // Sets animations based on movement
             if (_attackTimer <= 0)
             {
-                if (_isGrounded == true && Input.GetAxis("Horizontal") != 0)
-                    animator.SetInteger("animState", 1);
+                if (_isGrounded == true && Input.GetAxis("Horizontal") != 0)                
+                    animator.SetInteger("animState", 1);                                  
                 else if (_isGrounded == false && _playerRigidbody2D.velocity.y > 0.5)
                     animator.SetInteger("animState", 2);
                 else if (_isGrounded == false && _playerRigidbody2D.velocity.y < 0.5)
@@ -102,6 +102,7 @@ namespace CallOfValhalla.Player
             _attackTimer = 0;
         }
 
+        
         public void SetAttackAnimation(string animation, float timer)
         {
             
@@ -121,6 +122,7 @@ namespace CallOfValhalla.Player
             } else if (animation.Equals("hammerbasic"))
             {
                 animator.SetInteger("animState", 4);
+                _attackTimer = 0.4f;
             }
         }
 

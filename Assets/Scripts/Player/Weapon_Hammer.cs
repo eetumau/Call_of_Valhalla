@@ -48,7 +48,8 @@ public class Weapon_Hammer : Weapon
     // Update is called once per frame
     void Update()
     {
-
+        RunTimers();
+        CheckTimers();
     }
 
     public override float GetCooldown()
@@ -60,15 +61,34 @@ public class Weapon_Hammer : Weapon
     {
         if (!_specialActive && _timer1 <= 0)
         {
-            Debug.Log("Basic2 Collider");
-            _timer1 = 0;
+            
+            _timer1 = 0.8f;
             _basicCollider.SetActive(true);
-            _movement.SetAttackAnimation("hammerbasic", 1f);
+            _movement.SetAttackAnimation("hammerbasic", 0.8f);
         }
     }
 
     public override void SpecialAttack(bool attack)
     {
         throw new NotImplementedException();
+    }
+
+    private void RunTimers()
+    {
+        if (_timer1 > 0)
+            _timer1 -= Time.deltaTime;
+        
+    }
+
+    private void CheckTimers()
+    {
+        if (_timer1 <= 0.6f)
+            _basicCollider.SetActive(false);
+        if (_timer1 <= 0)
+        {            
+            _basicActive = false;
+            Debug.Log("HammerBasic Collider");
+        }
+        
     }
 }
