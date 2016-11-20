@@ -29,8 +29,7 @@ namespace CallOfValhalla.Enemy
         private Rigidbody2D _rigidBody2D;
         private Enemy_Attack _enemyAttack;
         private Player_Movement _playerMovement;
-        private Transform _player;
-        
+        private Transform _player;        
 
         public Enemy_Movement Instance
         {
@@ -42,12 +41,9 @@ namespace CallOfValhalla.Enemy
             get { return _transform; }
         }
 
-
         // Use this for initialization
         void Start()
         {
-
-
             _playerMovement = FindObjectOfType<Player_Movement>();
             _transform = GetComponent<Transform>();
             _enemyController = GetComponent<Enemy_Controller>();
@@ -57,7 +53,6 @@ namespace CallOfValhalla.Enemy
             _rigidBody2D = GetComponent<Rigidbody2D>();
             _enemyAttack = GetComponentInChildren<Enemy_Attack>();
             _player = _playerMovement.GetComponent<Transform>();
-
         }
 
         // Update is called once per frame
@@ -68,8 +63,7 @@ namespace CallOfValhalla.Enemy
             if (_knockbackTimer <= 0)
                 CheckStates();
 
-            RunTimers();
-            
+            RunTimers();           
 
         }
 
@@ -231,19 +225,19 @@ namespace CallOfValhalla.Enemy
 
         }
 
-        public void Knockback()
+        public void Knockback(float horizontalForce, float verticalForce)
         {
 
             if (!_isFacingRight && _knockbackTimer <= 0)
             {
-                _rigidBody2D.AddForce(_transform.right * 300);
-                _rigidBody2D.AddForce(_transform.up * 300);
+                _rigidBody2D.AddForce(_transform.right * horizontalForce);
+                _rigidBody2D.AddForce(_transform.up * verticalForce);
                 _knockbackTimer = 0.5f;
             }
             else if (_knockbackTimer <= 0)
             {
-                _rigidBody2D.AddForce(_transform.right * -300);
-                _rigidBody2D.AddForce(_transform.up * 300);
+                _rigidBody2D.AddForce(_transform.right * -horizontalForce);
+                _rigidBody2D.AddForce(_transform.up * verticalForce);
                 _knockbackTimer = 0.5f;
             }
         }
