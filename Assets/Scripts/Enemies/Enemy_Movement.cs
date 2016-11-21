@@ -162,8 +162,9 @@ namespace CallOfValhalla.Enemy
 
             var Distance = _transform.position.x - _player.position.x;
 
-            if (Distance >= _minDistanceFromPlayer || Distance <= -1 * _minDistanceFromPlayer)
+            if (Distance >= _minDistanceFromPlayer && !_wallCheck.CheckLeft() || Distance <= -1 * _minDistanceFromPlayer && !_wallCheck.CheckRight())
             {
+               
                 _animator.SetInteger("animState", 1);
 
                 if (!_enemyAttack.Instance.Attacking)
@@ -171,7 +172,6 @@ namespace CallOfValhalla.Enemy
                     _transform.position = Vector2.MoveTowards(_transform.position, new Vector2(_player.position.x, _transform.position.y), Time.deltaTime * _aggressiveMovementSpeed);
                 }
 
-                //_transform.position = Vector3.Lerp(_transform.position, new Vector3(_player.position.x, _transform.position.y, _transform.position.z), Time.deltaTime);
             }
             else if (Distance <= _minDistanceFromPlayer && Distance > 0 || Distance >= -1 * _minDistanceFromPlayer && Distance <= 0)
             {
@@ -183,6 +183,9 @@ namespace CallOfValhalla.Enemy
 
                 }
 
+            }else if(Distance >= _minDistanceFromPlayer && _wallCheck.CheckLeft() || Distance <= -1 * _minDistanceFromPlayer && _wallCheck.CheckRight())
+            {
+                _animator.SetInteger("animState", 0);
             }
 
 
@@ -200,11 +203,10 @@ namespace CallOfValhalla.Enemy
         {
             var Distance = _transform.position.x - _enemyController.LastSeenPlayerPos.x;
 
-            if (Distance >= _minDistanceFromPlayer && !_wallCheck.Instance.CheckLeft() || Distance <= -1 * _minDistanceFromPlayer && !_wallCheck.Instance.CheckRight())
+            if (Distance >= _minDistanceFromPlayer && !_wallCheck.CheckLeft() || Distance <= -1 * _minDistanceFromPlayer && !_wallCheck.CheckRight())
             {
                 _animator.SetInteger("animState", 1);
                 _transform.position = Vector2.MoveTowards(_transform.position, new Vector2(_enemyController.Instance.LastSeenPlayerPos.x, _transform.position.y), Time.deltaTime * _aggressiveMovementSpeed);
-                //_transform.position = Vector3.Lerp(_transform.position, new Vector3(_enemyController.LastSeenPlayerPos.x, _transform.position.y, _transform.position.z), Time.deltaTime);
             }
             else
             {
@@ -215,11 +217,6 @@ namespace CallOfValhalla.Enemy
         public void ChangeDirection()
         {
             _isFacingRight = !_isFacingRight;
-
-            //if (_enemyController.Instance.IsSearchingForPlayer)
-            //{
-            //    _enemyController.Instance.TurnToPassive();
-            //}
 
             _transform.localScale = new Vector3(-1 * _transform.localScale.x, _transform.localScale.y, _transform.localScale.z);
 

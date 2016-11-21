@@ -8,18 +8,14 @@ namespace CallOfValhalla.Enemy
 
         private Enemy_Movement _enemyMovement;
         private Transform _transform;
-        private BasicEnemy_WallCheck _instance;
+        private Enemy_Controller _controller;
 
-        public BasicEnemy_WallCheck Instance
-        {
-            get { return _instance; }
-        }
 
         private void Start()
         {
-            _instance = this;
             _enemyMovement = GetComponentInParent<Enemy_Movement>();
             _transform = GetComponent<Transform>();
+            _controller = GetComponentInParent<Enemy_Controller>();
         }
 
         private void FixedUpdate()
@@ -32,22 +28,27 @@ namespace CallOfValhalla.Enemy
 
             if (col.gameObject.tag == "Ground")
             {
+                if (_controller.IsPassive)
+                {
 
-                _enemyMovement.Instance.ChangeDirection();
+                    _enemyMovement.Instance.ChangeDirection();
+                }
             }
         }
 
         public bool CheckRight()
         {
             var allButIgnoreLinecast = ~(1 << 8);
-            var blocked = Physics2D.Raycast(_transform.position, _transform.right, 2, allButIgnoreLinecast);
+            var blocked = Physics2D.Linecast(_transform.position, new Vector3(_transform.position.x + 1, _transform.position.y + 0.3f, _transform.position.z), allButIgnoreLinecast);
+
             return blocked;
         }
 
         public bool CheckLeft()
         {
             var allButIgnoreLinecast = ~(1 << 8);
-            var blocked = Physics2D.Linecast(_transform.position, -_transform.right, 2, allButIgnoreLinecast);
+            var blocked = Physics2D.Linecast(_transform.position, new Vector3(_transform.position.x - 1, _transform.position.y + 0.3f, _transform.position.z), allButIgnoreLinecast);
+ 
             return blocked;
         }
     }
