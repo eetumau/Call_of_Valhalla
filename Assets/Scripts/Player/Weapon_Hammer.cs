@@ -87,7 +87,7 @@ public class Weapon_Hammer : Weapon
         if (_timer1 <= 0)
         {            
             _basicActive = false;
-            Debug.Log("HammerBasic Collider");
+            
         }
         
     }
