@@ -89,7 +89,7 @@ namespace CallOfValhalla.Player
                 _specialCollider.SetActive(true);
                 _specialActive = true;
                 _specialAttackTimer = 0.4f;
-                _specialAttackCooldown = 8f;
+                _specialAttackCooldown = 10f;
                 _movement.SetAttackAnimation("swordspecial", 0.4f);
             }
         }
