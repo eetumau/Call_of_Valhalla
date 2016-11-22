@@ -28,7 +28,7 @@ public class HammerSpecialCollision : MonoBehaviour {
             _enemyMovement = other.gameObject.GetComponentInParent<Enemy_Movement>();
             _enemyMovement.Knockback(0, 0);
             _enemyHP = other.gameObject.GetComponentInParent<Enemy_HP>();
-            _enemyHP.TakeDamage(1);
+            _enemyHP.TakeDamage(4);
         }
     }
 

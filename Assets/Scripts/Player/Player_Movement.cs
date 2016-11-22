@@ -1,12 +1,13 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 namespace CallOfValhalla.Player
 {
     public class Player_Movement : MonoBehaviour
     {
 
-        private Transform _playerTransform;
+        public Transform _playerTransform;
         private Rigidbody2D _playerRigidbody2D;
         public Animator animator;
 
@@ -22,8 +23,10 @@ namespace CallOfValhalla.Player
         public bool _isGrounded;
         private bool _attacking;
         private bool _swordDashing;
-        private float _attackTimer;
+        private float _swordAttackTimer;
         private float _swordDashTimer;
+        private float _hammerBasicTimer;
+        public bool _hammerSpecialActive;
         private Player_HP _hp;
         private WeaponController _weaponController;
 
@@ -51,11 +54,11 @@ namespace CallOfValhalla.Player
         void Update()
         {
             CheckIfGrounded();
-
-            
+                      
+            if (!_hammerSpecialActive && _hammerBasicTimer <= 0)
             CheckAnimations();
 
-            SpecialAttacks();
+            SwordSpecialAttack();
             RunTimers();
             CheckTimers();
         }
@@ -69,7 +72,7 @@ namespace CallOfValhalla.Player
                 _playerTransform.localScale = new Vector3(-1, 1, 1);
 
             // Sets animations based on movement
-            if (_attackTimer <= 0)
+            if (_swordAttackTimer <= 0)
             {
                 if (_isGrounded == true && Input.GetAxis("Horizontal") != 0)                
                     animator.SetInteger("animState", 1);                                  
@@ -82,7 +85,19 @@ namespace CallOfValhalla.Player
             }      
         }
 
-        public void SpecialAttacks()
+        internal void HammerSpecialInGround()
+        {
+            Debug.Log("InGROUND");
+            _hammerSpecialActive = true;
+        }
+
+        internal void HammerSpecialInAir()
+        {
+            Debug.Log("InAIR");
+            _hammerSpecialActive = true;
+        }
+
+        public void SwordSpecialAttack()
         {
             if (_swordDashing && _swordDashTimer > 0)
                 if (_playerTransform.localScale.x == 1)
@@ -99,36 +114,40 @@ namespace CallOfValhalla.Player
 
         public void ResetAttackTimer()
         {
-            _attackTimer = 0;
+            _swordAttackTimer = 0;
         }
 
         
         public void SetAttackAnimation(string animation, float timer)
         {
-            
+
             if (animation.Equals("swordbasic1"))
-            {                
+            {
                 animator.SetInteger("animState", 4);
-                _attackTimer = timer;
+                _swordAttackTimer = timer;
             } else if (animation.Equals("swordbasic2"))
             {
                 animator.SetInteger("animState", 5);
-                _attackTimer = timer;
+                _swordAttackTimer = timer;
             }
             else if (animation.Equals("swordspecial"))
-            {   
+            {
                 animator.SetInteger("animState", 6);
-                _attackTimer = timer;
+                _swordAttackTimer = timer;
             } else if (animation.Equals("hammerbasic"))
             {
+                Debug.Log("HAMMERBASIC ANIMATION");
                 animator.SetInteger("animState", 4);
-                _attackTimer = 0.4f;
+                _hammerBasicTimer = 0.4f;
+            }
+            else if (animation.Equals("hammerGroundSpecial")) {
+                animator.SetInteger("animState", 5);
             }
         }
 
         public void Move(float inputX)
         {
-            if (_swordDashTimer <= 0)
+            if (_swordDashTimer <= 0 && !_hammerSpecialActive && _hammerBasicTimer <= 0)
             _playerRigidbody2D.velocity = new Vector2(inputX * _playerMoveSpeed, _playerRigidbody2D.velocity.y);
 
         }
@@ -139,14 +158,14 @@ namespace CallOfValhalla.Player
             {
                 //_playerRigidbody2D.velocity = new Vector2(0, _playerRigidbody2D.velocity.y);
                 //_playerRigidbody2D.AddForce(_playerTransform.right * 900);
-                _attackTimer = 0.3f;
+                _swordAttackTimer = 0.3f;
                 _swordDashTimer = 0.3f;
                 _swordDashing = true;                
             } else
             {                
                 //_playerRigidbody2D.velocity = new Vector2(0, _playerRigidbody2D.velocity.y);
                 //_playerRigidbody2D.AddForce(_playerTransform.right * -900);
-                _attackTimer = 0.3f;
+                _swordAttackTimer = 0.3f;
                 _swordDashTimer = 0.3f;
                 _swordDashing = true;
             }
@@ -181,10 +200,12 @@ namespace CallOfValhalla.Player
 
         private void RunTimers()
         {
-            if (_attackTimer >= 0)            
-                _attackTimer -= Time.deltaTime;      
+            if (_swordAttackTimer >= 0)            
+                _swordAttackTimer -= Time.deltaTime;      
             if (_swordDashTimer >= 0)
                 _swordDashTimer -= Time.deltaTime;
+            if (_hammerBasicTimer >= 0)
+                _hammerBasicTimer -= Time.deltaTime;
         }
 
         private void CheckTimers()
