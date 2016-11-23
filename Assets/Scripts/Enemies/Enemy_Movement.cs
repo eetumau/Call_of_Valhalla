@@ -137,11 +137,19 @@ namespace CallOfValhalla.Enemy
 
                 if (_isFacingRight)
                 {
+                    if (_wallCheck.CheckRight())
+                    {
+                        ChangeDirection();
+                    }
                     _transform.position += new Vector3(_passiveMovementSpeed * Time.deltaTime, 0, 0);
                     _movingTimer -= Time.deltaTime;
                 }
                 else
                 {
+                    if (_wallCheck.CheckLeft())
+                    {
+                        ChangeDirection();
+                    }
                     _transform.position -= new Vector3(_passiveMovementSpeed * Time.deltaTime, 0, 0);
                     _movingTimer -= Time.deltaTime;
                 }
