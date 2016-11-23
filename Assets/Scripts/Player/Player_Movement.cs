@@ -85,18 +85,6 @@ namespace CallOfValhalla.Player
             }      
         }
 
-        internal void HammerSpecialInGround()
-        {
-            Debug.Log("InGROUND");
-            _hammerSpecialActive = true;
-        }
-
-        internal void HammerSpecialInAir()
-        {
-            Debug.Log("InAIR");
-            _hammerSpecialActive = true;
-        }
-
         public void SwordSpecialAttack()
         {
             if (_swordDashing && _swordDashTimer > 0)
@@ -120,7 +108,7 @@ namespace CallOfValhalla.Player
         
         public void SetAttackAnimation(string animation, float timer)
         {
-
+            
             if (animation.Equals("swordbasic1"))
             {
                 animator.SetInteger("animState", 4);
@@ -135,13 +123,21 @@ namespace CallOfValhalla.Player
                 animator.SetInteger("animState", 6);
                 _swordAttackTimer = timer;
             } else if (animation.Equals("hammerbasic"))
-            {
-                Debug.Log("HAMMERBASIC ANIMATION");
+            {                
                 animator.SetInteger("animState", 4);
                 _hammerBasicTimer = 0.4f;
             }
             else if (animation.Equals("hammerGroundSpecial")) {
                 animator.SetInteger("animState", 5);
+                _hammerSpecialActive = true;
+            } else if (animation.Equals("hammerAirSpecial"))
+            {                
+                animator.SetInteger("animState", 6);
+                _hammerSpecialActive = true;
+            } else if (animation.Equals("hammerAirFinish"))
+            {                
+                animator.SetInteger("animState", 7);
+                _hammerSpecialActive = true;
             }
         }
 

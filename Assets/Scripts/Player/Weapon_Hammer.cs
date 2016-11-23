@@ -17,13 +17,21 @@ public class Weapon_Hammer : Weapon
     [SerializeField]
     GameObject _special;
 
+    // Next huge bunch of booleans are mostly used to control the special attacks order of execution.
+    // Hammers special attack is basically 2 different attacks and therefore this looks really messy...
     private bool _basicActive;
-    private bool _specialActive;
-    private bool _specialInAir;
+    private bool _moveGroundSpecialCollider;
+    private bool _moveAirSpecialCollider;
+    private bool _specialInAirActive;
+    private bool _specialInAirButNotLanded;
+
+    // Timers to control the attack cooldowns and movement of the collider in special attack
     private float _specialAttackCooldown;
-    private Vector3 _specialColliderPosition;
     private float _timer1;
     private float _specialAttackMoveTimer;
+
+    // Vector3 for the original position of the special attack collider before moving it
+    private Vector3 _specialColliderPosition;
 
     private void Awake()
     {
@@ -50,16 +58,24 @@ public class Weapon_Hammer : Weapon
         RunTimers();
         CheckTimers();
 
-        if (_specialActive)
-            MoveColliders();
+        
+        MoveColliders();
+
+        SpecialInAir();
+        
     }
 
+    // Moves the hit collider during the special attack
     private void MoveColliders()
-    {
-        if (_specialInAir)
+    {    
+        if (_moveAirSpecialCollider)
         {
-            
-        } else
+            if (_movement._playerTransform.localScale.x == 1f)
+                _rigidBody2D.velocity = new Vector2(4.5f, 0f);
+            else
+                _rigidBody2D.velocity = new Vector2(-4.5f, 0f);
+        }
+        if (_moveGroundSpecialCollider)
         {
             if (_movement._playerTransform.localScale.x == 1f)
                 _rigidBody2D.velocity = new Vector2(4.5f, 0f);
@@ -68,7 +84,7 @@ public class Weapon_Hammer : Weapon
         }
     }
 
-    // Returns special attack cooldown to display in UI
+    // Returns special attack cooldown to display in the UI
     public override float GetCooldown()
     {
         return _specialAttackCooldown;
@@ -77,7 +93,7 @@ public class Weapon_Hammer : Weapon
     // Sets the basic attack collider active and sets the cooldown timer
     public override void BasicAttack(bool attack)
     {
-        if (!_specialActive && _timer1 <= 0)
+        if (!_moveGroundSpecialCollider && !_specialInAirActive && _timer1 <= 0)
         {            
             _timer1 = 0.8f;
             _basicCollider.SetActive(true);
@@ -85,35 +101,30 @@ public class Weapon_Hammer : Weapon
         }
     }
 
+    // Base operations for hammer special attack, separate air and ground functions
     public override void SpecialAttack(bool attack)
     {
-        if (_specialAttackCooldown <= 0 && !_movement._isGrounded)
-        {
-            _specialAttackCooldown = 8f;
-            _movement.HammerSpecialInAir();
-            _specialInAir = true;
-            
-        } else if (_specialAttackCooldown <= 0 && _movement._isGrounded)
-        {
-            _movement.HammerSpecialInGround();
-            _specialAttackCooldown = 8f;
-            //SpecialInGround();
-            _specialCollider.SetActive(true);
-            float tempX = _hero.transform.position.x;
-            float tempY = _hero.transform.position.y + 1;
-            float tempZ = _hero.transform.position.z;
 
-            // Fix collider position based on which way the character is facing
-            if (_movement._playerTransform.localScale.x == 1f)
-                tempX += 1;
-            else
-                tempX -= 1;                
-            
-            _movement.SetAttackAnimation("hammerGroundSpecial", 0.8f);
-            _specialColliderPosition = new Vector3(tempX, tempY, tempZ);
-            _specialCollider.transform.position = _specialColliderPosition;
-            _specialActive = true;
-            _specialAttackMoveTimer = 0.8f;
+        if (_specialAttackCooldown <= 0)
+        {
+            _specialAttackCooldown = 8f;                                              
+
+            if (!_movement._isGrounded)
+            {                              
+                
+                _specialInAirActive = true;
+                _movement.SetAttackAnimation("hammerAirSpecial", 0.8f);
+                _specialInAirButNotLanded = true;
+            }
+            else 
+            {
+                _specialColliderPosition = SnapColliderPosition();
+                _specialCollider.transform.position = _specialColliderPosition;
+                _specialCollider.SetActive(true);             
+                _movement.SetAttackAnimation("hammerGroundSpecial", 0.8f);                
+                _moveGroundSpecialCollider = true;
+                _specialAttackMoveTimer = 0.8f;
+            }
         }
     }
 
@@ -128,16 +139,42 @@ public class Weapon_Hammer : Weapon
         
     }
 
-    private void SpecialInGround()
+    // Returns special attack collider position after fixing it next to player to the direction he's facing
+    private Vector3 SnapColliderPosition()
     {
-        _specialCollider.SetActive(true);
-        _specialColliderPosition = _specialCollider.transform.position;
+        float tempX = _hero.transform.position.x;
+        float tempY = _hero.transform.position.y + 1;
+        float tempZ = _hero.transform.position.z;
+
+        // Fix colliders X position based on which way the character is facing
+        if (_movement._playerTransform.localScale.x == 1f)
+            tempX += 1;
+        else
+            tempX -= 1;
+
+        return new Vector3(tempX, tempY, tempZ);
         
     }
 
+    // Controls the order of execution when doing special from air. --> Move forward only after character lands.
     private void SpecialInAir()
     {
-        _specialCollider.SetActive(true);
+        
+        if (_specialInAirActive && _specialInAirButNotLanded)
+        {
+            
+            if (_movement._isGrounded)
+            {
+                Debug.Log("MAASSA");
+                _specialColliderPosition = SnapColliderPosition();
+                _specialCollider.transform.position = _specialColliderPosition;
+                _movement.SetAttackAnimation("hammerAirFinish", 0.8f);
+                _specialInAirButNotLanded = false;
+                _specialAttackMoveTimer = 0.8f;
+                _specialCollider.SetActive(true);
+                _moveAirSpecialCollider = true;
+            }
+        }
     }
 
     private void CheckTimers()
@@ -150,10 +187,9 @@ public class Weapon_Hammer : Weapon
         {
             _specialCollider.SetActive(false);
             _specialCollider.transform.position = _specialColliderPosition;            
-            _specialActive = false;
-            _specialInAir = false;
+            _moveGroundSpecialCollider = false;
+            _moveAirSpecialCollider = false;     
             _movement._hammerSpecialActive = false;
-        }
-        
+        }        
     }
 }
