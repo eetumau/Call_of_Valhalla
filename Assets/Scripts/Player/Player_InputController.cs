@@ -15,14 +15,13 @@ namespace CallOfValhalla.Player
 
 
         private Player_Movement _playerMovement;
-        
+
 
         // Use this for initialization
         void Start()
         {
 
             //_playerMovement = GetComponent<Player_Movement>();
-            
 
         }
 
@@ -48,7 +47,7 @@ namespace CallOfValhalla.Player
             _specialAttack = Input.GetButtonDown("Attack2");
             _changeCurrentWeapon = Input.GetButtonDown("ChangeWeapon");
 
-            
+
 
             if (_basicAttack || _specialAttack)
                 GameManager.Instance.Player.WeaponController.Attack(_basicAttack, _specialAttack);

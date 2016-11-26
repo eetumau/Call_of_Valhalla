@@ -43,7 +43,6 @@ namespace CallOfValhalla.Enemy
                 Debug.DrawLine(new Vector3(_transform.position.x + 1, _transform.position.y, _transform.position.z), new Vector3(_transform.position.x + 1, _transform.position.y - 3, _transform.position.z));
                 if (!blocked)
                 {
-                    Debug.Log("Tyhjää");
                     blocked = true;
                 }else
                 {
@@ -67,7 +66,6 @@ namespace CallOfValhalla.Enemy
                 if (!blocked)
                 {
                     
-                    Debug.Log("Tyhjää  " + blocked);
                     blocked = true;
                 }
                 else

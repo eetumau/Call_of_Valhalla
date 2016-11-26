@@ -224,10 +224,12 @@ namespace CallOfValhalla.Enemy
 
         public void ChangeDirection()
         {
-            _isFacingRight = !_isFacingRight;
+            if (!_enemyAttack.Instance.Attacking)
+            {
+                _isFacingRight = !_isFacingRight;
 
-            _transform.localScale = new Vector3(-1 * _transform.localScale.x, _transform.localScale.y, _transform.localScale.z);
-
+                _transform.localScale = new Vector3(-1 * _transform.localScale.x, _transform.localScale.y, _transform.localScale.z);
+            }
         }
 
         public void Knockback(float horizontalForce, float verticalForce)
