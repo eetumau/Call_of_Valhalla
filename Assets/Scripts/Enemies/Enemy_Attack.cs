@@ -128,7 +128,7 @@ namespace CallOfValhalla.Enemy
                 _attackHitBox.enabled = true;
             }
 
-            if (_delayTimer == _attackDelay)
+            if (_delayTimer == _attackDelay && _leaping)
             {
                 if (_movement.IsFacingRight)
                 {
