@@ -152,15 +152,11 @@ namespace CallOfValhalla.Player
         {
             if (_playerTransform.localScale.x == 1)
             {
-                //_playerRigidbody2D.velocity = new Vector2(0, _playerRigidbody2D.velocity.y);
-                //_playerRigidbody2D.AddForce(_playerTransform.right * 900);
                 _swordAttackTimer = 0.3f;
                 _swordDashTimer = 0.3f;
                 _swordDashing = true;                
             } else
-            {                
-                //_playerRigidbody2D.velocity = new Vector2(0, _playerRigidbody2D.velocity.y);
-                //_playerRigidbody2D.AddForce(_playerTransform.right * -900);
+            {                                
                 _swordAttackTimer = 0.3f;
                 _swordDashTimer = 0.3f;
                 _swordDashing = true;
@@ -171,7 +167,6 @@ namespace CallOfValhalla.Player
         {
             if (_isGrounded && _jump)
             {
-                //_playerRigidbody2D.AddForce(new Vector2(0, _playerJumpForce));
                 _playerRigidbody2D.velocity = new Vector2(_playerRigidbody2D.velocity.x, _playerJumpForce);
                 _isGrounded = false;
             }

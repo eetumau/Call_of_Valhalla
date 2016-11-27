@@ -27,6 +27,8 @@ public class Weapon_Hammer : Weapon
 
     // Timers to control the attack cooldowns and movement of the collider in special attack
     private float _specialAttackCooldown;
+    [SerializeField]
+    private float _specialAttackMaxCooldown;
     private float _timer1;
     private float _specialAttackMoveTimer;
 
@@ -54,26 +56,35 @@ public class Weapon_Hammer : Weapon
 
     // Update is called once per frame
     void Update()
-    {
-        RunTimers();
-        CheckTimers();
-
-        
-        MoveColliders();
-
+    {                 
         SpecialInAir();
+
+        MoveColliders();
         
+        RunTimers();  
+        CheckTimers();
+    }
+
+    private void FixedUpdate()
+    {
+        MoveColliders();
     }
 
     // Moves the hit collider during the special attack
     private void MoveColliders()
-    {    
+    {
+        
         if (_moveAirSpecialCollider)
         {
-            if (_movement._playerTransform.localScale.x == 1f)
+            Debug.Log("LIIKKUU");
+            if (_movement._playerTransform.localScale.x == 1f) {
                 _rigidBody2D.velocity = new Vector2(4.5f, 0f);
+            }
             else
-                _rigidBody2D.velocity = new Vector2(-4.5f, 0f);
+            {
+                _rigidBody2D.AddForce(transform.right * 2000);
+            }
+                
         }
         if (_moveGroundSpecialCollider)
         {
@@ -88,6 +99,11 @@ public class Weapon_Hammer : Weapon
     public override float GetCooldown()
     {
         return _specialAttackCooldown;
+    }
+
+    public override float GetMaxCooldown()
+    {
+        return _specialAttackMaxCooldown;
     }
 
     // Sets the basic attack collider active and sets the cooldown timer
@@ -107,7 +123,7 @@ public class Weapon_Hammer : Weapon
 
         if (_specialAttackCooldown <= 0)
         {
-            _specialAttackCooldown = 8f;                                              
+            _specialAttackCooldown = _specialAttackMaxCooldown;                                              
 
             if (!_movement._isGrounded)
             {                              
@@ -115,6 +131,7 @@ public class Weapon_Hammer : Weapon
                 _specialInAirActive = true;
                 _movement.SetAttackAnimation("hammerAirSpecial", 0.8f);
                 _specialInAirButNotLanded = true;
+                
             }
             else 
             {
@@ -124,10 +141,12 @@ public class Weapon_Hammer : Weapon
                 _movement.SetAttackAnimation("hammerGroundSpecial", 0.8f);                
                 _moveGroundSpecialCollider = true;
                 _specialAttackMoveTimer = 0.8f;
+                
             }
         }
     }
 
+    // Count down all timers
     private void RunTimers()
     {
         if (_timer1 > 0)
@@ -143,7 +162,7 @@ public class Weapon_Hammer : Weapon
     private Vector3 SnapColliderPosition()
     {
         float tempX = _hero.transform.position.x;
-        float tempY = _hero.transform.position.y + 1;
+        float tempY = _hero.transform.position.y + 1.5f;
         float tempZ = _hero.transform.position.z;
 
         // Fix colliders X position based on which way the character is facing
@@ -165,14 +184,15 @@ public class Weapon_Hammer : Weapon
             
             if (_movement._isGrounded)
             {
-                Debug.Log("MAASSA");
+                
                 _specialColliderPosition = SnapColliderPosition();
                 _specialCollider.transform.position = _specialColliderPosition;
+                _specialCollider.SetActive(true);
                 _movement.SetAttackAnimation("hammerAirFinish", 0.8f);
                 _specialInAirButNotLanded = false;
+                _specialInAirActive = false;
                 _specialAttackMoveTimer = 0.8f;
-                _specialCollider.SetActive(true);
-                _moveAirSpecialCollider = true;
+                _moveAirSpecialCollider = true;                              
             }
         }
     }
@@ -184,7 +204,7 @@ public class Weapon_Hammer : Weapon
         if (_timer1 <= 0)                    
             _basicActive = false;           
         if (_specialAttackMoveTimer <= 0)
-        {
+        {            
             _specialCollider.SetActive(false);
             _specialCollider.transform.position = _specialColliderPosition;            
             _moveGroundSpecialCollider = false;

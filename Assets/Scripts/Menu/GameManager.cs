@@ -66,23 +66,7 @@ namespace CallOfValhalla
             set { _level = value; }
         }
 
-        public GUIManager GUIManager
-        {
-            get
-            {
-                if (_guiManager == null)
-                {
-                    _guiManager = FindObjectOfType<GUIManager>();
-                }
-                if (_guiManager == null)
-                {
-                    Debug.LogError("GameManager: GUIManager is not found from scene!");
-                    Debug.Break();
-                }
-
-                return _guiManager;
-            }
-        }
+        
 
         // Use this for initialization
         void Awake()

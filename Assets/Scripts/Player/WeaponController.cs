@@ -15,7 +15,7 @@ namespace CallOfValhalla.Player
 
         private bool _basicAttack;
         private bool _specialAttack;
-        private bool _weapon1Current;
+        public bool _weapon1Current;
         private Animator _animator;
 
 
@@ -47,7 +47,7 @@ namespace CallOfValhalla.Player
                 _sword = GetComponent<Weapon_Sword>();
                 _weapon1 = _sword;
                 _currentWeapon = "Sword";
-                GameManager.Instance.GUIManager.SetWeapon("Sword");
+
             }
             /*else if (weapon1Name.Equals("Sword"))
                 _weapon1 = GetComponent<Weapon_Sword>();
@@ -91,6 +91,14 @@ namespace CallOfValhalla.Player
                 return _weapon1.GetCooldown();
             else
                 return _weapon2.GetCooldown();
+        }
+
+        public float GetMaxCooldown()
+        {
+            if (_weapon1Current)
+                return _weapon1.GetMaxCooldown();
+            else
+                return _weapon2.GetMaxCooldown();
         }
 
         public void ChangeCurrentWeapon()
