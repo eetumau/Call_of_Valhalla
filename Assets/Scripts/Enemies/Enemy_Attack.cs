@@ -6,8 +6,11 @@ namespace CallOfValhalla.Enemy
 {
     public class Enemy_Attack : MonoBehaviour
     {
+
+        //This is just for checking if the enemy is a wolf so the attack includes leaping.
         [SerializeField]
         private bool _leaping;
+
         [SerializeField]
         private int _damage;
         [SerializeField]
@@ -69,7 +72,12 @@ namespace CallOfValhalla.Enemy
         // Update is called once per frame
         void Update()
         {
+            RunTimers();
+        }
 
+        //Does all the calculations whether to attack or not
+        private void RunTimers()
+        {
             if (_enemyController.Instance.InAttackRange)
             {
                 if (_coolDownTimer <= 0)
@@ -83,7 +91,8 @@ namespace CallOfValhalla.Enemy
                     {
                         _attacking = true;
                         Attack();
-                    }else
+                    }
+                    else
                     {
                         _coolDownTimer = _attackCoolDown;
                     }
@@ -110,7 +119,6 @@ namespace CallOfValhalla.Enemy
                 _attackTimer -= Time.deltaTime;
             }
 
-
         }
 
         public void DealDamage()
@@ -130,18 +138,24 @@ namespace CallOfValhalla.Enemy
 
             if (_delayTimer == _attackDelay && _leaping)
             {
-                if (_movement.IsFacingRight)
-                {
-                    _rigidBody.AddForce(new Vector2(500, 500));
-                }
-                else
-                {
-                    _rigidBody.AddForce(new Vector2(-500, 500));
-                }
+                //This is for the wolf only
+                Leap();
             }
 
             _delayTimer -= Time.deltaTime;
 
+        }
+
+        private void Leap()
+        {
+            if (_movement.IsFacingRight)
+            {
+                _rigidBody.AddForce(new Vector2(500, 500));
+            }
+            else
+            {
+                _rigidBody.AddForce(new Vector2(-500, 500));
+            }
         }
     }
 }
