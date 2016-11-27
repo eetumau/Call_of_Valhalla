@@ -20,6 +20,7 @@ namespace CallOfValhalla.Enemy
         private bool _isFacingRight;
         private Enemy_Controller _enemyController;
         private float _movingTimer;
+        private float _stunTimer;
         private float _actionTimer;
         private float _knockbackTimer;
         private bool _isIdle = true;
@@ -60,7 +61,7 @@ namespace CallOfValhalla.Enemy
         {
             _enemyController.Instance.InAttackRange = false;
 
-            if (_knockbackTimer <= 0)
+            if (_knockbackTimer <= 0 && _stunTimer <= 0)
                 CheckStates();
 
             RunTimers();           
@@ -71,6 +72,13 @@ namespace CallOfValhalla.Enemy
         {
             if (_knockbackTimer > 0)
                 _knockbackTimer -= Time.deltaTime;
+            if (_stunTimer > 0)
+                _stunTimer -= Time.deltaTime;
+        }
+
+        public void Stun(float time)
+        {
+            _stunTimer = time;
         }
 
         private void CheckStates()

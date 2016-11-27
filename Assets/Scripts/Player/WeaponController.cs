@@ -85,6 +85,11 @@ namespace CallOfValhalla.Player
 
         }
 
+        public Weapon_Hammer GetHammer()
+        {
+            return _hammer;
+        }
+
         public float GetCooldown()
         {
             if (_weapon1Current)

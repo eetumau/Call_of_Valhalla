@@ -15,7 +15,6 @@ public class WeaponStatusBar : MonoBehaviour {
     private float _weaponCooldown;
     private float _weaponMaxCooldown;
     private float _completionPercent;
-    private bool _cooldownReady;
     private Vector3 _transformScale;
     
     
