@@ -42,6 +42,11 @@ namespace CallOfValhalla.Enemy
             get { return _transform; }
         }
 
+        public bool IsFacingRight
+        {
+            get { return _isFacingRight; }
+        }
+
         // Use this for initialization
         void Start()
         {

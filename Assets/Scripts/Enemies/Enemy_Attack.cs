@@ -6,7 +6,8 @@ namespace CallOfValhalla.Enemy
 {
     public class Enemy_Attack : MonoBehaviour
     {
-
+        [SerializeField]
+        private bool _leaping;
         [SerializeField]
         private int _damage;
         [SerializeField]
@@ -29,6 +30,8 @@ namespace CallOfValhalla.Enemy
         private Transform _transform;
         private bool _attacking = false;
         private float _delayTimer;
+        private Rigidbody2D _rigidBody;
+        private Enemy_Movement _movement;
 
         public Enemy_Attack Instance
         {
@@ -55,6 +58,8 @@ namespace CallOfValhalla.Enemy
             _player = FindObjectOfType<Player_HP>();
             _enemyController = GetComponentInParent<Enemy_Controller>();
             _animator = GetComponentInParent<Animator>();
+            _rigidBody = GetComponentInParent<Rigidbody2D>();
+            _movement = GetComponentInParent<Enemy_Movement>();
 
             _coolDownTimer = _attackCoolDown;
             _attackTimer = _attackTime;
@@ -122,7 +127,19 @@ namespace CallOfValhalla.Enemy
             {
                 _attackHitBox.enabled = true;
             }
-            
+
+            if (_delayTimer == _attackDelay)
+            {
+                if (_movement.IsFacingRight)
+                {
+                    _rigidBody.AddForce(new Vector2(500, 500));
+                }
+                else
+                {
+                    _rigidBody.AddForce(new Vector2(-500, 500));
+                }
+            }
+
             _delayTimer -= Time.deltaTime;
 
         }

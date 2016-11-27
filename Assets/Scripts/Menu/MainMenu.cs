@@ -20,12 +20,22 @@ namespace CallOfValhalla
 
         }
 
+        public void OnSettingsPressed()
+        {
+            _animator.SetTrigger("Show2");
+        }
+
         public void OnQuitPressed()
         {
             Application.Quit();
         }
 
         public void OnBackPressed()
+        {
+            _animator.SetTrigger("Show");
+        }
+
+        public void OnBack2Pressed()
         {
             _animator.SetTrigger("Show");
         }
