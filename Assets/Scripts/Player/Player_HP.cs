@@ -23,6 +23,7 @@ namespace CallOfValhalla.Player
         private Transform _transform;
         private HPBarController _hpBar;
         private bool _respawning;
+        private bool _dead;
 
         public Player_HP Instance
         {
@@ -56,8 +57,9 @@ namespace CallOfValhalla.Player
             _hpBar.Progress = ((float)_hp)/ ((float)_OriginalHP);
             _hpBar.SecondaryProgress += ((float)damage) / ((float)_OriginalHP);
 
-            if (_hp <= 0)
+            if (_hp <= 0 && !_dead)
             {
+                Time.timeScale = 0.5f;
                 Die();
             }
         }
@@ -66,10 +68,10 @@ namespace CallOfValhalla.Player
         {
             if (!_respawning)
             {
+                _dead = true;
                 _movement.enabled = false;
                 _input.enabled = false;
                 _animator.SetInteger("animState", 9);
-
                 StartCoroutine(GameOverTimer(_deathDelay));
                 /*
                 if (_delayTimer <= 0)
@@ -90,7 +92,9 @@ namespace CallOfValhalla.Player
 
         public void Respawn(Transform spawnPoint)
         {
+            Time.timeScale = 1;
             _respawning = true;
+            _dead = false;
             _movement.enabled = true;
             _input.enabled = true;
             _animator.SetInteger("animState", 0);

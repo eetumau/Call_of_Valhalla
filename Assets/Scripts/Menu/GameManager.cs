@@ -14,11 +14,13 @@ namespace CallOfValhalla
         private Pauser _pauser;
         private Checkpoint _checkPoint;
         private GUIManager _guiManager;
+        private GameOverUI _gameOverUI;
 
         private Player_InputController _inputController;
         private Player_Movement _playerMovement;
         private Player_HP _playerHP;
         private int _level;
+
 
         public static GameManager Instance
         {
@@ -55,6 +57,12 @@ namespace CallOfValhalla
             set { _pauser = value; }
         }
 
+        public GameOverUI GameOverUI
+        {
+            get { return _gameOverUI; }
+            set { _gameOverUI = value; }
+        }
+
         public Checkpoint CheckPoint
         {
             set { _checkPoint = value; }
@@ -84,7 +92,6 @@ namespace CallOfValhalla
 
         private void Init()
         {
-            _pauser = FindObjectOfType<Pauser>();
             _playerMovement = FindObjectOfType<Player_Movement>();
             _playerHP = FindObjectOfType<Player_HP>();
 
@@ -119,14 +126,13 @@ namespace CallOfValhalla
                     _checkPoint.DestroyCheckPoint();
                 }else
                 {
-                    StateManager.PerformTransition(TransitionType.GameToMainMenu);
+                    _gameOverUI.ToggleGameOverUI();
 
                 }
             }
             else
             {
-                StateManager.PerformTransition(TransitionType.GameToMainMenu);
-
+                _gameOverUI.ToggleGameOverUI();
             }
         }
 
