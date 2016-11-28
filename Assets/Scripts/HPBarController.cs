@@ -63,6 +63,7 @@ namespace CallOfValhalla.UI
             _barImage = _barGO.GetComponent<Image>();
             _bar = Instantiate(_barImage.material);
             _barImage.material = _bar;
+            SetBarProgress(Progress);
         }
 
 

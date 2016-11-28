@@ -7,6 +7,8 @@ public class WeaponStatusBar : MonoBehaviour {
 
     private Sprite _statusBarNotReady;
     private Sprite _statusBarReady;
+    private Sprite _statusBarNotReadySword;
+    private Sprite _statusBarReadySword;
     private Sprite _currentWeaponSword;
     private Sprite _currentWeaponHammer;
 
@@ -29,6 +31,9 @@ public class WeaponStatusBar : MonoBehaviour {
         _statusBarReady = Resources.Load("WeaponFillBarReady", typeof(Sprite)) as Sprite;
         _statusBarNotReady = Resources.Load("WeaponFillBar", typeof(Sprite)) as Sprite;
 
+        _statusBarReadySword = Resources.Load("WeaponFillBarReadySword", typeof(Sprite)) as Sprite;
+        _statusBarNotReadySword = Resources.Load("WeaponFillBarSword", typeof(Sprite)) as Sprite;
+
         _currentWeaponSword = Resources.Load("Sword", typeof(Sprite)) as Sprite;
         _currentWeaponHammer = Resources.Load("Mjölnir", typeof(Sprite)) as Sprite;
 
@@ -46,8 +51,9 @@ public class WeaponStatusBar : MonoBehaviour {
 
     private void UpdateStatusImage()
     {
-        if (GameManager.Instance.Player.WeaponController._weapon1Current)
-            _currentWeaponImage.GetComponent<UnityEngine.UI.Image>().sprite = _currentWeaponSword;
+        if (GameManager.Instance.Player.WeaponController._weapon1Current) { 
+            _currentWeaponImage.GetComponent<UnityEngine.UI.Image>().sprite = _currentWeaponSword;            
+        }
         else
             _currentWeaponImage.GetComponent<UnityEngine.UI.Image>().sprite = _currentWeaponHammer;
     }
@@ -59,9 +65,21 @@ public class WeaponStatusBar : MonoBehaviour {
         _weaponStatusBar.transform.localScale = _transformScale;
 
         if (_completionPercent >= 100f)
-            _weaponStatusBar.GetComponent<UnityEngine.UI.Image>().sprite = _statusBarReady;
+        {
+            if (GameManager.Instance.Player.WeaponController._weapon1Current)
+                _weaponStatusBar.GetComponent<UnityEngine.UI.Image>().sprite = _statusBarReadySword;
+            else
+                _weaponStatusBar.GetComponent<UnityEngine.UI.Image>().sprite = _statusBarReady;
+        }
         else
-            _weaponStatusBar.GetComponent<UnityEngine.UI.Image>().sprite = _statusBarNotReady;        
+        {
+            if (GameManager.Instance.Player.WeaponController._weapon1Current)
+                _weaponStatusBar.GetComponent<UnityEngine.UI.Image>().sprite = _statusBarNotReadySword;
+            else
+                _weaponStatusBar.GetComponent<UnityEngine.UI.Image>().sprite = _statusBarNotReady;
+
+
+        }       
     }
 
     private void UpdateCompletionPercent()

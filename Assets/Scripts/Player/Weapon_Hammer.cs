@@ -120,7 +120,7 @@ public class Weapon_Hammer : Weapon
                 _specialCollider.SetActive(true);             
                 _movement.SetAttackAnimation("hammerGroundSpecial", 0.8f);                
                 _moveSpecialCollider = true;
-                _specialAttackMoveTimer = 0.8f;
+                StartCoroutine(ResetAfterSpecial(0.8f));
                 
             }
         }
@@ -171,10 +171,21 @@ public class Weapon_Hammer : Weapon
                 _specialInAirButNotLanded = false;
                 _airSpecialCollision = true;
                 _specialAttackMoveTimer = 0.8f;
-                
+                StartCoroutine(ResetAfterSpecial(0.8f));
                 _moveSpecialCollider = true;                              
             }
         }
+    }
+
+    private IEnumerator ResetAfterSpecial(float howLong)
+    {
+        yield return new WaitForSeconds(howLong);
+        _specialCollider.SetActive(false);
+        _specialCollider.transform.position = _specialColliderPosition;
+        _moveSpecialCollider = false;
+        _airSpecialCollision = false;
+        _specialInAirActive = false;
+        _movement._hammerSpecialActive = false;
     }
 
     private void CheckTimers()
@@ -185,11 +196,7 @@ public class Weapon_Hammer : Weapon
             _basicActive = false;           
         if (_specialAttackMoveTimer <= 0)
         {            
-            _specialCollider.SetActive(false);
-            _specialCollider.transform.position = _specialColliderPosition;            
-            _moveSpecialCollider = false;
-            _airSpecialCollision = false;            
-            _movement._hammerSpecialActive = false;
+            
         }        
     }
 }
