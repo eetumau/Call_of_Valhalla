@@ -41,6 +41,11 @@ namespace CallOfValhalla.Enemy
             get { return _instance; }
         }
 
+        public BoxCollider2D AttackHitBox
+        {
+            get { return _attackHitBox; }
+        }
+
         public bool Attacking
         {
             get { return _attacking; }

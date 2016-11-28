@@ -95,6 +95,7 @@ namespace CallOfValhalla.Enemy
             _hp.enabled = false;
             _wallCheck.enabled = false;
             _instance.enabled = false;
+            _attack.AttackHitBox.enabled = false;
             _attack.enabled = false;
             _attackTrigger.enabled = false;
             
