@@ -68,6 +68,7 @@ namespace CallOfValhalla.Player
         {
             if (!_respawning)
             {
+                GameManager.Instance.CameraFollow.Sepia.enabled = true;
                 _dead = true;
                 _movement.enabled = false;
                 _input.enabled = false;
@@ -93,6 +94,7 @@ namespace CallOfValhalla.Player
         public void Respawn(Transform spawnPoint)
         {
             Time.timeScale = 1;
+            GameManager.Instance.CameraFollow.Sepia.enabled = false;
             _respawning = true;
             _dead = false;
             _movement.enabled = true;

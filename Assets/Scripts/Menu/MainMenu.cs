@@ -85,14 +85,14 @@ namespace CallOfValhalla
         //For testing purposes
         public void EetunSceneen()
         {
-            GameManager.Instance.Level = 6;
+            GameManager.Instance.Level = 8;
             GameManager.Instance.Game();
         }
 
         //For testing purposes
         public void TeemunSceneen()
         {
-            GameManager.Instance.Level = 7;
+            GameManager.Instance.Level = 9;
             GameManager.Instance.Game();
         }
 

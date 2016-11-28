@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.ImageEffects;
 
 namespace CallOfValhalla.Player
 {
@@ -18,12 +19,20 @@ namespace CallOfValhalla.Player
         private Transform _playerTransform;
 
         private Transform _transform;
+        private SepiaTone _sepiaEffect;
+
+        public SepiaTone Sepia
+        {
+            get { return _sepiaEffect; }
+        }
 
         // Use this for initialization
         void Start()
         {
-
+            GameManager.Instance.CameraFollow = this;
             _transform = GetComponent<Transform>();
+            _sepiaEffect = GetComponent<SepiaTone>();
+            _sepiaEffect.enabled = false;
         }
 
         // Update is called once per frame

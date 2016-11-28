@@ -15,6 +15,7 @@ namespace CallOfValhalla
         private Checkpoint _checkPoint;
         private GUIManager _guiManager;
         private GameOverUI _gameOverUI;
+        private Player_CameraFollow _cameraFollow;
 
         private Player_InputController _inputController;
         private Player_Movement _playerMovement;
@@ -72,6 +73,12 @@ namespace CallOfValhalla
         {
             get { return _level; }
             set { _level = value; }
+        }
+
+        public Player_CameraFollow CameraFollow
+        {
+            get { return _cameraFollow; }
+            set { _cameraFollow = value; }
         }
 
         
