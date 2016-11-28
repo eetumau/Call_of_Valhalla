@@ -229,6 +229,14 @@ namespace CallOfValhalla.Enemy
 
             if (Distance >= _minDistanceFromPlayer && !_wallCheck.CheckLeft() || Distance <= -1 * _minDistanceFromPlayer && !_wallCheck.CheckRight())
             {
+                if(Distance >= _minDistanceFromPlayer && _isFacingRight)
+                {
+                    ChangeDirection();
+                }else if (Distance <= -1 * _minDistanceFromPlayer && !_isFacingRight)
+                {
+                    ChangeDirection();
+                }
+
                 _animator.SetInteger("animState", 1);
                 _transform.position = Vector2.MoveTowards(_transform.position, new Vector2(_enemyController.Instance.LastSeenPlayerPos.x, _transform.position.y), Time.deltaTime * _aggressiveMovementSpeed);
             }
