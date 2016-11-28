@@ -78,7 +78,10 @@ namespace CallOfValhalla.Enemy
             if (_knockbackTimer > 0)
                 _knockbackTimer -= Time.deltaTime;
             if (_stunTimer > 0)
+            {
+                _animator.SetInteger("animState", 4);
                 _stunTimer -= Time.deltaTime;
+            }
         }
 
         public void Stun(float time)
