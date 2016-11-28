@@ -35,6 +35,7 @@ namespace CallOfValhalla.Enemy
         private float _delayTimer;
         private Rigidbody2D _rigidBody;
         private Enemy_Movement _movement;
+        private bool _damageDealt;
 
         public Enemy_Attack Instance
         {
@@ -54,6 +55,12 @@ namespace CallOfValhalla.Enemy
         public int Damage
         {
             get { return _damage; }
+        }
+
+        public bool DamageDealt
+        {
+            get { return _damageDealt; }
+            set { _damageDealt = value; }
         }
 
         // Use this for initialization
@@ -118,6 +125,7 @@ namespace CallOfValhalla.Enemy
                     _attackTimer = _attackTime;
                     _delayTimer = _attackDelay;
                     _coolDownTimer = _attackCoolDown;
+                    _damageDealt = false;
 
                 }
 
@@ -126,10 +134,14 @@ namespace CallOfValhalla.Enemy
 
         }
 
-        public void DealDamage()
-        {
-            _player.Instance.TakeDamage(_damage);
-        }
+        //public void DealDamage()
+        //{
+        //    if (!_damageDealt)
+        //    {
+        //        _player.Instance.TakeDamage(_damage);
+
+        //    }
+        //}
 
         private void Attack()
         {

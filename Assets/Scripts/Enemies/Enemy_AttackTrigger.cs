@@ -29,7 +29,13 @@ namespace CallOfValhalla.Enemy {
         {
             if (other.gameObject.tag == "Player")
             {
-                _player.TakeDamage(_damage);
+                if (!_enemyAttack.DamageDealt)
+                {
+                    _player.TakeDamage(_damage);
+                    _enemyAttack.DamageDealt = true;
+                }
+
+                
             }
         }
 
