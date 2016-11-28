@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using CallOfValhalla;
+using CallOfValhalla.UI;
 
 namespace CallOfValhalla.Player
 {
@@ -15,11 +16,12 @@ namespace CallOfValhalla.Player
         private Player_HP _instance;
         private Animator _animator;
         private float _delayTimer;
-        private int _hp;
+        public int _hp;
 
         private Player_Movement _movement;
         private Player_InputController _input;
         private Transform _transform;
+        private HPBarController _hpBar;
         private bool _respawning;
 
         public Player_HP Instance
@@ -34,7 +36,7 @@ namespace CallOfValhalla.Player
         }
 
         // Use this for initialization
-        void Start()
+        void Awake()
         {
             _instance = this;
             _animator = GetComponent<Animator>();
@@ -43,22 +45,21 @@ namespace CallOfValhalla.Player
             _delayTimer = _deathDelay;
             _hp = _OriginalHP;
             _transform = GetComponent<Transform>();
-        }
 
-        // Update is called once per frame
-        void Update()
-        {
-            if(_hp <= 0)
-            {
-                Die();
-            }
-
+            _hpBar = FindObjectOfType<HPBarController>();
         }
 
         public void TakeDamage(int damage)
         {
             _hp -= damage;
-            Debug.Log(_hp);
+
+            _hpBar.Progress = ((float)_hp)/ ((float)_OriginalHP);
+            _hpBar.SecondaryProgress += ((float)damage) / ((float)_OriginalHP);
+
+            if (_hp <= 0)
+            {
+                Die();
+            }
         }
 
         public void Die()
@@ -69,13 +70,22 @@ namespace CallOfValhalla.Player
                 _input.enabled = false;
                 _animator.SetInteger("animState", 9);
 
+                StartCoroutine(GameOverTimer(_deathDelay));
+                /*
                 if (_delayTimer <= 0)
                 {
                     GameManager.Instance.GameOver();
                 }
 
                 _delayTimer -= Time.deltaTime;
+                */
             }
+        }
+
+        private IEnumerator GameOverTimer(float howLong)
+        {
+            yield return new WaitForSeconds(howLong);
+            GameManager.Instance.GameOver();
         }
 
         public void Respawn(Transform spawnPoint)
@@ -88,6 +98,7 @@ namespace CallOfValhalla.Player
             _hp = _OriginalHP;
             _transform.position = new Vector3(spawnPoint.position.x, spawnPoint.position.y, _transform.position.z);
             _respawning = false;
+            _hpBar.Progress = 1f;
 
         }
 

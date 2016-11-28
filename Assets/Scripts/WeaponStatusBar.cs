@@ -15,6 +15,8 @@ public class WeaponStatusBar : MonoBehaviour {
     private float _weaponCooldown;
     private float _weaponMaxCooldown;
     private float _completionPercent;
+    private float _baseScale = 0.5f;
+    private float _cooldownScale;
     private Vector3 _transformScale;
     
     
@@ -27,8 +29,8 @@ public class WeaponStatusBar : MonoBehaviour {
         _statusBarReady = Resources.Load("WeaponFillBarReady", typeof(Sprite)) as Sprite;
         _statusBarNotReady = Resources.Load("WeaponFillBar", typeof(Sprite)) as Sprite;
 
-        _currentWeaponSword = Resources.Load("Sword_checked", typeof(Sprite)) as Sprite;
-        _currentWeaponHammer = Resources.Load("Sword_unchecked", typeof(Sprite)) as Sprite;
+        _currentWeaponSword = Resources.Load("Sword", typeof(Sprite)) as Sprite;
+        _currentWeaponHammer = Resources.Load("Mjölnir", typeof(Sprite)) as Sprite;
 
         _weaponStatusBar.GetComponent<UnityEngine.UI.Image>().sprite = _statusBarReady;
     }
@@ -52,11 +54,11 @@ public class WeaponStatusBar : MonoBehaviour {
 
     private void UpdateStatusBar()
     {
-        _transformScale.x = _completionPercent / 100;
-        _transformScale.y = _completionPercent / 100;
+        _transformScale.x = (_baseScale + (_cooldownScale/100f));
+        _transformScale.y = (_baseScale + (_cooldownScale / 100f));
         _weaponStatusBar.transform.localScale = _transformScale;
 
-        if (_completionPercent == 100)
+        if (_completionPercent >= 100f)
             _weaponStatusBar.GetComponent<UnityEngine.UI.Image>().sprite = _statusBarReady;
         else
             _weaponStatusBar.GetComponent<UnityEngine.UI.Image>().sprite = _statusBarNotReady;        
@@ -64,8 +66,11 @@ public class WeaponStatusBar : MonoBehaviour {
 
     private void UpdateCompletionPercent()
     {
-        float tmp = (int)(_weaponCooldown * 100) / _weaponMaxCooldown;
-        _completionPercent = 100 - tmp;        
+        float tmp = ((_weaponCooldown / _weaponMaxCooldown) * 100f) ;
+        _completionPercent = 100 - tmp;
+
+        _cooldownScale = (1 - _baseScale)*_completionPercent;
+
     }
 
     private void UpdateCooldown()

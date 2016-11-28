@@ -31,12 +31,12 @@ public class HammerSpecialCollision : MonoBehaviour {
             
             if (_hammer._airSpecialCollision)
             {
-                _enemyMovement.Stun(3f);
+                _enemyMovement.Stun(4f);
                 _enemyHP.TakeDamage(1);
             }
             else
             {
-                _enemyMovement.Stun(1.5f);
+                _enemyMovement.Stun(2f);
                 _enemyHP.TakeDamage(0);
             }                       
         }

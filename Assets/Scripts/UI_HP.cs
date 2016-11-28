@@ -17,9 +17,5 @@ namespace CallOfValhalla.UI {
             _image = GetComponent<Image>();
         }
 
-        // Update is called once per frame
-        void Update() {
-            _image.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _hp.Instance.HP * 40);
-        }
     }
 }
