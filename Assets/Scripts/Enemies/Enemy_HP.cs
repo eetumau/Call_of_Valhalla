@@ -5,7 +5,7 @@ namespace CallOfValhalla.Enemy {
     public class Enemy_HP : MonoBehaviour {
 
         [SerializeField]
-        private float _hitPoints;
+        private int _hitPoints;
         [SerializeField]
         private GameObject _blood;
 
@@ -13,7 +13,10 @@ namespace CallOfValhalla.Enemy {
         private Enemy_Controller _enemyController;
         private Transform _transform;
 
-
+        public int HP
+        {
+            get { return _hitPoints; }
+        }
         // Use this for initialization
         void Start() {
 
