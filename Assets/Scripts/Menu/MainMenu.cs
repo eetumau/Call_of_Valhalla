@@ -70,6 +70,18 @@ namespace CallOfValhalla
             GameManager.Instance.Game();
         }
 
+		public void Level6()
+		{
+			GameManager.Instance.Level = 6;
+			GameManager.Instance.Game();
+		}
+
+		public void Level7()
+		{
+			GameManager.Instance.Level = 7;
+			GameManager.Instance.Game();
+		}
+
         //For testing purposes
         public void EetunSceneen()
         {
