@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: abb9e1bb119938a4fb066caaf3045ca7
+timeCreated: 1480420889
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 1
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - VIKING, ELDER Runes Bold
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 2
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
