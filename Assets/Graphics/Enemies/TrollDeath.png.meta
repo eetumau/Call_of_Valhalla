@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 28918fd6a13886f459cd686e34e5ec86
-timeCreated: 1478504364
+timeCreated: 1480414665
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -9,6 +9,10 @@ TextureImporter:
     21300004: TrollDeath_2
     21300006: TrollDeath_3
     21300008: TrollDeath_4
+    21300010: TrollDeath_5
+    21300012: TrollDeath_6
+    21300014: TrollDeath_7
+    21300016: TrollDeath_8
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -67,7 +71,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 200
+        y: 400
         width: 300
         height: 200
       alignment: 9
@@ -80,7 +84,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 300
-        y: 200
+        y: 400
         width: 300
         height: 200
       alignment: 9
@@ -93,7 +97,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 600
-        y: 200
+        y: 400
         width: 300
         height: 200
       alignment: 9
@@ -106,7 +110,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 200
         width: 300
         height: 200
       alignment: 9
@@ -119,6 +123,58 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 300
+        y: 200
+        width: 300
+        height: 200
+      alignment: 9
+      pivot: {x: 0.7, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TrollDeath_5
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 200
+        width: 300
+        height: 200
+      alignment: 9
+      pivot: {x: 0.7, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TrollDeath_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 300
+        height: 200
+      alignment: 9
+      pivot: {x: 0.7, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TrollDeath_7
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 300
+        height: 200
+      alignment: 9
+      pivot: {x: 0.7, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TrollDeath_8
+      rect:
+        serializedVersion: 2
+        x: 600
         y: 0
         width: 300
         height: 200
