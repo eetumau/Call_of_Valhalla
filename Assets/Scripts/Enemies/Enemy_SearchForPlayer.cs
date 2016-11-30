@@ -60,17 +60,22 @@ namespace CallOfValhalla.Enemy
                     if (!Physics2D.Linecast(new Vector2(_lineCastStartingPoint.position.x, _lineCastStartingPoint.position.y), new Vector2(_lineCastEndingPoint.position.x, _lineCastEndingPoint.position.y), allButIgnoreLinecast))
                     {
                         Debug.DrawLine(new Vector2(_lineCastStartingPoint.position.x, _lineCastStartingPoint.position.y), new Vector2(_lineCastEndingPoint.position.x, _lineCastEndingPoint.position.y));
-                        _enemyController.Instance.TurnToAggressive();
+
+                        if(_enemyController.IsPassive || _enemyController.IsSearchingForPlayer)
+                        {
+                            _enemyController.TurnToAggressive();
+
+                        }
 
                         _turnToPassiveTimer = _timeBeforeTurningPassive;
-                        _enemyController.Instance.LastSeenPlayerPos = colliders[i].gameObject.transform.position;
+                        _enemyController.LastSeenPlayerPos = colliders[i].gameObject.transform.position;
                     }
                     else
                     {
-                        if (_enemyController.Instance.IsAggressive)
+                        if (_enemyController.IsAggressive)
                         {
 
-                            _enemyController.Instance.TurnToSearchingForPlayer();
+                            _enemyController.TurnToSearchingForPlayer();
 
                         }
                     }
@@ -78,21 +83,21 @@ namespace CallOfValhalla.Enemy
                     var distance = _lineCastStartingPoint.position - _lineCastEndingPoint.position;
                     if(distance.magnitude >= _aggroRadius)
                     {
-                        if (_enemyController.Instance.IsAggressive)
+                        if (_enemyController.IsAggressive)
                         {
-                            _enemyController.Instance.TurnToSearchingForPlayer();
+                            _enemyController.TurnToSearchingForPlayer();
                         }
                     }
                 }
             }
 
-            if (_enemyController.Instance.IsSearchingForPlayer)
+            if (_enemyController.IsSearchingForPlayer)
             {
 
                 if (_turnToPassiveTimer <= 0)
                 {
 
-                    _enemyController.Instance.TurnToPassive();
+                    _enemyController.TurnToPassive();
                     _turnToPassiveTimer = _timeBeforeTurningPassive;
                 }
 

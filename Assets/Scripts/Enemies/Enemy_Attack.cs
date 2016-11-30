@@ -145,6 +145,7 @@ namespace CallOfValhalla.Enemy
 
         private void Attack()
         {
+            SoundManager.instance.PlaySound("goblin_swing", _enemyController.Source);
 
             _animator.SetInteger("animState", 2);
 

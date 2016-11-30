@@ -2,6 +2,7 @@
 using System.Collections;
 using CallOfValhalla.Enemy;
 using CallOfValhalla.Player;
+using CallOfValhalla;
 
 public class SwordBasicCollision : MonoBehaviour {
 
@@ -10,17 +11,21 @@ public class SwordBasicCollision : MonoBehaviour {
     private Weapon_Sword _sword;
     private int _damage = 1;
     private float _specialCompletionPercent = 5f;
+    private AudioSource _source;
 
     // Use this for initialization
     void Awake()
     {
         _sword = FindObjectOfType<Weapon_Sword>();
+        _source = gameObject.AddComponent<AudioSource>();
+        _source.playOnAwake = false;
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Enemy")
         {
+            SoundManager.instance.PlaySound("sword_hit", _source);
             _enemyMovement = other.gameObject.GetComponentInParent<Enemy_Movement>();
             _enemyMovement.Knockback(250f, 250f);
             _enemyHP = other.gameObject.GetComponentInParent<Enemy_HP>();

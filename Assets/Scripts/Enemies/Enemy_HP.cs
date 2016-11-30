@@ -34,8 +34,22 @@ namespace CallOfValhalla.Enemy {
             if (_hitPoints <= 0)
             {
                 _animator.SetInteger("animState", 3);
-                SoundManager.instance.PlaySound("goblin_death_1", _enemyController.Source);
                 _enemyController.Instance.Die();
+
+                if (gameObject.name.Contains("Goblin"))
+                {
+                    SoundManager.instance.PlaySound("goblin_death_1", _enemyController.Source);
+
+                }else if (gameObject.name.Contains("Troll"))
+                {
+                    SoundManager.instance.PlaySound("troll_death", _enemyController.Source);
+
+                }
+                else if (gameObject.name.Contains("Wolf"))
+                {
+                    SoundManager.instance.PlaySound("wolf_death", _enemyController.Source);
+
+                }
             }
 
         }

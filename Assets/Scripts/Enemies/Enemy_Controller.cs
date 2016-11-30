@@ -83,6 +83,23 @@ namespace CallOfValhalla.Enemy
 
         public void TurnToAggressive()
         {
+            if (!_isSearchingForPlayer)
+            {
+                if (gameObject.name.Contains("Troll"))
+                {
+                    SoundManager.instance.PlaySound("troll_aggro", _audioSource);
+
+                }
+                else if (gameObject.name.Contains("Goblin"))
+                {
+                    SoundManager.instance.PlaySound("goblin_aggro", _audioSource);
+
+                }
+                else if (gameObject.name.Contains("Wolf"))
+                {
+
+                }
+            }
             _isAggressive = true;
             _isPassive = false;
             _isSearchingForPlayer = false;
