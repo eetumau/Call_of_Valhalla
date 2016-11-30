@@ -15,12 +15,14 @@ namespace CallOfValhalla
         private Checkpoint _checkPoint;
         private GUIManager _guiManager;
         private GameOverUI _gameOverUI;
+        private LevelCompleteUI _levelCompleteUI;
         private Player_CameraFollow _cameraFollow;
 
         private Player_InputController _inputController;
         private Player_Movement _playerMovement;
         private Player_HP _playerHP;
         private int _level;
+        private bool _toSelectLevel;
 
 
         public static GameManager Instance
@@ -64,6 +66,12 @@ namespace CallOfValhalla
             set { _gameOverUI = value; }
         }
 
+        public LevelCompleteUI LevelCompleteUI
+        {
+            get { return _levelCompleteUI; }
+            set { _levelCompleteUI = value; }
+        }
+
         public Checkpoint CheckPoint
         {
             set { _checkPoint = value; }
@@ -73,6 +81,12 @@ namespace CallOfValhalla
         {
             get { return _level; }
             set { _level = value; }
+        }
+
+        public bool ToSelectLevel
+        {
+            get { return _toSelectLevel; }
+            set { _toSelectLevel = value; }
         }
 
         public Player_CameraFollow CameraFollow
