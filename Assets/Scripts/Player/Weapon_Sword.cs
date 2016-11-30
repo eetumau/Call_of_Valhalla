@@ -18,6 +18,7 @@ namespace CallOfValhalla.Player
         private float _timer2;
         private float _specialAttackTimer;
         private float _specialAttackCooldown;
+        private float _specialCompletion = 100f;
         [SerializeField]
         private float _specialAttackMaxCooldown;
 
@@ -80,14 +81,16 @@ namespace CallOfValhalla.Player
         }
 
         // Returns special attack cooldown to display in the UI
-        public override float GetCooldown()
+        public override float GetCompletion()
         {
-            return _specialAttackCooldown;
+            return _specialCompletion / 100f;
         }
 
-        public override float GetMaxCooldown()
+        public void AddCompletionByDamage(float completionPercent)
         {
-            return _specialAttackMaxCooldown;
+            if (_specialCompletion < 100f)
+                _specialCompletion += completionPercent;
+
         }
 
         public override void SpecialAttack(bool attack)
@@ -100,7 +103,16 @@ namespace CallOfValhalla.Player
                 _specialAttackTimer = 0.4f;
                 _specialAttackCooldown = _specialAttackMaxCooldown;
                 _movement.SetAttackAnimation("swordspecial", 0.4f);
+                _specialCompletion = 0f;
             }
+        }
+
+        private void UpdateSpecialCompletion()
+        {
+            if (_specialCompletion < 100)
+                _specialCompletion += Time.deltaTime;
+            if (_specialCompletion > 100f)
+                _specialCompletion = 100f;
         }
 
         // Update is called once per frame
@@ -108,6 +120,7 @@ namespace CallOfValhalla.Player
         {
             CheckTimers();
             RunTimers();            
+            UpdateSpecialCompletion();
         }
 
         private void RunTimers()

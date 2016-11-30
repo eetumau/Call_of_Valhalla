@@ -31,6 +31,7 @@ public class Weapon_Hammer : Weapon
     private float _specialAttackMaxCooldown;
     private float _timer1;
     private float _specialAttackMoveTimer;
+    private float _specialCompletion = 100f;
 
     // Vector3 for the original position of the special attack collider before moving it
     private Vector3 _specialColliderPosition;
@@ -59,7 +60,7 @@ public class Weapon_Hammer : Weapon
         SpecialInAir();
 
         MoveColliders();
-        
+        UpdateSpecialCompletion();
         RunTimers();  
         CheckTimers();
     }
@@ -77,14 +78,26 @@ public class Weapon_Hammer : Weapon
     }
 
     // Returns special attack cooldown to display in the UI
-    public override float GetCooldown()
+    public override float GetCompletion()
     {
-        return _specialAttackCooldown;
+        return _specialCompletion / 100f;
     }
 
-    public override float GetMaxCooldown()
+    public void AddCompletionByDamage(float completionPercent)
     {
-        return _specialAttackMaxCooldown;
+        if (_specialCompletion < 100f)
+            _specialCompletion += completionPercent;
+        
+    }
+
+    private void UpdateSpecialCompletion()
+    {
+        if (_specialCompletion < 100)
+            _specialCompletion += Time.deltaTime;
+
+        if (_specialCompletion > 100f)
+            _specialCompletion = 100f;
+
     }
 
     // Sets the basic attack collider active and sets the cooldown timer
@@ -102,9 +115,9 @@ public class Weapon_Hammer : Weapon
     public override void SpecialAttack(bool attack)
     {
 
-        if (_specialAttackCooldown <= 0)
+        if (_specialCompletion >= 100f)
         {
-            _specialAttackCooldown = _specialAttackMaxCooldown;                                              
+            _specialCompletion = 0f;                                             
 
             if (!_movement._isGrounded)
             {                                              
