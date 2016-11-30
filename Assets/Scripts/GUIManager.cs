@@ -38,7 +38,7 @@ namespace CallOfValhalla.UI
         // Update is called once per frame
         void Update()
         {
-            float tmp = GameManager.Instance.Player.WeaponController.GetCooldown();
+            float tmp = GameManager.Instance.Player.WeaponController.GetCompletion();
 
             int tmp2 = (int)tmp;
             if (tmp <= 0)

@@ -49,11 +49,6 @@ namespace CallOfValhalla.Player
                 _currentWeapon = "Sword";
 
             }
-            /*else if (weapon1Name.Equals("Sword"))
-                _weapon1 = GetComponent<Weapon_Sword>();
-            else
-                _weapon1 = GetComponent<Weapon_Sword>();
-                */
 
             if (weapon2Name.Equals("Hammer"))
             {
@@ -61,12 +56,6 @@ namespace CallOfValhalla.Player
                 _weapon2 = _hammer;
             }
 
-            /*
-            else if (weapon2Name.Equals("Sword"))
-                _weapon2 = GetComponent<Weapon_Sword>();
-            else
-                _weapon2 = GetComponent<Weapon_Sword>();
-                */
         }
 
         public void Attack(bool basicAttack, bool specialAttack)
@@ -90,20 +79,12 @@ namespace CallOfValhalla.Player
             return _hammer;
         }
 
-        public float GetCooldown()
+        public float GetCompletion()
         {
             if (_weapon1Current)
-                return _weapon1.GetCooldown();
+                return _weapon1.GetCompletion();
             else
-                return _weapon2.GetCooldown();
-        }
-
-        public float GetMaxCooldown()
-        {
-            if (_weapon1Current)
-                return _weapon1.GetMaxCooldown();
-            else
-                return _weapon2.GetMaxCooldown();
+                return _weapon2.GetCompletion();
         }
 
         public void ChangeCurrentWeapon()

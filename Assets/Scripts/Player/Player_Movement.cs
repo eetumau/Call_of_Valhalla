@@ -19,6 +19,7 @@ namespace CallOfValhalla.Player
         private float _groundCheckRadius;
         [SerializeField]
         private Transform _groundCheckTransform;
+        
 
         public bool _isGrounded;
         private bool _attacking;
@@ -29,6 +30,7 @@ namespace CallOfValhalla.Player
         public bool _hammerSpecialActive;
         private Player_HP _hp;
         private WeaponController _weaponController;
+        private AudioSource _source;
 
         public Player_HP HP
         {
@@ -40,6 +42,11 @@ namespace CallOfValhalla.Player
             get { return _weaponController; }
         }
 
+        public AudioSource Source
+        {
+            get { return _source; }
+        }
+
         // Use this for initialization
         void Start()
         {
@@ -47,6 +54,7 @@ namespace CallOfValhalla.Player
             _playerRigidbody2D = GetComponent<Rigidbody2D>();
             _weaponController = GetComponent<WeaponController>();
             _hp = GetComponent<Player_HP>();
+            _source = GetComponent<AudioSource>();
         }
 
 

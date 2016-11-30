@@ -28,7 +28,6 @@ namespace CallOfValhalla
         public void OnNewGamePressed()
         {
             _animator.SetTrigger("Hide");
-
         }
 
         public void OnSettingsPressed()

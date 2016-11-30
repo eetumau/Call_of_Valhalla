@@ -18,6 +18,7 @@ namespace CallOfValhalla.Player
         private float _timer2;
         private float _specialAttackTimer;
         private float _specialAttackCooldown;
+        private float _specialCompletion = 100f;
         [SerializeField]
         private float _specialAttackMaxCooldown;
 
@@ -67,6 +68,7 @@ namespace CallOfValhalla.Player
                 _basic2Collider.SetActive(true);
                 _basic2Active = true;
                 _movement.SetAttackAnimation("swordbasic2", 0.4f);
+                SoundManager.instance.PlaySound("sword_1", _movement.Source);
 
             }
             if (attack && !_basic1Active && !_specialActive)
@@ -75,19 +77,22 @@ namespace CallOfValhalla.Player
                 _basic1Active = true;
                 _timer1 = 0.4f;
                 _movement.SetAttackAnimation("swordbasic1", 0.4f);
+                SoundManager.instance.PlaySound("sword_1", _movement.Source);
             }
             
         }
 
         // Returns special attack cooldown to display in the UI
-        public override float GetCooldown()
+        public override float GetCompletion()
         {
-            return _specialAttackCooldown;
+            return _specialCompletion / 100f;
         }
 
-        public override float GetMaxCooldown()
+        public void AddCompletionByDamage(float completionPercent)
         {
-            return _specialAttackMaxCooldown;
+            if (_specialCompletion < 100f)
+                _specialCompletion += completionPercent;
+
         }
 
         public override void SpecialAttack(bool attack)
@@ -100,7 +105,17 @@ namespace CallOfValhalla.Player
                 _specialAttackTimer = 0.4f;
                 _specialAttackCooldown = _specialAttackMaxCooldown;
                 _movement.SetAttackAnimation("swordspecial", 0.4f);
+				SoundManager.instance.PlaySound("sword_super", _movement.Source);
+                _specialCompletion = 0f;
             }
+        }
+
+        private void UpdateSpecialCompletion()
+        {
+            if (_specialCompletion < 100)
+                _specialCompletion += Time.deltaTime;
+            if (_specialCompletion > 100f)
+                _specialCompletion = 100f;
         }
 
         // Update is called once per frame
@@ -108,6 +123,7 @@ namespace CallOfValhalla.Player
         {
             CheckTimers();
             RunTimers();            
+            UpdateSpecialCompletion();
         }
 
         private void RunTimers()

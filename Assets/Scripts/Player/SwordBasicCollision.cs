@@ -1,22 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 using CallOfValhalla.Enemy;
+using CallOfValhalla.Player;
 
 public class SwordBasicCollision : MonoBehaviour {
 
     private Enemy_HP _enemyHP;
     private Enemy_Movement _enemyMovement;
+    private Weapon_Sword _sword;
+    private int _damage = 1;
+    private float _specialCompletionPercent = 5f;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        _sword = FindObjectOfType<Weapon_Sword>();
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -26,7 +24,12 @@ public class SwordBasicCollision : MonoBehaviour {
             _enemyMovement = other.gameObject.GetComponentInParent<Enemy_Movement>();
             _enemyMovement.Knockback(250f, 250f);
             _enemyHP = other.gameObject.GetComponentInParent<Enemy_HP>();
-            _enemyHP.TakeDamage(1);
+
+            if (_enemyHP.HP > 0)
+                _sword.AddCompletionByDamage(_specialCompletionPercent);
+
+            _enemyHP.TakeDamage(_damage);
+            
         }
     }
 

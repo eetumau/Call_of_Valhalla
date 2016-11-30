@@ -2,6 +2,7 @@
 using System.Collections;
 using CallOfValhalla;
 using System;
+using CallOfValhalla.UI;
 
 public class WeaponStatusBar : MonoBehaviour {
 
@@ -14,11 +15,8 @@ public class WeaponStatusBar : MonoBehaviour {
 
     private GameObject _weaponStatusBar;
     private GameObject _currentWeaponImage;
-    private float _weaponCooldown;
-    private float _weaponMaxCooldown;
+    private WeaponStatusBarController _controller;
     private float _completionPercent;
-    private float _baseScale = 0.5f;
-    private float _cooldownScale;
     private Vector3 _transformScale;
     
     
@@ -37,12 +35,12 @@ public class WeaponStatusBar : MonoBehaviour {
         _currentWeaponSword = Resources.Load("Sword", typeof(Sprite)) as Sprite;
         _currentWeaponHammer = Resources.Load("Mjölnir", typeof(Sprite)) as Sprite;
 
+	    _controller = GetComponent<WeaponStatusBarController>();
         _weaponStatusBar.GetComponent<UnityEngine.UI.Image>().sprite = _statusBarReady;
     }
 
     // Update is called once per frame
     private void Update () {
-        UpdateCooldown();
         UpdateCompletionPercent();
         UpdateStatusBar();
         UpdateStatusImage();
@@ -60,11 +58,13 @@ public class WeaponStatusBar : MonoBehaviour {
 
     private void UpdateStatusBar()
     {
-        _transformScale.x = (_baseScale + (_cooldownScale/100f));
-        _transformScale.y = (_baseScale + (_cooldownScale / 100f));
-        _weaponStatusBar.transform.localScale = _transformScale;
 
-        if (_completionPercent >= 100f)
+        if (_completionPercent < 1)
+            _controller.Progress = _completionPercent;
+
+        Debug.Log(_completionPercent);
+
+        if (_completionPercent >= 1f)
         {
             if (GameManager.Instance.Player.WeaponController._weapon1Current)
                 _weaponStatusBar.GetComponent<UnityEngine.UI.Image>().sprite = _statusBarReadySword;
@@ -84,16 +84,7 @@ public class WeaponStatusBar : MonoBehaviour {
 
     private void UpdateCompletionPercent()
     {
-        float tmp = ((_weaponCooldown / _weaponMaxCooldown) * 100f) ;
-        _completionPercent = 100 - tmp;
+        _completionPercent = GameManager.Instance.Player.WeaponController.GetCompletion();
 
-        _cooldownScale = (1 - _baseScale)*_completionPercent;
-
-    }
-
-    private void UpdateCooldown()
-    {
-        _weaponCooldown = GameManager.Instance.Player.WeaponController.GetCooldown();
-        _weaponMaxCooldown = GameManager.Instance.Player.WeaponController.GetMaxCooldown();
     }
 }
