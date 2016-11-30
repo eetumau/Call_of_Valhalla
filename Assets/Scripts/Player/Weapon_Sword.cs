@@ -85,7 +85,9 @@ namespace CallOfValhalla.Player
         // Returns special attack cooldown to display in the UI
         public override float GetCompletion()
         {
+            Debug.Log("WEAPONISTA" + _specialCompletion);
             return _specialCompletion / 100f;
+            
         }
 
         public void AddCompletionByDamage(float completionPercent)
@@ -97,13 +99,12 @@ namespace CallOfValhalla.Player
 
         public override void SpecialAttack(bool attack)
         {
-            if (attack && _specialAttackCooldown <= 0 && _movement._isGrounded )
+            if (attack && _specialCompletion >= 100 && _movement._isGrounded )
             {
                 _movement.SwordDash();
                 _specialCollider.SetActive(true);
                 _specialActive = true;
                 _specialAttackTimer = 0.4f;
-                _specialAttackCooldown = _specialAttackMaxCooldown;
                 _movement.SetAttackAnimation("swordspecial", 0.4f);
 				SoundManager.instance.PlaySound("sword_super", _movement.Source);
                 _specialCompletion = 0f;

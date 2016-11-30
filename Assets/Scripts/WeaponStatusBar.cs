@@ -17,15 +17,16 @@ public class WeaponStatusBar : MonoBehaviour {
     private GameObject _currentWeaponImage;
     private WeaponStatusBarController _controller;
     private float _completionPercent;
-    private Vector3 _transformScale;
+    private float _baseCompletion = 0.15f;
+    private float _endCompletion = 0.90f;
+    private float _scaledCompletion;
     
     
 
 	// Use this for initialization
 	private void Awake () {
         _weaponStatusBar = GameObject.Find("WeaponStatusBar");
-        _currentWeaponImage = GameObject.Find("WeaponStatusImage");
-        _transformScale = new Vector3(1, 1, 0);      
+        _currentWeaponImage = GameObject.Find("WeaponStatusImage");    
         _statusBarReady = Resources.Load("WeaponFillBarReady", typeof(Sprite)) as Sprite;
         _statusBarNotReady = Resources.Load("WeaponFillBar", typeof(Sprite)) as Sprite;
 
@@ -58,18 +59,18 @@ public class WeaponStatusBar : MonoBehaviour {
 
     private void UpdateStatusBar()
     {
+        _controller.Progress = _baseCompletion + _scaledCompletion;       
 
-        if (_completionPercent < 1)
-            _controller.Progress = _completionPercent;
-
-        Debug.Log(_completionPercent);
-
-        if (_completionPercent >= 1f)
+        if (_completionPercent >= _endCompletion)
         {
+            
             if (GameManager.Instance.Player.WeaponController._weapon1Current)
                 _weaponStatusBar.GetComponent<UnityEngine.UI.Image>().sprite = _statusBarReadySword;
             else
+            {
+                Debug.Log(_completionPercent);
                 _weaponStatusBar.GetComponent<UnityEngine.UI.Image>().sprite = _statusBarReady;
+            }
         }
         else
         {
@@ -77,14 +78,18 @@ public class WeaponStatusBar : MonoBehaviour {
                 _weaponStatusBar.GetComponent<UnityEngine.UI.Image>().sprite = _statusBarNotReadySword;
             else
                 _weaponStatusBar.GetComponent<UnityEngine.UI.Image>().sprite = _statusBarNotReady;
-
-
         }       
     }
 
     private void UpdateCompletionPercent()
     {
-        _completionPercent = GameManager.Instance.Player.WeaponController.GetCompletion();
+        float tmp = GameManager.Instance.Player.WeaponController.GetCompletion();
+
+        _scaledCompletion = (1 - _baseCompletion - (1 - _endCompletion)) * tmp;
+
+        _completionPercent = _baseCompletion + _scaledCompletion;
+
+        Debug.Log(_scaledCompletion);
 
     }
 }
