@@ -167,11 +167,11 @@ namespace CallOfValhalla.Enemy
         {
             if (_movement.IsFacingRight)
             {
-                _rigidBody.AddForce(new Vector2(500, 500));
+                _rigidBody.AddForce(new Vector2(600, 500));
             }
             else
             {
-                _rigidBody.AddForce(new Vector2(-500, 500));
+                _rigidBody.AddForce(new Vector2(-600, 500));
             }
         }
     }

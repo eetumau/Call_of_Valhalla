@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using CallOfValhalla;
 
 namespace CallOfValhalla.Enemy {
     public class Enemy_HP : MonoBehaviour {
@@ -12,6 +13,7 @@ namespace CallOfValhalla.Enemy {
         private Animator _animator;
         private Enemy_Controller _enemyController;
         private Transform _transform;
+        private AudioSource _audioSource;
 
         public int HP
         {
@@ -23,6 +25,7 @@ namespace CallOfValhalla.Enemy {
             _enemyController = GetComponent<Enemy_Controller>();
             _animator = GetComponent<Animator>();
             _transform = GetComponent<Transform>();
+            _audioSource = GetComponent<AudioSource>();
         }
 
         // Update is called once per frame
@@ -31,7 +34,7 @@ namespace CallOfValhalla.Enemy {
             if (_hitPoints <= 0)
             {
                 _animator.SetInteger("animState", 3);
-
+                SoundManager.instance.PlaySound("goblin_death_1", _enemyController.Source);
                 _enemyController.Instance.Die();
             }
 

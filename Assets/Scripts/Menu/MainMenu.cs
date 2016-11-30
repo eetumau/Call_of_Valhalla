@@ -12,12 +12,22 @@ namespace CallOfValhalla
         void Start()
         {
             _animator = GetComponentInChildren<Animator>();
+            CheckPanel();
+        }
+
+        //If returned to main menu after completing a level, move to level selection instantly.
+        private void CheckPanel()
+        {
+            if (GameManager.Instance.ToSelectLevel)
+            {
+                OnNewGamePressed();
+                GameManager.Instance.ToSelectLevel = false;
+            }
         }
 
         public void OnNewGamePressed()
         {
             _animator.SetTrigger("Hide");
-
         }
 
         public void OnSettingsPressed()

@@ -19,8 +19,10 @@ namespace CallOfValhalla {
         {
             if (other.gameObject.tag == "Player")
             {
-                GameManager.Instance.MainMenu();
+                GameManager.Instance.LevelCompleteUI.ToggleLevelCompleteUI();
             }
         }
+
+
     }
 }

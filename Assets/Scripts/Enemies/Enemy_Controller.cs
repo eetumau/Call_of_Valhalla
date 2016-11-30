@@ -12,6 +12,7 @@ namespace CallOfValhalla.Enemy
         private Enemy_SearchForPlayer _searchForPlayer;
         private Enemy_Attack _attack;
         private Enemy_AttackTrigger _attackTrigger;
+        private AudioSource _audioSource;
 
         private bool _isPassive = true;
         private bool _isAggressive = false;
@@ -51,6 +52,11 @@ namespace CallOfValhalla.Enemy
             set { _inAttackRange = value; }
         }
 
+        public AudioSource Source
+        {
+            get { return _audioSource; }
+        }
+
         private void Start()
         {
             _instance = this;
@@ -60,6 +66,7 @@ namespace CallOfValhalla.Enemy
             _wallCheck = GetComponentInChildren<BasicEnemy_WallCheck>();
             _attack = GetComponentInChildren<Enemy_Attack>();
             _attackTrigger = GetComponentInChildren<Enemy_AttackTrigger>();
+            _audioSource = GetComponent<AudioSource>();
         }
 
         private void Update()

@@ -5,6 +5,9 @@ namespace CallOfValhalla.Enemy
 {
     public class BasicEnemy_WallCheck : MonoBehaviour
     {
+        //Used to check if the enemy is flying to allow movement even when there is no ground ahead.
+        [SerializeField]
+        private bool _flying;
 
         private Enemy_Movement _enemyMovement;
         private Transform _transform;
@@ -37,7 +40,7 @@ namespace CallOfValhalla.Enemy
             var allButIgnoreLinecast = ~(1 << 8);
             bool blocked = Physics2D.Linecast(_transform.position, new Vector3(_transform.position.x + 1, _transform.position.y + 0.3f, _transform.position.z), allButIgnoreLinecast);
 
-            if (!blocked)
+            if (!blocked && !_flying)
             {
                 blocked = Physics2D.Linecast(new Vector3(_transform.position.x + 1, _transform.position.y, _transform.position.z), new Vector3(_transform.position.x + 1, _transform.position.y - 3, _transform.position.z), allButIgnoreLinecast);
                 Debug.DrawLine(new Vector3(_transform.position.x + 1, _transform.position.y, _transform.position.z), new Vector3(_transform.position.x + 1, _transform.position.y - 3, _transform.position.z));
@@ -59,7 +62,7 @@ namespace CallOfValhalla.Enemy
             bool blocked = Physics2D.Linecast(_transform.position, new Vector3(_transform.position.x - 1, _transform.position.y + 0.3f, _transform.position.z), allButIgnoreLinecast);
             
 
-            if (!blocked)
+            if (!blocked && !_flying)
             {
                 blocked = Physics2D.Linecast(new Vector3(_transform.position.x - 1, _transform.position.y, _transform.position.z), new Vector3(_transform.position.x - 1, _transform.position.y - 3, _transform.position.z), allButIgnoreLinecast);
                 Debug.DrawLine(new Vector3(_transform.position.x - 1, _transform.position.y, _transform.position.z), new Vector3(_transform.position.x - 1, _transform.position.y - 3, _transform.position.z));

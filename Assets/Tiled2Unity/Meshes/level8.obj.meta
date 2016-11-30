@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: a8bd0e50c13f73b45b3cb1c84c72a288
-timeCreated: 1480419082
+guid: afe0c435615aa164482e561ac79dfa0a
+timeCreated: 1480504054
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -27,6 +27,8 @@ ModelImporter:
     4300002: mesh_0002
     4300004: mesh_0003_MeshPart0
     4300006: mesh_0004
+    4300008: mesh_0002_MeshPart0
+    4300010: mesh_0003
     11400000: mesh_0001
     11400002: mesh_0002
     11400004: mesh_0003
