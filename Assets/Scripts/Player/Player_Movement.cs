@@ -19,6 +19,8 @@ namespace CallOfValhalla.Player
         private float _groundCheckRadius;
         [SerializeField]
         private Transform _groundCheckTransform;
+        [SerializeField]
+        private float _soundDelay;
         
 
         public bool _isGrounded;
@@ -31,6 +33,8 @@ namespace CallOfValhalla.Player
         private Player_HP _hp;
         private WeaponController _weaponController;
         private AudioSource _source;
+        private AudioSource _groundSource;
+        private float _soundDelayTimer;
 
         public Player_HP HP
         {
@@ -55,6 +59,8 @@ namespace CallOfValhalla.Player
             _weaponController = GetComponent<WeaponController>();
             _hp = GetComponent<Player_HP>();
             _source = GetComponent<AudioSource>();
+            _groundSource = _groundCheckTransform.gameObject.GetComponent<AudioSource>();
+            _soundDelayTimer = _soundDelay;
         }
 
 
@@ -154,6 +160,8 @@ namespace CallOfValhalla.Player
             if (_swordDashTimer <= 0 && !_hammerSpecialActive && _hammerBasicTimer <= 0)
             _playerRigidbody2D.velocity = new Vector2(inputX * _playerMoveSpeed, _playerRigidbody2D.velocity.y);
 
+            PlaySound();
+
         }
         
         public void SwordDash()
@@ -216,6 +224,38 @@ namespace CallOfValhalla.Player
                 _swordDashing = false;
             }
                 */
+        }
+
+        private void PlaySound()
+        {
+            if (_isGrounded && _soundDelayTimer <= 0)
+            {
+                float random = UnityEngine.Random.Range(0, 3);
+
+                string sound;
+
+                if (random == 0)
+                {
+                    sound = "footsteps - Step1";
+                }
+                else if (random == 1)
+                {
+                    sound = "footsteps - Step2";
+                }
+                else if (random == 2)
+                {
+                    sound = "footsteps - Step3";
+                }
+                else
+                {
+                    sound = "footsteps - Step4";
+                }
+
+                SoundManager.instance.PlaySound(sound, _groundSource);
+                _soundDelayTimer = _soundDelay;
+            }
+
+            _soundDelayTimer -= Time.deltaTime;
         }
     }
 }
