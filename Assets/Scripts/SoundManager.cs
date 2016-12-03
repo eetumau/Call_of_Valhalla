@@ -52,7 +52,6 @@ namespace CallOfValhalla
 
         public void PlaySound(string name, AudioSource source)
         {
-            Debug.Log("play");
             for (int i = 0; i < _sfx.Length; i++)
             {
                 if (_sfx[i].name == name)
