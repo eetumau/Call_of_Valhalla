@@ -69,7 +69,7 @@ namespace CallOfValhalla.UI
 
         private void SetBarProgress(float __progress, float __segmentTwoProgress = 0f)
         {
-            Debug.Log("Progress");
+
             _bar.SetFloat("_Progress", __progress);
             _bar.SetFloat("_SegmentTwo", __segmentTwoProgress);
         }

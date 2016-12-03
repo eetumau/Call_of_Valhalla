@@ -85,7 +85,6 @@ namespace CallOfValhalla.Player
         // Returns special attack cooldown to display in the UI
         public override float GetCompletion()
         {
-            Debug.Log("WEAPONISTA" + _specialCompletion);
             return _specialCompletion / 100f;
             
         }

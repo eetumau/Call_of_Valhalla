@@ -6,7 +6,7 @@ namespace CallOfValhalla.Enemy {
     public class Enemy_HP : MonoBehaviour {
 
         [SerializeField]
-        private int _hitPoints;
+        public int _hitPoints;
         [SerializeField]
         private GameObject _blood;
 
