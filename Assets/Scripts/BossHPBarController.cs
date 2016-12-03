@@ -6,12 +6,13 @@ using UnityEngine.UI;
 namespace CallOfValhalla.UI
 {
     [ExecuteInEditMode]
-    public class HPBarController : MonoBehaviour
+    public class BossHPBarController : MonoBehaviour
     {
 
         private Material _bar = null;
         private Image _barImage = null;
-        [SerializeField] private GameObject _barGO;
+        [SerializeField]
+        private GameObject _barGO;
 
         public float Progress
         {
