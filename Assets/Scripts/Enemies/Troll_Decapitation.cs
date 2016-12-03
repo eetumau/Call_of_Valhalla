@@ -5,15 +5,7 @@ public class Troll_Decapitation : MonoBehaviour {
 
 	public GameObject head;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
 
-	// Update is called once per frame
-	void Update () {
-
-	}
 
 	void Decapitation () {
 		var t = transform;

@@ -16,12 +16,6 @@ public class HammerSpecialCollision : MonoBehaviour {
         _hammer = GameManager.Instance.Player.WeaponController.GetHammer();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Enemy")  {

@@ -6,11 +6,6 @@ using CallOfValhalla.States;
 namespace CallOfValhalla {
     public class PauseMenu : MonoBehaviour {
 
-
-        private void Start()
-        {
-        }
-
         public void OnResumePressed()
         {
             GameManager.Instance.Pauser.TogglePause();

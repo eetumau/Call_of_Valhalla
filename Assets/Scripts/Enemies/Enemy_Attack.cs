@@ -126,6 +126,7 @@ namespace CallOfValhalla.Enemy
                     _delayTimer = _attackDelay;
                     _coolDownTimer = _attackCoolDown;
                     _damageDealt = false;
+                    return;
 
                 }
 
@@ -145,7 +146,7 @@ namespace CallOfValhalla.Enemy
 
         private void Attack()
         {
-            SoundManager.instance.PlaySound("goblin_swing", _enemyController.Source);
+            PlaySound();
 
             _animator.SetInteger("animState", 2);
 
@@ -162,6 +163,26 @@ namespace CallOfValhalla.Enemy
 
             _delayTimer -= Time.deltaTime;
 
+        }
+
+        private void PlaySound()
+        {
+            if (_attackTimer == _attackTime)
+            {
+                if (gameObject.name.Contains("Goblin"))
+                {
+                    SoundManager.instance.PlaySound("goblin_swing", _enemyController.WeaponSource);
+                }
+                else if (gameObject.name.Contains("Troll"))
+                {
+                    SoundManager.instance.PlaySound("goblin_swing", _enemyController.WeaponSource);
+                }
+                else
+                {
+                    SoundManager.instance.PlaySound("goblin_swing", _enemyController.WeaponSource);
+                }
+
+            }
         }
 
         private void Leap()
