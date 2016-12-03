@@ -28,6 +28,13 @@ namespace CallOfValhalla
             SceneManager.LoadScene(GameManager.Instance.Level);
         }
 
+        public void OnNextLevelPressed()
+        {
+            GameManager.Instance.LevelCompleteUI.ToggleLevelCompleteUI();
+            GameManager.Instance.Level += 1;
+            SceneManager.LoadScene(GameManager.Instance.Level);
+        }
+
         public void OnExitPressed()
         {
             GameManager.Instance.ToSelectLevel = true;
