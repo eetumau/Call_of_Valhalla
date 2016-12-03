@@ -7,12 +7,14 @@ namespace CallOfValhalla
     {
         private GameObject _gameOverUI;
         private Canvas _canvas;
+        private AudioSource _source;
 
         private bool _gameOver = false;
 
         // Use this for initialization
         void Start()
         {
+            _source = GetComponent<AudioSource>();
             GameManager.Instance.GameOverUI = this;
             _canvas = GetComponentInChildren<Canvas>();
             _gameOverUI = _canvas.gameObject;
@@ -28,6 +30,7 @@ namespace CallOfValhalla
                 _gameOverUI.SetActive(true);
             }else
             {
+                SoundManager.instance.PlaySound("button", _source);
                 Time.timeScale = 1;
                 _gameOverUI.SetActive(false);
             }

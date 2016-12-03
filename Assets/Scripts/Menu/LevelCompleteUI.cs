@@ -8,12 +8,14 @@ namespace CallOfValhalla
 
         private GameObject _levelCompleteUI;
         private Canvas _canvas;
+        private AudioSource _source;
 
         private bool _levelCompleted;
 
         // Use this for initialization
         void Start()
         {
+            _source = GetComponent<AudioSource>();
             _canvas = GetComponentInChildren<Canvas>();
             _levelCompleteUI = _canvas.gameObject;
             GameManager.Instance.LevelCompleteUI = this;
@@ -30,6 +32,7 @@ namespace CallOfValhalla
                 Time.timeScale = 0;
             }else
             {
+                SoundManager.instance.PlaySound("button", _source);
                 _levelCompleteUI.SetActive(false);
                 Time.timeScale = 1;
             }
