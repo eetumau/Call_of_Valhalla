@@ -15,6 +15,7 @@ namespace CallOfValhalla
         private bool _used = false;
         private Transform _transform;
         private SpriteRenderer _renderer;
+        private AudioSource _source;
 
         public Transform SpawnPoint
         {
@@ -33,20 +34,17 @@ namespace CallOfValhalla
         {
             _transform = GetComponent<Transform>();
             _renderer = GetComponent<SpriteRenderer>();
+            _source = GetComponent<AudioSource>();
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
 
         void OnTriggerEnter2D(Collider2D other)
         {
-            if (!_used)
+            if (!_used && !_activated)
             {
                 if (other.gameObject.tag == "Player")
                 {
+                    SoundManager.instance.PlaySound("checkpoint_activated", _source);
                     _activated = true;
                     _renderer.sprite = _activatedSprite;
                     GameManager.Instance.CheckPoint = this;
