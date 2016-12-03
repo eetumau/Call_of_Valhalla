@@ -8,15 +8,24 @@ namespace CallOfValhalla
     {
         private int _level;
         private Animator _animator;
-
+        private GameObject _levelPanel;
+        private GameObject _settingsPanel;
         private AudioSource _source;
 
 
         void Start()
         {
+            _levelPanel = GameObject.Find("LevelSelectPanel");
+            _settingsPanel = GameObject.Find("SettingsPanel");
+
             _animator = GetComponentInChildren<Animator>();
             _source = GetComponent<AudioSource>();
+
+            //_levelPanel.SetActive(false);
+            //_settingsPanel.SetActive(false);
+
             CheckPanel();
+            
         }
 
         //If returned to main menu after completing a level, move to level selection instantly.
@@ -32,11 +41,13 @@ namespace CallOfValhalla
         public void OnNewGamePressed()
         {
             SoundManager.instance.PlaySound("button", _source);
+            //_levelPanel.SetActive(true);
             _animator.SetTrigger("Hide");
         }
 
         public void OnSettingsPressed()
         {
+            //_settingsPanel.SetActive(true);
             SoundManager.instance.PlaySound("button", _source);
             _animator.SetTrigger("Show2");
         }
@@ -49,12 +60,14 @@ namespace CallOfValhalla
 
         public void OnBackPressed()
         {
+            //_levelPanel.SetActive(false);
             SoundManager.instance.PlaySound("button", _source);
             _animator.SetTrigger("Show");
         }
 
         public void OnBack2Pressed()
         {
+            //_settingsPanel.SetActive(false);
             SoundManager.instance.PlaySound("button", _source);
             _animator.SetTrigger("Show");
         }
