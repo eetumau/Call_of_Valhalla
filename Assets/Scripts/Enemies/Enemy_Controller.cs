@@ -13,6 +13,7 @@ namespace CallOfValhalla.Enemy
         private Enemy_Attack _attack;
         private Enemy_AttackTrigger _attackTrigger;
         private AudioSource _audioSource;
+        private AudioSource _audioSource2;
 
         private bool _isPassive = true;
         private bool _isAggressive = false;
@@ -57,6 +58,11 @@ namespace CallOfValhalla.Enemy
             get { return _audioSource; }
         }
 
+        public AudioSource WeaponSource
+        {
+            get { return _audioSource2; }
+        }
+
         private void Start()
         {
             _instance = this;
@@ -67,6 +73,7 @@ namespace CallOfValhalla.Enemy
             _attack = GetComponentInChildren<Enemy_Attack>();
             _attackTrigger = GetComponentInChildren<Enemy_AttackTrigger>();
             _audioSource = GetComponent<AudioSource>();
+            _audioSource2 = _attack.GetComponent<AudioSource>();
         }
 
         private void Update()
