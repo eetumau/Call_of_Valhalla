@@ -16,12 +16,6 @@ namespace CallOfValhalla
             _text.text = "Level " + GameManager.Instance.Level + " Completed!";
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         public void OnRestartPressed()
         {
             GameManager.Instance.LevelCompleteUI.ToggleLevelCompleteUI();

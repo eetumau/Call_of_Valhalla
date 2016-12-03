@@ -76,10 +76,6 @@ namespace CallOfValhalla.Enemy
             _audioSource2 = _attack.GetComponent<AudioSource>();
         }
 
-        private void Update()
-        {
-
-        }
 
         public void TurnToPassive()
         {
