@@ -169,7 +169,6 @@ namespace CallOfValhalla.Enemy
         {
             if (_attackTimer == _attackTime)
             {
-                Debug.Log("Playsound");
                 if (gameObject.name.Contains("Goblin"))
                 {
                     SoundManager.instance.PlaySound("goblin_swing", _enemyController.WeaponSource);
