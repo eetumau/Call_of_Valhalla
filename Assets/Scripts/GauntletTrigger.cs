@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using CallOfValhalla;
 
 public class GauntletTrigger : MonoBehaviour {
 
@@ -19,6 +20,7 @@ public class GauntletTrigger : MonoBehaviour {
         {
             _gauntlet.ActivateGauntlet();
             _trigger.SetActive(false);
+            SoundManager.instance.SetMusic("boss_music_2");
             
         }
     }
