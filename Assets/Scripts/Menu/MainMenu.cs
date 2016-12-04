@@ -18,6 +18,10 @@ namespace CallOfValhalla
         [SerializeField]
         private Toggle _sound;
         [SerializeField]
+        private Slider _mVolume;
+        [SerializeField]
+        private Slider _sVolume;
+        [SerializeField]
         private Button[] _levelButtons;
 
         void Start()
@@ -36,6 +40,8 @@ namespace CallOfValhalla
 
             _music.isOn = !SoundManager.instance.MusicMuted;
             _sound.isOn = !SoundManager.instance.SoundMuted;
+            _mVolume.value = SoundManager.instance.MusicVolume;
+            _sVolume.value = SoundManager.instance.SoundVolume;
             
         }
 
@@ -189,13 +195,31 @@ namespace CallOfValhalla
             SoundManager.instance.ToggleSound(_sound.isOn);
         }
 
+        public void AdjustMusic()
+        {
+            _music.isOn = true;
+            SoundManager.instance.MusicVolume = _mVolume.value;
+            GameManager.Instance.Save();
+        }
+
+        public void AdjustSound()
+        {
+            _sound.isOn = true;
+            SoundManager.instance.SoundVolume = _sVolume.value;
+            GameManager.Instance.Save();
+        }
+
         public void DeleteSaveData()
         {
 
 
             _sound.isOn = true;
             _music.isOn = true;
+            SoundManager.instance.MusicVolume = 1;
+            SoundManager.instance.SoundVolume = 1;
             GameManager.Instance.DeleteSaveData();
+            _mVolume.value = SoundManager.instance.MusicVolume;
+            _sVolume.value = SoundManager.instance.SoundVolume;
         }
     }
 }

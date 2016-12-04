@@ -18,6 +18,9 @@ namespace CallOfValhalla
         [SerializeField]
         private float highPitchRange = 1.05f;
 
+        private float _musicVolume;
+        private float _soundVolume;
+
         private bool _musicMuted = false;
         private bool _soundMuted = false;
 
@@ -33,6 +36,22 @@ namespace CallOfValhalla
         {
             get { return _soundMuted; }
             set { _soundMuted = value; }
+        }
+
+        public float MusicVolume
+        {
+            get { return _musicVolume; }
+            set
+            {
+                _musicVolume = value;
+                musicSource.volume = _musicVolume;
+            }
+        }
+
+        public float SoundVolume
+        {
+            get { return _soundVolume; }
+            set { _soundVolume = value; }
         }
 
         // Use this for initialization
@@ -80,7 +99,7 @@ namespace CallOfValhalla
                         source.volume = 0;
                     }else
                     {
-                        source.volume = 1;
+                        source.volume = _soundVolume;
                     }
 
                     source.Play();
@@ -97,7 +116,7 @@ namespace CallOfValhalla
                 musicSource.volume = 0;
             }else
             {
-                musicSource.volume = 1;
+                musicSource.volume = _musicVolume;
             }
 
             GameManager.Instance.Save();

@@ -183,6 +183,8 @@ namespace CallOfValhalla
 
             data.musicMuted = SoundManager.instance.MusicMuted;
             data.soundMuted = SoundManager.instance.SoundMuted;
+            data.mVolume = SoundManager.instance.MusicVolume;
+            data.sVolume = SoundManager.instance.SoundVolume;
 
             if(_levelCompleted > data.levelCompleted)
             {
@@ -201,6 +203,8 @@ namespace CallOfValhalla
             {
                 SoundManager.instance.MusicMuted = data.musicMuted;
                 SoundManager.instance.SoundMuted = data.soundMuted;
+                SoundManager.instance.MusicVolume = data.mVolume;
+                SoundManager.instance.SoundVolume = data.sVolume;
 
                 if (_levelCompleted < data.levelCompleted)
                 {
@@ -218,6 +222,8 @@ namespace CallOfValhalla
 
             data.musicMuted = false;
             data.soundMuted = false;
+            data.mVolume = 1;
+            data.sVolume = 1;
             data.levelCompleted = _levelCompleted;
 
             SaveSystem.Save(data);

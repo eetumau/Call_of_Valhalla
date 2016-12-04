@@ -9,6 +9,8 @@ namespace CallOfValhalla
         public int levelCompleted;
         public bool musicMuted;
         public bool soundMuted;
+        public float mVolume;
+        public float sVolume;
         
         
     }
