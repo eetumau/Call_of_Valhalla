@@ -63,6 +63,9 @@ namespace CallOfValhalla.Player
 
                 Time.timeScale = 0.5f;
                 Die();
+            }else
+            {
+                SoundManager.instance.PlaySound("ouch", _movement.Source);
             }
         }
 

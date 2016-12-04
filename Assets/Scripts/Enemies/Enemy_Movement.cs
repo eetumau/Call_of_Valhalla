@@ -66,7 +66,8 @@ namespace CallOfValhalla.Enemy
         {
             _enemyController.Instance.InAttackRange = false;
 
-            if (_knockbackTimer <= 0 && _stunTimer <= 0)
+            //if (_knockbackTimer <= 0 && _stunTimer <= 0)
+            if(_stunTimer <= 0)
                 CheckStates();
 
             RunTimers();           
