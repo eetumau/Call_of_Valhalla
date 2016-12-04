@@ -183,6 +183,7 @@ namespace CallOfValhalla.Player
         {
             if (_isGrounded && _jump)
             {
+                SoundManager.instance.PlaySound("jump", _groundSource);
                 _playerRigidbody2D.velocity = new Vector2(_playerRigidbody2D.velocity.x, _playerJumpForce);
                 _isGrounded = false;
             }
