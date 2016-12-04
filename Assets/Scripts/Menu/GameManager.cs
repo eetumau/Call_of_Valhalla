@@ -219,8 +219,6 @@ namespace CallOfValhalla
         {
             GameData data = new GameData();
 
-            _levelCompleted = 0;
-
             data.musicMuted = false;
             data.soundMuted = false;
             data.mVolume = 1;

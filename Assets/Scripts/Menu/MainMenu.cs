@@ -67,6 +67,11 @@ namespace CallOfValhalla
                 {
                     _levelButtons[i].interactable = true;
                     _levelButtons[i].GetComponentInChildren<Text>().enabled = true;
+                }else if(levelCompleted < i)
+                {
+                    _levelButtons[i].interactable = false;
+                    _levelButtons[i].GetComponentInChildren<Text>().enabled = false;
+
                 }
             }
         }
@@ -216,9 +221,11 @@ namespace CallOfValhalla
             _music.isOn = true;
             SoundManager.instance.MusicVolume = 1;
             SoundManager.instance.SoundVolume = 1;
-            GameManager.Instance.DeleteSaveData();
             _mVolume.value = SoundManager.instance.MusicVolume;
             _sVolume.value = SoundManager.instance.SoundVolume;
+            GameManager.Instance.LevelCompleted = 0;
+            CheckLevelCompleted();
+            GameManager.Instance.DeleteSaveData();
         }
     }
 }
