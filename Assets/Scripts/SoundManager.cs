@@ -44,7 +44,10 @@ namespace CallOfValhalla
             set
             {
                 _musicVolume = value;
-                musicSource.volume = _musicVolume;
+                if (!_musicMuted)
+                {
+                    musicSource.volume = _musicVolume;
+                }
             }
         }
 

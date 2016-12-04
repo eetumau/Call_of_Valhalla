@@ -10,17 +10,24 @@ namespace CallOfValhalla
         private GameObject _pauseCanvasGO;
         private Canvas _canvas;
         private AudioSource _source;
+        private GameObject _settingsPanel;
+        private bool _showSettings;
+
 
 
         private bool _paused = false;
 
         private void Start()
         {
+            
+            _settingsPanel = GameObject.Find("SettingsPanel");
             _source = GetComponent<AudioSource>();
             GameManager.Instance.Pauser = this;
             _canvas = GetComponentInChildren<Canvas>();
             _pauseCanvasGO = _canvas.gameObject;
             _pauseCanvasGO.SetActive(false);
+            _settingsPanel.SetActive(false);
+            
         }
 
         public void TogglePause()
@@ -36,9 +43,27 @@ namespace CallOfValhalla
             }else
             {
                 SoundManager.instance.PlaySound("button", _source);
+                _settingsPanel.SetActive(false);
+                _showSettings = false;
                 _pauseCanvasGO.SetActive(false);
                 Time.timeScale = 1;
             }
         }
+
+        public void ToggleSettings()
+        {
+            SoundManager.instance.PlaySound("button", _source);
+
+            _showSettings = !_showSettings;
+
+            if (_showSettings)
+            {
+                _settingsPanel.SetActive(true);
+            }else
+            {
+                _settingsPanel.SetActive(false);
+            }
+        }
+
     }
 }

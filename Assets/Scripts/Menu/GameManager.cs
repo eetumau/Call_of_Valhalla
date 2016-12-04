@@ -201,10 +201,11 @@ namespace CallOfValhalla
 
             if (data != null)
             {
-                SoundManager.instance.MusicMuted = data.musicMuted;
-                SoundManager.instance.SoundMuted = data.soundMuted;
                 SoundManager.instance.MusicVolume = data.mVolume;
                 SoundManager.instance.SoundVolume = data.sVolume;
+                SoundManager.instance.MusicMuted = data.musicMuted;
+                SoundManager.instance.SoundMuted = data.soundMuted;
+                
 
                 if (_levelCompleted < data.levelCompleted)
                 {

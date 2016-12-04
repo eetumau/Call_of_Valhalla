@@ -198,14 +198,12 @@ namespace CallOfValhalla
 
         public void AdjustMusic()
         {
-            _music.isOn = true;
             SoundManager.instance.MusicVolume = _mVolume.value;
             GameManager.Instance.Save();
         }
 
         public void AdjustSound()
         {
-            _sound.isOn = true;
             SoundManager.instance.SoundVolume = _sVolume.value;
             GameManager.Instance.Save();
         }
