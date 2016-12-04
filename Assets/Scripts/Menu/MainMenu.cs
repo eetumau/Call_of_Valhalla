@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using CallOfValhalla.States;
+using UnityEngine.UI;
 
 namespace CallOfValhalla
 {
@@ -12,6 +13,12 @@ namespace CallOfValhalla
         private GameObject _settingsPanel;
         private AudioSource _source;
 
+        [SerializeField]
+        private Toggle _music;
+        [SerializeField]
+        private Toggle _sound;
+        [SerializeField]
+        private Button[] _levelButtons;
 
         void Start()
         {
@@ -21,10 +28,14 @@ namespace CallOfValhalla
             _animator = GetComponentInChildren<Animator>();
             _source = GetComponent<AudioSource>();
 
+            CheckLevelCompleted();
             //_levelPanel.SetActive(false);
             //_settingsPanel.SetActive(false);
 
             CheckPanel();
+
+            _music.isOn = !SoundManager.instance.MusicMuted;
+            _sound.isOn = !SoundManager.instance.SoundMuted;
             
         }
 
@@ -35,6 +46,21 @@ namespace CallOfValhalla
             {
                 OnNewGamePressed();
                 GameManager.Instance.ToSelectLevel = false;
+            }
+        }
+
+
+
+        private void CheckLevelCompleted()
+        {
+            int levelCompleted = GameManager.Instance.LevelCompleted;
+
+            for(int i = 0; i < _levelButtons.Length; i++)
+            {
+                if(levelCompleted >= i)
+                {
+                    _levelButtons[i].interactable = true;
+                }
             }
         }
 
@@ -151,5 +177,23 @@ namespace CallOfValhalla
             GameManager.Instance.Game();
         }
 
+        public void MuteMusic()
+        {
+            SoundManager.instance.ToggleMusic(_music.isOn);
+        }
+
+    
+
+        public void MuteSound()
+        {
+            SoundManager.instance.ToggleSound(_sound.isOn);
+        }
+
+        public void DeleteSaveData()
+        {
+            _sound.isOn = true;
+            _music.isOn = true;
+            GameManager.Instance.DeleteSaveData();
+        }
     }
 }

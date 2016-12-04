@@ -24,6 +24,9 @@ namespace CallOfValhalla
         private int _level;
         private bool _toSelectLevel;
 
+        [SerializeField]
+        private int _levelCompleted;
+
 
         public static GameManager Instance
         {
@@ -83,6 +86,12 @@ namespace CallOfValhalla
             set { _level = value; }
         }
 
+        public int LevelCompleted
+        {
+            get { return _levelCompleted; }
+            set { _levelCompleted = value; }
+        }
+
         public bool ToSelectLevel
         {
             get { return _toSelectLevel; }
@@ -111,12 +120,16 @@ namespace CallOfValhalla
             }
         }
 
+
+
         private void Init()
         {
             _playerMovement = FindObjectOfType<Player_Movement>();
             _playerHP = FindObjectOfType<Player_HP>();
 
             InitStateManager();
+            LoadGame();
+
         }
 
         private void InitStateManager()
@@ -162,6 +175,52 @@ namespace CallOfValhalla
             {
                 _gameOverUI.ToggleGameOverUI();
             }
+        }
+
+        public void Save()
+        {
+            GameData data = new GameData();
+
+            data.musicMuted = SoundManager.instance.MusicMuted;
+            data.soundMuted = SoundManager.instance.SoundMuted;
+
+            if(_levelCompleted > data.levelCompleted)
+            {
+                data.levelCompleted = _levelCompleted;
+
+            }
+
+            SaveSystem.Save(data);
+        }
+
+        public void LoadGame()
+        {
+            GameData data = SaveSystem.Load<GameData>();
+
+            if (data != null)
+            {
+                SoundManager.instance.MusicMuted = data.musicMuted;
+                SoundManager.instance.SoundMuted = data.soundMuted;
+
+                if (_levelCompleted < data.levelCompleted)
+                {
+                    _levelCompleted = data.levelCompleted;
+
+                }
+            }
+        }
+
+        public void DeleteSaveData()
+        {
+            GameData data = new GameData();
+
+            _levelCompleted = 0;
+
+            data.musicMuted = false;
+            data.soundMuted = false;
+            data.levelCompleted = _levelCompleted;
+
+            SaveSystem.Save(data);
         }
 
     }

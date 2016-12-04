@@ -18,13 +18,27 @@ namespace CallOfValhalla
         [SerializeField]
         private float highPitchRange = 1.05f;
 
+        private bool _musicMuted = false;
+        private bool _soundMuted = false;
+
+
         public static SoundManager instance = null;
 
+        public bool MusicMuted
+        {
+            get { return _musicMuted; }
+            set { _musicMuted = value; }
+        }
+        public bool SoundMuted
+        {
+            get { return _soundMuted; }
+            set { _soundMuted = value; }
+        }
 
         // Use this for initialization
         void Awake()
         {
-
+            
             if (instance == null)
             {
                 instance = this;
@@ -33,7 +47,7 @@ namespace CallOfValhalla
             {
                 Destroy(gameObject);
             }
-
+            
             DontDestroyOnLoad(gameObject);
         }
 
@@ -45,6 +59,7 @@ namespace CallOfValhalla
                 if (_music[i].name == name)
                 {
                     musicSource.clip = _music[i];
+
                     musicSource.Play();
                 }
             }
@@ -58,11 +73,40 @@ namespace CallOfValhalla
                 {
                     float randomPitch = Random.Range(lowPitchRange, highPitchRange);
                     source.pitch = randomPitch;
-
                     source.clip = _sfx[i];
+
+                    if (_soundMuted)
+                    {
+                        source.volume = 0;
+                    }else
+                    {
+                        source.volume = 1;
+                    }
+
                     source.Play();
                 }
             }
+        }
+
+        public void ToggleMusic(bool toggle)
+        {
+            _musicMuted = !toggle;
+
+            if (_musicMuted)
+            {
+                musicSource.volume = 0;
+            }else
+            {
+                musicSource.volume = 1;
+            }
+
+            GameManager.Instance.Save();
+        }
+
+        public void ToggleSound(bool toggle)
+        {
+            _soundMuted = !toggle;
+            GameManager.Instance.Save();
         }
 
     }
