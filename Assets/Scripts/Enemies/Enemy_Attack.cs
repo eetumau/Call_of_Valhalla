@@ -169,17 +169,17 @@ namespace CallOfValhalla.Enemy
         {
             if (_attackTimer == _attackTime)
             {
-                if (gameObject.name.Contains("Goblin"))
+                if (_enemyController.gameObject.name.Contains("Goblin"))
                 {
                     SoundManager.instance.PlaySound("goblin_swing", _enemyController.WeaponSource);
                 }
-                else if (gameObject.name.Contains("Troll"))
+                else if (_enemyController.gameObject.name.Contains("Troll"))
                 {
                     SoundManager.instance.PlaySound("goblin_swing", _enemyController.WeaponSource);
                 }
-                else
+                else if(_enemyController.gameObject.name.Contains("Wolf"))
                 {
-                    SoundManager.instance.PlaySound("goblin_swing", _enemyController.WeaponSource);
+                    SoundManager.instance.PlaySound("wolf_bark_2", _enemyController.WeaponSource);
                 }
 
             }

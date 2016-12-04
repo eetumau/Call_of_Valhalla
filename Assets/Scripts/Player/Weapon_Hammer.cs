@@ -2,6 +2,7 @@
 using System.Collections;
 using CallOfValhalla.Player;
 using System;
+using CallOfValhalla;
 
 public class Weapon_Hammer : Weapon
 {
@@ -108,6 +109,8 @@ public class Weapon_Hammer : Weapon
             _timer1 = 0.8f;
             _basicCollider.SetActive(true);
             _movement.SetAttackAnimation("hammerbasic", 0.8f);
+            SoundManager.instance.PlaySound("hammer_swing", _movement.Source);
+
         }
     }
 
@@ -131,7 +134,8 @@ public class Weapon_Hammer : Weapon
                 _specialColliderPosition = SnapColliderPosition();
                 _specialCollider.transform.position = _specialColliderPosition;
                 _specialCollider.SetActive(true);             
-                _movement.SetAttackAnimation("hammerGroundSpecial", 0.8f);                
+                _movement.SetAttackAnimation("hammerGroundSpecial", 0.8f);
+                SoundManager.instance.PlaySound("hammer_super", _movement.Source);
                 _moveSpecialCollider = true;
                 StartCoroutine(ResetAfterSpecial(0.8f));
                 
@@ -181,6 +185,7 @@ public class Weapon_Hammer : Weapon
                 _specialColliderPosition = SnapColliderPosition();
                 _specialCollider.transform.position = _specialColliderPosition;   
                 _movement.SetAttackAnimation("hammerAirFinish", 0.8f);
+                SoundManager.instance.PlaySound("hammer_super", _movement.Source);
                 _specialInAirButNotLanded = false;
                 _airSpecialCollision = true;
                 _specialAttackMoveTimer = 0.8f;

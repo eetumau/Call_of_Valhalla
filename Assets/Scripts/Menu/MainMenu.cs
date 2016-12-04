@@ -191,6 +191,8 @@ namespace CallOfValhalla
 
         public void DeleteSaveData()
         {
+
+
             _sound.isOn = true;
             _music.isOn = true;
             GameManager.Instance.DeleteSaveData();

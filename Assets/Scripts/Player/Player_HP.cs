@@ -59,6 +59,8 @@ namespace CallOfValhalla.Player
 
             if (_hp <= 0 && !_dead)
             {
+                SoundManager.instance.PlaySound("death_3", _movement.Source);
+
                 Time.timeScale = 0.5f;
                 Die();
             }

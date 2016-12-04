@@ -100,7 +100,7 @@ namespace CallOfValhalla.Enemy
                 }
                 else if (gameObject.name.Contains("Wolf"))
                 {
-
+                    SoundManager.instance.PlaySound("wolf_growl_1", _audioSource);
                 }
             }
             _isAggressive = true;
