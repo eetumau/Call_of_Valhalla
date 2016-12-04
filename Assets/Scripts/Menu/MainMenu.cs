@@ -66,6 +66,7 @@ namespace CallOfValhalla
                 if(levelCompleted >= i)
                 {
                     _levelButtons[i].interactable = true;
+                    _levelButtons[i].GetComponentInChildren<Text>().enabled = true;
                 }
             }
         }
