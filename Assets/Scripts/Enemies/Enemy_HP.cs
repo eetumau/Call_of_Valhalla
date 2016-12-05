@@ -1,17 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 using CallOfValhalla;
+using CallOfValhalla.UI;
 
 namespace CallOfValhalla.Enemy {
     public class Enemy_HP : MonoBehaviour {
 
         [SerializeField]
-        private int _hitPoints;
+        public int _hitPoints;
         [SerializeField]
         private GameObject _blood;
+        [SerializeField]
+        private bool _thisIsABoss;
 
+        private float _originalHP;
         private Animator _animator;
         private Enemy_Controller _enemyController;
+        private BossHPBarController _BossHP;
         private Transform _transform;
         private AudioSource _audioSource;
 
@@ -26,6 +31,10 @@ namespace CallOfValhalla.Enemy {
             _animator = GetComponent<Animator>();
             _transform = GetComponent<Transform>();
             _audioSource = GetComponent<AudioSource>();
+
+            _originalHP = _hitPoints;
+            if (_thisIsABoss)
+                _BossHP = FindObjectOfType<BossHPBarController>();
         }
 
         // Update is called once per frame
@@ -58,6 +67,12 @@ namespace CallOfValhalla.Enemy {
         {
             _hitPoints -= damage;
             Instantiate(_blood, _transform.position+Vector3.up, _transform.rotation );
+
+            if (_thisIsABoss)
+            {
+                float tmp = _hitPoints / _originalHP;
+                _BossHP.Progress = tmp;
+            }
         }
     }
 }

@@ -19,14 +19,11 @@ namespace CallOfValhalla.Enemy {
 
         }
 
-        // Update is called once per frame
-        void Update() {
-            _damage = _enemyAttack.Instance.Damage;
-
-        }
 
         void OnTriggerEnter2D(Collider2D other)
         {
+            _damage = _enemyAttack.Instance.Damage;
+
             if (other.gameObject.tag == "Player")
             {
                 if (!_enemyAttack.DamageDealt)

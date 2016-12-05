@@ -8,7 +8,6 @@ namespace CallOfValhalla
     public class LevelCompleteMenu : MonoBehaviour
     {
         private Text _text;
-
         // Use this for initialization
         void Start()
         {
@@ -16,15 +15,22 @@ namespace CallOfValhalla
             _text.text = "Level " + GameManager.Instance.Level + " Completed!";
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         public void OnRestartPressed()
         {
             GameManager.Instance.LevelCompleteUI.ToggleLevelCompleteUI();
+            SceneManager.LoadScene(GameManager.Instance.Level);
+        }
+
+        public void OnNextLevelPressed()
+        {
+
+            GameManager.Instance.LevelCompleteUI.ToggleLevelCompleteUI();
+            if(GameManager.Instance.Level == 3 || GameManager.Instance.Level == 6)
+            {
+                SoundManager.instance.SetMusic("level_music_1");
+            }
+            GameManager.Instance.Level += 1;
+            
             SceneManager.LoadScene(GameManager.Instance.Level);
         }
 

@@ -5,21 +5,22 @@ using UnityEngine.SceneManagement;
 namespace CallOfValhalla {
     public class LevelFinishTrigger : MonoBehaviour {
 
-        // Use this for initialization
-        void Start() {
+        private AudioSource _source;
 
-        }
-
-        // Update is called once per frame
-        void Update() {
-
+        void Start()
+        {
+            _source = gameObject.AddComponent<AudioSource>();
         }
 
         void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.tag == "Player")
             {
+                GameManager.Instance.LevelCompleted = GameManager.Instance.Level;
+                GameManager.Instance.Save();
+                SoundManager.instance.PlaySound("level_finish", _source);
                 GameManager.Instance.LevelCompleteUI.ToggleLevelCompleteUI();
+
             }
         }
 

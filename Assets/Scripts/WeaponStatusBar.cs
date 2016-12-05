@@ -68,7 +68,7 @@ public class WeaponStatusBar : MonoBehaviour {
                 _weaponStatusBar.GetComponent<UnityEngine.UI.Image>().sprite = _statusBarReadySword;
             else
             {
-                Debug.Log(_completionPercent);
+
                 _weaponStatusBar.GetComponent<UnityEngine.UI.Image>().sprite = _statusBarReady;
             }
         }
@@ -88,8 +88,6 @@ public class WeaponStatusBar : MonoBehaviour {
         _scaledCompletion = (1 - _baseCompletion - (1 - _endCompletion)) * tmp;
 
         _completionPercent = _baseCompletion + _scaledCompletion;
-
-        Debug.Log(_scaledCompletion);
 
     }
 }

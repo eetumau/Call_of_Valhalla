@@ -37,11 +37,6 @@ namespace CallOfValhalla.Enemy
             _lineCastEndingPoint = _lineCastObject.GetComponent<Transform>();
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
 
         private void FixedUpdate()
         {
