@@ -8,12 +8,40 @@ public class HammerSpecialCollision : MonoBehaviour {
     private Enemy_HP _enemyHP;
     private Enemy_Movement _enemyMovement;
     private Weapon_Hammer _hammer;
-    
+    private float _stunTime;
+    private int _damage;
+
+    private float _smallStunTime    = 0.5f;
+    private float _mediumStunTime   = 1.5f;
+    private float _largeStunTime     = 2.5f;
+
+    private int _smallDamage  = 1;
+    private int _mediumDamage = 2;
+    private int _largeDamage  = 4;
 
     // Use this for initialization
-    void Start()
+    private void Awake()
     {
         _hammer = GameManager.Instance.Player.WeaponController.GetHammer();
+    }
+
+    public void SetStunAndDamage (float chargeTime)
+    {
+        if (chargeTime > 0 && chargeTime <= 0.75f)
+        {
+            _stunTime = _smallStunTime;
+            _damage = _smallDamage;
+
+        } else if (chargeTime > 0.75f && chargeTime <= 1.5f)
+        {
+            _stunTime = _mediumStunTime;
+            _damage = _mediumDamage;
+        }
+        else
+        {
+            _stunTime = _largeStunTime;
+            _damage = _largeDamage;
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -23,16 +51,8 @@ public class HammerSpecialCollision : MonoBehaviour {
             _enemyHP = other.gameObject.GetComponentInParent<Enemy_HP>();
             _enemyMovement.Knockback(0, 0);
             
-            if (_hammer._airSpecialCollision)
-            {
-                _enemyMovement.Stun(4f);
-                _enemyHP.TakeDamage(1);
-            }
-            else
-            {
-                _enemyMovement.Stun(2f);
-                _enemyHP.TakeDamage(0);
-            }                       
+            _enemyMovement.Stun(_stunTime);
+            _enemyHP.TakeDamage(_damage);                           
         }
     }
 }
