@@ -10,9 +10,7 @@ namespace CallOfValhalla.Player
         private Weapon_Sword _sword;
         private Weapon_Hammer _hammer;
 
-        private string Weapon1;
-        private string Weapon2;
-
+        private bool _hammerInGame;
         private bool _basicAttack;
         private bool _specialAttack;
         public bool _weapon1Current;
@@ -25,37 +23,27 @@ namespace CallOfValhalla.Player
 
         private void Awake()
         {
-            Weapon1 = "Sword";
-            Weapon2 = "Hammer";
-            SetWeapons(Weapon1, Weapon2);
+            SetWeapons();
             _weapon1Current = true;
             _animator = GetComponent<Animator>();
-
         }
 
-        // Update is called once per frame
-        void Update()
+
+        private void SetWeapons()
         {
+            _weapon1 = GetComponent<Weapon_Sword>();
+            _currentWeapon = "Sword";
 
-        }
+            _weapon2 = GetComponent<Weapon_Hammer>();
 
-        private void SetWeapons(string weapon1Name, string weapon2Name)
-        {
+            string tmp = Application.loadedLevelName;
 
-            if (weapon1Name.Equals("Sword"))
-            {
-                _sword = GetComponent<Weapon_Sword>();
-                _weapon1 = _sword;
-                _currentWeapon = "Sword";
-
-            }
-
-            if (weapon2Name.Equals("Hammer"))
-            {
-                _hammer = GetComponent<Weapon_Hammer>();
-                _weapon2 = _hammer;
-            }
-
+            if (tmp.Equals("Level1") || tmp.Equals("Level2"))
+                _hammerInGame = false;
+            else
+                _hammerInGame = true;
+            
+            
         }
 
         public void Attack(bool basicAttack, bool specialAttack)
@@ -65,11 +53,13 @@ namespace CallOfValhalla.Player
                 _weapon1.BasicAttack(basicAttack);
             else if (_weapon1Current && !basicAttack && specialAttack)
                 _weapon1.SpecialAttack(specialAttack);
-            else if (!_weapon1Current && basicAttack && !specialAttack)
-                _weapon2.BasicAttack(basicAttack);
-            if (!_weapon1Current && !basicAttack && specialAttack)
-                _weapon2.SpecialAttack(specialAttack);
 
+            if (_hammerInGame) { 
+                if (!_weapon1Current && basicAttack && !specialAttack)
+                    _weapon2.BasicAttack(basicAttack);
+                if (!_weapon1Current && !basicAttack && specialAttack)
+                    _weapon2.SpecialAttack(specialAttack);
+            }
 
 
         }
@@ -90,16 +80,18 @@ namespace CallOfValhalla.Player
         public void ChangeCurrentWeapon()
         {
 
-            Debug.Log("change");
-            if (_weapon1Current)
+            if (_hammerInGame)
             {
-                _weapon1Current = false;
-                _animator.runtimeAnimatorController = Resources.Load("Hero_Mjölnir", typeof(RuntimeAnimatorController)) as RuntimeAnimatorController;
-            }
-            else
-            {
-                _weapon1Current = true;
-                _animator.runtimeAnimatorController = Resources.Load("Hero_Sword", typeof(RuntimeAnimatorController)) as RuntimeAnimatorController;
+                if (_weapon1Current)
+                {
+                    _weapon1Current = false;
+                    _animator.runtimeAnimatorController = Resources.Load("Hero_Mjölnir", typeof(RuntimeAnimatorController)) as RuntimeAnimatorController;
+                }
+                else
+                {
+                    _weapon1Current = true;
+                    _animator.runtimeAnimatorController = Resources.Load("Hero_Sword", typeof(RuntimeAnimatorController)) as RuntimeAnimatorController;
+                }
             }
         }
     }
