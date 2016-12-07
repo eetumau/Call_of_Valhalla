@@ -150,7 +150,6 @@ namespace CallOfValhalla.Player
             }
             else if (animation.Equals("Charge2"))
             {
-                Debug.Log("ANIMAATIO");
                 animator.SetInteger("animState", 7);
                 _hammerSpecialActive = true;
             }

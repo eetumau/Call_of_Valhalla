@@ -60,15 +60,9 @@ namespace CallOfValhalla.Player
             {
                 _hp -= damage;
                 _hpBar.SecondaryProgress += ((float)damage) / ((float)_OriginalHP);
-            }            
-            
-                      
+            }                                             
 
-            _hpBar.Progress = ((float)_hp) / ((float)_OriginalHP);
-
-            Debug.Log(((float)_hp) / ((float)_OriginalHP));            
-            
-            
+            _hpBar.Progress = ((float)_hp) / ((float)_OriginalHP);                       
 
             if (_hp <= 0 && !_dead)
             {

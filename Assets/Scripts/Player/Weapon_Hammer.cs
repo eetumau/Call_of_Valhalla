@@ -14,19 +14,22 @@ public class Weapon_Hammer : Weapon
     private Rigidbody2D _rigidBody2D;
     private HammerSpecialCollision _specialCollisionScript;
     private BoxCollider2D _specialBoxCollider;
+    private GameObject _lightning;
 
     [SerializeField]
     GameObject _basic;
     [SerializeField]
     GameObject _special;
+    [SerializeField]
+    GameObject _sprite;
 
-    // Next huge bunch of booleans are mostly used to control the special attacks order of execution.
-    // Hammers special attack is basically 2 different attacks and therefore this looks really messy...
+    
     private bool _basicActive;
     private bool _moveSpecialCollider;
     private bool _specialCharging;
+    private bool _fullyCharged;
 
-    // Timers to control the attack cooldowns and movement of the collider in special attack
+    
     private float _timer1;
     private float _specialAttackMoveTimer;
     public float _specialChargeTimer;
@@ -54,8 +57,11 @@ public class Weapon_Hammer : Weapon
         _specialBoxCollider = _specialCollider.GetComponent<BoxCollider2D>();
         _colliderSizeVector = _specialBoxCollider.size;
 
-        if (_specialCollisionScript == null)
-            Debug.Log("NULL");
+        _lightning = Instantiate(_sprite, transform.position, Quaternion.identity) as GameObject;
+        _lightning.transform.parent = _hero.transform;
+        _lightning.transform.position = new Vector2(transform.position.x + 1, transform.position.y + 6);
+        _lightning.SetActive(false);
+
     }
 
 
@@ -100,6 +106,9 @@ public class Weapon_Hammer : Weapon
             _movement.SetAttackAnimation("HammerSpecial");
             StartCoroutine(ResetAfterSpecial(0.5f));
             _SpecialColliderSize = 1;
+
+            if (_fullyCharged)
+                _lightning.SetActive(true);
         }
     }
 
@@ -137,7 +146,6 @@ public class Weapon_Hammer : Weapon
 
         if (_specialCompletion >= 100f)
         {
-            Debug.Log("STEP1");
             _specialCompletion = 0f;
             _specialCharging = true;
 
@@ -173,30 +181,6 @@ public class Weapon_Hammer : Weapon
         
     }
 
-    /*
-    // Controls the order of execution when doing special from air. --> Move forward only after character lands.
-    private void SpecialInAir()
-    {
-        
-        if (_specialInAirActive && _specialInAirButNotLanded)
-        {
-            
-            if (_movement._isGrounded)
-            {
-                _specialCollider.SetActive(true);
-                _specialColliderPosition = SnapColliderPosition();
-                _specialCollider.transform.position = _specialColliderPosition;   
-                _movement.SetAttackAnimation("hammerAirFinish", 0.8f);
-                SoundManager.instance.PlaySound("hammer_super", _movement.Source);
-                _specialInAirButNotLanded = false;
-                _airSpecialCollision = true;
-                _specialAttackMoveTimer = 0.8f;
-                StartCoroutine(ResetAfterSpecial(0.8f));
-                _moveSpecialCollider = true;                              
-            }
-        }
-    }
-    */
 
     private IEnumerator ResetAfterSpecial(float howLong)
     {
@@ -205,6 +189,7 @@ public class Weapon_Hammer : Weapon
         _moveSpecialCollider = false;
         _specialCharging = false;
         _movement._hammerSpecialActive = false;
+        _lightning.SetActive(false);
     }
 
     private IEnumerator SetSecondChargeStep(float howLong)
@@ -212,15 +197,16 @@ public class Weapon_Hammer : Weapon
         yield return new WaitForSeconds(howLong);
         _specialCollisionScript.SetStunAndDamage("Medium");
         _movement.SetAttackAnimation("Charge2");
-        Debug.Log("STEP2");
+        
     }
 
     private IEnumerator SetThirdChargeStep(float howLong)
     {   
-            yield return new WaitForSeconds(howLong);
-            _specialCollisionScript.SetStunAndDamage("Large");
-            _movement.SetAttackAnimation("Charge3");
-            Debug.Log("STEP3");               
+        yield return new WaitForSeconds(howLong);
+        _specialCollisionScript.SetStunAndDamage("Large");
+        _movement.SetAttackAnimation("Charge3");
+        _fullyCharged = true;
+                          
     }
 
 
