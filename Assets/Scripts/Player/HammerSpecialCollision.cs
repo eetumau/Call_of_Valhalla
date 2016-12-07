@@ -11,13 +11,13 @@ public class HammerSpecialCollision : MonoBehaviour {
     private float _stunTime;
     private int _damage;
 
-    private float _smallStunTime    = 0.5f;
-    private float _mediumStunTime   = 1.5f;
-    private float _largeStunTime     = 2.5f;
+    private float _smallStunTime    = 1f;
+    private float _mediumStunTime   = 2f;
+    private float _largeStunTime     = 3.5f;
 
-    private int _smallDamage  = 1;
-    private int _mediumDamage = 2;
-    private int _largeDamage  = 4;
+    private int _smallDamage  = 2;
+    private int _mediumDamage = 3;
+    private int _largeDamage  = 6;
 
     // Use this for initialization
     private void Awake()
@@ -25,19 +25,19 @@ public class HammerSpecialCollision : MonoBehaviour {
         _hammer = GameManager.Instance.Player.WeaponController.GetHammer();
     }
 
-    public void SetStunAndDamage (float chargeTime)
+    public void SetStunAndDamage (string charge)
     {
-        if (chargeTime > 0 && chargeTime <= 0.75f)
+        if (charge.Equals("Small"))
         {
             _stunTime = _smallStunTime;
             _damage = _smallDamage;
 
-        } else if (chargeTime > 0.75f && chargeTime <= 1.5f)
+        } else if (charge.Equals("Medium"))
         {
             _stunTime = _mediumStunTime;
             _damage = _mediumDamage;
         }
-        else
+        else if (charge.Equals("Large"))
         {
             _stunTime = _largeStunTime;
             _damage = _largeDamage;
@@ -48,8 +48,7 @@ public class HammerSpecialCollision : MonoBehaviour {
     {
         if (other.gameObject.tag == "Enemy")  {
             _enemyMovement = other.gameObject.GetComponentInParent<Enemy_Movement>();
-            _enemyHP = other.gameObject.GetComponentInParent<Enemy_HP>();
-            _enemyMovement.Knockback(0, 0);
+            _enemyHP = other.gameObject.GetComponentInParent<Enemy_HP>();            
             
             _enemyMovement.Stun(_stunTime);
             _enemyHP.TakeDamage(_damage);                           

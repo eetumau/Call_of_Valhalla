@@ -21,7 +21,7 @@ namespace CallOfValhalla.Player
         // Use this for initialization
         void Start()
         {
-
+            _hammer = FindObjectOfType<Weapon_Hammer>();
             //_playerMovement = GetComponent<Player_Movement>();
 
         }
@@ -55,7 +55,7 @@ namespace CallOfValhalla.Player
             if (_changeCurrentWeapon)
                 GameManager.Instance.Player.WeaponController.ChangeCurrentWeapon();
             if (_specialAttackRelease)
-                Debug.Log("RELEASE");
+                _hammer.SpecialAttackRelease();
             
 
             if (_inputX < 0 || _inputX > 0)

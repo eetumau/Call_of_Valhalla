@@ -119,15 +119,16 @@ namespace CallOfValhalla.Player
             _swordAttackTimer = 0;
         }
 
-        
-        public void SetAttackAnimation(string animation, float timer)
+
+        public void SetAttackAnimation(string animation, float timer = 0)
         {
-            
+
             if (animation.Equals("swordbasic1"))
             {
                 animator.SetInteger("animState", 4);
                 _swordAttackTimer = timer;
-            } else if (animation.Equals("swordbasic2"))
+            }
+            else if (animation.Equals("swordbasic2"))
             {
                 animator.SetInteger("animState", 5);
                 _swordAttackTimer = timer;
@@ -136,21 +137,31 @@ namespace CallOfValhalla.Player
             {
                 animator.SetInteger("animState", 6);
                 _swordAttackTimer = timer;
-            } else if (animation.Equals("hammerbasic"))
-            {                
+            }
+            else if (animation.Equals("hammerbasic"))
+            {
                 animator.SetInteger("animState", 4);
                 _hammerBasicTimer = 0.4f;
             }
-            else if (animation.Equals("hammerGroundSpecial")) {
-                animator.SetInteger("animState", 5);
-                _hammerSpecialActive = true;
-            } else if (animation.Equals("hammerAirSpecial"))
-            {                
+            else if (animation.Equals("Charge1"))
+            {
                 animator.SetInteger("animState", 6);
                 _hammerSpecialActive = true;
-            } else if (animation.Equals("hammerAirFinish"))
-            {                
+            }
+            else if (animation.Equals("Charge2"))
+            {
+                Debug.Log("ANIMAATIO");
                 animator.SetInteger("animState", 7);
+                _hammerSpecialActive = true;
+            }
+            else if (animation.Equals("Charge3"))
+            {
+                animator.SetInteger("animState", 8);
+                _hammerSpecialActive = true;
+            }
+            else if (animation.Equals("HammerSpecial"))
+            {
+                animator.SetInteger("animState", 10);
                 _hammerSpecialActive = true;
             }
         }

@@ -12,6 +12,8 @@ public class Weapon_Hammer : Weapon
     private GameObject _hero;
     private Player_Movement _movement;
     private Rigidbody2D _rigidBody2D;
+    private HammerSpecialCollision _specialCollisionScript;
+    private BoxCollider2D _specialBoxCollider;
 
     [SerializeField]
     GameObject _basic;
@@ -22,7 +24,6 @@ public class Weapon_Hammer : Weapon
     // Hammers special attack is basically 2 different attacks and therefore this looks really messy...
     private bool _basicActive;
     private bool _moveSpecialCollider;
-    public bool _airSpecialCollision; // used just for telling the collider to stun the enemy for longer time. So awful code
     private bool _specialCharging;
 
     // Timers to control the attack cooldowns and movement of the collider in special attack
@@ -30,9 +31,9 @@ public class Weapon_Hammer : Weapon
     private float _specialAttackMoveTimer;
     public float _specialChargeTimer;
     private float _specialCompletion = 100f;
+    private float _SpecialColliderSize;
+    private Vector3 _colliderSizeVector;
 
-    // Vector3 for the original position of the special attack collider before moving it
-    private Vector3 _specialColliderPosition;
 
     private void Awake()
     {
@@ -49,13 +50,18 @@ public class Weapon_Hammer : Weapon
         _specialCollider.SetActive(false);
 
         _rigidBody2D = _specialCollider.GetComponent<Rigidbody2D>();
+        _specialCollisionScript = _specialCollider.GetComponent<HammerSpecialCollision>();
+        _specialBoxCollider = _specialCollider.GetComponent<BoxCollider2D>();
+        _colliderSizeVector = _specialBoxCollider.size;
+
+        if (_specialCollisionScript == null)
+            Debug.Log("NULL");
     }
 
 
     // Update is called once per frame
     void Update()
-    {                 
-        
+    {                        
 
         MoveColliders();
         UpdateSpecialCompletion();
@@ -68,10 +74,9 @@ public class Weapon_Hammer : Weapon
     {                               
         if (_moveSpecialCollider)
         {
-            if (_movement._playerTransform.localScale.x == 1f)
-                _rigidBody2D.velocity = new Vector2(4.5f, 0f);
-            else
-                _rigidBody2D.velocity = new Vector2(-4.5f, 0f);
+            _SpecialColliderSize += Time.deltaTime * 10;
+            _colliderSizeVector.x = _SpecialColliderSize;
+            _specialBoxCollider.size = (_colliderSizeVector);
         }
     }
 
@@ -81,11 +86,21 @@ public class Weapon_Hammer : Weapon
         return _specialCompletion / 100f;
     }
 
+
     // Executed when player releases the special attack key. Ends charging and starts the attack
     public void SpecialAttackRelease()
     {
-        _specialCharging = false;
-
+        if (_specialCharging)
+        {
+            SetColliderPositionToHero();
+            _specialCharging = false;
+            _specialCollider.SetActive(true);
+            StopAllCoroutines();
+            _moveSpecialCollider = true;
+            _movement.SetAttackAnimation("HammerSpecial");
+            StartCoroutine(ResetAfterSpecial(0.5f));
+            _SpecialColliderSize = 1;
+        }
     }
 
     // Adds percents to completion when player hits enemy with a basic attack
@@ -102,7 +117,6 @@ public class Weapon_Hammer : Weapon
 
         if (_specialCompletion > 100f)
             _specialCompletion = 100f;
-
     }
 
     // Sets the basic attack collider active and sets the cooldown timer
@@ -110,11 +124,10 @@ public class Weapon_Hammer : Weapon
     {
         if (!_moveSpecialCollider && !_specialCharging && _timer1 <= 0)
         {            
-            _timer1 = 0.8f;
+            _timer1 = 0.6f;
             _basicCollider.SetActive(true);
-            _movement.SetAttackAnimation("hammerbasic", 0.8f);
+            _movement.SetAttackAnimation("hammerbasic", 0.6f);
             SoundManager.instance.PlaySound("hammer_swing", _movement.Source);
-
         }
     }
 
@@ -124,9 +137,17 @@ public class Weapon_Hammer : Weapon
 
         if (_specialCompletion >= 100f)
         {
+            Debug.Log("STEP1");
             _specialCompletion = 0f;
             _specialCharging = true;
+
+            _specialCollisionScript.SetStunAndDamage("Small");
+            _movement.SetAttackAnimation("Charge1");
             
+            StartCoroutine(SetSecondChargeStep( 0.5f));
+            StartCoroutine(SetThirdChargeStep(1f));
+            
+
         }
     }
 
@@ -139,23 +160,16 @@ public class Weapon_Hammer : Weapon
             _specialAttackMoveTimer -= Time.deltaTime;
         if (_specialCharging)
             _specialChargeTimer += Time.deltaTime;
-        
-    }
+        }
 
     // Returns special attack collider position after fixing it next to player to the direction he's facing
-    private Vector3 SnapColliderPosition()
+    private void SetColliderPositionToHero()
     {
         float tempX = _hero.transform.position.x;
         float tempY = _hero.transform.position.y + 1f;
         float tempZ = _hero.transform.position.z;
 
-        // Fix colliders X position based on which way the character is facing
-        if (_movement._playerTransform.localScale.x == 1f)
-            tempX += 1;
-        else
-            tempX -= 1;
-
-        return new Vector3(tempX, tempY, tempZ);
+        _specialCollider.transform.position = new Vector3(tempX, tempY, tempZ);
         
     }
 
@@ -188,16 +202,32 @@ public class Weapon_Hammer : Weapon
     {
         yield return new WaitForSeconds(howLong);
         _specialCollider.SetActive(false);
-        _specialCollider.transform.position = _specialColliderPosition;
         _moveSpecialCollider = false;
-        _airSpecialCollision = false;
         _specialCharging = false;
         _movement._hammerSpecialActive = false;
     }
 
+    private IEnumerator SetSecondChargeStep(float howLong)
+    {
+        yield return new WaitForSeconds(howLong);
+        _specialCollisionScript.SetStunAndDamage("Medium");
+        _movement.SetAttackAnimation("Charge2");
+        Debug.Log("STEP2");
+    }
+
+    private IEnumerator SetThirdChargeStep(float howLong)
+    {   
+            yield return new WaitForSeconds(howLong);
+            _specialCollisionScript.SetStunAndDamage("Large");
+            _movement.SetAttackAnimation("Charge3");
+            Debug.Log("STEP3");               
+    }
+
+
+
     private void CheckTimers()
     {
-        if (_timer1 <= 0.6f)
+        if (_timer1 <= 0.4f)
             _basicCollider.SetActive(false);
         if (_timer1 <= 0)                    
             _basicActive = false;               
