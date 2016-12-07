@@ -52,10 +52,23 @@ namespace CallOfValhalla.Player
 
         public void TakeDamage(int damage)
         {
-            _hp -= damage;
+            if (_hp < damage)
+            {
+                _hp = 0;
+            }            
+            if (_hp > 0)
+            {
+                _hp -= damage;
+                _hpBar.SecondaryProgress += ((float)damage) / ((float)_OriginalHP);
+            }            
+            
+                      
 
-            _hpBar.Progress = ((float)_hp)/ ((float)_OriginalHP);
-            _hpBar.SecondaryProgress += ((float)damage) / ((float)_OriginalHP);
+            _hpBar.Progress = ((float)_hp) / ((float)_OriginalHP);
+
+            Debug.Log(((float)_hp) / ((float)_OriginalHP));            
+            
+            
 
             if (_hp <= 0 && !_dead)
             {
