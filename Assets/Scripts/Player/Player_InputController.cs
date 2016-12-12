@@ -13,6 +13,7 @@ namespace CallOfValhalla.Player
         private bool _specialAttack;
         private bool _changeCurrentWeapon;
         private bool _specialAttackRelease;
+        private bool _controlsDisabled;
 
         private Player_Movement _playerMovement;
         private Weapon_Hammer _hammer;
@@ -34,6 +35,11 @@ namespace CallOfValhalla.Player
 
         }
 
+        public void DisableControls(bool state)
+        {
+            _controlsDisabled = state;
+        }
+
         private void GetInput()
         {
 
@@ -42,12 +48,15 @@ namespace CallOfValhalla.Player
                 GameManager.Instance.Pauser.TogglePause();
             }
 
-            _inputX = Input.GetAxis("Horizontal");
-            _jump = Input.GetButtonDown("Jump");
-            _basicAttack = Input.GetButtonDown("Attack1");
-            _specialAttack = Input.GetButtonDown("Attack2");
-            _changeCurrentWeapon = Input.GetButtonDown("ChangeWeapon");
-            _specialAttackRelease = Input.GetButtonUp("Attack2");
+            if (!_controlsDisabled)
+            {
+                _inputX = Input.GetAxis("Horizontal");
+                _jump = Input.GetButtonDown("Jump");
+                _basicAttack = Input.GetButtonDown("Attack1");
+                _specialAttack = Input.GetButtonDown("Attack2");
+                _changeCurrentWeapon = Input.GetButtonDown("ChangeWeapon");
+                _specialAttackRelease = Input.GetButtonUp("Attack2");
+            }
 
 
             if (_basicAttack || _specialAttack)

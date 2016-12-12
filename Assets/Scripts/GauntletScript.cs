@@ -43,7 +43,6 @@ public class GauntletScript : MonoBehaviour {
         if (_gauntletActive)
         {
             CheckEnemiesLeft();
-            Debug.Log(_enemiesLeft);
 
             if (_enemiesLeft == 0)
             {
@@ -51,8 +50,6 @@ public class GauntletScript : MonoBehaviour {
             }
             _enemiesLeft = 0;
         }
-
-        
 	}
 
     private void DeactivateGauntlet()
