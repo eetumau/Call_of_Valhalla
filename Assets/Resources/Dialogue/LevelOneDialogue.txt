@@ -1,0 +1,7 @@
+-
+This is the first line
+second line
+third line, break coming
+(end)
+Yet another dialog
+(end)
