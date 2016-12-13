@@ -23,7 +23,7 @@ namespace CallOfValhalla.Player
         void Start()
         {
             _hammer = FindObjectOfType<Weapon_Hammer>();
-            //_playerMovement = GetComponent<Player_Movement>();
+            _playerMovement = GetComponent<Player_Movement>();
 
         }
 
@@ -38,6 +38,15 @@ namespace CallOfValhalla.Player
         public void DisableControls(bool state)
         {
             _controlsDisabled = state;
+
+            if (state == true)
+            {
+                _inputX = 0;
+                _playerMovement.StopCharacter();
+            } else
+            {
+                _playerMovement.ReleaseCharacter();
+            }
         }
 
         private void GetInput()

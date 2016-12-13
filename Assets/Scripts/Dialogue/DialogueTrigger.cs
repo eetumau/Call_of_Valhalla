@@ -2,7 +2,7 @@
 using System.Collections;
 using CallOfValhalla.Dialogue;
 
-namespace CallofValhalla.dialogue
+namespace CallOfValhalla.Dialogue
 {
     public class DialogueTrigger : MonoBehaviour
     {

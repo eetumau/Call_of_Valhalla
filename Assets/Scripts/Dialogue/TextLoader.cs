@@ -21,10 +21,8 @@ namespace CallOfValhalla.Dialogue
 
             
             if (tmp.Equals("level1"))
-            {
-                
-                _currentTextFile = Resources.Load("Dialogue/LevelOneDialogue", typeof(TextAsset)) as TextAsset;
-                
+            {                
+                _currentTextFile = Resources.Load("Dialogue/LevelOneDialogue", typeof(TextAsset)) as TextAsset;                
             }
 
             

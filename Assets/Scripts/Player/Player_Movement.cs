@@ -21,8 +21,8 @@ namespace CallOfValhalla.Player
         private Transform _groundCheckTransform;
         [SerializeField]
         private float _soundDelay;
-        
 
+        private bool _cantMove;
         public bool _isGrounded;
         private bool _attacking;
         private bool _swordDashing;
@@ -88,7 +88,7 @@ namespace CallOfValhalla.Player
             // Sets animations based on movement
             if (_swordAttackTimer <= 0)
             {
-                if (_isGrounded == true && Input.GetAxis("Horizontal") != 0)                
+                if (_isGrounded == true && Input.GetAxis("Horizontal") != 0 && !_cantMove)                
                     animator.SetInteger("animState", 1);                                  
                 else if (_isGrounded == false && _playerRigidbody2D.velocity.y > 0.5)
                     animator.SetInteger("animState", 2);
@@ -167,6 +167,7 @@ namespace CallOfValhalla.Player
 
         public void Move(float inputX)
         {
+
             if (_swordDashTimer <= 0 && !_hammerSpecialActive && _hammerBasicTimer <= 0)
             _playerRigidbody2D.velocity = new Vector2(inputX * _playerMoveSpeed, _playerRigidbody2D.velocity.y);
 
@@ -214,6 +215,17 @@ namespace CallOfValhalla.Player
                 }
             }
 
+        }
+
+        public void StopCharacter()
+        {
+            _cantMove = true;
+            _playerRigidbody2D.velocity = new Vector2(0, 0);
+        }
+
+        public void ReleaseCharacter()
+        {
+            _cantMove = false;
         }
 
         private void RunTimers()

@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System;
+using CallOfValhalla.Player;
 
 namespace CallOfValhalla.Dialogue
 {
@@ -17,7 +18,8 @@ namespace CallOfValhalla.Dialogue
 
         [SerializeField]
         private Text _theText;
-        
+
+        private Player_InputController _playerInput;
         private TextLoader _textLoader;
         private int _currentLine = 0;
         private int _endAtLine;
@@ -25,19 +27,22 @@ namespace CallOfValhalla.Dialogue
         private bool _nextText;
         private bool _textBoxActive;
 
+        private bool _isTyping;
+        private bool _cancelTyping;
+        [SerializeField]
+        private float _typeSpeed;
+
         // Use this for initialization
         void Awake()
         {
             _textLoader = GetComponent<TextLoader>();
 
             PrepareText();
-
+            _playerInput = FindObjectOfType<Player_InputController>();
 
             Debug.Log(_textLines.Length);
 
             _textBox.SetActive(false);
-            
-
 
         }
 
@@ -56,21 +61,46 @@ namespace CallOfValhalla.Dialogue
         private void Update()
         {
             if (_textBoxActive)
-            {
-
+            {                
 
                 if (Input.GetButtonDown("Continue"))
-                    _currentLine += 1;
+                {
+                    if (!_isTyping)
+                    {
+                        _currentLine += 1;
 
-                Debug.Log(_textLines[_currentLine].Length);
+                        if (_textLines[_currentLine].Contains("(end)"))
+                            DisableTextBox();
+                        else
+                            StartCoroutine(TextScroll(_textLines[_currentLine]));
+                    }
+                    else if (_isTyping && !_cancelTyping)
+                    {
+                        _cancelTyping = true;
+                    }                    
+                }                    
 
-                if (_textLines[_currentLine].Contains("(end)"))
-                {                    
-                    DisableTextBox();
-                }
-
-                _theText.text = _textLines[_currentLine];
             }
+        }
+
+        private IEnumerator TextScroll(string LineOfText)
+        {
+            int letter = 0;
+            _theText.text = "";
+            _isTyping = true;
+            _cancelTyping = false;
+
+            while (_isTyping && !_cancelTyping && letter < (LineOfText.Length -1))
+            {
+                _theText.text += LineOfText[letter];
+                letter += 1;
+                yield return new WaitForSeconds(_typeSpeed);
+            }
+
+            _theText.text = LineOfText;
+            _isTyping = false;
+            _cancelTyping = false;
+
         }
 
         public void EnableTextBox()
@@ -80,6 +110,7 @@ namespace CallOfValhalla.Dialogue
                 PrepareText();
             }
 
+            _playerInput.DisableControls(true);
             _currentLine += 1;
             _textBox.SetActive(true);
             _textBoxActive = true;
@@ -87,6 +118,7 @@ namespace CallOfValhalla.Dialogue
 
         public void DisableTextBox()
         {
+            _playerInput.DisableControls(false);
             _textBox.SetActive(false);
             _textBoxActive = false;
         }
