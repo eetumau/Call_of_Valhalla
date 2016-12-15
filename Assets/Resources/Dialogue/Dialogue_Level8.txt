@@ -1,0 +1,7 @@
+-
+LEVEL 2, testaan vahan dialogia tassa
+second line
+third line, break coming kaikkee taas tulossa
+(end)
+Yet another dialog
+(end)

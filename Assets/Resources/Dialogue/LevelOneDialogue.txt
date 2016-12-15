@@ -1,7 +1,0 @@
--
-Kirjotan tähän läyttömän
-second line
-third line, break coming
-(end)
-Yet another dialog
-(end)

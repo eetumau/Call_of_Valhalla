@@ -16,7 +16,7 @@ namespace CallOfValhalla.Dialogue
         [SerializeField]
         private GameObject _textBox;
 
-        [SerializeField]
+        [SerializeField]      
         private Text _theText;
 
         private Player_InputController _playerInput;
@@ -49,17 +49,19 @@ namespace CallOfValhalla.Dialogue
         private void PrepareText()
         {
             _textFile = _textLoader.GetTextAsset();
-
+            
             if (_textFile != null)
             {
-                
+                Debug.Log("TextLoaded");
                 _textLines = (_textFile.text.Split('\n'));
             }
             _endAtLine = _textLines.Length - 1;
+            _theText.text = _textLines[_currentLine];
         }
 
         private void Update()
         {
+
             if (_textBoxActive)
             {                
 
@@ -72,7 +74,11 @@ namespace CallOfValhalla.Dialogue
                         if (_textLines[_currentLine].Contains("(end)"))
                             DisableTextBox();
                         else
+                        {
+                            Debug.Log("STARTTYPING");
                             StartCoroutine(TextScroll(_textLines[_currentLine]));
+                        }
+                            
                     }
                     else if (_isTyping && !_cancelTyping)
                     {
@@ -110,10 +116,11 @@ namespace CallOfValhalla.Dialogue
                 PrepareText();
             }
 
-            _playerInput.DisableControls(true);
             _currentLine += 1;
+            _playerInput.DisableControls(true);
             _textBox.SetActive(true);
             _textBoxActive = true;
+            StartCoroutine(TextScroll(_textLines[_currentLine]));
         }
 
         public void DisableTextBox()
