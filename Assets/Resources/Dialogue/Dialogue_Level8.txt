@@ -1,6 +1,9 @@
 -
-It seems that Fenrir's pack has joined him.
-Remain cautious, wolves are the bane of the unwary.
+There is something thou should know.
+Fenrir, the Son of Loki, was bound down here ages ago. 
+The Jotun have likely set him loose.
+Prepare thyself!
 (move)
-Yet another dialog
+Thou have seen those wolves, yes?
+They belong to Fenrir's pack. Expect to face more of them ahead...
 (endlevel)

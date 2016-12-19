@@ -4,7 +4,6 @@ I sense that Loki has sent one of his strongest allies to stop you.
 Ready thy blade, Champion!
 (move)
 Hail, Champion! I am Thor, the God of Lightning.
-I saw how you slew the Flame of Muspelheim.
-I believe a reward is in order...
-I bestow upon you my legendary hammer, Mjölnir, to aid you in your quest.
+I saw how you slew that mighty foe! I believe a reward is in order...
+I bestow upon you my legendary hammer, Mjolnir! May it aid you in your quest.
 (endlevel)

@@ -3,5 +3,5 @@ Thou art approaching the gates of Svartalfheim.
 But beware, the gates are likely well guarded. 
 (move)
 You impress me once more, Champion!
-And I see you're putting my Mjölnir to good use as well!
+And I see you're putting my Mjolnir to good use as well!
 (endlevel)

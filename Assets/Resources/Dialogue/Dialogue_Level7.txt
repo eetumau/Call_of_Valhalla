@@ -1,8 +1,9 @@
 -
-There is something thou should know.
-Fenrir, the Son of Loki, was locked in the deepest dungeons of Svartalfheim ages ago. 
-The Jotun have likely set him loose.
-Prepare thyself!
+Svartalfheim, the world of the dwarves...
+Sadly, the Jotun seem to have driven away the dwarves.
+Do not expect a warm welcome.
 (end)
-Yet another dialog
+The dwarves were the greatest craftsmen in all the Nine Worlds...
+It was they who crafted thine weapons, as well as mine.
+Thou must avenge them!
 (endlevel)

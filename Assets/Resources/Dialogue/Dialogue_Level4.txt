@@ -1,6 +1,7 @@
--
-T’would seem that Loki’s Jotun have already overrun these caves.
-It may be that they have already reached Svartalfheim…
+ -
+It would seem that Loki’s Jotun have already overrun these caves.
+It may be that they have already reached Svartalfheim...
 (move)
-Yet another dialog
+Those runestone are blessed with the same power as your tattoos.
+Should thou fall in battle, they will give thee a second chance.
 (endlevel)
