@@ -99,6 +99,17 @@ namespace CallOfValhalla.Dialogue
                         if (_textLines[_currentLine].Contains("(change_thor)"))
                         {
                             _npc.SetThor();
+                            _currentLine += 1;
+                        }
+                        if (_textLines[_currentLine].Contains("(change_thorhammer)"))
+                        {
+                            _npc.SetThorHammer();
+                            _currentLine += 1;
+                        }
+                        if (_textLines[_currentLine].Contains("(change_odin)"))
+                        {
+                            _npc.SetOdin();
+                            _currentLine += 1;
                         }
                         else
                         {

@@ -80,9 +80,18 @@ public class Weapon_Hammer : Weapon
     {                               
         if (_moveSpecialCollider)
         {
-            _SpecialColliderSize += Time.deltaTime * 10;
-            _colliderSizeVector.x = _SpecialColliderSize;
-            _specialBoxCollider.size = (_colliderSizeVector);
+            if (_fullyCharged)
+            {
+                _SpecialColliderSize += Time.deltaTime*13;
+                _colliderSizeVector.x = _SpecialColliderSize;
+                _specialBoxCollider.size = (_colliderSizeVector);
+            }
+            else
+            {
+                _SpecialColliderSize += Time.deltaTime * 10;
+                _colliderSizeVector.x = _SpecialColliderSize;
+                _specialBoxCollider.size = (_colliderSizeVector);
+            }
         }
     }
 
@@ -103,12 +112,19 @@ public class Weapon_Hammer : Weapon
             _specialCollider.SetActive(true);
             StopAllCoroutines();
             _moveSpecialCollider = true;
-            _movement.SetAttackAnimation("HammerSpecial");
-            StartCoroutine(ResetAfterSpecial(0.5f));
             _SpecialColliderSize = 1;
 
             if (_fullyCharged)
+            {
+                _movement.SetAttackAnimation("HammerSpecialFull");
+                StartCoroutine(ResetAfterSpecial(0.5f));
                 _lightning.SetActive(true);
+            }
+            else
+            {
+                _movement.SetAttackAnimation("HammerSpecial");
+                StartCoroutine(ResetAfterSpecial(0.5f));
+            }
         }
     }
 
@@ -188,6 +204,7 @@ public class Weapon_Hammer : Weapon
         _specialCollider.SetActive(false);
         _moveSpecialCollider = false;
         _specialCharging = false;
+        _fullyCharged = false;
         _movement._hammerSpecialActive = false;
         _lightning.SetActive(false);
     }

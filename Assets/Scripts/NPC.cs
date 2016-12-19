@@ -14,9 +14,9 @@ namespace CallOfValhalla.Dialogue
         // Use this for initialization
         void Awake()
         {
-            _thorSprite = Resources.Load("NPC/Thor", typeof(Sprite)) as Sprite;
+            _thorSprite = Resources.Load("NPC/ThorNoMjölnir", typeof(Sprite)) as Sprite;
             _odinSprite = Resources.Load("NPC/Odin", typeof(Sprite)) as Sprite;
-            _thorHammerSprite = Resources.Load("NPC/Thor_1", typeof(Sprite)) as Sprite;
+            _thorHammerSprite = Resources.Load("NPC/ThorMjölnir", typeof(Sprite)) as Sprite;
             _renderer = GetComponent<SpriteRenderer>();
         }
 
