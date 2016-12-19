@@ -17,10 +17,11 @@ namespace CallOfValhalla.Dialogue
         [SerializeField] private GameObject _objectToMove;
         private GameObject _dialogueMovePoint;
         private GameObject _endLevelTrigger;
-
+        private Player_CameraFollow _cameraFollow;
         [SerializeField]      
         private Text _theText;
         private NPC _npc;
+        private Player_Movement _playerMovement;
 
         private Player_InputController _playerInput;
         private TextLoader _textLoader;
@@ -52,9 +53,10 @@ namespace CallOfValhalla.Dialogue
                 _endLevelTrigger = GameObject.Find("EndLevelTrigger");
                 _endLevelTrigger.SetActive(false);
             }
-            
-            _textBox.SetActive(false);
 
+            _playerMovement = FindObjectOfType<Player_Movement>();
+            _textBox.SetActive(false);
+            _cameraFollow = FindObjectOfType<Player_CameraFollow>();
         }
 
         private void PrepareText()
@@ -141,12 +143,32 @@ namespace CallOfValhalla.Dialogue
                 PrepareText();
             }
 
+            
             _currentLine += 1;
             _playerInput.DisableControls(true);
+            Debug.Log(_playerMovement._isGrounded);
+
+            if (_playerMovement._isGrounded)
+            {
+                _textBox.SetActive(true);
+                _textBoxActive = true;
+                StartCoroutine(TextScroll(_textLines[_currentLine]));
+                _cameraFollow.StartCenteringCamera();
+            } else
+                StartCoroutine(TextBoxDelay());
+            
+        }
+
+        private IEnumerator TextBoxDelay()
+        {
+
+            yield return new WaitForSeconds(0.5f);
             _textBox.SetActive(true);
             _textBoxActive = true;
             StartCoroutine(TextScroll(_textLines[_currentLine]));
+            _cameraFollow.StartCenteringCamera();
         }
+    
 
         public void DisableTextBox()
         {
