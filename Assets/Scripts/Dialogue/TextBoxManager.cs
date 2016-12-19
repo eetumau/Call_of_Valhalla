@@ -12,12 +12,15 @@ namespace CallOfValhalla.Dialogue
         private TextAsset _textFile;
         [SerializeField]
         private string[] _textLines;
-
         [SerializeField]
         private GameObject _textBox;
+        [SerializeField] private GameObject _objectToMove;
+        private GameObject _dialogueMovePoint;
+        private GameObject _endLevelTrigger;
 
         [SerializeField]      
         private Text _theText;
+        private NPC _npc;
 
         private Player_InputController _playerInput;
         private TextLoader _textLoader;
@@ -26,7 +29,8 @@ namespace CallOfValhalla.Dialogue
         private string _tempString;
         private bool _nextText;
         private bool _textBoxActive;
-
+        public bool _needsToMove;
+        public bool _endsLevel;
         private bool _isTyping;
         private bool _cancelTyping;
         [SerializeField]
@@ -39,9 +43,16 @@ namespace CallOfValhalla.Dialogue
 
             PrepareText();
             _playerInput = FindObjectOfType<Player_InputController>();
+            _npc = FindObjectOfType<NPC>();
 
-            Debug.Log(_textLines.Length);
-
+            if (_needsToMove)
+                _dialogueMovePoint = GameObject.Find("DialogueMovePoint");
+            if (_endsLevel)
+            {
+                _endLevelTrigger = GameObject.Find("EndLevelTrigger");
+                _endLevelTrigger.SetActive(false);
+            }
+            
             _textBox.SetActive(false);
 
         }
@@ -73,6 +84,20 @@ namespace CallOfValhalla.Dialogue
 
                         if (_textLines[_currentLine].Contains("(end)"))
                             DisableTextBox();
+                        if (_textLines[_currentLine].Contains("(move)"))
+                        {
+                            DisableTextBox();
+                            _objectToMove.transform.position = _dialogueMovePoint.transform.position;
+                        }
+                        if (_textLines[_currentLine].Contains("(endlevel)"))
+                        {
+                            DisableTextBox();
+                            _endLevelTrigger.SetActive(true);
+                        }
+                        if (_textLines[_currentLine].Contains("(change_thor)"))
+                        {
+                            _npc.SetThor();
+                        }
                         else
                         {
                             Debug.Log("STARTTYPING");

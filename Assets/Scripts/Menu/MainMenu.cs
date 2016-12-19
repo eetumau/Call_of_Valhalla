@@ -173,11 +173,25 @@ namespace CallOfValhalla
 			GameManager.Instance.Game();
 		}
 
+		public void Level10()
+		{
+			SoundManager.instance.PlaySound("button", _source);
+			GameManager.Instance.Level = 10;
+			GameManager.Instance.Game();
+		}
+
+		public void Level11()
+		{
+			SoundManager.instance.PlaySound("button", _source);
+			GameManager.Instance.Level = 11;
+			GameManager.Instance.Game();
+		}
+
         //For testing purposes
         public void EetunSceneen()
         {
             SoundManager.instance.PlaySound("button", _source);
-            GameManager.Instance.Level = 9;
+            GameManager.Instance.Level = 12;
             GameManager.Instance.Game();
         }
 
@@ -185,7 +199,7 @@ namespace CallOfValhalla
         public void TeemunSceneen()
         {
             SoundManager.instance.PlaySound("button", _source);
-            GameManager.Instance.Level = 10;
+            GameManager.Instance.Level = 13;
             GameManager.Instance.Game();
         }
 
