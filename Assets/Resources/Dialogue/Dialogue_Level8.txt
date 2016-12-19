@@ -1,7 +1,6 @@
 -
-LEVEL 2, testaan vahan dialogia tassa
-second line
-third line, break coming kaikkee taas tulossa
+It seems that Fenrir's pack has joined him.
+Remain cautious, wolves are the bane of the unwary.
 (end)
 Yet another dialog
 (end)

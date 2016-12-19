@@ -1,7 +1,8 @@
 -
-LEVEL 2, testaan vahan dialogia tassa
-second line
-third line, break coming kaikkee taas tulossa
+There is something thou should know.
+Fenrir, the Son of Loki, was locked in the deepest dungeons of Svartalfheim ages ago. 
+The Jotun have likely set him loose.
+Prepare thyself!
 (end)
 Yet another dialog
 (end)

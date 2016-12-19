@@ -1,7 +1,6 @@
 -
-LEVEL 2, testaan vahan dialogia tassa
-second line
-third line, break coming kaikkee taas tulossa
+Thou art close to the place where Fenrir was bound...
 (end)
-Yet another dialog
+Hah! Well fought, Champion! 
+Jotunheim awaits!
 (end)

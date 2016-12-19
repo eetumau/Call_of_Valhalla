@@ -1,7 +1,6 @@
 -
-LEVEL 2, testaan vahan dialogia tassa
-second line
-third line, break coming kaikkee taas tulossa
+T’would seem that Loki’s Jotun have already overrun these caves.
+It may be that they have already reached Svartalfheim…
 (end)
 Yet another dialog
 (end)

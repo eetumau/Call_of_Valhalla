@@ -1,9 +1,10 @@
 -
-Tahan kirjotetaan tekstia. Peli patkii sen ite riveihin. Yks rivi on aina yks boxi.
-Enterilla tai spacella pelaaja paasee seuraavaan kohtaan.
-Alla oleva merkinta katkasee dialogin ja paastaa takasin peliin.
+Well met, Champion of Valhalla.
+I have cast thee down back to Midgard to stop the coming of Ragnarok, the prophesized apocalypse. 
+To do this, thou must slay the Trickster God, Loki.
+Know that I shalt be watching…
 (end)
-Jos tekee toisen dialogin niin se alottaa automaattisesti tästä
-Tiedosto pitaa aina aloittaa yhdellä "tyhjalla" rivillä mikä ei tuu näkyyn pelissa
-unity ei myöskään ymmärrä "Ä" kirjainta, eli se on tyhjänä pelissä.
+T’would seem that Loki has uncovered my plans.
+But I see thou hath already made short work of the Jotun he sent to stop thee.
+As expected from the greatest hero of Valhalla.
 (end)

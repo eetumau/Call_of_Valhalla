@@ -1,7 +1,7 @@
 -
-LEVEL 2, testaan vahan dialogia tassa
-second line
-third line, break coming kaikkee taas tulossa
+Thou art approaching the gates of Svartalfheim.
+But beware, the gates are likely well guarded. 
 (end)
-Yet another dialog
+You impress me once more, Champion!
+And I see you're putting my Mjölnir to good use as well!
 (end)
