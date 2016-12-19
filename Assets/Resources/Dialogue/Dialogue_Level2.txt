@@ -1,6 +1,6 @@
 -
 My crows tell me that Loki has fled to the world of Jotunheim.
 To reach him, thou must venture through the depths of Svartalfheim, the world of the dwarves. 
-(end)
-Yet another dialog
-(end)
+(move)
+Yo dawg
+(endlevel)

@@ -3,4 +3,4 @@ Thou art close to the place where Fenrir was bound...
 (end)
 Hah! Well fought, Champion! 
 Jotunheim awaits!
-(end)
+(endlevel)

@@ -3,8 +3,8 @@ Well met, Champion of Valhalla.
 I have cast thee down back to Midgard to stop the coming of Ragnarok, the prophesized apocalypse. 
 To do this, thou must slay the Trickster God, Loki.
 Know that I shalt be watching…
-(end)
+(move)
 T’would seem that Loki has uncovered my plans.
 But I see thou hath already made short work of the Jotun he sent to stop thee.
 As expected from the greatest hero of Valhalla.
-(end)
+(endlevel)

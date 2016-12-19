@@ -5,4 +5,4 @@ The Jotun have likely set him loose.
 Prepare thyself!
 (end)
 Yet another dialog
-(end)
+(endlevel)

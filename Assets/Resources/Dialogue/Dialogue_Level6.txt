@@ -4,4 +4,4 @@ But beware, the gates are likely well guarded.
 (end)
 You impress me once more, Champion!
 And I see you're putting my Mjölnir to good use as well!
-(end)
+(endlevel)
