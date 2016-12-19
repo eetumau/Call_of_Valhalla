@@ -163,6 +163,11 @@ namespace CallOfValhalla.Player
                 animator.SetInteger("animState", 10);
                 _hammerSpecialActive = true;
             }
+            else if (animation.Equals("HammerSpecialFull"))
+            {
+                animator.SetInteger("animState", 11);
+                _hammerSpecialActive = true;
+            }
         }
 
         public void Move(float inputX)
