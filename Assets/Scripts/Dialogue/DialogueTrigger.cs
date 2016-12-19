@@ -16,10 +16,13 @@ namespace CallOfValhalla.Dialogue
             _trigger = gameObject;
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            _textBoxManager.EnableTextBox();
-            _trigger.SetActive(false);
+        	if (other.tag == "Player")
+        	{
+            	_textBoxManager.EnableTextBox();
+            	_trigger.SetActive(false);
+        	}
         }
     }
 }

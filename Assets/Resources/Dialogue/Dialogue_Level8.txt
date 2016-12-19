@@ -1,6 +1,6 @@
 -
 It seems that Fenrir's pack has joined him.
 Remain cautious, wolves are the bane of the unwary.
-(end)
+(move)
 Yet another dialog
 (endlevel)

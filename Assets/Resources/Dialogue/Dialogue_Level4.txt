@@ -1,6 +1,6 @@
 -
 T’would seem that Loki’s Jotun have already overrun these caves.
 It may be that they have already reached Svartalfheim…
-(end)
+(move)
 Yet another dialog
 (endlevel)
