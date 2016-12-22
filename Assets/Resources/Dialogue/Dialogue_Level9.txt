@@ -1,6 +1,7 @@
 -
 Thou art close to the place where Fenrir was bound...
-(move)
+(move) (change_thor)
 Hah! Well fought, Champion! 
+The dwarves can now return to these halls thanks to you!
 Jotunheim awaits!
 (endlevel)

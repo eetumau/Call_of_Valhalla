@@ -3,7 +3,7 @@ This is it Champion!
 Loki awaits thee just over yonder.
 Eternal glory awaits thee should thou prevail!
 (move)
-It is done, Champion! 
+Tis' done, Champion! 
 Know that thine actions this day have shaped the future of all the worlds!
 The Gods will remember this for all eternity!
 (endlevel)

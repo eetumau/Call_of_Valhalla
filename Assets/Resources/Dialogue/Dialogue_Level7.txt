@@ -1,9 +1,9 @@
 -
 Svartalfheim, the world of the dwarves...
-Sadly, the Jotun seem to have driven away the dwarves.
+Sadly, the Jotun seem to have driven them away.
 Do not expect a warm welcome.
 (end)
 The dwarves were the greatest craftsmen in all the Nine Worlds...
-It was they who crafted thine weapons, as well as mine.
-Thou must avenge them!
+T'was they who crafted thine weapons, as well as mine.
+Reclaim their homeland!
 (endlevel)

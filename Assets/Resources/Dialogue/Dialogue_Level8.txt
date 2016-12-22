@@ -1,9 +1,8 @@
 -
 There is something thou should know.
-Fenrir, the Son of Loki, was bound down here ages ago. 
+Fenrir, the Son of Loki, was bound in Svartalfheim ages ago. 
 The Jotun have likely set him loose.
 Prepare thyself!
 (move)
-Thou have seen those wolves, yes?
-They belong to Fenrir's pack. Expect to face more of them ahead...
+Those wolves belong to Fenrir's pack. Expect to face more of them ahead...
 (endlevel)
