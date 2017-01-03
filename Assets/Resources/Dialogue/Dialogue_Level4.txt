@@ -1,7 +1,7 @@
  -
-T'would seem that Loki's Jotun have already overrun these caves.
-It may be that they have already reached Svartalfheim...
+'Twould seem that Loki's Jotun have already overrun these caves.
+I hope they have not reached Svartalfheim yet...
 (move)
-Those runestones are blessed with the same power as your tattoos.
-Should thou fall in battle, they will give thee a second chance.
+The Jotun fall before thee like weeds!
+I would expect no less from the greatest champion of Valhalla!
 (endlevel)

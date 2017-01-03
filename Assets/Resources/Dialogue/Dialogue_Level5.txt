@@ -1,6 +1,8 @@
 -
-My crows tell me that Loki's Jotun have indeed reached Svartalfheim
+My crows tell me that the Jotun have indeed reached Svartalfheim...
 Make haste, Champion!
 (move)
-Yet another dialog
+I began to gather warriors in Valhalla to aid me during Ragnarok.
+Yet prophecy states that it would not be enough.
+Prophecy, however, says nothing about thine quest...
 (endlevel)

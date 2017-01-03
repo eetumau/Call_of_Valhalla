@@ -3,7 +3,7 @@ Svartalfheim, the world of the dwarves...
 Sadly, the Jotun seem to have driven them away.
 Do not expect a warm welcome.
 (end)
-The dwarves were the greatest craftsmen in all the Nine Worlds...
-T'was they who crafted thine weapons, as well as mine.
-Reclaim their homeland!
+The dwarves are the greatest craftsmen in all the Nine Worlds...
+'Twas they who crafted thine weapons, as well as mine.
+Reclaim their sacred halls!
 (endlevel)

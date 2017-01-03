@@ -1,8 +1,8 @@
 -
 Jotunheim… A cold world indeed. 
 Tis' fitting for a misfit like Loki to seek refuge here.
-This is the home of all the Jotun thou have slain. 
-Their brethren are sure to seek vengeance! Prepare thyself!
 (move)
-Moro moro
+This is the home of all the Jotun thou have slain.
+The Jotun represent destruction, entropy, and decay.
+This is why they are normally kept at bay, here in Jotunheim.
 (endlevel)

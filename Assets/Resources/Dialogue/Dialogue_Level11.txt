@@ -1,7 +1,7 @@
 -
-Art thou wandering why I did not do all of this myself?
-Tis' because I fear I could not bring myself to strike down Loki myself. 
-He is my kin despite everything he has done…
+I chose thee for this quest because I could not strike down Loki myself. 
+He is my kin despite everything...
 (move)
-O shit waddup
+During Ragnarok, Loki is destined to lead these Jotun to war against the Aesir, the Gods.
+This is why he must die...
 (endlevel)

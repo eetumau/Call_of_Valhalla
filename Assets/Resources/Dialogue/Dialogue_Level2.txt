@@ -2,6 +2,6 @@
 My crows tell me that Loki has fled to the world of Jotunheim.
 To reach him, thou must venture through the depths of Svartalfheim. 
 (move)
-Those tattoos of thine are imbued with power. Make sure they remain unharmed.
-For they are the only thing that keeps thee within the world of the living.
+Those runestones are blessed with my power.
+Should thou fall in battle, they will give thee a second chance.
 (endlevel)
