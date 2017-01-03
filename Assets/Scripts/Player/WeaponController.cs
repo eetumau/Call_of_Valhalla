@@ -38,12 +38,16 @@ namespace CallOfValhalla.Player
 
             string tmp = Application.loadedLevelName;
 
-            if (tmp.Equals("Level1") || tmp.Equals("Level2"))
+            if (tmp.Equals("level1") || tmp.Equals("Level2") || tmp.Equals("Level3"))
                 _hammerInGame = false;
             else
                 _hammerInGame = true;
-            
-            
+                        
+        }
+
+        public void EnableHammer()
+        {
+            _hammerInGame = true;
         }
 
         public void Attack(bool basicAttack, bool specialAttack)

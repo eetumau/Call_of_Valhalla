@@ -24,6 +24,7 @@ namespace CallOfValhalla.Dialogue
         private Player_Movement _playerMovement;
 
         private Player_InputController _playerInput;
+        private WeaponController _weaponController;
         private TextLoader _textLoader;
         private int _currentLine = 0;
         private int _endAtLine;
@@ -45,6 +46,7 @@ namespace CallOfValhalla.Dialogue
             PrepareText();
             _playerInput = FindObjectOfType<Player_InputController>();
             _npc = FindObjectOfType<NPC>();
+            _weaponController = FindObjectOfType<WeaponController>();
 
             if (_needsToMove)
                 _dialogueMovePoint = GameObject.Find("DialogueMovePoint");
@@ -91,6 +93,11 @@ namespace CallOfValhalla.Dialogue
                             DisableTextBox();
                             _objectToMove.transform.position = _dialogueMovePoint.transform.position;
                         }
+                        if (_textLines[_currentLine].Contains("(equiphammer)"))
+                        {
+                            _weaponController.EnableHammer();
+                            _weaponController.ChangeCurrentWeapon();
+                        }
                         if (_textLines[_currentLine].Contains("(endlevel)"))
                         {
                             DisableTextBox();
@@ -110,7 +117,7 @@ namespace CallOfValhalla.Dialogue
                         {
                             _npc.SetOdin();
                             _currentLine += 1;
-                        }
+                        }                        
                         else
                         {
                             Debug.Log("STARTTYPING");

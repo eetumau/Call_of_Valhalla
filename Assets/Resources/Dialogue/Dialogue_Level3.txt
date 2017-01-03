@@ -5,6 +5,6 @@ But beware, the entrance is guarded by a powerful Jotun called Durnir.
 
 Hail, Champion! I am Thor, the God of Lightning.
 I saw how you slew that mighty foe! I believe a reward is in order...
-(change_thor)
+(equiphammer) (change_thor)
 I bestow upon you my legendary hammer, Mjolnir! May it aid you in your quest.
 (endlevel)
