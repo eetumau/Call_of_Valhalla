@@ -209,6 +209,7 @@ namespace CallOfValhalla
 
                 if (_levelCompleted < data.levelCompleted)
                 {
+                    Debug.Log("Level completed:" + _levelCompleted);
                     _levelCompleted = data.levelCompleted;
 
                 }
