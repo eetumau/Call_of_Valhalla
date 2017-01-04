@@ -137,12 +137,19 @@ namespace CallOfValhalla
             StateManager = new StateManager(new MainMenuState());
             StateManager.AddState(new GameState());
             StateManager.AddState(new GameOverState());
+            StateManager.AddState(new GameCompleteState());
 
         }
 
         public void MainMenu()
         {
-            StateManager.PerformTransition(TransitionType.GameToMainMenu);
+            if(StateManager.CurrentStateType == StateType.Game)
+            {
+                StateManager.PerformTransition(TransitionType.GameToMainMenu);
+            }else
+            {
+                StateManager.PerformTransition(TransitionType.GameCompleteToMainMenu);
+            }
         }
 
         public void Game()
@@ -175,6 +182,12 @@ namespace CallOfValhalla
             {
                 _gameOverUI.ToggleGameOverUI();
             }
+        }
+
+        public void GameCompleted()
+        {
+            //SceneManager.LoadScene(13);
+            StateManager.PerformTransition(TransitionType.GameToGameComplete);
         }
 
         public void Save()

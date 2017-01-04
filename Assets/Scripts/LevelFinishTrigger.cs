@@ -22,7 +22,14 @@ namespace CallOfValhalla {
                 }
                 GameManager.Instance.Save();
                 SoundManager.instance.PlaySound("level_finish", _source);
-                GameManager.Instance.LevelCompleteUI.ToggleLevelCompleteUI();
+
+                if(GameManager.Instance.Level < 12)
+                {
+                    GameManager.Instance.LevelCompleteUI.ToggleLevelCompleteUI();
+                }else
+                {
+                    GameManager.Instance.GameCompleted();
+                }
 
             }
         }

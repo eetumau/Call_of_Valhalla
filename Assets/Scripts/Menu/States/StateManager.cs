@@ -12,7 +12,8 @@ namespace CallOfValhalla.States
         Error = -1,
         MainMenu,
         Game,
-        GameOver
+        GameOver,
+        GameComplete
 
     }
 
@@ -22,7 +23,9 @@ namespace CallOfValhalla.States
         MainMenuToGame,
         GameToGameOver,
         GameToMainMenu,
-        GameOverToMainMenu
+        GameOverToMainMenu,
+        GameToGameComplete,
+        GameCompleteToMainMenu
     }
 
     public class StateManager
