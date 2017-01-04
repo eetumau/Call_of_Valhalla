@@ -210,7 +210,6 @@ namespace CallOfValhalla
                 if (_levelCompleted < data.levelCompleted)
                 {
                     _levelCompleted = data.levelCompleted;
-
                 }
             }
         }
