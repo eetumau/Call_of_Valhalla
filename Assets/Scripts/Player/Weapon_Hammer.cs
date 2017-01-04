@@ -15,6 +15,7 @@ public class Weapon_Hammer : Weapon
     private HammerSpecialCollision _specialCollisionScript;
     private BoxCollider2D _specialBoxCollider;
     private GameObject _lightning;
+    private Animator _lightningAnimator;
 
     [SerializeField]
     GameObject _basic;
@@ -57,11 +58,8 @@ public class Weapon_Hammer : Weapon
         _specialBoxCollider = _specialCollider.GetComponent<BoxCollider2D>();
         _colliderSizeVector = _specialBoxCollider.size;
 
-        _lightning = Instantiate(_sprite, transform.position, Quaternion.identity) as GameObject;
-        _lightning.transform.parent = _hero.transform;
-        _lightning.transform.position = new Vector2(transform.position.x + 1, transform.position.y + 6);
-        _lightning.SetActive(false);
-
+        _lightning = GameObject.Find("Lightning");
+        _lightningAnimator = _lightning.GetComponent<Animator>();
     }
 
 
@@ -118,7 +116,8 @@ public class Weapon_Hammer : Weapon
             {
                 _movement.SetAttackAnimation("HammerSpecialFull");
                 StartCoroutine(ResetAfterSpecial(0.5f));
-                _lightning.SetActive(true);
+                StartCoroutine(ResetLightning(0.267f));
+                _lightningAnimator.SetInteger("Animstate", 1);
             }
             else
             {
@@ -197,6 +196,11 @@ public class Weapon_Hammer : Weapon
         
     }
 
+    private IEnumerator ResetLightning(float howLong)
+    {
+        yield return new WaitForSeconds(howLong);
+        _lightningAnimator.SetInteger("Animstate", 0);
+    }
 
     private IEnumerator ResetAfterSpecial(float howLong)
     {
@@ -206,7 +210,7 @@ public class Weapon_Hammer : Weapon
         _specialCharging = false;
         _fullyCharged = false;
         _movement._hammerSpecialActive = false;
-        _lightning.SetActive(false);
+        
     }
 
     private IEnumerator SetSecondChargeStep(float howLong)
