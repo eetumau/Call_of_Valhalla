@@ -25,10 +25,15 @@ public class SwordBasicCollision : MonoBehaviour {
     {
         if (other.gameObject.tag == "Enemy")
         {
-            SoundManager.instance.PlaySound("sword_hit", _source);
-            _enemyMovement = other.gameObject.GetComponentInParent<Enemy_Movement>();
-            _enemyMovement.Knockback(250f, 250f);
             _enemyHP = other.gameObject.GetComponentInParent<Enemy_HP>();
+            SoundManager.instance.PlaySound("sword_hit", _source);
+
+            if (!_enemyHP.thisIsABoss)
+            {
+                _enemyMovement = other.gameObject.GetComponentInParent<Enemy_Movement>();
+                _enemyMovement.Knockback(250f, 250f);
+            }
+            
 
             if (_enemyHP.HP > 0)
                 _sword.AddCompletionByDamage(_specialCompletionPercent);

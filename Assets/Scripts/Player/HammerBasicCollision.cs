@@ -24,10 +24,13 @@ public class HammerBasicCollision : MonoBehaviour {
         if (other.gameObject.tag == "Enemy")
         {
             SoundManager.instance.PlaySound("sword_hit", _source);
-
-            _enemyMovement = other.gameObject.GetComponentInParent<Enemy_Movement>();
-            _enemyMovement.Knockback(400, 250);
             _enemyHP = other.gameObject.GetComponentInParent<Enemy_HP>();
+
+            if (!_enemyHP.thisIsABoss)
+            {
+                _enemyMovement = other.gameObject.GetComponentInParent<Enemy_Movement>();
+                _enemyMovement.Knockback(250f, 250f);
+            }
             
             if (_enemyHP.HP > 0)
                 _hammer.AddCompletionByDamage(_SpecialCompletionPercent);

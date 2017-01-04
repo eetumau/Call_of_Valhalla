@@ -7,11 +7,13 @@ namespace CallOfValhalla.Enemy {
     public class Enemy_HP : MonoBehaviour {
 
         [SerializeField]
-        public int _hitPoints;
+        public int hitPoints;
         [SerializeField]
         private GameObject _blood;
         [SerializeField]
-        private bool _thisIsABoss;
+        public bool thisIsABoss;
+        [SerializeField]
+        private bool _loki;
 
         private float _originalHP;
         private Animator _animator;
@@ -22,28 +24,32 @@ namespace CallOfValhalla.Enemy {
 
         public int HP
         {
-            get { return _hitPoints; }
+            get { return hitPoints; }
         }
         // Use this for initialization
         void Start() {
 
-            _enemyController = GetComponent<Enemy_Controller>();
+            if (!_loki)
+                _enemyController = GetComponent<Enemy_Controller>();
+
             _animator = GetComponent<Animator>();
             _transform = GetComponent<Transform>();
             _audioSource = GetComponent<AudioSource>();
 
-            _originalHP = _hitPoints;
-            if (_thisIsABoss)
+            _originalHP = hitPoints;
+            if (thisIsABoss)
                 _BossHP = FindObjectOfType<BossHPBarController>();
         }
 
         // Update is called once per frame
         void Update() {
 
-            if (_hitPoints <= 0)
+            if (hitPoints <= 0)
             {
                 _animator.SetInteger("animState", 3);
-                _enemyController.Instance.Die();
+
+                if (!_loki)
+                    _enemyController.Instance.Die();
 
                 if (gameObject.name.Contains("Goblin"))
                 {
@@ -65,12 +71,12 @@ namespace CallOfValhalla.Enemy {
 
         public void TakeDamage(int damage)
         {
-            _hitPoints -= damage;
+            hitPoints -= damage;
             Instantiate(_blood, _transform.position+Vector3.up, _transform.rotation );
 
-            if (_thisIsABoss)
+            if (thisIsABoss)
             {
-                float tmp = _hitPoints / _originalHP;
+                float tmp = hitPoints / _originalHP;
                 _BossHP.Progress = tmp;
             }
         }

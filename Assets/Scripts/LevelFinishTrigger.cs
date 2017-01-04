@@ -16,7 +16,10 @@ namespace CallOfValhalla {
         {
             if (other.gameObject.tag == "Player")
             {
-                GameManager.Instance.LevelCompleted = GameManager.Instance.Level;
+                if(GameManager.Instance.Level >= GameManager.Instance.LevelCompleted)
+                {
+                    GameManager.Instance.LevelCompleted = GameManager.Instance.Level;
+                }
                 GameManager.Instance.Save();
                 SoundManager.instance.PlaySound("level_finish", _source);
                 GameManager.Instance.LevelCompleteUI.ToggleLevelCompleteUI();
