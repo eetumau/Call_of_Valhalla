@@ -38,6 +38,12 @@ namespace CallOfValhalla.Dialogue
                 _currentTextFile = Resources.Load("Dialogue/Dialogue_Level8", typeof(TextAsset)) as TextAsset;
             if (tmp.Equals("Level9"))
                 _currentTextFile = Resources.Load("Dialogue/Dialogue_Level9", typeof(TextAsset)) as TextAsset;
+			if (tmp.Equals("Level10"))
+				_currentTextFile = Resources.Load("Dialogue/Dialogue_Level10", typeof(TextAsset)) as TextAsset;
+			if (tmp.Equals("Level11"))
+				_currentTextFile = Resources.Load("Dialogue/Dialogue_Level11", typeof(TextAsset)) as TextAsset;
+			if (tmp.Equals("Level12"))
+				_currentTextFile = Resources.Load("Dialogue/Dialogue_Level12", typeof(TextAsset)) as TextAsset;
 
 
 
