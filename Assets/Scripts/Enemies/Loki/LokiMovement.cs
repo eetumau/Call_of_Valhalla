@@ -6,7 +6,24 @@ public class LokiMovement : MonoBehaviour {
     private Transform _lokiTransform;
     private Transform _pointToMove;
     private Rigidbody2D _rigidBody;
-    [SerializeField] private float _speed;
+    private Transform _currentMovePoint;
+
+    [SerializeField]
+    private float _speed;
+
+    [SerializeField]
+    private GameObject _pointGameObject1;
+    [SerializeField]
+    private GameObject _pointGameObject2;
+    [SerializeField]
+    private GameObject _pointGameObject3;
+    [SerializeField]
+    private GameObject _pointGameObject4;
+
+    private Transform _firstMovePoint;
+    private Transform _secondMovePoint;
+    private Transform _thirdMovePoint;
+    private Transform _fourthMovePoint;
 
     private bool _moving;
 
@@ -14,8 +31,13 @@ public class LokiMovement : MonoBehaviour {
 	void Awake () {
 
         _lokiTransform = GetComponent<Transform>();
-        
-	}
+
+        _firstMovePoint = _pointGameObject1.GetComponent<Transform>();
+        _secondMovePoint = _pointGameObject2.GetComponent<Transform>();
+        _thirdMovePoint = _pointGameObject3.GetComponent<Transform>();
+        _fourthMovePoint = _pointGameObject4.GetComponent<Transform>();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -25,21 +47,105 @@ public class LokiMovement : MonoBehaviour {
         
 	}
 
+    // Sets up a new movement sequence
+    public void SetMovement()
+    {
+        float tmpTime = GetRandomMoveTime();
+        Transform tmpPoint = GetRandomMovePoint();
+        StartCoroutine(Movement(tmpTime, tmpPoint));
+
+    }
+
+    private IEnumerator Movement(float time, Transform tf)
+    {
+
+        yield return new WaitForSeconds(time);
+        MoveToPoint(tf);
+        SetMovement();
+    }
+
+
     public void MoveToPoint(Transform tf)
     {
         _moving = true;
         _pointToMove = tf;
     }
 
+    // Moves Loki to the destination
     private void Move()
     {
-
         float step = _speed * Time.deltaTime;
         _lokiTransform.position = Vector3.MoveTowards(_lokiTransform.position, _pointToMove.position, step);
 
         if (_lokiTransform.position == _pointToMove.position)
-        {
             _moving = false;
+        
+    }
+
+    // Returns random time for the movement timer
+    private float GetRandomMoveTime()
+    {
+        return Random.Range(3f, 5f);
+    }
+
+    // Returns random movepoint which is not the current movepoint
+    private Transform GetRandomMovePoint()
+    {
+
+        Transform tmptf;
+        while (true)
+        {
+            int tmp = (int)Random.Range(0f, 4f) + 1;
+
+            if (tmp == 1)
+            {
+                if (_firstMovePoint != _currentMovePoint)
+                {
+                    tmptf = _firstMovePoint;
+                    break;
+                }
+            }
+            else if (tmp == 2)
+            {
+                if (_secondMovePoint != _currentMovePoint)
+                {
+                    tmptf = _secondMovePoint;
+                    break;
+                }
+            }
+            else if (tmp == 3)
+            {
+                if (_thirdMovePoint != _currentMovePoint)
+                {
+                    tmptf = _thirdMovePoint;
+                    break;
+                }
+            }
+            else
+            {
+                if (_fourthMovePoint != _currentMovePoint)
+                {
+                    tmptf = _fourthMovePoint;
+                    break;
+                }
+            }
         }
+
+        _currentMovePoint = tmptf;
+        return tmptf;
+    }
+
+    // Stops movement and all coroutines
+    public void StopAllMovementSequences()
+    {
+        _moving = false;
+        StopAllCoroutines();
+    }
+
+    // Starts a flying movement sequence immediatly
+    public void StartFlyingMovement()
+    {
+        Transform tmpPoint = GetRandomMovePoint();
+        StartCoroutine(Movement(0f, tmpPoint));
     }
 }
