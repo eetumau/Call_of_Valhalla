@@ -42,15 +42,13 @@ namespace CallOfValhalla {
             _congText.CrossFadeAlpha(0, 1, true);
 
             yield return new WaitForSeconds(1);
-            _congText.enabled = false;
-
             StartCoroutine(RollCredits());
            
         }
 
         private IEnumerator RollCredits()
         {
-            for(float i = 0; i <= 290; i += 0.1f)
+            while(_creditText.transform.position.y < 2700)
             {
 
                 _newPos += 0.5f;
