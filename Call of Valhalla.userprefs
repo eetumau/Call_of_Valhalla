@@ -1,9 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Dialogue\TextLoader.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GauntletScript.cs">
     <Files>
       <File FileName="Assets\Scripts\Dialogue\TextBoxManager.cs" Line="22" Column="30" />
       <File FileName="Assets\Scripts\Dialogue\TextLoader.cs" Line="46" Column="100" />
+      <File FileName="Assets\Scripts\GauntletScript.cs" Line="54" Column="42" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

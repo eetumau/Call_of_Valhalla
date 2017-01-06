@@ -10,6 +10,9 @@ public class GauntletScript : MonoBehaviour {
     [SerializeField]
     private GameObject[] _objects;
 
+	public GameObject _door;
+	private Animator animator;
+
     private ArrayList _hp;
     private bool _gauntletActive;
     private float _enemiesLeft;
@@ -17,6 +20,7 @@ public class GauntletScript : MonoBehaviour {
 	// Use this for initialization
 	private void Awake () {        
 
+		animator = _door.GetComponent<Animator> ();
         CheckLists();
 	    
 	}
@@ -47,6 +51,7 @@ public class GauntletScript : MonoBehaviour {
             if (_enemiesLeft == 0)
             {
                 DeactivateGauntlet();
+				animator.SetBool ("Door_Open", true);
             }
             _enemiesLeft = 0;
         }
