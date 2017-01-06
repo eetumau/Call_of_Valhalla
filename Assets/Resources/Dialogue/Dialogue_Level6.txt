@@ -1,8 +1,8 @@
 -
 Thou art approaching the gates of Svartalfheim.
-I sense Loki has sent one of his strongest allies, Surt, to stop thee.
+I sense that Loki has sent one of his strongest allies, Surt, to stop thee.
 Surt is a fire giant whose destiny is to burn all the worlds during Ragnarok.
-I need not tell thee that it is vital thou slay him.
+Erase him from the prophecy!
 (move) (change_thor)
 
 You impress me once more, Champion! The gates of Svartalfheim are open!
