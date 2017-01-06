@@ -7,6 +7,11 @@ public class GauntletTrigger : MonoBehaviour {
     private GauntletScript _gauntlet;
     private GameObject _trigger;
 
+
+    public GameObject Trigger
+    {
+        get { return _trigger; }
+    }
 	// Use this for initialization
 	private void Awake () {
         _gauntlet = FindObjectOfType<GauntletScript>();

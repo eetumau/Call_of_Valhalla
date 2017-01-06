@@ -2,6 +2,7 @@
 using System.Collections;
 using CallOfValhalla.Enemy;
 using System;
+using CallOfValhalla;
 
 public class GauntletScript : MonoBehaviour {
         
@@ -16,10 +17,11 @@ public class GauntletScript : MonoBehaviour {
     private ArrayList _hp;
     private bool _gauntletActive;
     private float _enemiesLeft;
+    private GauntletTrigger _gauntletTrigger;
 
 	// Use this for initialization
-	private void Awake () {        
-
+	private void Awake () {
+        _gauntletTrigger = GetComponentInChildren<GauntletTrigger>();
 		animator = _door.GetComponent<Animator> ();
         CheckLists();
 	    
@@ -54,6 +56,12 @@ public class GauntletScript : MonoBehaviour {
 				animator.SetBool ("Door_Open", true);
             }
             _enemiesLeft = 0;
+
+            if(GameManager.Instance.Player.HP._hp <= 0)
+            {
+                ResetMusic();
+                _gauntletTrigger.Trigger.SetActive(true);
+            }
         }
 	}
 
@@ -65,6 +73,8 @@ public class GauntletScript : MonoBehaviour {
         {
             ob.SetActive(false);
         }
+
+        ResetMusic();
     }
 
     private void CheckEnemiesLeft()
@@ -82,11 +92,27 @@ public class GauntletScript : MonoBehaviour {
     // Activates the objects relating to the gauntlet and starts checking remaining enemies
     public void ActivateGauntlet()
     {
-        _gauntletActive = true;
-
-        foreach (GameObject ob in _objects)
+        if (!_gauntletActive)
         {
-            ob.SetActive(true);
+            _gauntletActive = true;
+
+            foreach (GameObject ob in _objects)
+            {
+                ob.SetActive(true);
+            }
+        }
+       
+    }
+
+    private void ResetMusic()
+    {
+        if(GameManager.Instance.Level < 4)
+        {
+            SoundManager.instance.SetMusic("level_music_2");
+        }else
+        {
+            SoundManager.instance.SetMusic("level_music_1");
         }
     }
+
 }
