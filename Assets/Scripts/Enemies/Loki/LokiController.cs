@@ -4,11 +4,6 @@ using System.Collections;
 
 public class LokiController : MonoBehaviour {
 
-
-
-    
-
-
     private LokiMovement _lokiMovement;
     private LokiAttack _lokiAttack;
 

@@ -19,11 +19,14 @@ public class LokiMovement : MonoBehaviour {
     private GameObject _pointGameObject3;
     [SerializeField]
     private GameObject _pointGameObject4;
+	[SerializeField]
+	private GameObject _pointGameObject5;
 
     private Transform _firstMovePoint;
     private Transform _secondMovePoint;
     private Transform _thirdMovePoint;
     private Transform _fourthMovePoint;
+	private Transform _fifthMovePoint;
 
     private bool _moving;
 
@@ -96,7 +99,7 @@ public class LokiMovement : MonoBehaviour {
 		Transform tmptf = _currentMovePoint;
 		while (true)
         {
-			int tmp = (int)Random.Range(0f, 4f) + 1;
+			int tmp = (int)Random.Range(0f, 5f) + 1;
 
             if (tmp == 1)
             {
@@ -122,11 +125,19 @@ public class LokiMovement : MonoBehaviour {
                     break;
                 }
             }
+			else if (tmp == 4)
+			{
+				if (_fourthMovePoint != _currentMovePoint)
+				{
+					tmptf = _fourthMovePoint;
+					break;
+				}
+			}
             else
             {
-                if (_fourthMovePoint != _currentMovePoint)
+                if (_fifthMovePoint != _currentMovePoint)
                 {
-                    tmptf = _fourthMovePoint;
+                    tmptf = _fifthMovePoint;
                     break;
                 }
             }
