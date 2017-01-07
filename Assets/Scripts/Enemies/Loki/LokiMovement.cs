@@ -32,6 +32,8 @@ public class LokiMovement : MonoBehaviour {
 
         _lokiTransform = GetComponent<Transform>();
 
+		_currentMovePoint = _lokiTransform;
+
         _firstMovePoint = _pointGameObject1.GetComponent<Transform>();
         _secondMovePoint = _pointGameObject2.GetComponent<Transform>();
         _thirdMovePoint = _pointGameObject3.GetComponent<Transform>();
@@ -53,7 +55,6 @@ public class LokiMovement : MonoBehaviour {
         float tmpTime = GetRandomMoveTime();
         Transform tmpPoint = GetRandomMovePoint();
         StartCoroutine(Movement(tmpTime, tmpPoint));
-
     }
 
     private IEnumerator Movement(float time, Transform tf)
@@ -91,11 +92,11 @@ public class LokiMovement : MonoBehaviour {
     // Returns random movepoint which is not the current movepoint
     private Transform GetRandomMovePoint()
     {
-
-        Transform tmptf;
-        while (true)
+		
+		Transform tmptf = _currentMovePoint;
+		while (true)
         {
-            int tmp = (int)Random.Range(0f, 4f) + 1;
+			int tmp = (int)Random.Range(0f, 4f) + 1;
 
             if (tmp == 1)
             {
@@ -129,6 +130,7 @@ public class LokiMovement : MonoBehaviour {
                     break;
                 }
             }
+			break;
         }
 
         _currentMovePoint = tmptf;
