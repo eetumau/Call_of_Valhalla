@@ -17,6 +17,8 @@ public class Weapon_Hammer : Weapon
     private GameObject _lightning;
     private Animator _lightningAnimator;
     private AudioSource _lightningSource;
+    private Camera _cam;
+    private LightningFlash _flash;
 
     [SerializeField]
     GameObject _basic;
@@ -62,6 +64,8 @@ public class Weapon_Hammer : Weapon
         _lightning = GameObject.Find("Lightning");
         _lightningAnimator = _lightning.GetComponent<Animator>();
         _lightningSource = _lightning.GetComponent<AudioSource>();
+        _cam = FindObjectOfType<Camera>();
+        _flash = _cam.GetComponent<LightningFlash>();
     }
 
 
@@ -127,7 +131,10 @@ public class Weapon_Hammer : Weapon
                 StartCoroutine(ResetAfterSpecial(0.5f));
             }
 
+            SoundManager.instance.PlaySound("lightningStrike", _movement.Source, false);
             SoundManager.instance.PlaySound("mjolnirLightning", _lightningSource, false);
+            StartCoroutine(_flash.Flash());
+
         }
     }
 
