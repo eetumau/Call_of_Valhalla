@@ -16,6 +16,7 @@ public class Weapon_Hammer : Weapon
     private BoxCollider2D _specialBoxCollider;
     private GameObject _lightning;
     private Animator _lightningAnimator;
+    private AudioSource _lightningSource;
 
     [SerializeField]
     GameObject _basic;
@@ -60,6 +61,7 @@ public class Weapon_Hammer : Weapon
 
         _lightning = GameObject.Find("Lightning");
         _lightningAnimator = _lightning.GetComponent<Animator>();
+        _lightningSource = _lightning.GetComponent<AudioSource>();
     }
 
 
@@ -125,7 +127,7 @@ public class Weapon_Hammer : Weapon
                 StartCoroutine(ResetAfterSpecial(0.5f));
             }
 
-            SoundManager.instance.PlaySound("mjolnirLightning", _movement.Source, false);
+            SoundManager.instance.PlaySound("mjolnirLightning", _lightningSource, false);
         }
     }
 
@@ -168,7 +170,7 @@ public class Weapon_Hammer : Weapon
 
             _specialCollisionScript.SetStunAndDamage("Small");
             _movement.SetAttackAnimation("Charge1");
-            SoundManager.instance.PlaySound("charge_1", _movement.Source, false);
+            SoundManager.instance.PlaySound("charge_1", _lightningSource, false);
             
             StartCoroutine(SetSecondChargeStep( 0.5f));
             StartCoroutine(SetThirdChargeStep(1f));
@@ -227,7 +229,7 @@ public class Weapon_Hammer : Weapon
     private IEnumerator SetThirdChargeStep(float howLong)
     {   
         yield return new WaitForSeconds(howLong);
-        SoundManager.instance.PlaySound("charge_2", _movement.Source, true);
+        SoundManager.instance.PlaySound("charge_2", _lightningSource, true);
         _specialCollisionScript.SetStunAndDamage("Large");
         _movement.SetAttackAnimation("Charge3");
         _fullyCharged = true;
