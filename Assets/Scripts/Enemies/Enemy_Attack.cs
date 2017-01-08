@@ -90,7 +90,7 @@ namespace CallOfValhalla.Enemy
         //Does all the calculations whether to attack or not
         private void RunTimers()
         {
-            if (_enemyController.Instance.InAttackRange)
+            if (_enemyController.InAttackRange)
             {
                 if (_coolDownTimer <= 0)
                 {

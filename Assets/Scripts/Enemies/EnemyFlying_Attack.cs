@@ -71,7 +71,7 @@ namespace CallOfValhalla.Enemy
         {
             _transform = _enemyMovement.Instance.Transform;
 
-            if (_enemyController.Instance.InAttackRange)
+            if (_enemyController.InAttackRange)
             {
                 if (_coolDownTimer <= 0)
                 {

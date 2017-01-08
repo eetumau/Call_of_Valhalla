@@ -48,8 +48,10 @@ namespace CallOfValhalla.Enemy
 
             if (hitPoints <= 0)
             {
+                _enemyController.Die();
                 _animator.SetInteger("animState", 3);
                 SoundManager.instance.PlaySound("wolf_death", _enemyController.Source, false);
+                
             }
 
         }

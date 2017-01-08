@@ -7,6 +7,7 @@ using CallOfValhalla;
 public class SwordBasicCollision : MonoBehaviour {
 
     private Enemy_HP _enemyHP;
+    private Fenrir_HP _fenrirHP;
     private Enemy_Movement _enemyMovement;
     private Weapon_Sword _sword;
     private int _damage = 1;
@@ -26,20 +27,39 @@ public class SwordBasicCollision : MonoBehaviour {
         if (other.gameObject.tag == "Enemy")
         {
             _enemyHP = other.gameObject.GetComponentInParent<Enemy_HP>();
+
+            if(_enemyHP == null)
+            {
+                _fenrirHP = other.gameObject.GetComponentInParent<Fenrir_HP>();
+            }
+
             SoundManager.instance.PlaySound("sword_hit", _source, false);
 
-            if (!_enemyHP.thisIsABoss)
+            if (_enemyHP != null && !_enemyHP.thisIsABoss)
             {
                 _enemyMovement = other.gameObject.GetComponentInParent<Enemy_Movement>();
                 _enemyMovement.Knockback(250f, 250f);
             }
             
+            if(_fenrirHP == null)
+            {
+                if (_enemyHP.HP > 0)
+                    _sword.AddCompletionByDamage(_specialCompletionPercent);
 
-            if (_enemyHP.HP > 0)
-                _sword.AddCompletionByDamage(_specialCompletionPercent);
+                _enemyHP.TakeDamage(_damage);
+            }else
+            {
+                if(_fenrirHP.HP > 0)
+                {
+                    _sword.AddCompletionByDamage(_specialCompletionPercent);
+                }
+                _fenrirHP.TakeDamage(_damage);
+                
+            }
 
-            _enemyHP.TakeDamage(_damage);
-            
+            _fenrirHP = null;
+            _enemyHP = null;
+            _enemyMovement = null;
         }
     }
 

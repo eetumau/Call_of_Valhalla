@@ -5,7 +5,6 @@ namespace CallOfValhalla.Enemy
 {
     public class Enemy_Controller : MonoBehaviour
     {
-        private Enemy_Controller _instance;
         private Enemy_Movement _movement;
         private BasicEnemy_WallCheck _wallCheck;
         private Enemy_HP _hp;
@@ -20,11 +19,6 @@ namespace CallOfValhalla.Enemy
         private bool _isSearchingForPlayer = false;
         private Vector3 _lastSeenPlayerPos;
         private bool _inAttackRange;
-
-        public Enemy_Controller Instance
-        {
-            get { return _instance; }
-        }
 
         public bool IsPassive
         {
@@ -65,7 +59,6 @@ namespace CallOfValhalla.Enemy
 
         private void Start()
         {
-            _instance = this;
             _hp = GetComponent<Enemy_HP>();
             _movement = GetComponent<Enemy_Movement>();
             _searchForPlayer = GetComponent<Enemy_SearchForPlayer>();
@@ -121,7 +114,7 @@ namespace CallOfValhalla.Enemy
             _searchForPlayer.enabled = false;
             _hp.enabled = false;
             _wallCheck.enabled = false;
-            _instance.enabled = false;
+            this.enabled = false;
             _attack.AttackHitBox.enabled = false;
             _attack.enabled = false;
             _attackTrigger.enabled = false;
