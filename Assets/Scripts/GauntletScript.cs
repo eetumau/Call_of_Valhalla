@@ -35,7 +35,18 @@ public class GauntletScript : MonoBehaviour {
         foreach (GameObject enemy in _enemies)
         {
             Enemy_HP tmp = enemy.GetComponent<Enemy_HP>();
-            _hp.Add(tmp);
+
+            if(tmp == null)
+            {
+                Fenrir_HP fenrirHP = enemy.GetComponent<Fenrir_HP>();
+                _hp.Add(fenrirHP);
+
+            }else
+            {
+                _hp.Add(tmp);
+
+            }
+
         }
 
         foreach (GameObject ob in _objects)
@@ -80,12 +91,24 @@ public class GauntletScript : MonoBehaviour {
 
     private void CheckEnemiesLeft()
     {
-        foreach (Enemy_HP hp in _hp)
+        if (GameManager.Instance.Level != 9)
         {
-
-            if (hp.HP > 0)
+            foreach (Enemy_HP hp in _hp)
             {
-                _enemiesLeft += 1;
+
+                if (hp.HP > 0)
+                {
+                    _enemiesLeft += 1;
+                }
+            }
+        }else
+        {
+            foreach(Fenrir_HP hp in _hp)
+            {
+                if(hp.HP > 0)
+                {
+                    _enemiesLeft += 1;
+                }
             }
         }
     }
@@ -116,7 +139,7 @@ public class GauntletScript : MonoBehaviour {
             SoundManager.instance.SetMusic("level_music_4");
         }else if(GameManager.Instance.Level > 3 && GameManager.Instance.Level < 10)
         {
-            SoundManager.instance.SetMusic("level_music_1");
+            SoundManager.instance.SetMusic("level_music_5");
         }else
         {
             SoundManager.instance.SetMusic("level_music_3");

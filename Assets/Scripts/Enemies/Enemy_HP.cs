@@ -49,7 +49,7 @@ namespace CallOfValhalla.Enemy {
                 _animator.SetInteger("animState", 3);
 
                 if (!_loki)
-                    _enemyController.Instance.Die();
+                    _enemyController.Die();
 
                 if (gameObject.name.Contains("Goblin"))
                 {

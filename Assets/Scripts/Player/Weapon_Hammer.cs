@@ -124,6 +124,8 @@ public class Weapon_Hammer : Weapon
                 StartCoroutine(ResetAfterSpecial(0.5f));
                 StartCoroutine(ResetLightning(0.267f));
                 _lightningAnimator.SetInteger("Animstate", 1);
+                StartCoroutine(_flash.Flash());
+
             }
             else
             {
@@ -133,7 +135,6 @@ public class Weapon_Hammer : Weapon
 
             SoundManager.instance.PlaySound("lightningStrike", _movement.Source, false);
             SoundManager.instance.PlaySound("mjolnirLightning", _lightningSource, false);
-            StartCoroutine(_flash.Flash());
 
         }
     }

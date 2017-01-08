@@ -7,6 +7,8 @@ public class HammerSpecialCollision : MonoBehaviour {
 
     private Enemy_HP _enemyHP;
     private Enemy_Movement _enemyMovement;
+    private Fenrir_HP _fenrirHP;
+    private Fenrir_Movement _fenrirMovement;
     private Weapon_Hammer _hammer;
     private float _stunTime;
     private int _damage;
@@ -47,11 +49,31 @@ public class HammerSpecialCollision : MonoBehaviour {
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Enemy")  {
+
+
             _enemyMovement = other.gameObject.GetComponentInParent<Enemy_Movement>();
-            _enemyHP = other.gameObject.GetComponentInParent<Enemy_HP>();            
+            _enemyHP = other.gameObject.GetComponentInParent<Enemy_HP>();  
             
-            _enemyMovement.Stun(_stunTime);
-            _enemyHP.TakeDamage(_damage);                           
+            if(_enemyHP == null || _enemyMovement == null)
+            {
+                _fenrirMovement = other.gameObject.GetComponentInParent<Fenrir_Movement>();
+                _fenrirHP = other.gameObject.GetComponentInParent<Fenrir_HP>();
+            }          
+            
+            if(_enemyHP != null)
+            {
+                _enemyMovement.Stun(_stunTime);
+                _enemyHP.TakeDamage(_damage);
+            }else
+            {
+                _fenrirMovement.Stun(_stunTime);
+                _fenrirHP.TakeDamage(_damage);
+            }
+
+            _fenrirHP = null;
+            _fenrirMovement = null;
+            _enemyHP = null;
+            _enemyMovement = null;
         }
     }
 }

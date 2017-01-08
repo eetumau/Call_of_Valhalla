@@ -64,7 +64,7 @@ namespace CallOfValhalla.Enemy
         // Update is called once per frame
         void Update()
         {
-            _enemyController.Instance.InAttackRange = false;
+            _enemyController.InAttackRange = false;
 
             //if (_knockbackTimer <= 0 && _stunTimer <= 0)
             if(_stunTimer <= 0)
@@ -92,15 +92,15 @@ namespace CallOfValhalla.Enemy
 
         private void CheckStates()
         {
-            if (_enemyController.Instance.IsPassive)
+            if (_enemyController.IsPassive)
             {
                 PassiveMove();
             }
-            else if (_enemyController.Instance.IsAggressive)
+            else if (_enemyController.IsAggressive)
             {
                 AggressiveMove();
             }
-            else if (_enemyController.Instance.IsSearchingForPlayer)
+            else if (_enemyController.IsSearchingForPlayer)
             {
                 MoveToLastSeenPos();
             }
@@ -183,7 +183,7 @@ namespace CallOfValhalla.Enemy
 
         private void AggressiveMove()
         {
-            _enemyController.Instance.InAttackRange = false;
+            _enemyController.InAttackRange = false;
 
             var Distance = _transform.position.x - _player.position.x;
 
@@ -200,7 +200,7 @@ namespace CallOfValhalla.Enemy
             }
             else if (Distance <= _minDistanceFromPlayer && Distance > 0 || Distance >= -1 * _minDistanceFromPlayer && Distance <= 0)
             {
-                _enemyController.Instance.InAttackRange = true;
+                _enemyController.InAttackRange = true;
 
                 if (!_enemyAttack.Instance.Attacking)
                 {
@@ -239,7 +239,7 @@ namespace CallOfValhalla.Enemy
                 }
 
                 _animator.SetInteger("animState", 1);
-                _transform.position = Vector2.MoveTowards(_transform.position, new Vector2(_enemyController.Instance.LastSeenPlayerPos.x, _transform.position.y), Time.deltaTime * _aggressiveMovementSpeed);
+                _transform.position = Vector2.MoveTowards(_transform.position, new Vector2(_enemyController.LastSeenPlayerPos.x, _transform.position.y), Time.deltaTime * _aggressiveMovementSpeed);
             }
             else
             {

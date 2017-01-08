@@ -6,29 +6,36 @@ public class SwordSpecialCollision : MonoBehaviour {
 
     private Enemy_HP _enemyHP;
     private Enemy_Movement _enemyMovement;
+    private Fenrir_HP _fenrirHP;
+    private Fenrir_Movement _fenrirMovement;
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Enemy")
         {
-
-
+           
             _enemyMovement = other.gameObject.GetComponentInParent<Enemy_Movement>();
-            _enemyMovement.Knockback(250f, 250f);
             _enemyHP = other.gameObject.GetComponentInParent<Enemy_HP>();
-            _enemyHP.TakeDamage(3);
+
+            if (_enemyHP != null && _enemyMovement != null)
+            {
+                _enemyMovement.Knockback(250f, 250f);
+                _enemyHP.TakeDamage(3);
+            }else
+            {
+                _fenrirHP = other.gameObject.GetComponentInParent<Fenrir_HP>();
+                _fenrirMovement = other.gameObject.GetComponentInParent<Fenrir_Movement>();
+
+                _fenrirMovement.Knockback(250f, 250f);
+                _fenrirHP.TakeDamage(3);
+            }
+
+
+            _fenrirHP = null;
+            _enemyHP = null;
+            _enemyMovement = null;
+
         }
     }
 
