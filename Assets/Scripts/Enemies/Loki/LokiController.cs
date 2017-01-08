@@ -12,7 +12,6 @@ public class LokiController : MonoBehaviour {
 
         _lokiMovement = GetComponent<LokiMovement>();
         _lokiAttack = GetComponent<LokiAttack>();
-        StartBossFight();
     }
 	
 	// Update is called once per frame
@@ -27,9 +26,21 @@ public class LokiController : MonoBehaviour {
         _lokiAttack.SetStopAttack(false);
 
         _lokiAttack.Attack();
+
+        StartCoroutine(StartTeleportingSequence(10));
     }
 
-    
+    private IEnumerator StartTeleportingSequence(float howLong)
+    {
+        yield return new WaitForSeconds(howLong);
+        _lokiMovement.StartTeleportingSequence();
+    }
+
+    private IEnumerator StopTeleportingSequence(float howLong)
+    {
+        yield return new WaitForSeconds(howLong);
+        _lokiMovement._teleporting = false;
+    }
 
     
 

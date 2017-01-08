@@ -6,17 +6,18 @@ public class LokiAttack : MonoBehaviour {
 
     [SerializeField]
     private GameObject _projectile;
-
     [SerializeField]
     private Transform _projectileStartingPoint;
 
+    private LokiAnimationController _animator;
     private bool _normalAttack;
     private bool _stopAttack;
     private bool _attackOnce;
 
     private int _pooledProjectiles = 20;
     private int _arrayIndex;
-    
+
+    private float _shootingTime;
     
     public List<GameObject> _projectiles;
 
@@ -24,6 +25,7 @@ public class LokiAttack : MonoBehaviour {
     void Awake() {
 
         _projectiles = new List<GameObject>();
+        _animator = GetComponent<LokiAnimationController>();
         SetupProjectiles();
 	}
 
@@ -47,7 +49,7 @@ public class LokiAttack : MonoBehaviour {
     public void Attack()
     {
 
-        StartCoroutine(FireDelay(5));
+        StartCoroutine(NextShot(5));
         if (_normalAttack)
         {
 
@@ -68,11 +70,20 @@ public class LokiAttack : MonoBehaviour {
         _stopAttack = state;
     }
 
+    /*
     public System.Collections.IEnumerator FireDelay(float howLong)
     {
         yield return new WaitForSeconds(howLong);
         Fire(6);
-        StartCoroutine(FireDelay(5));
+    }
+    */
+
+    public System.Collections.IEnumerator NextShot(float howLong)
+    {
+        yield return new WaitForSeconds(howLong);        
+        _animator.SetAttackAnimation();
+        StartCoroutine(NextShot(3));
+        
     }
 
 

@@ -29,18 +29,22 @@ public class LokiMovement : MonoBehaviour {
 	private Transform _fifthMovePoint;
 
     private bool _moving;
+    [HideInInspector]
+    public bool _teleporting;
+    private LokiAnimationController _animator;
 
-	// Use this for initialization
-	void Awake () {
+    // Use this for initialization
+    void Awake () {
 
         _lokiTransform = GetComponent<Transform>();
-
+        _animator = GetComponent<LokiAnimationController>();
 		_currentMovePoint = _lokiTransform;
 
         _firstMovePoint = _pointGameObject1.GetComponent<Transform>();
         _secondMovePoint = _pointGameObject2.GetComponent<Transform>();
         _thirdMovePoint = _pointGameObject3.GetComponent<Transform>();
         _fourthMovePoint = _pointGameObject4.GetComponent<Transform>();
+        _fifthMovePoint = _pointGameObject5.GetComponent<Transform>();
 
     }
 	
@@ -161,4 +165,24 @@ public class LokiMovement : MonoBehaviour {
         Transform tmpPoint = GetRandomMovePoint();
         StartCoroutine(Movement(0f, tmpPoint));
     }
+
+    public void StartTeleportingSequence()
+    {
+        StopAllMovementSequences();
+        _animator.SetTeleportAnimation();
+    }
+
+    public void Teleport()
+    {
+        Transform tmp = GetRandomMovePoint();
+        transform.position = tmp.position;
+    }
+
+    public void StopTeleportingSequence()
+    {
+        if (!_teleporting)
+            StopAllMovementSequences();
+    }
+
+    
 }

@@ -18,6 +18,9 @@ namespace CallOfValhalla.Player
         [SerializeField]
         private Transform _playerTransform;
 
+        private bool _increaseCameraSize;
+        private bool _decreaseCameraSize;
+        private Camera _camera;
         private Vector3 _tmpLocation;
         private Transform _transform;
         private SepiaTone _sepiaEffect;
@@ -37,6 +40,7 @@ namespace CallOfValhalla.Player
             _transform = GetComponent<Transform>();
             _sepiaEffect = GetComponent<SepiaTone>();
             _sepiaEffect.enabled = false;
+            _camera = GetComponent<Camera>();
         }
 
         // Update is called once per frame
@@ -46,7 +50,9 @@ namespace CallOfValhalla.Player
                 MoveCamera();
             else
                 CenterCamera();
-                
+
+            CheckCameraSize();
+
         }
 
         private void MoveCamera()
@@ -97,5 +103,40 @@ namespace CallOfValhalla.Player
             yield return new WaitForSeconds(0.5f);
             _cameraCentering = true;
         }
+
+        private void CheckCameraSize()
+        {
+            if (_increaseCameraSize)
+            {
+                if (_camera.orthographicSize < 9)
+                {
+                    _camera.orthographicSize += +0.01f;
+                }
+                else
+                {
+                    _camera.orthographicSize = 9;
+                    _increaseCameraSize = false;
+                }
+
+            }
+
+            if (_decreaseCameraSize)
+            {
+                _camera.orthographicSize = 7f;
+                _decreaseCameraSize = false;
+            }
+        }
+
+        public void DecreaseCamera()
+        {
+            _decreaseCameraSize = true;
+        }
+
+        public void IncreaseCamera()
+        {
+            _increaseCameraSize = true;
+        }
     }
+
+
 }

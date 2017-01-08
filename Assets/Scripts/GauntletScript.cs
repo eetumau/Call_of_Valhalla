@@ -23,7 +23,10 @@ public class GauntletScript : MonoBehaviour {
 	// Use this for initialization
 	private void Awake () {
         _gauntletTrigger = GetComponentInChildren<GauntletTrigger>();
-		animator = _door.GetComponent<Animator> ();
+
+        if (_door != null)
+		    animator = _door.GetComponent<Animator> ();
+
         CheckLists();
 	    
 	}
@@ -65,7 +68,8 @@ public class GauntletScript : MonoBehaviour {
             if (_enemiesLeft == 0)
             {
                 DeactivateGauntlet();
-				animator.SetBool ("Door_Open", true);
+                if (_door != null)
+                    animator.SetBool ("Door_Open", true);
             }
             _enemiesLeft = 0;
 

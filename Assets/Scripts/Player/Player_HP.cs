@@ -13,6 +13,7 @@ namespace CallOfValhalla.Player
         [SerializeField]
         private float _deathDelay;
 
+        private Player_CameraFollow _cameraFollow;
         private Player_HP _instance;
         private Animator _animator;
         private float _delayTimer;
@@ -46,7 +47,7 @@ namespace CallOfValhalla.Player
             _delayTimer = _deathDelay;
             _hp = _OriginalHP;
             _transform = GetComponent<Transform>();
-
+            _cameraFollow = FindObjectOfType<Player_CameraFollow>();
             _hpBar = FindObjectOfType<HPBarController>();
         }
 
@@ -116,6 +117,7 @@ namespace CallOfValhalla.Player
             _hp = _OriginalHP;
             _transform.position = new Vector3(spawnPoint.position.x, spawnPoint.position.y, _transform.position.z);
             _respawning = false;
+            _cameraFollow.DecreaseCamera();
             _hpBar.Progress = 1f;
 
         }

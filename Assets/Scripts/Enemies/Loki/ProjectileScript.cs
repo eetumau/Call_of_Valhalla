@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using CallOfValhalla.Player;
 
 public class ProjectileScript : MonoBehaviour {
 
     private Rigidbody2D _rigidBody;
     private GameObject _player;
+    private Player_HP _playerHP;
     private Transform _playerTransform;
     private Transform _startingPointTransform;
-    private int _speed = 6;
+    private int _speed = 10;
 
 	// Use this for initialization
 	void Awake () {
@@ -41,4 +43,17 @@ public class ProjectileScript : MonoBehaviour {
     {
         _rigidBody.velocity = new Vector3(0, 0, 0);
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        _playerHP = other.GetComponent<Player_HP>();
+
+        if (other.gameObject.tag == "Player")
+        {
+                _playerHP.TakeDamage(3);
+        }
+
+
+    }
+    
 }
