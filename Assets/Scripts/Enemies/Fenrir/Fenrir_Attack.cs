@@ -26,6 +26,8 @@ namespace CallOfValhalla.Enemy
         [SerializeField] private float _specialMovementSpeed;
         [SerializeField]
         private int _chargeTimes;
+        [SerializeField]
+        private float _specialCoolDown;
 
         private BoxCollider2D _attackHitBox;
         private Fenrir_Controller _enemyController;
@@ -48,6 +50,8 @@ namespace CallOfValhalla.Enemy
         private float _distanceFromPointR;
         private bool _goRight;
         private int _chargeCounter;
+        private ParticleSystem _specialEffect;
+        private float _specialCDTimer;
 
 
         public Transform _bodyTransform;
@@ -95,12 +99,15 @@ namespace CallOfValhalla.Enemy
             _delayTimer = _attackDelay;
             _specialPointL = GameObject.Find("SpecialPointL");
             _specialPointR = GameObject.Find("SpecialPointR");
+            _specialEffect = GetComponentInChildren<ParticleSystem>();
+            _specialCDTimer = _specialCoolDown;
             //_bodyTransform = GetComponentInParent<Transform>();
         }
 
         // Update is called once per frame
         void Update()
         {
+            Debug.Log(_specialCDTimer);
             RunTimers();
         }
 
@@ -119,14 +126,14 @@ namespace CallOfValhalla.Enemy
                             _randomSpecial = Random.Range(0, _specialChance + 1);
                         }
 
-                        if (_randomSpecial == _specialChance)
+                        if (_randomSpecial == _specialChance && _specialCDTimer <= 0)
                         {
                             _specialAttacking = true;
                             CheckSpecialPoints();
                             StartCoroutine(SpecialAttack());
 
                         }
-                        else if (_random == _attackChance)
+                        else if (_random == _attackChance || (_randomSpecial == _specialChance && _specialCDTimer > 0))
                         {
                             _attacking = true;
                             Attack();
@@ -139,6 +146,12 @@ namespace CallOfValhalla.Enemy
                     else
                     {
                         _coolDownTimer -= Time.deltaTime;
+                    }
+
+                    if (!_specialAttacking)
+                    {
+                        _specialCDTimer -= Time.deltaTime;
+
                     }
                 }
             }
@@ -220,6 +233,7 @@ namespace CallOfValhalla.Enemy
 
         private IEnumerator SpecialAttack()
         {
+            _specialEffect.Play();
 
             Vector3 faceRight = new Vector3(-2, _bodyTransform.localScale.y, _bodyTransform.localScale.z);
             Vector3 faceLeft = new Vector3(2, _bodyTransform.localScale.y, _bodyTransform.localScale.z);
@@ -305,6 +319,8 @@ namespace CallOfValhalla.Enemy
 
             _attackHitBox.enabled = false;
             _specialAttacking = false;
+            _specialCDTimer = _specialCoolDown;
+            _specialEffect.Stop();
         }
     }
 }
