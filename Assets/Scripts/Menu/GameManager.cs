@@ -161,7 +161,7 @@ namespace CallOfValhalla
 				SoundManager.instance.SetMusic ("level_music_4");
 			}else if (_level > 3 && _level < 10)
 			{
-				SoundManager.instance.SetMusic ("level_music_1");
+				SoundManager.instance.SetMusic ("level_music_5");
 			}else
 			{
 				SoundManager.instance.SetMusic ("level_music_3");
