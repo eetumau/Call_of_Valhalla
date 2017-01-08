@@ -125,7 +125,7 @@ public class Weapon_Hammer : Weapon
                 StartCoroutine(ResetAfterSpecial(0.5f));
             }
 
-            SoundManager.instance.PlaySound("charge_release", _movement.Source, false);
+            SoundManager.instance.PlaySound("mjolnirLightning", _movement.Source, false);
         }
     }
 
