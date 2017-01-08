@@ -78,7 +78,7 @@ namespace CallOfValhalla
 
         public void OnNewGamePressed()
         {
-            SoundManager.instance.PlaySound("button", _source);
+            SoundManager.instance.PlaySound("button", _source, false);
             //_levelPanel.SetActive(true);
             _animator.SetTrigger("Hide");
         }
@@ -86,110 +86,110 @@ namespace CallOfValhalla
         public void OnSettingsPressed()
         {
             //_settingsPanel.SetActive(true);
-            SoundManager.instance.PlaySound("button", _source);
+            SoundManager.instance.PlaySound("button", _source, false);
             _animator.SetTrigger("Show2");
         }
 
         public void OnQuitPressed()
         {
-            SoundManager.instance.PlaySound("button", _source);
+            SoundManager.instance.PlaySound("button", _source, false);
             Application.Quit();
         }
 
         public void OnBackPressed()
         {
             //_levelPanel.SetActive(false);
-            SoundManager.instance.PlaySound("button", _source);
+            SoundManager.instance.PlaySound("button", _source, false);
             _animator.SetTrigger("Show");
         }
 
         public void OnBack2Pressed()
         {
             //_settingsPanel.SetActive(false);
-            SoundManager.instance.PlaySound("button", _source);
+            SoundManager.instance.PlaySound("button", _source, false);
             _animator.SetTrigger("Show");
         }
 
         public void Level1()
         {
-            SoundManager.instance.PlaySound("button", _source);
+            SoundManager.instance.PlaySound("button", _source, false);
             GameManager.Instance.Level = 1;
             GameManager.Instance.Game();
         }
 
         public void Level2()
         {
-            SoundManager.instance.PlaySound("button", _source);
+            SoundManager.instance.PlaySound("button", _source, false);
             GameManager.Instance.Level = 2;
             GameManager.Instance.Game();
         }
         
         public void Level3()
         {
-            SoundManager.instance.PlaySound("button", _source);
+            SoundManager.instance.PlaySound("button", _source, false);
             GameManager.Instance.Level = 3;
             GameManager.Instance.Game();
         }
 
         public void Level4()
         {
-            SoundManager.instance.PlaySound("button", _source);
+            SoundManager.instance.PlaySound("button", _source, false);
             GameManager.Instance.Level = 4;
             GameManager.Instance.Game();
         }
 
         public void Level5()
         {
-            SoundManager.instance.PlaySound("button", _source);
+            SoundManager.instance.PlaySound("button", _source, false);
             GameManager.Instance.Level = 5;
             GameManager.Instance.Game();
         }
 
 		public void Level6()
 		{
-            SoundManager.instance.PlaySound("button", _source);
+            SoundManager.instance.PlaySound("button", _source, false);
             GameManager.Instance.Level = 6;
 			GameManager.Instance.Game();
 		}
 
 		public void Level7()
 		{
-            SoundManager.instance.PlaySound("button", _source);
+            SoundManager.instance.PlaySound("button", _source, false);
             GameManager.Instance.Level = 7;
 			GameManager.Instance.Game();
 		}
 
 		public void Level8()
 		{
-            SoundManager.instance.PlaySound("button", _source);
+            SoundManager.instance.PlaySound("button", _source, false);
             GameManager.Instance.Level = 8;
 			GameManager.Instance.Game();
 		}
 
 		public void Level9()
 		{
-            SoundManager.instance.PlaySound("button", _source);
+            SoundManager.instance.PlaySound("button", _source, false);
             GameManager.Instance.Level = 9;
 			GameManager.Instance.Game();
 		}
 
 		public void Level10()
 		{
-			SoundManager.instance.PlaySound("button", _source);
+			SoundManager.instance.PlaySound("button", _source, false);
 			GameManager.Instance.Level = 10;
 			GameManager.Instance.Game();
 		}
 
 		public void Level11()
 		{
-			SoundManager.instance.PlaySound("button", _source);
+			SoundManager.instance.PlaySound("button", _source, false);
 			GameManager.Instance.Level = 11;
 			GameManager.Instance.Game();
 		}
 
 		public void Level12()
 		{
-			SoundManager.instance.PlaySound("button", _source);
+			SoundManager.instance.PlaySound("button", _source, false);
 			GameManager.Instance.Level = 12;
 			GameManager.Instance.Game();
 		}
@@ -197,7 +197,7 @@ namespace CallOfValhalla
         //For testing purposes
         public void EetunSceneen()
         {
-            SoundManager.instance.PlaySound("button", _source);
+            SoundManager.instance.PlaySound("button", _source, false);
             GameManager.Instance.Level = 12;
             GameManager.Instance.Game();
         }
@@ -205,7 +205,7 @@ namespace CallOfValhalla
         //For testing purposes
         public void TeemunSceneen()
         {
-            SoundManager.instance.PlaySound("button", _source);
+            SoundManager.instance.PlaySound("button", _source, false);
             GameManager.Instance.Level = 13;
             GameManager.Instance.Game();
         }

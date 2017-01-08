@@ -32,7 +32,7 @@ namespace CallOfValhalla
                 Time.timeScale = 0;
             }else
             {
-                SoundManager.instance.PlaySound("button", _source);
+                SoundManager.instance.PlaySound("button", _source, false);
                 _levelCompleteUI.SetActive(false);
                 Time.timeScale = 1;
             }

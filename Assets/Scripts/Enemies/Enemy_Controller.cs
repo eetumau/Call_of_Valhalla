@@ -90,17 +90,17 @@ namespace CallOfValhalla.Enemy
             {
                 if (gameObject.name.Contains("Troll"))
                 {
-                    SoundManager.instance.PlaySound("troll_aggro", _audioSource);
+                    SoundManager.instance.PlaySound("troll_aggro", _audioSource, false);
 
                 }
                 else if (gameObject.name.Contains("Goblin"))
                 {
-                    SoundManager.instance.PlaySound("goblin_aggro", _audioSource);
+                    SoundManager.instance.PlaySound("goblin_aggro", _audioSource, false);
 
                 }
                 else if (gameObject.name.Contains("Wolf"))
                 {
-                    SoundManager.instance.PlaySound("wolf_growl_1", _audioSource);
+                    SoundManager.instance.PlaySound("wolf_growl_1", _audioSource, false);
                 }
             }
             _isAggressive = true;

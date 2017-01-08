@@ -21,7 +21,7 @@ namespace CallOfValhalla {
                     GameManager.Instance.LevelCompleted = GameManager.Instance.Level;
                 }
                 GameManager.Instance.Save();
-                SoundManager.instance.PlaySound("level_finish", _source);
+                SoundManager.instance.PlaySound("level_finish", _source, false);
 
                 if(GameManager.Instance.Level < 12)
                 {

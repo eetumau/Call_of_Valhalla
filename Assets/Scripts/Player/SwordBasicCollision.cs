@@ -26,7 +26,7 @@ public class SwordBasicCollision : MonoBehaviour {
         if (other.gameObject.tag == "Enemy")
         {
             _enemyHP = other.gameObject.GetComponentInParent<Enemy_HP>();
-            SoundManager.instance.PlaySound("sword_hit", _source);
+            SoundManager.instance.PlaySound("sword_hit", _source, false);
 
             if (!_enemyHP.thisIsABoss)
             {

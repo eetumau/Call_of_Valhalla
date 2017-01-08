@@ -187,7 +187,7 @@ namespace CallOfValhalla.Enemy
             if (_attackTimer == _attackTime)
             {
 
-                SoundManager.instance.PlaySound("wolf_bark_2", _enemyController.WeaponSource);
+                SoundManager.instance.PlaySound("wolf_bark_2", _enemyController.WeaponSource, false);
             }
         }
 

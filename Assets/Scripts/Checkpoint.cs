@@ -44,7 +44,7 @@ namespace CallOfValhalla
             {
                 if (other.gameObject.tag == "Player")
                 {
-                    SoundManager.instance.PlaySound("checkpoint_activated", _source);
+                    SoundManager.instance.PlaySound("checkpoint_activated", _source, false);
                     _activated = true;
                     _renderer.sprite = _activatedSprite;
                     GameManager.Instance.CheckPoint = this;

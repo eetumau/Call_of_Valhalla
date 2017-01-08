@@ -42,7 +42,7 @@ namespace CallOfValhalla
                 Time.timeScale = 0;
             }else
             {
-                SoundManager.instance.PlaySound("button", _source);
+                SoundManager.instance.PlaySound("button", _source, false);
                 _settingsPanel.SetActive(false);
                 _showSettings = false;
                 _pauseCanvasGO.SetActive(false);
@@ -52,7 +52,7 @@ namespace CallOfValhalla
 
         public void ToggleSettings()
         {
-            SoundManager.instance.PlaySound("button", _source);
+            SoundManager.instance.PlaySound("button", _source, false);
 
             _showSettings = !_showSettings;
 

@@ -23,7 +23,7 @@ public class HammerBasicCollision : MonoBehaviour {
     {
         if (other.gameObject.tag == "Enemy")
         {
-            SoundManager.instance.PlaySound("sword_hit", _source);
+            SoundManager.instance.PlaySound("sword_hit", _source, false);
             _enemyHP = other.gameObject.GetComponentInParent<Enemy_HP>();
 
             if (!_enemyHP.thisIsABoss)

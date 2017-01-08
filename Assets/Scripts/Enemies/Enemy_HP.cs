@@ -53,16 +53,16 @@ namespace CallOfValhalla.Enemy {
 
                 if (gameObject.name.Contains("Goblin"))
                 {
-                    SoundManager.instance.PlaySound("goblin_death_1", _enemyController.Source);
+                    SoundManager.instance.PlaySound("goblin_death_1", _enemyController.Source, false);
 
                 }else if (gameObject.name.Contains("Troll"))
                 {
-                    SoundManager.instance.PlaySound("troll_death", _enemyController.Source);
+                    SoundManager.instance.PlaySound("troll_death", _enemyController.Source, false);
 
                 }
                 else if (gameObject.name.Contains("Wolf"))
                 {
-                    SoundManager.instance.PlaySound("wolf_death", _enemyController.Source);
+                    SoundManager.instance.PlaySound("wolf_death", _enemyController.Source, false);
 
                 }
             }

@@ -68,7 +68,7 @@ namespace CallOfValhalla.Player
                 _basic2Collider.SetActive(true);
                 _basic2Active = true;
                 _movement.SetAttackAnimation("swordbasic2", 0.4f);
-                SoundManager.instance.PlaySound("sword_1", _movement.Source);
+                SoundManager.instance.PlaySound("sword_1", _movement.Source, false);
 
             }
             if (attack && !_basic1Active && !_specialActive)
@@ -77,7 +77,7 @@ namespace CallOfValhalla.Player
                 _basic1Active = true;
                 _timer1 = 0.4f;
                 _movement.SetAttackAnimation("swordbasic1", 0.4f);
-                SoundManager.instance.PlaySound("sword_1", _movement.Source);
+                SoundManager.instance.PlaySound("sword_1", _movement.Source, false);
             }
             
         }
@@ -105,7 +105,7 @@ namespace CallOfValhalla.Player
                 _specialActive = true;
                 _specialAttackTimer = 0.4f;
                 _movement.SetAttackAnimation("swordspecial", 0.4f);
-				SoundManager.instance.PlaySound("sword_super", _movement.Source);
+				SoundManager.instance.PlaySound("sword_super", _movement.Source, false);
                 _specialCompletion = 0f;
             }
         }

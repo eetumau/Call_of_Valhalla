@@ -30,7 +30,7 @@ namespace CallOfValhalla
                 _gameOverUI.SetActive(true);
             }else
             {
-                SoundManager.instance.PlaySound("button", _source);
+                SoundManager.instance.PlaySound("button", _source, false);
                 Time.timeScale = 1;
                 _gameOverUI.SetActive(false);
             }

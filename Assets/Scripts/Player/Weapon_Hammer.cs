@@ -124,6 +124,8 @@ public class Weapon_Hammer : Weapon
                 _movement.SetAttackAnimation("HammerSpecial");
                 StartCoroutine(ResetAfterSpecial(0.5f));
             }
+
+            SoundManager.instance.PlaySound("charge_release", _movement.Source, false);
         }
     }
 
@@ -151,7 +153,7 @@ public class Weapon_Hammer : Weapon
             _timer1 = 0.6f;
             _basicCollider.SetActive(true);
             _movement.SetAttackAnimation("hammerbasic", 0.6f);
-            SoundManager.instance.PlaySound("hammer_swing", _movement.Source);
+            SoundManager.instance.PlaySound("hammer_swing", _movement.Source, false);
         }
     }
 
@@ -166,6 +168,7 @@ public class Weapon_Hammer : Weapon
 
             _specialCollisionScript.SetStunAndDamage("Small");
             _movement.SetAttackAnimation("Charge1");
+            SoundManager.instance.PlaySound("charge_1", _movement.Source, false);
             
             StartCoroutine(SetSecondChargeStep( 0.5f));
             StartCoroutine(SetThirdChargeStep(1f));
@@ -224,6 +227,7 @@ public class Weapon_Hammer : Weapon
     private IEnumerator SetThirdChargeStep(float howLong)
     {   
         yield return new WaitForSeconds(howLong);
+        SoundManager.instance.PlaySound("charge_2", _movement.Source, true);
         _specialCollisionScript.SetStunAndDamage("Large");
         _movement.SetAttackAnimation("Charge3");
         _fullyCharged = true;

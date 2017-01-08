@@ -87,7 +87,7 @@ namespace CallOfValhalla
             }
         }
 
-        public void PlaySound(string name, AudioSource source)
+        public void PlaySound(string name, AudioSource source, bool loop)
         {
             for (int i = 0; i < _sfx.Length; i++)
             {
@@ -103,6 +103,15 @@ namespace CallOfValhalla
                     }else
                     {
                         source.volume = _soundVolume;
+                    }
+
+                    if (loop)
+                    {
+                        source.loop = true;
+                    }
+                    else
+                    {
+                        source.loop = false;
                     }
 
                     source.Play();

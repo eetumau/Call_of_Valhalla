@@ -199,7 +199,7 @@ namespace CallOfValhalla.Player
         {
             if (_isGrounded && _jump)
             {
-                SoundManager.instance.PlaySound("jump", _groundSource);
+                SoundManager.instance.PlaySound("jump", _groundSource, false);
                 _playerRigidbody2D.velocity = new Vector2(_playerRigidbody2D.velocity.x, _playerJumpForce);
                 _isGrounded = false;
             }
@@ -279,7 +279,7 @@ namespace CallOfValhalla.Player
                     sound = "footsteps - Step4";
                 }
 
-                SoundManager.instance.PlaySound(sound, _groundSource);
+                SoundManager.instance.PlaySound(sound, _groundSource, false);
                 _soundDelayTimer = _soundDelay;
             }
 
