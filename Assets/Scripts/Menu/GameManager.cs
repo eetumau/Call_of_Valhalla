@@ -143,13 +143,15 @@ namespace CallOfValhalla
 
         public void MainMenu()
         {
-            if(StateManager.CurrentStateType == StateType.Game)
+
+            if (StateManager.CurrentStateType == StateType.Game)
             {
                 StateManager.PerformTransition(TransitionType.GameToMainMenu);
             }else
             {
                 StateManager.PerformTransition(TransitionType.GameCompleteToMainMenu);
             }
+
         }
 
         public void Game()

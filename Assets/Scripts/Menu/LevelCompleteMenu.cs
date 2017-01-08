@@ -25,11 +25,18 @@ namespace CallOfValhalla
         {
 
             GameManager.Instance.LevelCompleteUI.ToggleLevelCompleteUI();
-            if(GameManager.Instance.Level == 3 || GameManager.Instance.Level == 6)
+
+            GameManager.Instance.Level += 1;
+
+            if (GameManager.Instance.Level > 3)
             {
                 SoundManager.instance.SetMusic("level_music_1");
+            }else if(GameManager.Instance.Level > 9)
+            {
+                SoundManager.instance.SetMusic("level_music_3");
             }
-            GameManager.Instance.Level += 1;
+
+
             
             SceneManager.LoadScene(GameManager.Instance.Level);
         }

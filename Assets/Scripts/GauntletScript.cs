@@ -3,6 +3,7 @@ using System.Collections;
 using CallOfValhalla.Enemy;
 using System;
 using CallOfValhalla;
+using CallOfValhalla.States;
 
 public class GauntletScript : MonoBehaviour {
         
@@ -106,12 +107,19 @@ public class GauntletScript : MonoBehaviour {
 
     private void ResetMusic()
     {
-        if(GameManager.Instance.Level < 4)
+        if (GameManager.StateManager.CurrentStateType == CallOfValhalla.States.StateType.MainMenu)
         {
-            SoundManager.instance.SetMusic("level_music_2");
-        }else
+            SoundManager.instance.SetMusic("menu_music_1");
+        }
+        else if(GameManager.Instance.Level < 4)
+        {
+            SoundManager.instance.SetMusic("level_music_4");
+        }else if(GameManager.Instance.Level > 3 && GameManager.Instance.Level < 10)
         {
             SoundManager.instance.SetMusic("level_music_1");
+        }else
+        {
+            SoundManager.instance.SetMusic("level_music_3");
         }
     }
 
