@@ -67,7 +67,6 @@ namespace CallOfValhalla.Dialogue
             
             if (_textFile != null)
             {
-                Debug.Log("TextLoaded");
                 _textLines = (_textFile.text.Split('\n'));
             }
             _endAtLine = _textLines.Length - 1;

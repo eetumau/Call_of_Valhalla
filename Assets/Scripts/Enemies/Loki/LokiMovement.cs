@@ -176,12 +176,17 @@ public class LokiMovement : MonoBehaviour {
     {
         Transform tmp = GetRandomMovePoint();
         transform.position = tmp.position;
+
+        if (!_teleporting)
+        {
+            StopAllMovementSequences();
+        }
+
     }
 
     public void StopTeleportingSequence()
     {
-        if (!_teleporting)
-            StopAllMovementSequences();
+
     }
 
     

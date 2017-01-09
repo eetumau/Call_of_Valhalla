@@ -34,6 +34,7 @@ public class LokiController : MonoBehaviour {
     {
         yield return new WaitForSeconds(howLong);
         _lokiMovement.StartTeleportingSequence();
+        StartCoroutine(StopTeleportingSequence(8));
     }
 
     private IEnumerator StopTeleportingSequence(float howLong)
