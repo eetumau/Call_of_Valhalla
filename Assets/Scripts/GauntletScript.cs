@@ -136,7 +136,7 @@ public class GauntletScript : MonoBehaviour {
     {
         if (GameManager.StateManager.CurrentStateType == CallOfValhalla.States.StateType.MainMenu)
         {
-            SoundManager.instance.SetMusic("menu_music_1");
+            SoundManager.instance.SetMusic("epic-bensound");
         }
         else if(GameManager.Instance.Level < 4)
         {
