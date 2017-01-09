@@ -24,8 +24,15 @@ public class GauntletTrigger : MonoBehaviour {
         {
             _gauntlet.ActivateGauntlet();
             _trigger.SetActive(false);
-            SoundManager.instance.SetMusic("boss_music_3");
-            
+
+            if(GameManager.Instance.Level != 10 && GameManager.Instance.Level != 12)
+            {
+                SoundManager.instance.SetMusic("boss_music_2");
+            }else if(GameManager.Instance.Level == 12)
+            {
+                SoundManager.instance.SetMusic("boss_music_3");
+            }
+
         }
     }
 }
