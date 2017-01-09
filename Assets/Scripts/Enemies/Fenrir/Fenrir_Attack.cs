@@ -52,6 +52,7 @@ namespace CallOfValhalla.Enemy
         private int _chargeCounter;
         private ParticleSystem _specialEffect;
         private float _specialCDTimer;
+        private Coroutine _special;
 
 
         public Transform _bodyTransform;
@@ -130,7 +131,7 @@ namespace CallOfValhalla.Enemy
                         {
                             _specialAttacking = true;
                             CheckSpecialPoints();
-                            StartCoroutine(SpecialAttack());
+                            _special = StartCoroutine(SpecialAttack());
 
                         }
                         else if (_random == _attackChance || (_randomSpecial == _specialChance && _specialCDTimer > 0))
@@ -246,6 +247,7 @@ namespace CallOfValhalla.Enemy
                 _movement.IsFacingRight = true;
                 while (_bodyTransform.position.x < _specialPointR.transform.position.x)
                 {
+                    
                     _bodyTransform.position = Vector2.MoveTowards(_bodyTransform.position,
                     new Vector2(_specialPointR.transform.position.x, _bodyTransform.position.y),
                     Time.deltaTime * _specialMovementSpeed);
@@ -254,7 +256,8 @@ namespace CallOfValhalla.Enemy
                 }
                 _goRight = false;
 
-            }else
+            }
+            else
             {
                 _bodyTransform.localScale = faceLeft;
                 _movement.IsFacingRight = false;
@@ -295,7 +298,8 @@ namespace CallOfValhalla.Enemy
 
                     _damageDealt = false;
                     _goRight = false;
-                }else
+                }
+                else
                 {
                     _bodyTransform.localScale = faceLeft;
                     _movement.IsFacingRight = false;
@@ -313,14 +317,21 @@ namespace CallOfValhalla.Enemy
                 }
 
                 _animator.SetInteger("animState", 0);
-                
+
                 yield return new WaitForSeconds(2);
             }
 
+            StopSpecial();
+        }
+
+        public void StopSpecial()
+        {
+            Debug.Log("STOP SPECIAL");
             _attackHitBox.enabled = false;
             _specialAttacking = false;
             _specialCDTimer = _specialCoolDown;
             _specialEffect.Stop();
+            StopCoroutine(_special);
         }
     }
 }

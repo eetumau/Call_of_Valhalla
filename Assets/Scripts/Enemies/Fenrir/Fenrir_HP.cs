@@ -23,6 +23,7 @@ namespace CallOfValhalla.Enemy
         private BossHPBarController _BossHP;
         private Transform _transform;
         private AudioSource _audioSource;
+        private Fenrir_Attack _attack;
 
         public int HP
         {
@@ -32,7 +33,7 @@ namespace CallOfValhalla.Enemy
         void Start()
         {
             _enemyController = GetComponent<Fenrir_Controller>();
-
+            _attack = GetComponentInChildren<Fenrir_Attack>();
             _animator = GetComponent<Animator>();
             _transform = GetComponent<Transform>();
             _audioSource = GetComponent<AudioSource>();
@@ -48,6 +49,7 @@ namespace CallOfValhalla.Enemy
 
             if (hitPoints <= 0)
             {
+                _attack.StopSpecial();
                 _enemyController.Die();
                 _animator.SetInteger("animState", 3);
                 SoundManager.instance.PlaySound("fenrir_death", _enemyController.Source, false);

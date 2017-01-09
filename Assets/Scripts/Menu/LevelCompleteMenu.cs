@@ -15,6 +15,14 @@ namespace CallOfValhalla
             _text.text = "Level " + GameManager.Instance.Level + " Completed!";
         }
 
+        private void Update()
+        {
+            if (Input.GetButtonDown("Continue"))
+            {
+                OnNextLevelPressed();
+            }
+        }
+
         public void OnRestartPressed()
         {
             GameManager.Instance.LevelCompleteUI.ToggleLevelCompleteUI();
