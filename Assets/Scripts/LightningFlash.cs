@@ -14,7 +14,7 @@ namespace CallOfValhalla
 
         public IEnumerator Flash()
         {
-            _cG.alpha = 1;
+            _cG.alpha = 0.4f;
 
             while(_cG.alpha > 0)
             {
