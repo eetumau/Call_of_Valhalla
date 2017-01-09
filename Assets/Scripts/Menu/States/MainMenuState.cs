@@ -17,7 +17,7 @@ namespace CallOfValhalla.States
         public override void StateActivated()
         {
             SceneManager.LoadScene(0);
-            SoundManager.instance.SetMusic("menu_music_1");
+            SoundManager.instance.SetMusic("bensound-epic");
         }
 
 
