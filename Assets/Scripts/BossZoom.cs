@@ -11,9 +11,12 @@ public class BossZoom : MonoBehaviour {
 		_camera = FindObjectOfType<Player_CameraFollow>();
 	}
 	
-	// Update is called once per frame
-	void OnCollisionEnter2D (Collider2D other) {
-		if (other.tag == "Player")
-			_camera.IncreaseCamera();
+	void OnTriggerEnter2D (Collider2D other) {
+	    if (other.tag == "Player")
+	    {
+            _camera.IncreaseCamera();
+            Debug.Log("HUGA");
+        }
+			
 	}
 }

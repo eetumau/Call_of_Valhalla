@@ -19,14 +19,10 @@ public class ProjectileScript : MonoBehaviour {
         _rigidBody = GetComponent<Rigidbody2D>();
         _player = GameObject.Find("HeroSword_0");
         _playerTransform = _player.GetComponent<Transform>();
-
-        Debug.Log(_startingPointTransform.position);
-        Debug.Log(transform.position);
     }
 	
 	void OnEnable()
     {
-
         transform.position = _startingPointTransform.position;
         _aimPoint = _playerTransform.position;
         _aimPoint.y += 1;

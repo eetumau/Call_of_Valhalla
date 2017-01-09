@@ -62,7 +62,9 @@ public class HammerSpecialCollision : MonoBehaviour {
             
             if(_enemyHP != null)
             {
-                _enemyMovement.Stun(_stunTime);
+                if (_enemyMovement != null)
+                    _enemyMovement.Stun(_stunTime);
+
                 _enemyHP.TakeDamage(_damage);
             }else
             {

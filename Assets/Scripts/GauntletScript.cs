@@ -90,6 +90,12 @@ public class GauntletScript : MonoBehaviour {
             ob.SetActive(false);
         }
 
+        if(GameManager.Instance.Level == 6 || GameManager.Instance.Level == 9)
+        {
+
+            SoundManager.instance.PlaySound("gate", _door.GetComponent<AudioSource>(), true);
+        }
+
         ResetMusic();
     }
 
