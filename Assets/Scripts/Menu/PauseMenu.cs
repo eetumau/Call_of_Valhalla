@@ -22,6 +22,14 @@ namespace CallOfValhalla {
             _soundToggle.isOn = !SoundManager.instance.SoundMuted;
         }
 
+        private void Update()
+        {
+            if (Input.GetButtonDown("Continue"))
+            {
+                OnResumePressed();
+            }
+        }
+
         public void OnResumePressed()
         {
             GameManager.Instance.Pauser.TogglePause();

@@ -42,6 +42,11 @@ public class Weapon_Hammer : Weapon
     private Vector3 _colliderSizeVector;
 
 
+    public AudioSource LightningSource
+    {
+        get { return _lightningSource; }
+    }
+
     private void Awake()
     {
         _hero = GameObject.Find("HeroSword_0");
@@ -215,7 +220,7 @@ public class Weapon_Hammer : Weapon
         _lightningAnimator.SetInteger("Animstate", 0);
     }
 
-    private IEnumerator ResetAfterSpecial(float howLong)
+    public IEnumerator ResetAfterSpecial(float howLong)
     {
         yield return new WaitForSeconds(howLong);
         _specialCollider.SetActive(false);

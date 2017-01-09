@@ -7,6 +7,14 @@ namespace CallOfValhalla
     public class GameOverMenu : MonoBehaviour
     {
 
+        private void Update()
+        {
+            if (Input.GetButtonDown("Continue"))
+            {
+                OnRestartPressed();
+            }
+        }
+
         public void OnRestartPressed()
         {
             GameManager.Instance.GameOverUI.ToggleGameOverUI();
