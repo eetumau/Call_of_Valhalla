@@ -10,13 +10,13 @@ public class LokiController : MonoBehaviour {
     private Enemy_HP _hp;
     private bool _dead;
 
+
     // Use this for initialization
     void Awake () {
 
         _lokiMovement = GetComponent<LokiMovement>();
         _lokiAttack = GetComponent<LokiAttack>();
         _hp = GetComponent<Enemy_HP>();
-
     }
 	
 	// Update is called once per frame
@@ -33,8 +33,18 @@ public class LokiController : MonoBehaviour {
     private void Die()
     {
         _dead = true;
-        _lokiMovement.Die();
+        _lokiMovement.Die();        
+
         _lokiAttack.SetStopAttack(true);
+
+        StopAllCoroutines();
+        
+    }
+
+    public void DisableLoki()
+    {
+        Debug.Log("DISABLE");
+        gameObject.SetActive(false);
     }
 
     public void StartBossFight()

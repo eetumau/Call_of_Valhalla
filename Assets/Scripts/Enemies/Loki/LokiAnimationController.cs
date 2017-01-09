@@ -19,6 +19,7 @@ public class LokiAnimationController : MonoBehaviour {
     public void SetAttackAnimation()
     {
         StopAllCoroutines();
+        Debug.Log("ATTACK");
         StartCoroutine(ResetToIdleAnimation(0.5f));
         _animator.SetInteger("animState", 1);
     }
@@ -43,6 +44,7 @@ public class LokiAnimationController : MonoBehaviour {
     public void SetStunAnimation()
     {
         StopAllCoroutines();
+        Debug.Log("STUNNED");
         _animator.SetInteger("animState", 4);
     }
 

@@ -46,10 +46,14 @@ namespace CallOfValhalla.Enemy {
 
             if (hitPoints <= 0)
             {
-                _animator.SetInteger("animState", 3);
+
 
                 if (!_loki)
+                {
+                    _animator.SetInteger("animState", 3);
                     _enemyController.Die();
+                }
+                    
 
                 if (gameObject.name.Contains("BigAssGoblin"))
                 {
