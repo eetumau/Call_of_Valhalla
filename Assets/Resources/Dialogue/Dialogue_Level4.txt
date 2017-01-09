@@ -1,6 +1,6 @@
  -
 'Twould seem that Loki's Jotun have already overrun these caves.
-I hope they have not reached Svartalfheim yet...
+Let us hope they have not reached Svartalfheim yet...
 (move)
 The Jotun fall before thee like weeds!
 (endlevel)
