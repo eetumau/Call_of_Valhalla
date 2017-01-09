@@ -31,6 +31,11 @@ public class LokiAnimationController : MonoBehaviour {
         SetIdleAnimation();
     }
 
+    public void StopFight()
+    {
+        StartCoroutine(ResetToIdleAnimation(0));
+    }
+
     public void SetTeleportAnimation()
     {
         _animator.SetInteger("animState", 2);

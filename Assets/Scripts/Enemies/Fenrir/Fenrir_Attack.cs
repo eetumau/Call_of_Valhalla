@@ -331,7 +331,11 @@ namespace CallOfValhalla.Enemy
             _specialAttacking = false;
             _specialCDTimer = _specialCoolDown;
             _specialEffect.Stop();
-            StopCoroutine(_special);
+
+            if (_special != null)
+            {
+                StopCoroutine(_special);
+            }
         }
     }
 }
