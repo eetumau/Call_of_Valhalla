@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 using CallOfValhalla.Enemy;
+using CallOfValhalla.Player;
 
 
 public class LokiController : MonoBehaviour {
 
     private LokiMovement _lokiMovement;
     private LokiAttack _lokiAttack;
+    private LokiAnimationController _animationController;
     private Enemy_HP _hp;
+    private Player_HP _playerHP;
     private bool _dead;
 
+    [SerializeField]
+    private GameObject[] _gameObjects;
 
     // Use this for initialization
     void Awake () {
@@ -17,6 +22,8 @@ public class LokiController : MonoBehaviour {
         _lokiMovement = GetComponent<LokiMovement>();
         _lokiAttack = GetComponent<LokiAttack>();
         _hp = GetComponent<Enemy_HP>();
+        _playerHP = FindObjectOfType<Player_HP>();
+        _animationController = GetComponent<LokiAnimationController>();
     }
 	
 	// Update is called once per frame
@@ -27,8 +34,37 @@ public class LokiController : MonoBehaviour {
             Debug.Log("DEATH");
 	        Die();
 	    }
+
+	    if (_playerHP.HP <= 0)
+	    {
+            Debug.Log("DÖD");
+	        StopBossFight();
+	    }
 	        
 	}
+
+    private void StopBossFight()
+    {
+        _lokiAttack.SetStopAttack(true);
+        _lokiMovement.StopAllMovementSequences();
+        _animationController.StopFight();
+    }
+
+    public void HideStuff()
+    {
+        foreach (GameObject tmpGameObject in _gameObjects)
+        {
+            tmpGameObject.SetActive(false);
+        }
+    }
+
+    private void ShowStuff()
+    {
+        foreach (GameObject tmpGameObject in _gameObjects)
+        {
+            tmpGameObject.SetActive(true);
+        }
+    }
 
     private void Die()
     {
@@ -38,7 +74,9 @@ public class LokiController : MonoBehaviour {
         _lokiAttack.SetStopAttack(true);
 
         StopAllCoroutines();
+        ShowStuff();
         
+
     }
 
     public void DisableLoki()
@@ -62,6 +100,7 @@ public class LokiController : MonoBehaviour {
     {
         yield return new WaitForSeconds(howLong);
         _lokiMovement.StartTeleportingSequence();
+        _lokiAttack.SetStopAttack(true);
         StartCoroutine(StopTeleportingSequence(8));
     }
 

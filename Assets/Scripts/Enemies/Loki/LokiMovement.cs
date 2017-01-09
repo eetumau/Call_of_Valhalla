@@ -61,6 +61,13 @@ public class LokiMovement : MonoBehaviour {
         
 	}
 
+    public void StartMovement()
+    {
+        _animator.SetIdleAnimation();
+        Transform tmpPoint = GetRandomMovePoint();
+        StartCoroutine(Movement(0, tmpPoint));
+    }
+
     // Sets up a new movement sequence
     public void SetMovement()
     {
@@ -190,10 +197,6 @@ public class LokiMovement : MonoBehaviour {
             
         }
     }
-
-
-
-
 
     public void Die()
     {
