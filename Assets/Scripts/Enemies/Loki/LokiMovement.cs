@@ -32,6 +32,11 @@ public class LokiMovement : MonoBehaviour {
 	private Transform _fifthMovePoint;
     private Transform _stunPoint;
 
+    [SerializeField]
+    private GameObject[] _teleportGameObjects;
+
+    private Transform _playerTransform;
+
     private bool _moving;
     [HideInInspector]
     public bool _teleporting;
@@ -51,6 +56,10 @@ public class LokiMovement : MonoBehaviour {
         _fifthMovePoint = _pointGameObject5.GetComponent<Transform>();
         _stunPoint = _stunPointGameObject.GetComponent<Transform>();
 
+
+
+        _playerTransform = GameObject.Find("HeroSword_0").GetComponent<Transform>();
+
     }
 	
 	// Update is called once per frame
@@ -58,6 +67,7 @@ public class LokiMovement : MonoBehaviour {
 
         if (_moving)
             Move();
+        
         
 	}
 
@@ -71,17 +81,17 @@ public class LokiMovement : MonoBehaviour {
     // Sets up a new movement sequence
     public void SetMovement()
     {
-        float tmpTime = GetRandomMoveTime();
+        //float tmpTime = GetRandomMoveTime();
         _animator.SetIdleAnimation();
         Transform tmpPoint = GetRandomMovePoint();
-        StartCoroutine(Movement(tmpTime, tmpPoint));
+        StartCoroutine(Movement(1, tmpPoint));
     }
 
     private IEnumerator Movement(float time, Transform tf)
     {
         yield return new WaitForSeconds(time);
         MoveToPoint(tf);
-        SetMovement();
+        
     }
 
     public void MoveToPoint(Transform tf)
@@ -93,12 +103,46 @@ public class LokiMovement : MonoBehaviour {
     // Moves Loki to the destination
     private void Move()
     {
+        if (_lokiTransform.position.x < _pointToMove.position.x && _moving)
+        {
+            _lokiTransform.localScale = new Vector3(-1, 1, 1);
+        }
+        else if (_moving)
+        {
+            _lokiTransform.localScale = new Vector3(1, 1, 1);
+        }
+
         float step = _speed * Time.deltaTime;
         _lokiTransform.position = Vector3.MoveTowards(_lokiTransform.position, _pointToMove.position, step);
 
         if (_lokiTransform.position == _pointToMove.position)
+        {
             _moving = false;
-        
+            FaceThePlayer();
+            SetMovement();
+        }
+
+    }
+
+    private Vector3 GetRandomTeleportPoint()
+    {
+        float tmp = _teleportGameObjects.Length;
+        int index = (int)Random.Range(0f, tmp);
+
+        Vector3 tmpVector3 = _teleportGameObjects[index].transform.position;
+        return tmpVector3;
+    }
+
+    private void FaceThePlayer()
+    {
+        if (_lokiTransform.position.x < _playerTransform.position.x)
+        {
+            _lokiTransform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            _lokiTransform.localScale = new Vector3(1, 1, 1);
+        }
     }
 
     // Returns random time for the movement timer
@@ -168,6 +212,7 @@ public class LokiMovement : MonoBehaviour {
     {
         _moving = false;
         StopAllCoroutines();
+        Debug.Log("STOPALLMOVEMENT");
     }
 
     // Starts a flying movement sequence immediatly
@@ -186,9 +231,8 @@ public class LokiMovement : MonoBehaviour {
 
     public void Teleport()
     {
-        Transform tmp = GetRandomMovePoint();
-        transform.position = tmp.position;
-
+        transform.position = GetRandomTeleportPoint();
+        FaceThePlayer();
         if (!_teleporting)
         {
             StopAllMovementSequences();

@@ -119,7 +119,6 @@ namespace CallOfValhalla.Dialogue
                         }                        
                         else
                         {
-                            Debug.Log("STARTTYPING");
                             StartCoroutine(TextScroll(_textLines[_currentLine]));
                         }
                             
@@ -163,7 +162,6 @@ namespace CallOfValhalla.Dialogue
             
             _currentLine += 1;
             _playerInput.DisableControls(true);
-            Debug.Log(_playerMovement._isGrounded);
 
             if (_playerMovement._isGrounded)
             {

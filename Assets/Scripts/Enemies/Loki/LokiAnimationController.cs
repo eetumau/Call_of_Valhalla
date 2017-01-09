@@ -24,7 +24,6 @@ public class LokiAnimationController : MonoBehaviour {
         _animator.SetInteger("animState", 1);
     }
 
-
     public IEnumerator ResetToIdleAnimation(float howLong)
     {
         yield return new WaitForSeconds(howLong);
@@ -38,6 +37,7 @@ public class LokiAnimationController : MonoBehaviour {
 
     public void SetTeleportAnimation()
     {
+        StopAllCoroutines();
         _animator.SetInteger("animState", 2);
     }
 

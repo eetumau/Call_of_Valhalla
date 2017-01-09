@@ -28,7 +28,7 @@ public class ProjectileScript : MonoBehaviour {
         _aimPoint.y += 1;
         transform.LookAt(_aimPoint);
         _rigidBody.velocity = transform.forward * _speed;
-        StartCoroutine(Disable(5));        
+        StartCoroutine(Disable(4));        
     }
 
     public void SetSpeed(int speed)

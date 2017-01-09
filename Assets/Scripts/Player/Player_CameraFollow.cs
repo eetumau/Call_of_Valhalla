@@ -27,6 +27,7 @@ namespace CallOfValhalla.Player
         private bool _cameraCentering;
         [SerializeField] private float _centeringSpeed;
         private float _resetTime = 1f;
+        private bool _decreaseCameraSizeSlowly;
 
         public SepiaTone Sepia
         {
@@ -109,15 +110,23 @@ namespace CallOfValhalla.Player
             if (_increaseCameraSize)
             {
                 if (_camera.orthographicSize < 9)
-                {
-                    _camera.orthographicSize += +0.01f;
-                }
+                    _camera.orthographicSize += 0.01f;
                 else
                 {
                     _camera.orthographicSize = 9;
                     _increaseCameraSize = false;
                 }
+            }
 
+            if (_decreaseCameraSizeSlowly)
+            {
+                if (_camera.orthographicSize > 7)
+                    _camera.orthographicSize -= 0.01f;
+                else
+                {
+                    _camera.orthographicSize = 7;
+                    _increaseCameraSize = false;
+                }
             }
 
             if (_decreaseCameraSize)
@@ -135,6 +144,30 @@ namespace CallOfValhalla.Player
         public void IncreaseCamera()
         {
             _increaseCameraSize = true;
+        }
+
+        public void DecreaseCameraSlowly()
+        {
+            _decreaseCameraSizeSlowly = true;
+        }
+
+        public void CameraDelayAfterLoki()
+        {
+            Time.timeScale = 0.5f;
+            StartCoroutine(Delay(0.4f));
+            StartCoroutine(CameraDelay(1.5f));
+        }
+
+        private IEnumerator Delay(float howLong)
+        {
+            yield return new WaitForSeconds(howLong);
+            DecreaseCameraSlowly();
+        }
+
+        private IEnumerator CameraDelay(float howLong)
+        {
+            yield return new WaitForSeconds(howLong);
+            Time.timeScale = 1f;
         }
     }
 

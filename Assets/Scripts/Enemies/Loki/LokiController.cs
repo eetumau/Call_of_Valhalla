@@ -12,6 +12,7 @@ public class LokiController : MonoBehaviour {
     private Enemy_HP _hp;
     private Player_HP _playerHP;
     private bool _dead;
+    private Player_CameraFollow _cameraFollow;
 
     [SerializeField]
     private GameObject[] _gameObjects;
@@ -24,6 +25,7 @@ public class LokiController : MonoBehaviour {
         _hp = GetComponent<Enemy_HP>();
         _playerHP = FindObjectOfType<Player_HP>();
         _animationController = GetComponent<LokiAnimationController>();
+        _cameraFollow = FindObjectOfType<Player_CameraFollow>();
     }
 	
 	// Update is called once per frame
@@ -45,6 +47,7 @@ public class LokiController : MonoBehaviour {
 
     private void StopBossFight()
     {
+        StopAllCoroutines();
         _lokiAttack.SetStopAttack(true);
         _lokiMovement.StopAllMovementSequences();
         _animationController.StopFight();
@@ -70,14 +73,16 @@ public class LokiController : MonoBehaviour {
     {
         _dead = true;
         _lokiMovement.Die();        
-
         _lokiAttack.SetStopAttack(true);
-
         StopAllCoroutines();
         ShowStuff();
+        _cameraFollow.CameraDelayAfterLoki();
+        
         
 
     }
+
+    
 
     public void DisableLoki()
     {
@@ -88,11 +93,8 @@ public class LokiController : MonoBehaviour {
     public void StartBossFight()
     {
         _lokiMovement.SetMovement();
-        _lokiAttack.SetNormalAttack(true);
         _lokiAttack.SetStopAttack(false);
-
         _lokiAttack.Attack();
-
         StartCoroutine(StartTeleportingSequence(10));
     }
 
@@ -108,9 +110,8 @@ public class LokiController : MonoBehaviour {
     {
         yield return new WaitForSeconds(howLong);
         _lokiMovement._teleporting = false;
-        _lokiAttack.SetNormalAttack(false);
         _lokiAttack.SetStopAttack(true);
-        StartCoroutine(ResetBossfight(10));
+        StartCoroutine(ResetBossfight(8));
     }
 
     private IEnumerator ResetBossfight(float howLong)

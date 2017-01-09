@@ -14,7 +14,7 @@ public class LokiAttack : MonoBehaviour {
     private bool _stopAttack;
     private bool _attackOnce;
 
-    private int _pooledProjectiles = 20;
+    private int _pooledProjectiles = 15;
     private int _arrayIndex;
 
     private float _shootingTime;
@@ -40,30 +40,12 @@ public class LokiAttack : MonoBehaviour {
 
     }
 
-    // Update is called once per frame
-    void Update () {
-	    
-
-	}
 
     public void Attack()
     {
 
-        StartCoroutine(NextShot(5));
-        if (_normalAttack)
-        {
+        StartCoroutine(NextShot(2));
 
-        }
-        else
-        {
-
-        }
-    }
-
-    public void SetNormalAttack(bool state)
-    {
-        _normalAttack = state;
-        StartCoroutine(NextShot(0f));
     }
 
     public void SetStopAttack(bool state)
@@ -84,7 +66,7 @@ public class LokiAttack : MonoBehaviour {
     {
         yield return new WaitForSeconds(howLong);        
         _animator.SetAttackAnimation();
-        StartCoroutine(NextShot(3));
+        StartCoroutine(NextShot(2.5f));
         
     }
 

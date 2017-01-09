@@ -24,6 +24,7 @@ namespace CallOfValhalla.Enemy {
             Physics2D.IgnoreCollision(_circleCollider, _playerBoxCollider, true);
             Physics2D.IgnoreCollision(_circleCollider, _playerCircleCollider, true);
 
+
         }
 
 
@@ -38,5 +39,7 @@ namespace CallOfValhalla.Enemy {
                 Physics2D.IgnoreCollision(_circleCollider, col.gameObject.GetComponentInChildren<CircleCollider2D>(), true);
             }
         }
+
+
     }
 }

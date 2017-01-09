@@ -37,6 +37,7 @@ namespace CallOfValhalla.Enemy {
             _audioSource = GetComponent<AudioSource>();
 
             _originalHP = hitPoints;
+
             if (thisIsABoss)
                 _BossHP = FindObjectOfType<BossHPBarController>();
         }
