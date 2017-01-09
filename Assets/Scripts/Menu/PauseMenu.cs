@@ -30,7 +30,10 @@ namespace CallOfValhalla {
         public void OnRestartPressed()
         {
             GameManager.Instance.Pauser.TogglePause();
+
+            ResetMusic();
             SceneManager.LoadScene(GameManager.Instance.Level);
+
         }
 
         public void OnSettingsPressed()
@@ -54,6 +57,26 @@ namespace CallOfValhalla {
         public void MuteSound()
         {
             SoundManager.instance.ToggleSound(_soundToggle.isOn);
+        }
+
+        private void ResetMusic()
+        {
+            if (GameManager.StateManager.CurrentStateType == StateType.MainMenu)
+            {
+                SoundManager.instance.SetMusic("epic-bensound");
+            }
+            else if (GameManager.Instance.Level < 4)
+            {
+                SoundManager.instance.SetMusic("level_music_4");
+            }
+            else if (GameManager.Instance.Level > 3 && GameManager.Instance.Level < 10)
+            {
+                SoundManager.instance.SetMusic("level_music_5");
+            }
+            else
+            {
+                SoundManager.instance.SetMusic("level_music_3");
+            }
         }
     }
 }
