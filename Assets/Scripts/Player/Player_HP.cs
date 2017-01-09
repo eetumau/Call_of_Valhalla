@@ -87,14 +87,7 @@ namespace CallOfValhalla.Player
                 _input.enabled = false;
                 _animator.SetInteger("animState", 9);
                 StartCoroutine(GameOverTimer(_deathDelay));
-                /*
-                if (_delayTimer <= 0)
-                {
-                    GameManager.Instance.GameOver();
-                }
 
-                _delayTimer -= Time.deltaTime;
-                */
             }
         }
 

@@ -135,34 +135,37 @@ namespace CallOfValhalla.Enemy
 
         }
 
-        //public void DealDamage()
-        //{
-        //    if (!_damageDealt)
-        //    {
-        //        _player.Instance.TakeDamage(_damage);
-
-        //    }
-        //}
-
         private void Attack()
         {
             PlaySound();
 
             _animator.SetInteger("animState", 2);
 
-            if (_delayTimer <= 0)
+
+            //This is for the wolf only
+            if (_leaping)
             {
-                _attackHitBox.enabled = true;
+                if (_delayTimer <= 0)
+                {
+                    _attackHitBox.enabled = true;
+                }
+
+                if (_delayTimer == _attackDelay && _leaping)
+                {
+                    Leap();
+                }
+
+                _delayTimer -= Time.deltaTime;
             }
+        }
 
-            if (_delayTimer == _attackDelay && _leaping)
-            {
-                //This is for the wolf only
-                Leap();
-            }
-
-            _delayTimer -= Time.deltaTime;
-
+        public void EnableHitBox()
+        {
+            _attackHitBox.enabled = true;
+        }
+        public void DisableHitBox()
+        {
+            _attackHitBox.enabled = false;
         }
 
         private void PlaySound()

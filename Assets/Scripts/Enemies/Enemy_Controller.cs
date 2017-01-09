@@ -121,6 +121,15 @@ namespace CallOfValhalla.Enemy
             
         }
 
+        public void EnableAttackHitBox()
+        {
+            _attack.EnableHitBox();
+        }
+        public void DisableAttackHitBox()
+        {
+            _attack.DisableHitBox();
+        }
+
     }
 
 }
