@@ -16,7 +16,6 @@ public class GauntletTrigger : MonoBehaviour {
 	private void Awake () {
         _gauntlet = FindObjectOfType<GauntletScript>();
         _trigger = GameObject.Find("GauntletTrigger");
-        Debug.Log(_trigger);
 	}
 
     private void OnTriggerEnter2D(Collider2D other)
