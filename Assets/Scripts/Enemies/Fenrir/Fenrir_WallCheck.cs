@@ -30,7 +30,7 @@ namespace CallOfValhalla.Enemy
                 if (_controller.IsPassive)
                 {
 
-                    _enemyMovement.Instance.ChangeDirection();
+                    _enemyMovement.ChangeDirection();
                 }
             }
         }

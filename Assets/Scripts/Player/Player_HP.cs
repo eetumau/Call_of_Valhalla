@@ -18,6 +18,7 @@ namespace CallOfValhalla.Player
         private Animator _animator;
         private float _delayTimer;
         public int _hp;
+        private Weapon_Hammer _hammer;
 
         private Player_Movement _movement;
         private Player_InputController _input;
@@ -49,6 +50,7 @@ namespace CallOfValhalla.Player
             _transform = GetComponent<Transform>();
             _cameraFollow = FindObjectOfType<Player_CameraFollow>();
             _hpBar = FindObjectOfType<HPBarController>();
+            _hammer = GetComponent<Weapon_Hammer>();
         }
 
         public void TakeDamage(int damage)
@@ -81,13 +83,15 @@ namespace CallOfValhalla.Player
         {
             if (!_respawning)
             {
+                _hammer.LightningSource.loop = false;
+                StartCoroutine(_hammer.ResetAfterSpecial(0));
                 GameManager.Instance.CameraFollow.Sepia.enabled = true;
                 _dead = true;
                 _movement.enabled = false;
                 _input.enabled = false;
                 _animator.SetInteger("animState", 9);
                 StartCoroutine(GameOverTimer(_deathDelay));
-
+               
             }
         }
 

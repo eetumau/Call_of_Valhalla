@@ -25,17 +25,11 @@ namespace CallOfValhalla.Enemy
         private float _knockbackTimer;
         private bool _isIdle = true;
         private Animator _animator;
-        private Fenrir_Movement _instance;
         private Fenrir_WallCheck _wallCheck;
         private Rigidbody2D _rigidBody2D;
         private Fenrir_Attack _enemyAttack;
         private Player_Movement _playerMovement;
-        private Transform _player;
-
-        public Fenrir_Movement Instance
-        {
-            get { return _instance; }
-        }
+        private Transform _player;        
 
         public Transform Transform
         {
@@ -55,7 +49,6 @@ namespace CallOfValhalla.Enemy
             _transform = GetComponent<Transform>();
             _enemyController = GetComponent<Fenrir_Controller>();
             _animator = GetComponent<Animator>();
-            _instance = this;
             _wallCheck = GetComponentInChildren<Fenrir_WallCheck>();
             _rigidBody2D = GetComponent<Rigidbody2D>();
             _enemyAttack = GetComponentInChildren<Fenrir_Attack>();
@@ -88,7 +81,10 @@ namespace CallOfValhalla.Enemy
 
         public void Stun(float time)
         {
-            _stunTimer = time;
+            if (!_enemyAttack.SpecialAttacking)
+            {
+                _stunTimer = time;
+            }
         }
 
         private void CheckStates()
