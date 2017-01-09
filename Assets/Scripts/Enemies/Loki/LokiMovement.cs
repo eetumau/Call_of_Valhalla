@@ -21,12 +21,16 @@ public class LokiMovement : MonoBehaviour {
     private GameObject _pointGameObject4;
 	[SerializeField]
 	private GameObject _pointGameObject5;
+    [SerializeField]
+    private GameObject _stunPointGameObject;
+
 
     private Transform _firstMovePoint;
     private Transform _secondMovePoint;
     private Transform _thirdMovePoint;
     private Transform _fourthMovePoint;
 	private Transform _fifthMovePoint;
+    private Transform _stunPoint;
 
     private bool _moving;
     [HideInInspector]
@@ -45,6 +49,7 @@ public class LokiMovement : MonoBehaviour {
         _thirdMovePoint = _pointGameObject3.GetComponent<Transform>();
         _fourthMovePoint = _pointGameObject4.GetComponent<Transform>();
         _fifthMovePoint = _pointGameObject5.GetComponent<Transform>();
+        _stunPoint = _stunPointGameObject.GetComponent<Transform>();
 
     }
 	
@@ -60,18 +65,17 @@ public class LokiMovement : MonoBehaviour {
     public void SetMovement()
     {
         float tmpTime = GetRandomMoveTime();
+        _animator.SetIdleAnimation();
         Transform tmpPoint = GetRandomMovePoint();
         StartCoroutine(Movement(tmpTime, tmpPoint));
     }
 
     private IEnumerator Movement(float time, Transform tf)
     {
-
         yield return new WaitForSeconds(time);
         MoveToPoint(tf);
         SetMovement();
     }
-
 
     public void MoveToPoint(Transform tf)
     {
@@ -145,7 +149,7 @@ public class LokiMovement : MonoBehaviour {
                     break;
                 }
             }
-			break;
+			
         }
 
         _currentMovePoint = tmptf;
@@ -169,6 +173,7 @@ public class LokiMovement : MonoBehaviour {
     public void StartTeleportingSequence()
     {
         StopAllMovementSequences();
+        _teleporting = true;
         _animator.SetTeleportAnimation();
     }
 
@@ -180,14 +185,19 @@ public class LokiMovement : MonoBehaviour {
         if (!_teleporting)
         {
             StopAllMovementSequences();
+            transform.position = _stunPoint.position;
+            _animator.SetStunAnimation();
+            
         }
-
     }
 
-    public void StopTeleportingSequence()
+
+
+
+
+    public void Die()
     {
-
+        StopAllMovementSequences();
+        _animator.SetDeathAnimation();
     }
-
-    
 }

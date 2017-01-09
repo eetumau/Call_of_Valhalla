@@ -12,15 +12,14 @@ public class LokiAnimationController : MonoBehaviour {
 
     public void SetIdleAnimation()
     {
-        Debug.Log("RESET");
         _animator.SetInteger("animState", 0);
+        Debug.Log("RESETANIMATION");
     }
 
     public void SetAttackAnimation()
     {
         StopAllCoroutines();
         StartCoroutine(ResetToIdleAnimation(0.5f));
-        Debug.Log("STEP1");
         _animator.SetInteger("animState", 1);
     }
 
@@ -28,7 +27,6 @@ public class LokiAnimationController : MonoBehaviour {
     public IEnumerator ResetToIdleAnimation(float howLong)
     {
         yield return new WaitForSeconds(howLong);
-        Debug.Log("STEP2");
         SetIdleAnimation();
     }
 
@@ -40,5 +38,18 @@ public class LokiAnimationController : MonoBehaviour {
     public void SetTeleportAttackAnimation()
     {
         _animator.SetInteger("animState", 3);
+    }
+
+    public void SetStunAnimation()
+    {
+        StopAllCoroutines();
+        _animator.SetInteger("animState", 4);
+    }
+
+    public void SetDeathAnimation()
+    {
+        StopAllCoroutines();
+        Debug.Log("deathanimation");
+        _animator.SetInteger("animState", 5);
     }
 }

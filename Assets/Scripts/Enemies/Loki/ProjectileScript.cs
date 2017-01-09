@@ -9,6 +9,7 @@ public class ProjectileScript : MonoBehaviour {
     private Player_HP _playerHP;
     private Transform _playerTransform;
     private Transform _startingPointTransform;
+    private Vector3 _aimPoint;
     private int _speed = 10;
 
 	// Use this for initialization
@@ -18,12 +19,15 @@ public class ProjectileScript : MonoBehaviour {
         _rigidBody = GetComponent<Rigidbody2D>();
         _player = GameObject.Find("HeroSword_0");
         _playerTransform = _player.GetComponent<Transform>();
+	    
 	}
 	
 	void OnEnable()
     {
         transform.position = _startingPointTransform.position;
-        transform.LookAt(_playerTransform);
+        _aimPoint = _playerTransform.position;
+        _aimPoint.y += 1;
+        transform.LookAt(_aimPoint);
         _rigidBody.velocity = transform.forward * _speed;
         StartCoroutine(Disable(5));        
     }

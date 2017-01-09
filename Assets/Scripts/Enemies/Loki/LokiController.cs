@@ -1,23 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
+using CallOfValhalla.Enemy;
 
 
 public class LokiController : MonoBehaviour {
 
     private LokiMovement _lokiMovement;
     private LokiAttack _lokiAttack;
+    private Enemy_HP _hp;
+    private bool _dead;
 
     // Use this for initialization
     void Awake () {
 
         _lokiMovement = GetComponent<LokiMovement>();
         _lokiAttack = GetComponent<LokiAttack>();
+        _hp = GetComponent<Enemy_HP>();
+
     }
 	
 	// Update is called once per frame
-	void Update () {
-	    
+	void Update ()
+	{
+	    if (_hp.hitPoints <= 0 && !_dead)
+	    {
+            Debug.Log("DEATH");
+	        Die();
+	    }
+	        
 	}
+
+    private void Die()
+    {
+        _dead = true;
+        _lokiMovement.Die();
+        _lokiAttack.SetStopAttack(true);
+    }
 
     public void StartBossFight()
     {
@@ -41,8 +59,16 @@ public class LokiController : MonoBehaviour {
     {
         yield return new WaitForSeconds(howLong);
         _lokiMovement._teleporting = false;
+        _lokiAttack.SetNormalAttack(false);
+        _lokiAttack.SetStopAttack(true);
+        StartCoroutine(ResetBossfight(10));
     }
 
+    private IEnumerator ResetBossfight(float howLong)
+    {
+        yield return new WaitForSeconds(howLong);
+        StartBossFight();
+    }
     
 
     
