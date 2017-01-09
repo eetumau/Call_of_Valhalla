@@ -24,7 +24,7 @@ public class GauntletTrigger : MonoBehaviour {
         {
             _gauntlet.ActivateGauntlet();
             _trigger.SetActive(false);
-            SoundManager.instance.SetMusic("boss_music_2");
+            SoundManager.instance.SetMusic("boss_music_3");
             
         }
     }

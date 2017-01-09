@@ -50,7 +50,7 @@ namespace CallOfValhalla.Enemy
             {
                 _enemyController.Die();
                 _animator.SetInteger("animState", 3);
-                SoundManager.instance.PlaySound("wolf_death", _enemyController.Source, false);
+                SoundManager.instance.PlaySound("fenrir_death", _enemyController.Source, false);
                 
             }
 

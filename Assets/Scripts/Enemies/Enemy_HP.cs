@@ -51,11 +51,11 @@ namespace CallOfValhalla.Enemy {
                 if (!_loki)
                     _enemyController.Die();
 
-                if (gameObject.name.Contains("Goblin"))
+                if (gameObject.name.Contains("BigAssGoblin"))
                 {
-                    SoundManager.instance.PlaySound("goblin_death_1", _enemyController.Source, false);
-
-                }else if (gameObject.name.Contains("Troll"))
+                    SoundManager.instance.PlaySound("bigassgoblin_death", _enemyController.Source, false);
+                }
+                else if (gameObject.name.Contains("Troll"))
                 {
                     SoundManager.instance.PlaySound("troll_death", _enemyController.Source, false);
 
@@ -63,6 +63,17 @@ namespace CallOfValhalla.Enemy {
                 else if (gameObject.name.Contains("Wolf"))
                 {
                     SoundManager.instance.PlaySound("wolf_death", _enemyController.Source, false);
+
+                }else if (gameObject.name.Contains("Surt"))
+                {
+                    SoundManager.instance.PlaySound("surt_death", _enemyController.Source, false);
+                }
+                else if(gameObject.name.Contains("Goblin"))
+                {
+                    SoundManager.instance.PlaySound("goblin_death_1", _enemyController.Source, false);
+
+                } else if (gameObject.name.Contains("Loki"))
+                {
 
                 }
             }
