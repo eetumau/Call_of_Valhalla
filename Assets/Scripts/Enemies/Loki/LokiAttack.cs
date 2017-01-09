@@ -63,11 +63,13 @@ public class LokiAttack : MonoBehaviour {
     public void SetNormalAttack(bool state)
     {
         _normalAttack = state;
+        StartCoroutine(NextShot(0f));
     }
 
     public void SetStopAttack(bool state)
     {
         _stopAttack = state;
+        StopAllCoroutines();
     }
 
     /*
@@ -93,7 +95,6 @@ public class LokiAttack : MonoBehaviour {
         {
             if (!_projectiles[i].activeInHierarchy)
             {
-                Debug.Log("Fire");
                 _projectiles[i].SetActive(true);
                 break;
             }
