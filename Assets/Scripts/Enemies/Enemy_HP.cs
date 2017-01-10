@@ -26,6 +26,11 @@ namespace CallOfValhalla.Enemy {
         {
             get { return hitPoints; }
         }
+
+        public float OGHP
+        {
+            get { return _originalHP; }
+        }
         // Use this for initialization
         void Start() {
 
