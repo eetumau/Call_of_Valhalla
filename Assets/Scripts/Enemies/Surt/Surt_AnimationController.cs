@@ -27,13 +27,17 @@ namespace CallOfValhalla.Enemy
 
         public void EnableAttackHitBox()
         {
-            Debug.Log("ASD");
             _attack.EnableAttackHitBox();
         }
 
         public void DisableAttackHitBox()
         {
             _attack.DisableAttackHitBox();
+        }
+
+        public void ToggleAttacking()
+        {
+            _attack.ToggleAttacking();
         }
     }
 }
