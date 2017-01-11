@@ -48,7 +48,6 @@ namespace CallOfValhalla.Enemy
                 {
                     if (!Physics2D.Linecast(new Vector2(_lineCastStart.position.x, _lineCastStart.position.y), new Vector2(_lineCastEnd.position.x, _lineCastEnd.position.y), allButIgnoreLinecast))
                     {
-                        Debug.DrawLine(new Vector2(_lineCastStart.position.x, _lineCastStart.position.y), new Vector2(_lineCastEnd.position.x, _lineCastEnd.position.y));
 
                         _movement.PlayerOnSight = true;
                         _followTimer = _followTime;

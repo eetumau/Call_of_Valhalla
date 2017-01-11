@@ -13,7 +13,7 @@ namespace CallOfValhalla.Enemy {
         [SerializeField]
         public bool thisIsABoss;
         [SerializeField]
-        private bool _loki;
+        private bool _hasCustomScripts;
 
         private float _originalHP;
         private Animator _animator;
@@ -34,7 +34,7 @@ namespace CallOfValhalla.Enemy {
         // Use this for initialization
         void Start() {
 
-            if (!_loki)
+            if (!_hasCustomScripts)
                 _enemyController = GetComponent<Enemy_Controller>();
 
             _animator = GetComponent<Animator>();
@@ -54,12 +54,24 @@ namespace CallOfValhalla.Enemy {
             {
 
 
-                if (!_loki)
+                if (!_hasCustomScripts)
                 {
                     _animator.SetInteger("animState", 3);
                     _enemyController.Die();
+
+
                 }
-                    
+                else
+                {
+                    if (gameObject.name.Contains("Surt"))
+                    {
+
+                        Surt_Death _death = FindObjectOfType<Surt_Death>();
+                        _death.Die();
+
+                    }
+                }
+                   
 
                 if (gameObject.name.Contains("BigAssGoblin"))
                 {
@@ -74,9 +86,6 @@ namespace CallOfValhalla.Enemy {
                 {
                     SoundManager.instance.PlaySound("wolf_death", _enemyController.Source, false);
 
-                }else if (gameObject.name.Contains("Surt"))
-                {
-                    SoundManager.instance.PlaySound("surt_death", _enemyController.Source, false);
                 }
                 else if(gameObject.name.Contains("Goblin"))
                 {

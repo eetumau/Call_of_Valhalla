@@ -35,9 +35,14 @@ namespace CallOfValhalla.Enemy
             _attack.DisableAttackHitBox();
         }
 
-        public void ToggleAttacking()
+        public void EnableAttacking()
         {
-            _attack.ToggleAttacking();
+            _attack.EnableAttacking();
+        }
+
+        public void DisableAttacking()
+        {
+            _attack.DisableAttacking();
         }
     }
 }

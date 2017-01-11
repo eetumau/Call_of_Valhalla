@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using CallOfValhalla;
 
 
 namespace CallOfValhalla.Enemy {
@@ -22,6 +23,7 @@ namespace CallOfValhalla.Enemy {
         private float _rainDuration;
         [SerializeField]
         private float _rainInterval;
+        
 
         private Surt_Movement _movement;
         private Surt_AttackTrigger _trigger;
@@ -30,13 +32,15 @@ namespace CallOfValhalla.Enemy {
         private ParticleSystem[] _ps;
         private GameObject _specialPoint;
         private Transform _transform;
+        private AudioSource _source;
+        private Surt_Death _death;
         private float _cooldownTimer;
-        private bool _attacking;
-        private bool _specialAttacking;
+        private bool _attacking = false;
+        private bool _specialAttacking = false;
         private bool _specialDone;
         private float _rainIntervalTimer;
 
-        private int _pooledProjectiles = 15;
+        private int _pooledProjectiles = 30;
         private int index;
         private Transform[] _fireSpawns;
 
@@ -68,6 +72,7 @@ namespace CallOfValhalla.Enemy {
             _transform = _movement.GetComponent<Transform>();
             _cooldownTimer = _attackCooldown;
             _ps = GetComponentsInChildren<ParticleSystem>();
+            _source = GetComponent<AudioSource>();
 
             _fireSpawns = _fireSpawnObj.GetComponentsInChildren<Transform>();
             _projectiles = new List<GameObject>();
@@ -103,13 +108,13 @@ namespace CallOfValhalla.Enemy {
             if(_hp.HP < _hp.OGHP / 2 && !_specialDone)
             {
                 StartCoroutine(SpecialAttack());
+                _specialAttacking = true;
             }
 
-            if(_cooldownTimer <= 0)
+            if(_cooldownTimer <= 0 && !_specialAttacking)
             {
                 int random = (int)Random.Range(0, _attackChance +1);
 
-                Debug.Log(random);
                 if(random == _attackChance)
                 {
                     Attack();
@@ -119,7 +124,7 @@ namespace CallOfValhalla.Enemy {
                 }
             }
 
-            if (!_attacking)
+            if (!_attacking && !_specialAttacking)
             {
                 _cooldownTimer -= Time.deltaTime;
             }
@@ -127,9 +132,10 @@ namespace CallOfValhalla.Enemy {
 
         private void Attack()
         {
-            Debug.Log("Attack");
-            //_attacking = true;
+            _attacking = true;
             _surtAC.SetAnimation(2);
+            
+            _cooldownTimer = _attackCooldown;
         }
 
         private IEnumerator SpecialAttack()
@@ -139,32 +145,36 @@ namespace CallOfValhalla.Enemy {
             Vector2 _distance = _transform.position - _specialPoint.transform.position;
             while(_distance.magnitude > 1)
             {
+                CheckDirection();
                 _distance = _transform.position - _specialPoint.transform.position;
                 _transform.position = Vector2.MoveTowards(_transform.position, new Vector2(_specialPoint.transform.position.x, _transform.position.y), 5 * Time.deltaTime);
 
                 yield return null;
             }
+            SoundManager.instance.PlaySound("surt_death", _source, false);
             _surtAC.SetAnimation(6);
             _specialAttacking = true;
             _attacking = true;
             StartParticles();
+            StartCoroutine(RainTimer());
+
 
 
             yield return new WaitForSeconds(_shootDuration);
 
-            StartCoroutine(RainTimer());
             _surtAC.SetAnimation(0);
             StopParticles();
             _attacking = false;
+            _specialAttacking = false;
             
 
         }
 
         private IEnumerator RainTimer()
         {
-            while(_rainDuration > 0)
+            while (_rainDuration > 0)
             {
-                if(_rainIntervalTimer < 0)
+                if (_rainIntervalTimer < 0)
                 {
                     RainFire();
                     _rainIntervalTimer = _rainInterval;
@@ -174,6 +184,7 @@ namespace CallOfValhalla.Enemy {
                 _rainDuration -= Time.deltaTime;
                 yield return null;
             }
+
         }
 
         private void RainFire()
@@ -189,6 +200,21 @@ namespace CallOfValhalla.Enemy {
 
                 }
             
+        }
+
+        private void CheckDirection()
+        {
+            if(_movement.IsFacingRight && _movement.transform.position.x > _specialPoint.transform.position.x)
+            {
+                _movement.IsFacingRight = false;
+                
+            }else if(_movement.IsFacingRight && _movement.transform.position.x < _specialPoint.transform.position.x)
+            {
+                _movement.IsFacingRight = true;
+                
+            }
+            _movement.transform.localScale = 
+                new Vector2(-1 * _movement.transform.localScale.x, _movement.transform.localScale.y);
         }
 
         private void StartParticles()
@@ -209,7 +235,7 @@ namespace CallOfValhalla.Enemy {
 
         public void EnableAttackHitBox()
         {
-            _surtAC.SetAnimation(0);
+            //_surtAC.SetAnimation(0);
             _trigger.GetComponent<BoxCollider2D>().enabled = true;
         }
 
@@ -220,9 +246,13 @@ namespace CallOfValhalla.Enemy {
             _trigger.GetComponent<BoxCollider2D>().enabled = false;
         }
 
-        public void ToggleAttacking()
+        public void EnableAttacking()
         {
-            _attacking = !_attacking;
+            _attacking = true;
+        }
+        public void DisableAttacking()
+        {
+            _attacking = false;
         }
     }
 }

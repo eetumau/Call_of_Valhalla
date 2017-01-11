@@ -39,6 +39,12 @@ namespace CallOfValhalla.Enemy
         {
             get { return _moving; }
         }
+
+        public bool IsFacingRight
+        {
+            get { return _isFacingRight; }
+            set { _isFacingRight = value; }
+        }
         // Use this for initialization
         void Start()
         {
@@ -90,7 +96,7 @@ namespace CallOfValhalla.Enemy
             }
         }
 
-        private void CheckDirection()
+        public void CheckDirection()
         {
            if(_isFacingRight && _transform.position.x > _playerTransform.position.x)
             {
