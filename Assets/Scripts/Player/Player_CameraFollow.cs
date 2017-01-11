@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq.Expressions;
 using UnityStandardAssets.ImageEffects;
 
 namespace CallOfValhalla.Player
@@ -22,12 +23,19 @@ namespace CallOfValhalla.Player
         private bool _decreaseCameraSize;
         private Camera _camera;
         private Vector3 _tmpLocation;
+        private Vector3 _newLocation;
         private Transform _transform;
+        private Player_InputController _playerInput;
         private SepiaTone _sepiaEffect;
         private bool _cameraCentering;
         [SerializeField] private float _centeringSpeed;
         private float _resetTime = 1f;
+        private float _moveSpeed;
+        private float _showForSeconds;
         private bool _decreaseCameraSizeSlowly;
+
+        private bool _cameraEffect;
+        private bool _movementFinished;
 
         public SepiaTone Sepia
         {
@@ -40,6 +48,7 @@ namespace CallOfValhalla.Player
             GameManager.Instance.CameraFollow = this;
             _transform = GetComponent<Transform>();
             _sepiaEffect = GetComponent<SepiaTone>();
+            _playerInput = FindObjectOfType<Player_InputController>();
             _sepiaEffect.enabled = false;
             _camera = GetComponent<Camera>();
         }
@@ -47,10 +56,12 @@ namespace CallOfValhalla.Player
         // Update is called once per frame
         void Update()
         {
-            if (!_cameraCentering)
+            if (!_cameraCentering && !_cameraEffect)
                 MoveCamera();
-            else
+            else if (_cameraCentering)
                 CenterCamera();
+            else if (_cameraEffect)
+                Move();
 
             CheckCameraSize();
 
@@ -168,6 +179,49 @@ namespace CallOfValhalla.Player
         {
             yield return new WaitForSeconds(howLong);
             Time.timeScale = 1f;
+        }
+
+        public void MoveCamerahere(Vector3 position,float speed, float howLong)
+        {
+            _cameraEffect = true;
+            _newLocation = position;
+            _newLocation.z = transform.position.z;
+            _moveSpeed = speed;
+            _showForSeconds = howLong;
+            _movementFinished = false;
+        }
+
+        private void Move()
+        {
+            float step = _moveSpeed * Time.deltaTime;
+
+            transform.position = Vector3.MoveTowards(transform.position, _newLocation, step);
+
+            Debug.Log(_playerTransform.position);
+            Debug.Log(transform.position);
+
+            if (_newLocation == transform.position && _movementFinished)
+            {
+                Debug.Log("VALMIS");
+                _cameraEffect = false;
+                _playerInput.DisableControls(false);
+            }
+
+            if (transform.position == _newLocation && !_movementFinished)
+            {
+                StartCoroutine(ShowTimer(_showForSeconds));
+                GauntletScript script = FindObjectOfType<GauntletScript>();
+                script.OpenDoor();
+            }
+        }
+
+        private IEnumerator ShowTimer(float howLong)
+        {
+            yield return new WaitForSeconds(howLong);
+            _newLocation = _playerTransform.position;
+            _newLocation.y = _playerTransform.position.y + _bottomBorderOffset;
+            _newLocation.z = transform.position.z;
+            _movementFinished = true;
         }
     }
 

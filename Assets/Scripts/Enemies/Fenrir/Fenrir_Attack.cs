@@ -108,7 +108,6 @@ namespace CallOfValhalla.Enemy
         // Update is called once per frame
         void Update()
         {
-            Debug.Log(_specialCDTimer);
             RunTimers();
         }
 

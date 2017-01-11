@@ -70,7 +70,7 @@ namespace CallOfValhalla.Player
             CheckIfGrounded();
                       
             if (!_hammerSpecialActive && _hammerBasicTimer <= 0)
-            CheckAnimations();
+                CheckAnimations();
 
             SwordSpecialAttack();
             RunTimers();
@@ -80,9 +80,9 @@ namespace CallOfValhalla.Player
         public void CheckAnimations()
         {   
             // Determines which way the player looks
-            if (Input.GetAxis("Horizontal") > 0)
+            if (Input.GetAxis("Horizontal") > 0 && !_cantMove)
                 _playerTransform.localScale = new Vector3(1, 1, 1);
-            else if (Input.GetAxis("Horizontal") < 0)
+            else if (Input.GetAxis("Horizontal") < 0 && !_cantMove)
                 _playerTransform.localScale = new Vector3(-1, 1, 1);
 
             // Sets animations based on movement
@@ -101,7 +101,7 @@ namespace CallOfValhalla.Player
 
         public void SwordSpecialAttack()
         {
-            if (_swordDashing && _swordDashTimer > 0)
+            if (_swordDashing && _swordDashTimer > 0 && !_cantMove)
                 if (_playerTransform.localScale.x == 1)
                     _playerRigidbody2D.velocity = new Vector2(25, 0);
                 else

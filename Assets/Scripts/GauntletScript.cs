@@ -4,6 +4,7 @@ using CallOfValhalla.Enemy;
 using System;
 using CallOfValhalla;
 using CallOfValhalla.States;
+using UnityEngine.SceneManagement;
 
 public class GauntletScript : MonoBehaviour {
         
@@ -22,6 +23,8 @@ public class GauntletScript : MonoBehaviour {
 
 	// Use this for initialization
 	private void Awake () {
+
+        
         _gauntletTrigger = GetComponentInChildren<GauntletTrigger>();
 
         if (_door != null)
@@ -68,8 +71,8 @@ public class GauntletScript : MonoBehaviour {
             if (_enemiesLeft == 0)
             {
                 DeactivateGauntlet();
-                if (_door != null)
-                    animator.SetBool ("Door_Open", true);
+                if (Application.loadedLevelName == "Level10")
+                    OpenDoor();
             }
             _enemiesLeft = 0;
 
@@ -80,6 +83,13 @@ public class GauntletScript : MonoBehaviour {
             }
         }
 	}
+
+    public void OpenDoor()
+    {
+        if (_door != null)
+            animator.SetBool("Door_Open", true);
+    }
+
 
     private void DeactivateGauntlet()
     {
