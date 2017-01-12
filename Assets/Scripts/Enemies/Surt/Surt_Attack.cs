@@ -39,6 +39,7 @@ namespace CallOfValhalla.Enemy {
         private bool _specialAttacking = false;
         private bool _specialDone;
         private float _rainIntervalTimer;
+        private CameraShake _camShake;
 
         private int _pooledProjectiles = 30;
         private int index;
@@ -57,6 +58,11 @@ namespace CallOfValhalla.Enemy {
             get { return _damage; }
         }
 
+        public bool SpecialAttacking
+        {
+            get { return _specialAttacking; }
+        }
+
         public Transform[] FireSpawns
         {
             get { return _fireSpawns; }
@@ -73,7 +79,7 @@ namespace CallOfValhalla.Enemy {
             _cooldownTimer = _attackCooldown;
             _ps = GetComponentsInChildren<ParticleSystem>();
             _source = GetComponent<AudioSource>();
-
+            _camShake = FindObjectOfType<CameraShake>();
             _fireSpawns = _fireSpawnObj.GetComponentsInChildren<Transform>();
             _projectiles = new List<GameObject>();
             _rainIntervalTimer = _rainInterval;
@@ -83,7 +89,7 @@ namespace CallOfValhalla.Enemy {
         // Update is called once per frame
         void Update() {
 
-            if (_movement.InRange && !_attacking)
+            if (_movement.InRange && !_attacking && _movement.StunTimer <= 0)
             {
                 CheckNextAction();
             }
@@ -108,7 +114,6 @@ namespace CallOfValhalla.Enemy {
             if(_hp.HP < _hp.OGHP / 2 && !_specialDone)
             {
                 StartCoroutine(SpecialAttack());
-                _specialAttacking = true;
             }
 
             if(_cooldownTimer <= 0 && !_specialAttacking)
@@ -134,25 +139,34 @@ namespace CallOfValhalla.Enemy {
         {
             _attacking = true;
             _surtAC.SetAnimation(2);
+            SoundManager.instance.PlaySound("goblin_swing", _source, false);
             
             _cooldownTimer = _attackCooldown;
         }
 
         private IEnumerator SpecialAttack()
         {
+            _movement.SpecialMoving = true;
             _specialDone = true;
-            _surtAC.SetAnimation(1);
             Vector2 _distance = _transform.position - _specialPoint.transform.position;
             while(_distance.magnitude > 1)
             {
-                CheckDirection();
-                _distance = _transform.position - _specialPoint.transform.position;
-                _transform.position = Vector2.MoveTowards(_transform.position, new Vector2(_specialPoint.transform.position.x, _transform.position.y), 5 * Time.deltaTime);
+                if(_movement.StunTimer <= 0)
+                {
+                    _surtAC.SetAnimation(1);
+
+                    CheckDirection();
+                    _distance = _transform.position - _specialPoint.transform.position;
+                    _transform.position = Vector2.MoveTowards(_transform.position, new Vector2(_specialPoint.transform.position.x, _transform.position.y), 5 * Time.deltaTime);
+
+                }
 
                 yield return null;
             }
+            _movement.SpecialMoving = false;
             SoundManager.instance.PlaySound("surt_death", _source, false);
             _surtAC.SetAnimation(6);
+            StartCoroutine(_camShake.Shake(_shootDuration));
             _specialAttacking = true;
             _attacking = true;
             StartParticles();
@@ -207,17 +221,21 @@ namespace CallOfValhalla.Enemy {
             if(_movement.IsFacingRight && _movement.transform.position.x > _specialPoint.transform.position.x)
             {
                 _movement.IsFacingRight = false;
-                
-            }else if(_movement.IsFacingRight && _movement.transform.position.x < _specialPoint.transform.position.x)
+                _movement.transform.localScale =
+    new Vector2(-1 * _movement.transform.localScale.x, _movement.transform.localScale.y);
+
+            }
+            else if(_movement.IsFacingRight && _movement.transform.position.x < _specialPoint.transform.position.x)
             {
                 _movement.IsFacingRight = true;
-                
+                _movement.transform.localScale =
+    new Vector2(-1 * _movement.transform.localScale.x, _movement.transform.localScale.y);
+
             }
-            _movement.transform.localScale = 
-                new Vector2(-1 * _movement.transform.localScale.x, _movement.transform.localScale.y);
+
         }
 
-        private void StartParticles()
+        public void StartParticles()
         {
             foreach(ParticleSystem ps in _ps)
             {
@@ -225,7 +243,7 @@ namespace CallOfValhalla.Enemy {
             }
         }
 
-        private void StopParticles()
+        public void StopParticles()
         {
             foreach(ParticleSystem ps in _ps)
             {

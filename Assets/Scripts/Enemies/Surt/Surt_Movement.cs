@@ -22,6 +22,9 @@ namespace CallOfValhalla.Enemy
         private bool _inRange;
         private bool _isFacingRight;
         private bool _moving;
+        private float _stunTimer;
+        private bool _specialMoving;
+
 
 
         public bool PlayerOnSight
@@ -45,6 +48,16 @@ namespace CallOfValhalla.Enemy
             get { return _isFacingRight; }
             set { _isFacingRight = value; }
         }
+
+        public float StunTimer
+        {
+            get { return _stunTimer; }
+        }
+
+        public bool SpecialMoving
+        {
+            set { _specialMoving = value; }
+        }
         // Use this for initialization
         void Start()
         {
@@ -58,7 +71,17 @@ namespace CallOfValhalla.Enemy
         void Update()
         {
 
-            Move();
+            if (_stunTimer > 0)
+            {
+                RunStunTimer();
+            }
+            else
+            {
+                if (!_specialMoving)
+                {
+                    Move();
+                }
+            }
 
         }
 
@@ -112,6 +135,25 @@ namespace CallOfValhalla.Enemy
             _isFacingRight = !_isFacingRight;
 
             _transform.localScale = new Vector2(-1 * _transform.localScale.x, _transform.localScale.y);
+        }
+
+        public void Stun(float duration)
+        {
+            if (!_attack.SpecialAttacking)
+            {
+                _stunTimer = duration;
+                _attack.DisableAttackHitBox();
+                _attack.DisableAttacking();
+                _surtAC.SetAnimation(4);
+                _moving = false;
+            }
+      
+        }
+
+        private void RunStunTimer()
+        {
+            _stunTimer -= Time.deltaTime;
+
         }
     }
 }

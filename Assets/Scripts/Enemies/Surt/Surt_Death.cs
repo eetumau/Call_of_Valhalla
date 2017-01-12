@@ -30,6 +30,7 @@ namespace CallOfValhalla.Enemy {
             _attack.StopAllCoroutines();
             _animator.SetInteger("animState", 3);
             _movement.enabled = false;
+            _attack.StopParticles();
             _attack.enabled = false;
             _hp.enabled = false;
 

@@ -67,6 +67,7 @@ namespace CallOfValhalla.Enemy {
                     {
 
                         Surt_Death _death = FindObjectOfType<Surt_Death>();
+                        SoundManager.instance.PlaySound("random_death", _audioSource, false);
                         _death.Die();
 
                     }
