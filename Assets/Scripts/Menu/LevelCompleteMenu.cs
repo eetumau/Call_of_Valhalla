@@ -36,12 +36,15 @@ namespace CallOfValhalla
 
             GameManager.Instance.Level += 1;
 
-            if (GameManager.Instance.Level > 3)
-            {
-                SoundManager.instance.SetMusic("level_music_5");
-            }else if(GameManager.Instance.Level > 9)
+            if (GameManager.Instance.Level > 9)
             {
                 SoundManager.instance.SetMusic("level_music_3");
+            }else if(GameManager.Instance.Level > 3)
+            {
+                SoundManager.instance.SetMusic("level_music_5");
+            }else
+            {
+                SoundManager.instance.SetMusic("level_music_4");
             }
 
 

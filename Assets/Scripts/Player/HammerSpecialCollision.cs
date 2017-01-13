@@ -71,7 +71,7 @@ public class HammerSpecialCollision : MonoBehaviour {
                     _surt.Stun(_stunTime);
                 }
                 _enemyHP.TakeDamage(_damage);
-            }else
+            }else if(_fenrirHP != null)
             {
                 _fenrirMovement.Stun(_stunTime);
                 _fenrirHP.TakeDamage(_damage);
@@ -82,5 +82,10 @@ public class HammerSpecialCollision : MonoBehaviour {
             _enemyHP = null;
             _enemyMovement = null;
         }
+        else if (other.gameObject.tag == "Head")
+        {
+            other.gameObject.GetComponent<Head>().SpillBlood();
+        }
+
     }
 }

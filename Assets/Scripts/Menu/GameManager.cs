@@ -156,15 +156,15 @@ namespace CallOfValhalla
 
         public void Game()
         {
-			if (_level < 4)
+			if (_level > 9)
 			{
-				SoundManager.instance.SetMusic ("level_music_4");
-			}else if (_level > 3 && _level < 10)
+				SoundManager.instance.SetMusic ("level_music_3");
+			}else if (_level > 3)
 			{
 				SoundManager.instance.SetMusic ("level_music_5");
 			}else
 			{
-				SoundManager.instance.SetMusic ("level_music_3");
+				SoundManager.instance.SetMusic ("level_music_4");
 			}
             StateManager.PerformTransition(TransitionType.MainMenuToGame);
         }

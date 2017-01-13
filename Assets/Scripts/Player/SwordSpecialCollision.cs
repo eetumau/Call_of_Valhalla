@@ -41,6 +41,11 @@ public class SwordSpecialCollision : MonoBehaviour {
             _enemyMovement = null;
 
         }
+        else if (other.gameObject.tag == "Head")
+        {
+            other.gameObject.GetComponent<Head>().SpillBlood();
+        }
+
     }
 
 }

@@ -102,8 +102,11 @@ namespace CallOfValhalla.Enemy {
 
         public void TakeDamage(int damage)
         {
+
             hitPoints -= damage;
-            Instantiate(_blood, _transform.position+Vector3.up, _transform.rotation );
+            Instantiate(_blood, _transform.position + Vector3.up, _transform.rotation);
+
+
 
             if (thisIsABoss)
             {
@@ -111,5 +114,7 @@ namespace CallOfValhalla.Enemy {
                 _BossHP.Progress = tmp;
             }
         }
+
+
     }
 }

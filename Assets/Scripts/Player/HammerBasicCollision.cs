@@ -57,6 +57,11 @@ public class HammerBasicCollision : MonoBehaviour {
             _enemyHP = null;
             _enemyMovement = null;
         }
+        else if (other.gameObject.tag == "Head")
+        {
+            SoundManager.instance.PlaySound("sword_hit", _source, false);
+            other.gameObject.GetComponent<Head>().SpillBlood();
+        }
     }
 
 }
