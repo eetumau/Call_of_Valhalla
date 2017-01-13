@@ -12,7 +12,7 @@ namespace CallOfValhalla.Enemy
         private float _followTime;
 
         private Surt_Movement _movement;
-
+        private AudioSource _source;
         private Transform _transform;
         private GameObject _lineCastObject;
         private Transform _lineCastEnd;
@@ -28,6 +28,7 @@ namespace CallOfValhalla.Enemy
             _lineCastObject = GameObject.Find("LineCastEndingPoint");
             _lineCastEnd = _lineCastObject.GetComponent<Transform>();
             _movement = GetComponent<Surt_Movement>();
+            _source = GetComponent<AudioSource>();
             _followTimer = _followTime;
 
         }
@@ -48,6 +49,11 @@ namespace CallOfValhalla.Enemy
                 {
                     if (!Physics2D.Linecast(new Vector2(_lineCastStart.position.x, _lineCastStart.position.y), new Vector2(_lineCastEnd.position.x, _lineCastEnd.position.y), allButIgnoreLinecast))
                     {
+
+                        if (!_movement.PlayerOnSight)
+                        {
+                            SoundManager.instance.PlaySound("surt_aggro", _source, false);
+                        }
 
                         _movement.PlayerOnSight = true;
                         _followTimer = _followTime;
