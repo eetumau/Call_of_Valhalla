@@ -10,6 +10,7 @@ public class HammerSpecialCollision : MonoBehaviour {
     private Fenrir_HP _fenrirHP;
     private Fenrir_Movement _fenrirMovement;
     private Weapon_Hammer _hammer;
+    private Surt_Movement _surt;
     private float _stunTime;
     private int _damage;
 
@@ -54,7 +55,7 @@ public class HammerSpecialCollision : MonoBehaviour {
             _enemyMovement = other.gameObject.GetComponentInParent<Enemy_Movement>();
             _enemyHP = other.gameObject.GetComponentInParent<Enemy_HP>();  
             
-            if(_enemyHP == null || _enemyMovement == null)
+            if(_enemyHP == null)
             {
                 _fenrirMovement = other.gameObject.GetComponentInParent<Fenrir_Movement>();
                 _fenrirHP = other.gameObject.GetComponentInParent<Fenrir_HP>();
@@ -64,7 +65,11 @@ public class HammerSpecialCollision : MonoBehaviour {
             {
                 if (_enemyMovement != null)
                     _enemyMovement.Stun(_stunTime);
-
+                else if (_enemyHP.gameObject.name.Contains("Surt"))
+                {
+                    _surt = _enemyHP.GetComponent<Surt_Movement>();
+                    _surt.Stun(_stunTime);
+                }
                 _enemyHP.TakeDamage(_damage);
             }else
             {

@@ -18,9 +18,13 @@ public class SwordSpecialCollision : MonoBehaviour {
             _enemyMovement = other.gameObject.GetComponentInParent<Enemy_Movement>();
             _enemyHP = other.gameObject.GetComponentInParent<Enemy_HP>();
 
-            if (_enemyHP != null && _enemyMovement != null)
+            if (_enemyHP != null)
             {
-                _enemyMovement.Knockback(250f, 250f);
+                if(_enemyMovement != null)
+                {
+                    _enemyMovement.Knockback(250f, 250f);
+
+                }
                 _enemyHP.TakeDamage(3);
             }else
             {
