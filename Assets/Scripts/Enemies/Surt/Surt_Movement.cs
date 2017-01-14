@@ -108,7 +108,7 @@ namespace CallOfValhalla.Enemy
 
         private bool CheckDistanceFromPlayer()
         {
-            Vector2 _distance = _transform.position - _playerTransform.position;
+            Vector2 _distance = new Vector2(_transform.position.x, _transform.position.y) - new Vector2(_playerTransform.position.x, _transform.position.y);
 
             if(_distance.magnitude < _minDistanceFromPlayer)
             {

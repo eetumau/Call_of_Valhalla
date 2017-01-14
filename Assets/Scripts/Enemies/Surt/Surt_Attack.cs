@@ -148,7 +148,7 @@ namespace CallOfValhalla.Enemy {
         {
             _movement.SpecialMoving = true;
             _specialDone = true;
-            Vector2 _distance = _transform.position - _specialPoint.transform.position;
+            Vector2 _distance = new Vector2(_transform.position.x, _transform.position.y) - new Vector2(_specialPoint.transform.position.x, _transform.position.y);
             while(_distance.magnitude > 1)
             {
                 if(_movement.StunTimer <= 0)

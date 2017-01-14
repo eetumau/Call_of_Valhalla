@@ -75,6 +75,7 @@ namespace CallOfValhalla.Player
                 Die();
             }else
             {
+                if(HP > 0)
                 SoundManager.instance.PlaySound("ouch", _movement.Source, false);
             }
         }
