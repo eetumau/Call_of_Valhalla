@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using CallOfValhalla;
+using CallOfValhalla.Enemy;
 
 public class LokiAttack : MonoBehaviour {
 
@@ -11,7 +12,7 @@ public class LokiAttack : MonoBehaviour {
     private Transform _projectileStartingPoint;
 
     private LokiAnimationController _animator;
-    private AudioSource _source;
+    private Loki_AttackSound _sound;
     private bool _normalAttack;
     private bool _stopAttack;
     private bool _attackOnce;
@@ -28,7 +29,7 @@ public class LokiAttack : MonoBehaviour {
 
         _projectiles = new List<GameObject>();
         _animator = GetComponent<LokiAnimationController>();
-        _source = GetComponent<AudioSource>();
+        _sound = GetComponentInChildren<Loki_AttackSound>();
         SetupProjectiles();
 	}
 
@@ -81,7 +82,7 @@ public class LokiAttack : MonoBehaviour {
             if (!_projectiles[i].activeInHierarchy)
             {
                 _projectiles[i].SetActive(true);
-                SoundManager.instance.PlaySound("loki_attack1", _source, false);
+                _sound.PlaySound();
                 break;
             }
         }

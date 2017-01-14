@@ -87,14 +87,18 @@ namespace CallOfValhalla
             }
         }
 
-        public void PlaySound(string name, AudioSource source, bool loop)
+        public void PlaySound(string name, AudioSource source, bool loop = false, bool noRandomPitch = false)
         {
             for (int i = 0; i < _sfx.Length; i++)
             {
                 if (_sfx[i].name == name)
                 {
-                    float randomPitch = Random.Range(lowPitchRange, highPitchRange);
-                    source.pitch = randomPitch;
+                    if (!noRandomPitch)
+                    {
+                        float randomPitch = Random.Range(lowPitchRange, highPitchRange);
+                        source.pitch = randomPitch;
+                    }
+                   
                     source.clip = _sfx[i];
 
                     if (_soundMuted)

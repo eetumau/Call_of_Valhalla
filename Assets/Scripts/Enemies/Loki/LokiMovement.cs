@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using CallOfValhalla;
 
 public class LokiMovement : MonoBehaviour {
 
@@ -41,6 +42,7 @@ public class LokiMovement : MonoBehaviour {
     [HideInInspector]
     public bool _teleporting;
     private LokiAnimationController _animator;
+    private AudioSource _source;
 
     // Use this for initialization
     void Awake () {
@@ -57,7 +59,7 @@ public class LokiMovement : MonoBehaviour {
         _stunPoint = _stunPointGameObject.GetComponent<Transform>();
 
 
-
+        _source = GetComponent<AudioSource>();
         _playerTransform = GameObject.Find("HeroSword_0").GetComponent<Transform>();
 
     }
@@ -246,5 +248,11 @@ public class LokiMovement : MonoBehaviour {
     {
         StopAllMovementSequences();
         _animator.SetDeathAnimation();
+    }
+
+    public void PlaySound()
+    {
+        SoundManager.instance.PlaySound("loki_teleport", _source, false, true);
+
     }
 }
