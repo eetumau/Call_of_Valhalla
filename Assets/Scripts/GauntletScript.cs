@@ -71,7 +71,7 @@ public class GauntletScript : MonoBehaviour {
             if (_enemiesLeft == 0)
             {
                 DeactivateGauntlet();
-                if (Application.loadedLevelName == "Level10" || GameManager.Instance.Level == 6)
+                if (Application.loadedLevelName == "Level10")
                     OpenDoor();
             }
             _enemiesLeft = 0;
