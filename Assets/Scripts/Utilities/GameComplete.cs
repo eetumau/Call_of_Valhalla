@@ -49,11 +49,12 @@ namespace CallOfValhalla {
 
         private IEnumerator RollCredits()
         {
-            while(_creditText.transform.position.y < 2700)
+            while(_creditText.transform.position.y < 27)
             {
 
-                _newPos += 0.5f;
+                _newPos += 3f * Time.deltaTime;
                 _creditText.transform.position = new Vector3(_creditPos.x, _newPos, _creditPos.z);
+                Debug.Log(_creditText.transform.position);
                 yield return null;
 
             }
