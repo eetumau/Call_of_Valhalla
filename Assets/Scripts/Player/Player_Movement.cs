@@ -28,7 +28,7 @@ namespace CallOfValhalla.Player
         private bool _swordDashing;
         private float _swordAttackTimer;
         private float _swordDashTimer;
-        private float _hammerBasicTimer;
+        public bool _hammerBasicActive;
         public bool _hammerSpecialActive;
         private Player_HP _hp;
         private WeaponController _weaponController;
@@ -69,13 +69,13 @@ namespace CallOfValhalla.Player
         {
             CheckIfGrounded();
                       
-            if (!_hammerSpecialActive && _hammerBasicTimer <= 0)
+            if (!_hammerSpecialActive && !_hammerBasicActive)
                 CheckAnimations();
 
             SwordSpecialAttack();
             RunTimers();
             CheckTimers();
-        }
+        }        
 
         public void CheckAnimations()
         {   
@@ -141,7 +141,7 @@ namespace CallOfValhalla.Player
             else if (animation.Equals("hammerbasic"))
             {
                 animator.SetInteger("animState", 4);
-                _hammerBasicTimer = 0.4f;
+                _hammerBasicActive = true;
             }
             else if (animation.Equals("Charge1"))
             {
@@ -173,7 +173,7 @@ namespace CallOfValhalla.Player
         public void Move(float inputX)
         {
 
-            if (_swordDashTimer <= 0 && !_hammerSpecialActive && _hammerBasicTimer <= 0)
+            if (_swordDashTimer <= 0 && !_hammerSpecialActive && !_hammerBasicActive)
             _playerRigidbody2D.velocity = new Vector2(inputX * _playerMoveSpeed, _playerRigidbody2D.velocity.y);
 
             PlaySound();
@@ -239,8 +239,6 @@ namespace CallOfValhalla.Player
                 _swordAttackTimer -= Time.deltaTime;      
             if (_swordDashTimer >= 0)
                 _swordDashTimer -= Time.deltaTime;
-            if (_hammerBasicTimer >= 0)
-                _hammerBasicTimer -= Time.deltaTime;
         }
 
         private void CheckTimers()

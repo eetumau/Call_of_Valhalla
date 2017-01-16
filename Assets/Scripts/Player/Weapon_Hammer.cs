@@ -33,7 +33,7 @@ public class Weapon_Hammer : Weapon
     private bool _specialCharging;
     private bool _fullyCharged;
 
-    
+    public bool basicLocked;
     private float _timer1;
     private float _specialAttackMoveTimer;
     public float _specialChargeTimer;
@@ -80,8 +80,9 @@ public class Weapon_Hammer : Weapon
 
         MoveColliders();
         UpdateSpecialCompletion();
-        RunTimers();  
-        CheckTimers();
+        RunTimers();
+
+        _timer1 += Time.deltaTime;
     }
 
     // Moves the hit collider during the special attack
@@ -160,15 +161,38 @@ public class Weapon_Hammer : Weapon
             _specialCompletion = 100f;
     }
 
+    public void ResetBasicAttack()
+    {
+        
+        Debug.Log("RESET");
+        Debug.Log(_timer1);
+        basicLocked = false;
+        _movement._hammerBasicActive = false;
+    }
+
     // Sets the basic attack collider active and sets the cooldown timer
     public override void BasicAttack(bool attack)
     {
-        if (!_moveSpecialCollider && !_specialCharging && _timer1 <= 0)
-        {            
-            _timer1 = 0.6f;
-            _basicCollider.SetActive(true);
-            _movement.SetAttackAnimation("hammerbasic", 0.6f);
+        Debug.Log(basicLocked);
+        
+        if (!_moveSpecialCollider && !_specialCharging && !basicLocked)
+        {
+            _timer1 = 0.0f;
+            basicLocked = true;
+            _movement.SetAttackAnimation("hammerbasic");
             SoundManager.instance.PlaySound("hammer_swing", _movement.Source, false);
+        }
+    }
+
+    public void EnableBasicCollider()
+    {
+        if (_basicCollider.activeSelf)
+        {
+            _basicCollider.SetActive(false);
+        }
+        else
+        {
+            _basicCollider.SetActive(true);
         }
     }
 
@@ -195,13 +219,15 @@ public class Weapon_Hammer : Weapon
     // Count down all timers
     private void RunTimers()
     {
-        if (_timer1 > 0)
-            _timer1 -= Time.deltaTime;
         if (_specialAttackMoveTimer > 0)        
             _specialAttackMoveTimer -= Time.deltaTime;
         if (_specialCharging)
             _specialChargeTimer += Time.deltaTime;
+        if (_timer1 > 0.33f && basicLocked)
+        {
+            ResetBasicAttack();
         }
+    }
 
     // Returns special attack collider position after fixing it next to player to the direction he's facing
     private void SetColliderPositionToHero()
@@ -249,13 +275,4 @@ public class Weapon_Hammer : Weapon
                           
     }
 
-
-
-    private void CheckTimers()
-    {
-        if (_timer1 <= 0.4f)
-            _basicCollider.SetActive(false);
-        if (_timer1 <= 0)                    
-            _basicActive = false;               
-    }
 }
