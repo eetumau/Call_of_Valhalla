@@ -16,8 +16,6 @@ namespace CallOfValhalla.Player
         public bool _weapon1Current;
         private Animator _animator;
 
-        private string _currentWeapon;
-
         private void Awake()
         {
             SetWeapons();
@@ -25,12 +23,9 @@ namespace CallOfValhalla.Player
             _animator = GetComponent<Animator>();
         }
 
-
         private void SetWeapons()
         {
             _sword = GetComponent<Weapon_Sword>();
-            _currentWeapon = "Sword";
-
             _hammer = GetComponent<Weapon_Hammer>();
 
             string tmp = Application.loadedLevelName;
@@ -95,5 +90,3 @@ namespace CallOfValhalla.Player
         }
     }
 }
-
-

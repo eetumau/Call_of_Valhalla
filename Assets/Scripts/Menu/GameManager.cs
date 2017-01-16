@@ -13,7 +13,6 @@ namespace CallOfValhalla
         private static GameManager _instance;
         private Pauser _pauser;
         private Checkpoint _checkPoint;
-        private GUIManager _guiManager;
         private GameOverUI _gameOverUI;
         private LevelCompleteUI _levelCompleteUI;
         private Player_CameraFollow _cameraFollow;

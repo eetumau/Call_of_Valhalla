@@ -11,7 +11,6 @@ public class Weapon_Hammer : MonoBehaviour
     private GameObject _specialCollider;
     private GameObject _hero;
     private Player_Movement _movement;
-    private Rigidbody2D _rigidBody2D;
     private HammerSpecialCollision _specialCollisionScript;
     private BoxCollider2D _specialBoxCollider;
     private GameObject _lightning;
@@ -61,7 +60,6 @@ public class Weapon_Hammer : MonoBehaviour
         _specialCollider = Instantiate(_special, transform.position, Quaternion.identity) as GameObject;
         _specialCollider.SetActive(false);
 
-        _rigidBody2D = _specialCollider.GetComponent<Rigidbody2D>();
         _specialCollisionScript = _specialCollider.GetComponent<HammerSpecialCollision>();
         _specialBoxCollider = _specialCollider.GetComponent<BoxCollider2D>();
         _colliderSizeVector = _specialBoxCollider.size;

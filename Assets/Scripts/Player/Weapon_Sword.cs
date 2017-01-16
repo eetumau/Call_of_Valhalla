@@ -23,7 +23,6 @@ namespace CallOfValhalla.Player
         private float _specialAttackMaxCooldown;
 
         private bool _basic1Active;
-        private bool _basic2Active;
         private bool _specialActive;
 
         // Prefabs for the attack colldiers
@@ -66,7 +65,6 @@ namespace CallOfValhalla.Player
                 _timer2 = 0.4f;
                 _basic1Collider.SetActive(false);
                 _basic2Collider.SetActive(true);
-                _basic2Active = true;
                 _movement.SetAttackAnimation("swordbasic2", 0.4f);
                 SoundManager.instance.PlaySound("sword_1", _movement.Source, false);
 
@@ -149,7 +147,6 @@ namespace CallOfValhalla.Player
             if (_timer2 <= 0)
             {
                 _basic2Collider.SetActive(false);
-                _basic2Active = false;
             }
             if (_specialAttackTimer <= 0)
             {
