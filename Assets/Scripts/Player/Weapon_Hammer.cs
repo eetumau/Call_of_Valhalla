@@ -162,6 +162,7 @@ public class Weapon_Hammer : MonoBehaviour
     public void ResetBasicAttack()
     {
         basicLocked = false;
+        _basicCollider.SetActive(false);
         _movement._hammerBasicActive = false;
     }
 
