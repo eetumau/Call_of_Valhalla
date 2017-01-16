@@ -25,14 +25,14 @@ public class SwordSpecialCollision : MonoBehaviour {
                     _enemyMovement.Knockback(250f, 250f);
 
                 }
-                _enemyHP.TakeDamage(3);
+                _enemyHP.TakeDamage(10);
             }else
             {
                 _fenrirHP = other.gameObject.GetComponentInParent<Fenrir_HP>();
                 _fenrirMovement = other.gameObject.GetComponentInParent<Fenrir_Movement>();
 
                 _fenrirMovement.Knockback(250f, 250f);
-                _fenrirHP.TakeDamage(3);
+                _fenrirHP.TakeDamage(10);
             }
 
 
