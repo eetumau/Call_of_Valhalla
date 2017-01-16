@@ -15,11 +15,11 @@ namespace CallOfValhalla {
         private void Start()
         {
             _music = GameObject.Find("Music");
-            _musicToggle = _music.GetComponent<Toggle>();
+            //_musicToggle = _music.GetComponent<Toggle>();
             _sound = GameObject.Find("Sound");
-            _soundToggle = _sound.GetComponent<Toggle>();
-            _musicToggle.isOn = !SoundManager.instance.MusicMuted;
-            _soundToggle.isOn = !SoundManager.instance.SoundMuted;
+            //_soundToggle = _sound.GetComponent<Toggle>();
+            //_musicToggle.isOn = !SoundManager.instance.MusicMuted;
+            //_soundToggle.isOn = !SoundManager.instance.SoundMuted;
         }
 
         private void Update()

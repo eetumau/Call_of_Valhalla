@@ -28,7 +28,7 @@ namespace CallOfValhalla
             _canvas = GetComponentInChildren<Canvas>();
             _pauseCanvasGO = _canvas.gameObject;
             _pauseCanvasGO.SetActive(false);
-            _settingsPanel.SetActive(false);
+            //_settingsPanel.SetActive(false);
             
         }
 
@@ -47,8 +47,8 @@ namespace CallOfValhalla
                 else
                 {
                     SoundManager.instance.PlaySound("button", _source, false);
-                    _settingsPanel.SetActive(false);
-                    _showSettings = false;
+                    //_settingsPanel.SetActive(false);
+                    //_showSettings = false;
                     _pauseCanvasGO.SetActive(false);
                     Time.timeScale = 1;
                 }
