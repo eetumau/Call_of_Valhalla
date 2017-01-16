@@ -8,6 +8,7 @@ namespace CallOfValhalla
         private GameObject _gameOverUI;
         private Canvas _canvas;
         private AudioSource _source;
+        private Pauser _pauser;
 
         private bool _gameOver = false;
 
@@ -17,6 +18,7 @@ namespace CallOfValhalla
             _source = GetComponent<AudioSource>();
             GameManager.Instance.GameOverUI = this;
             _canvas = GetComponentInChildren<Canvas>();
+            _pauser = FindObjectOfType<Pauser>();
             _gameOverUI = _canvas.gameObject;
             _gameOverUI.SetActive(false);
         }
@@ -24,6 +26,7 @@ namespace CallOfValhalla
         public void ToggleGameOverUI()
         {
             _gameOver = !_gameOver;
+            _pauser._gameOver = _gameOver;
 
             if (_gameOver)
             {

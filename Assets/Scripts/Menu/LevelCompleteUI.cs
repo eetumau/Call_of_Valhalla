@@ -9,6 +9,7 @@ namespace CallOfValhalla
         private GameObject _levelCompleteUI;
         private Canvas _canvas;
         private AudioSource _source;
+        private Pauser _pauser;
 
         private bool _levelCompleted;
 
@@ -18,6 +19,7 @@ namespace CallOfValhalla
             _source = GetComponent<AudioSource>();
             _canvas = GetComponentInChildren<Canvas>();
             _levelCompleteUI = _canvas.gameObject;
+            _pauser = FindObjectOfType<Pauser>();
             GameManager.Instance.LevelCompleteUI = this;
             _levelCompleteUI.SetActive(false);
         }
@@ -25,6 +27,7 @@ namespace CallOfValhalla
         public void ToggleLevelCompleteUI()
         {
             _levelCompleted = !_levelCompleted;
+            _pauser._levelCompleted = _levelCompleted;
 
             if (_levelCompleted)
             {

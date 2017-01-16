@@ -12,6 +12,8 @@ namespace CallOfValhalla
         private AudioSource _source;
         private GameObject _settingsPanel;
         private bool _showSettings;
+        public bool _gameOver;
+        public bool _levelCompleted;
 
 
 
@@ -32,21 +34,24 @@ namespace CallOfValhalla
 
         public void TogglePause()
         {
-           
-            _paused = !_paused;
-
-            if (_paused)
+            if (!_gameOver && !_levelCompleted)
             {
-                _pauseCanvasGO.SetActive(true);
+                _paused = !_paused;
 
-                Time.timeScale = 0;
-            }else
-            {
-                SoundManager.instance.PlaySound("button", _source, false);
-                _settingsPanel.SetActive(false);
-                _showSettings = false;
-                _pauseCanvasGO.SetActive(false);
-                Time.timeScale = 1;
+                if (_paused)
+                {
+                    _pauseCanvasGO.SetActive(true);
+
+                    Time.timeScale = 0;
+                }
+                else
+                {
+                    SoundManager.instance.PlaySound("button", _source, false);
+                    _settingsPanel.SetActive(false);
+                    _showSettings = false;
+                    _pauseCanvasGO.SetActive(false);
+                    Time.timeScale = 1;
+                }
             }
         }
 
