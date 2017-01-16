@@ -247,7 +247,6 @@ public class Weapon_Hammer : MonoBehaviour
         _specialCharging = false;
         _fullyCharged = false;
         _movement._hammerSpecialActive = false;
-        
     }
 
     private IEnumerator SetSecondChargeStep(float howLong)
