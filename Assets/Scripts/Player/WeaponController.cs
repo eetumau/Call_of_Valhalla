@@ -16,9 +16,6 @@ namespace CallOfValhalla.Player
         public bool _weapon1Current;
         private Animator _animator;
 
-
-        private Weapon _weapon1;
-        private Weapon _weapon2;
         private string _currentWeapon;
 
         private void Awake()
@@ -31,10 +28,10 @@ namespace CallOfValhalla.Player
 
         private void SetWeapons()
         {
-            _weapon1 = GetComponent<Weapon_Sword>();
+            _sword = GetComponent<Weapon_Sword>();
             _currentWeapon = "Sword";
 
-            _weapon2 = GetComponent<Weapon_Hammer>();
+            _hammer = GetComponent<Weapon_Hammer>();
 
             string tmp = Application.loadedLevelName;
 
@@ -54,18 +51,16 @@ namespace CallOfValhalla.Player
         {
 
             if (_weapon1Current && basicAttack && !specialAttack)
-                _weapon1.BasicAttack(basicAttack);
+                _sword.BasicAttack(basicAttack);
             else if (_weapon1Current && !basicAttack && specialAttack)
-                _weapon1.SpecialAttack(specialAttack);
+                _sword.SpecialAttack(specialAttack);
 
             if (_hammerInGame) { 
                 if (!_weapon1Current && basicAttack && !specialAttack)
-                    _weapon2.BasicAttack(basicAttack);
+                    _hammer.BasicAttack(basicAttack);
                 if (!_weapon1Current && !basicAttack && specialAttack)
-                    _weapon2.SpecialAttack(specialAttack);
+                    _hammer.SpecialAttack(specialAttack);
             }
-
-
         }
 
         public Weapon_Hammer GetHammer()
@@ -76,9 +71,9 @@ namespace CallOfValhalla.Player
         public float GetCompletion()
         {
             if (_weapon1Current)
-                return _weapon1.GetCompletion();
+                return _sword.GetCompletion();
             else
-                return _weapon2.GetCompletion();
+                return _hammer.GetCompletion();
         }
 
         public void ChangeCurrentWeapon()

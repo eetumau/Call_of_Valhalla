@@ -4,7 +4,7 @@ using CallOfValhalla.Player;
 using System;
 using CallOfValhalla;
 
-public class Weapon_Hammer : Weapon
+public class Weapon_Hammer : MonoBehaviour
 {
 
     private GameObject _basicCollider;
@@ -106,7 +106,7 @@ public class Weapon_Hammer : Weapon
     }
 
     // Returns special attack cooldown to display in the UI
-    public override float GetCompletion()
+    public float GetCompletion()
     {
         return _specialCompletion / 100f;
     }
@@ -163,18 +163,13 @@ public class Weapon_Hammer : Weapon
 
     public void ResetBasicAttack()
     {
-        
-        Debug.Log("RESET");
-        Debug.Log(_timer1);
         basicLocked = false;
         _movement._hammerBasicActive = false;
     }
 
     // Sets the basic attack collider active and sets the cooldown timer
-    public override void BasicAttack(bool attack)
+    public void BasicAttack(bool attack)
     {
-        Debug.Log(basicLocked);
-        
         if (!_moveSpecialCollider && !_specialCharging && !basicLocked)
         {
             _timer1 = 0.0f;
@@ -197,7 +192,7 @@ public class Weapon_Hammer : Weapon
     }
 
     // Base operations for hammer special attack, separate air and ground functions
-    public override void SpecialAttack(bool attack)
+    public void SpecialAttack(bool attack)
     {
 
         if (_specialCompletion >= 100f)

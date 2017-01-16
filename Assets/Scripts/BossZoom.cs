@@ -15,7 +15,6 @@ public class BossZoom : MonoBehaviour {
 	    if (other.tag == "Player")
 	    {
             _camera.IncreaseCamera();
-            Debug.Log("HUGA");
         }
 			
 	}

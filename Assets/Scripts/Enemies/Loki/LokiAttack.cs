@@ -14,7 +14,6 @@ public class LokiAttack : MonoBehaviour {
     private LokiAnimationController _animator;
     private Loki_AttackSound _sound;
     private bool _normalAttack;
-    private bool _stopAttack;
     private bool _attackOnce;
 
     private int _pooledProjectiles = 15;
@@ -54,7 +53,6 @@ public class LokiAttack : MonoBehaviour {
 
     public void SetStopAttack(bool state)
     {
-        _stopAttack = state;
         StopAllCoroutines();
     }
 

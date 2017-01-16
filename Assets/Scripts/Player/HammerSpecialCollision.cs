@@ -9,7 +9,6 @@ public class HammerSpecialCollision : MonoBehaviour {
     private Enemy_Movement _enemyMovement;
     private Fenrir_HP _fenrirHP;
     private Fenrir_Movement _fenrirMovement;
-    private Weapon_Hammer _hammer;
     private Surt_Movement _surt;
     private float _stunTime;
     private int _damage;
@@ -21,12 +20,6 @@ public class HammerSpecialCollision : MonoBehaviour {
     private int _smallDamage  = 2;
     private int _mediumDamage = 3;
     private int _largeDamage  = 6;
-
-    // Use this for initialization
-    private void Awake()
-    {
-        _hammer = GameManager.Instance.Player.WeaponController.GetHammer();
-    }
 
     public void SetStunAndDamage (string charge)
     {

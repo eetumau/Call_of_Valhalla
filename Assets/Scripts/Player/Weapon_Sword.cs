@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace CallOfValhalla.Player
 {
-    public class Weapon_Sword : Weapon
+    public class Weapon_Sword : MonoBehaviour
     {
         
         // Colliders for all the attacks
@@ -57,7 +57,7 @@ namespace CallOfValhalla.Player
         }
 
         // Basic operations for the basic attack
-        public override void BasicAttack(bool attack)
+        public void BasicAttack(bool attack)
         {
 
             if (attack && _basic1Active && !_specialActive)
@@ -83,7 +83,7 @@ namespace CallOfValhalla.Player
         }
 
         // Returns special attack cooldown to display in the UI
-        public override float GetCompletion()
+        public float GetCompletion()
         {
             return _specialCompletion / 100f;
             
@@ -96,9 +96,9 @@ namespace CallOfValhalla.Player
 
         }
 
-        public override void SpecialAttack(bool attack)
+        public void SpecialAttack(bool attack)
         {
-            if (attack && _specialCompletion >= 100 && _movement._isGrounded )
+            if (attack && _specialCompletion >= 100)
             {
                 _movement.SwordDash();
                 _specialCollider.SetActive(true);

@@ -16,7 +16,6 @@ namespace CallOfValhalla.Player
         private Player_CameraFollow _cameraFollow;
         private Player_HP _instance;
         private Animator _animator;
-        private float _delayTimer;
         public int _hp;
         private Weapon_Hammer _hammer;
 
@@ -45,7 +44,6 @@ namespace CallOfValhalla.Player
             _animator = GetComponent<Animator>();
             _movement = GetComponent<Player_Movement>();
             _input = GetComponent<Player_InputController>();
-            _delayTimer = _deathDelay;
             _hp = _OriginalHP;
             _transform = GetComponent<Transform>();
             _cameraFollow = FindObjectOfType<Player_CameraFollow>();
@@ -111,7 +109,6 @@ namespace CallOfValhalla.Player
             _movement.enabled = true;
             _input.enabled = true;
             _animator.SetInteger("animState", 0);
-            _delayTimer = _deathDelay;
             _hp = _OriginalHP;
             _transform.position = new Vector3(spawnPoint.position.x, spawnPoint.position.y, _transform.position.z);
             _respawning = false;

@@ -197,12 +197,8 @@ namespace CallOfValhalla.Player
 
             transform.position = Vector3.MoveTowards(transform.position, _newLocation, step);
 
-            Debug.Log(_playerTransform.position);
-            Debug.Log(transform.position);
-
             if (_newLocation == transform.position && _movementFinished)
             {
-                Debug.Log("VALMIS");
                 _cameraEffect = false;
                 _playerInput.DisableControls(false);
             }

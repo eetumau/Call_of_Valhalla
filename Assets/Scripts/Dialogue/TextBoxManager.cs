@@ -27,7 +27,6 @@ namespace CallOfValhalla.Dialogue
         private WeaponController _weaponController;
         private TextLoader _textLoader;
         private int _currentLine = 0;
-        private int _endAtLine;
         private string _tempString;
         private bool _nextText;
         private bool _textBoxActive;
@@ -69,7 +68,6 @@ namespace CallOfValhalla.Dialogue
             {
                 _textLines = (_textFile.text.Split('\n'));
             }
-            _endAtLine = _textLines.Length - 1;
             _theText.text = _textLines[_currentLine];
         }
 
