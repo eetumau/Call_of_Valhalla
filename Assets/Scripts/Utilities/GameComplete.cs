@@ -42,6 +42,7 @@ namespace CallOfValhalla {
             _congText.CrossFadeAlpha(0, 1, true);
 
             yield return new WaitForSeconds(1);
+            _ended = true;
             StartCoroutine(RollCredits());
            
         }
@@ -57,7 +58,7 @@ namespace CallOfValhalla {
 
             }
 
-            _ended = true;
+           
 
         }
 
