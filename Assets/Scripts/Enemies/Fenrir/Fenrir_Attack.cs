@@ -18,16 +18,13 @@ namespace CallOfValhalla.Enemy
         [SerializeField]
         private int _attackChance;
         [SerializeField]
-        private int _specialChance;
-        [SerializeField]
         private float _attackTime;
         [SerializeField]
         private float _attackDelay;
         [SerializeField] private float _specialMovementSpeed;
         [SerializeField]
         private int _chargeTimes;
-        [SerializeField]
-        private float _specialCoolDown;
+
 
         private BoxCollider2D _attackHitBox;
         private Fenrir_Controller _enemyController;
@@ -36,7 +33,6 @@ namespace CallOfValhalla.Enemy
         private float _coolDownTimer;
         private float _attackTimer;
         private int _random;
-        private int _randomSpecial;
         private Transform _transform;
         private bool _attacking = false;
         private bool _specialAttacking = false;
@@ -51,8 +47,9 @@ namespace CallOfValhalla.Enemy
         private bool _goRight;
         private int _chargeCounter;
         private ParticleSystem _specialEffect;
-        private float _specialCDTimer;
         private Coroutine _special;
+        private bool _specialDone;
+        private Fenrir_HP _hp;
 
 
         public Transform _bodyTransform;
@@ -94,6 +91,7 @@ namespace CallOfValhalla.Enemy
             _animator = GetComponentInParent<Animator>();
             _rigidBody = GetComponentInParent<Rigidbody2D>();
             _movement = GetComponentInParent<Fenrir_Movement>();
+            _hp = GetComponentInParent<Fenrir_HP>();
 
             _coolDownTimer = _attackCoolDown;
             _attackTimer = _attackTime;
@@ -101,7 +99,6 @@ namespace CallOfValhalla.Enemy
             _specialPointL = GameObject.Find("SpecialPointL");
             _specialPointR = GameObject.Find("SpecialPointR");
             _specialEffect = GetComponentInChildren<ParticleSystem>();
-            _specialCDTimer = _specialCoolDown;
             //_bodyTransform = GetComponentInParent<Transform>();
         }
 
@@ -123,17 +120,17 @@ namespace CallOfValhalla.Enemy
                         if (!_attacking && !_specialAttacking)
                         {
                             _random = Random.Range(0, _attackChance + 1);
-                            _randomSpecial = Random.Range(0, _specialChance + 1);
                         }
 
-                        if (_randomSpecial == _specialChance && _specialCDTimer <= 0)
+                        if (!_specialDone && _hp.HP <= (_hp.OGHP/2))
                         {
                             _specialAttacking = true;
+                            _specialDone = true;
                             CheckSpecialPoints();
                             _special = StartCoroutine(SpecialAttack());
 
                         }
-                        else if (_random == _attackChance || (_randomSpecial == _specialChance && _specialCDTimer > 0))
+                        else if (_random == _attackChance)
                         {
                             _attacking = true;
                             Attack();
@@ -148,11 +145,7 @@ namespace CallOfValhalla.Enemy
                         _coolDownTimer -= Time.deltaTime;
                     }
 
-                    if (!_specialAttacking)
-                    {
-                        _specialCDTimer -= Time.deltaTime;
 
-                    }
                 }
             }
             if (_attacking)
@@ -274,7 +267,7 @@ namespace CallOfValhalla.Enemy
 
 
             _animator.SetInteger("animState", 0);
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(2);
 
             _attackHitBox.enabled = true;
 
@@ -317,7 +310,7 @@ namespace CallOfValhalla.Enemy
 
                 _animator.SetInteger("animState", 0);
 
-                yield return new WaitForSeconds(2);
+                yield return new WaitForSeconds(0.5f);
             }
 
             StopSpecial();
@@ -328,13 +321,18 @@ namespace CallOfValhalla.Enemy
             Debug.Log("STOP SPECIAL");
             _attackHitBox.enabled = false;
             _specialAttacking = false;
-            _specialCDTimer = _specialCoolDown;
             _specialEffect.Stop();
+            StartCoroutine(NextSpecial());
 
-            if (_special != null)
-            {
-                StopCoroutine(_special);
-            }
+            StopAllCoroutines();
+        }
+
+        private IEnumerator NextSpecial()
+        {
+            yield return new WaitForSeconds(15);
+
+            _specialDone = false;
+
         }
     }
 }
