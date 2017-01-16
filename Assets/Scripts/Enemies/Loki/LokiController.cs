@@ -2,7 +2,7 @@
 using System.Collections;
 using CallOfValhalla.Enemy;
 using CallOfValhalla.Player;
-
+using CallOfValhalla;
 
 public class LokiController : MonoBehaviour {
 
@@ -26,6 +26,7 @@ public class LokiController : MonoBehaviour {
         _playerHP = FindObjectOfType<Player_HP>();
         _animationController = GetComponent<LokiAnimationController>();
         _cameraFollow = FindObjectOfType<Player_CameraFollow>();
+
     }
 	
 	// Update is called once per frame
@@ -33,13 +34,11 @@ public class LokiController : MonoBehaviour {
 	{
 	    if (_hp.hitPoints <= 0 && !_dead)
 	    {
-            Debug.Log("DEATH");
 	        Die();
 	    }
 
 	    if (_playerHP.HP <= 0)
 	    {
-            Debug.Log("DÖD");
 	        StopBossFight();
 	    }
 	        
@@ -72,13 +71,11 @@ public class LokiController : MonoBehaviour {
     private void Die()
     {
         _dead = true;
-        _lokiMovement.Die();        
+        _lokiMovement.Die();
         _lokiAttack.SetStopAttack(true);
         StopAllCoroutines();
         ShowStuff();
         _cameraFollow.CameraDelayAfterLoki();
-        
-        
 
     }
 
@@ -86,7 +83,6 @@ public class LokiController : MonoBehaviour {
 
     public void DisableLoki()
     {
-        Debug.Log("DISABLE");
         gameObject.SetActive(false);
     }
 

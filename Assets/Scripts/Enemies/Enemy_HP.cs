@@ -92,9 +92,6 @@ namespace CallOfValhalla.Enemy {
                 {
                     SoundManager.instance.PlaySound("goblin_death_1", _enemyController.Source, false);
 
-                } else if (gameObject.name.Contains("Loki"))
-                {
-
                 }
             }
 

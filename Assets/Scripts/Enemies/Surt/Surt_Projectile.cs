@@ -15,9 +15,12 @@ namespace CallOfValhalla.Enemy
         [SerializeField]
         private float _disableTime;
 
+
         private Transform _transform;
         private Surt_Attack _attack;
         private Player_HP _player;
+        private GameObject _surt;
+        private Enemy_HP _surtHP;
 
         private float _disableTimer;
 
@@ -29,6 +32,8 @@ namespace CallOfValhalla.Enemy
             _attack = FindObjectOfType<Surt_Attack>();
             _player = FindObjectOfType<Player_HP>();
             _disableTimer = _disableTime;
+            _surt = GameObject.Find("Surt");
+            _surtHP = _surt.GetComponent<Enemy_HP>();
         }
 
         void OnEnable()
@@ -67,10 +72,12 @@ namespace CallOfValhalla.Enemy
         {
             if(other.gameObject.tag != "Enemy")
             {
-                if(other.gameObject.tag == "Player")
-                {
-                    _player.TakeDamage(_damage);
-                    gameObject.SetActive(false);
+                if (_surtHP.HP > 0) {
+                    if (other.gameObject.tag == "Player")
+                    {
+                        _player.TakeDamage(_damage);
+                        gameObject.SetActive(false);
+                    }
                 }
             }
         }
